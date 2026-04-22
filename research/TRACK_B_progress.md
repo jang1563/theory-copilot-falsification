@@ -125,3 +125,126 @@ Holding the gate's baseline fixed, vary n_permutations to see whether
 the `perm_p_fdr` estimate is seed-stable. If a candidate's p flips
 across permutation counts, the gate's verdict at the margin may be
 noisy even if the +0.029 ceiling is solid.
+
+---
+
+## B5 — Feature-scaling ablation  `2026-04-22`
+
+**Code:** `src/track_b_scaling_ablation.py`
+**Artifacts:**
+- `results/track_b_gate_robustness/scaling_ablation.csv` (268 rows)
+- `results/track_b_gate_robustness/scaling_ablation_summary.json`
+
+Re-evaluates the 67 candidates under four scalings on real TCGA-KIRC,
+recomputing `law_auc`, `baseline_auc` (sign-invariant max), and
+`delta_baseline`. Applies a reduced gate (`delta_baseline > 0.05`) per
+B1's finding that delta is the sole operative constraint.
+
+### Per (task, scaling) summary
+
+| Task | Scaling | Baseline AUC | Max `law_auc` | Max Δ | Survivors (reduced gate) |
+|---|---|---|---|---|---|
+| flagship | raw | 0.9655 (CA9) | 0.9946 | +0.0291 | 0 / 33 |
+| flagship | zscore | 0.9655 (CA9) | 0.9949 | +0.0294 | 0 / 33 |
+| flagship | rank | 0.9655 (CA9) | 0.9907 | +0.0252 | 0 / 33 |
+| flagship | minmax | 0.9655 (CA9) | 0.9953 | +0.0298 | 0 / 33 |
+| tier2 | raw | 0.6098 (CUBN) | 0.6385 | +0.0287 | 0 / 34 |
+| tier2 | **zscore** | 0.6098 (CUBN) | **0.6648** | **+0.0550** | **1 / 34** |
+| tier2 | rank | 0.6098 (CUBN) | 0.6506 | +0.0408 | 0 / 34 |
+| tier2 | minmax | 0.6098 (CUBN) | 0.6405 | +0.0307 | 0 / 34 |
+
+### Finding
+
+Flagship verdict (0 survivors) is **scaling-invariant** — max delta
+ranges from 0.025 to 0.030 across all four scalings.
+
+**Tier2 × zscore** flips the reduced-gate verdict for one candidate
+(max Δ = +0.055 > 0.05). Under the **full** 5-test gate the other
+four tests (permutation, CI, confound, decoy) still apply and would
+need separate verification; the scaling effect on tier2 is the one
+place where the artifact's design choice (z-score standardization
+inside the gate) may matter operationally.
+
+### Interpretation
+
+The flagship headline (0 survivors, +0.029 ceiling) is robust to
+scaling choice. The tier2 finding reveals a mild design sensitivity:
+the 0.06-AUROC ceiling on tier2 depends on the scaling. Z-score
+strengthens the compound-law advantage by ~0.02 AUROC relative to
+raw. Whether that still passes the full gate is checked in B7.
+
+---
+
+## B6 — Cohort-size subsampling  `2026-04-22`
+
+**Code:** `src/track_b_cohort_size.py`
+**Law:** `log1p(CA9) + log1p(VEGFA) - log1p(AGXT)` (Opus ex-ante)
+**Artifacts:** `results/track_b_gate_robustness/cohort_size_curve.json`
+
+Subsamples TCGA-KIRC (full n=609) to n ∈ {100, 200, 400, 600} with five
+RNG seeds per n, re-computes law_auc / baseline_auc / ci_lower /
+perm_p / delta_baseline.
+
+### Per n (mean over seeds)
+
+| n | law_auc | ci_lower (min / mean) | perm_p | Δ baseline | Pass (reduced) |
+|---|---|---|---|---|---|
+| 100 | 0.985 | 0.927 / 0.955 | 0.000 | +0.010 | 0/5 |
+| 200 | 0.985 | 0.953 / 0.966 | 0.000 | +0.012 | 0/5 |
+| 400 | 0.985 | 0.965 / 0.970 | 0.000 | +0.021 | 0/5 |
+| 600 | 0.984 | 0.971 / 0.972 | 0.000 | +0.019 | 0/5 |
+
+### Finding
+
+`ci_lower > 0.60` at every cohort size tested, including n=100 (mean
+0.955, min 0.927). The cohort would need to drop much smaller than 100
+for `ci_lower` to approach 0.60. `delta_baseline` stays in the
++0.01…+0.02 band across all sizes — the compound advantage does not
+materially change with sample size. `perm_p = 0.0` at every n.
+
+### Interpretation
+
+The 0-survivor verdict is robust to cohort-size reduction down to
+n=100. The gate's stability floor (ci_lower > 0.60) is not the
+limiting factor — delta_baseline is, at every size.
+
+---
+
+## B4 — Bootstrap seed variance  `2026-04-22`
+
+**Code:** `src/track_b_bootstrap_variance.py`
+**Artifacts:** `results/track_b_gate_robustness/bootstrap_seed_variance.json`
+**Run:** top 5 × 4 sources = 20 candidates, 5 seeds × n_resamples=1000.
+
+### Per-source seed variance of `ci_lower`
+
+| Source | ci_lower_mean | ci_lower_std (max) | ci_lower_range (max) | Passes 0.60 gate (all seeds) |
+|---|---|---|---|---|
+| flagship_pysr (5) | 0.985–0.988 | 0.0007 | 0.0017 | 5/5 ✓ |
+| opus_exante_flagship (5) | 0.858–0.973 | 0.0021 | 0.0052 | 5/5 ✓ |
+| tier2_pysr (5) | 0.590 (all) | 0.0019 | 0.0052 | 0/5 ✗ (below) |
+| opus_exante_tier2 (5) | 0.500–0.536 | 0.0031 | 0.0079 | 0/5 ✗ (below) |
+
+### Finding
+
+`ci_lower` is **stable to the third decimal** across 5 RNG seeds on
+every candidate: the maximum range is 0.008, the maximum std is
+0.003. No candidate's verdict flips across seeds. The gate's pass /
+fail boundary for `ci_lower` (0.60) is nowhere near the measurement
+noise for any of the 20 tested candidates — flagship candidates sit
+~0.35 above the line, tier2 candidates sit ~0.01–0.10 below.
+
+### Interpretation
+
+The 0-survivor verdict is not a bootstrap-seed artifact. The tier2
+PySR cluster genuinely fails the `ci_lower > 0.60` criterion — not
+because the bootstrap happened to land on unlucky resamples, but
+because the real data do not support a confident lower bound at 0.60.
+
+---
+
+## B3 — Permutation stability  `2026-04-22` (running)
+
+Background job iterating n_permutations ∈ {200, 500, 1k, 2k, 5k} ×
+3 seeds for the top 5 candidates of each source. Will commit the
+result JSON + update this section when the run completes.
