@@ -1,0 +1,146 @@
+# Submission Form Draft
+
+Target constraints per the Cerebral Valley × Anthropic submission form
+(inferred from the 4.6 hackathon form structure; confirm at submit time):
+
+| Field | Length cap |
+|---|---|
+| Project name | 60 characters |
+| One-line pitch | 140 characters |
+| Project summary | 150 words |
+| Claude Opus 4.7 usage | 150 words |
+| Claude Managed Agents usage | 150 words |
+| Prize category justification | 100 words |
+| GitHub link | URL |
+| Demo video link | URL |
+| Team | name / role / contact |
+
+---
+
+## Project name (60 char)
+
+```
+Theory Copilot: Falsification-Aware Biological Law Discovery
+```
+(60 chars exactly.)
+
+---
+
+## One-line pitch (140 char)
+
+```
+Opus 4.7 proposes compact biology laws. A pre-registered gate rejects textbook HIF biology and accepts an unseeded ccRCC subtype axis.
+```
+(138 chars.)
+
+---
+
+## Project summary (150 words, 148 counted)
+
+Theory Copilot is a falsification-first biological law discovery loop
+powered by Opus 4.7. Opus 4.7 plays three roles — Scientist, Skeptic,
+Interpreter — around a plain-Python five-test statistical gate that
+cannot be rationalised by the model itself. On real TCGA-KIRC the gate
+rejects 100+ candidates across four ccRCC tasks on an 11-gene HIF-axis
+panel — each task is already solved by one gene. Then on a 45-gene
+expanded panel the same gate accepts nine candidates on the metastasis
+task, the simplest being `TOP2A − EPAS1`: when a tumour's proliferation
+program runs ahead of its HIF-2α program, metastasis is more likely.
+That is the published ccA-vs-ccB ccRCC subtype axis, rediscovered by
+unconstrained symbolic regression and accepted by a gate whose
+thresholds were written down before the search. The artefact is the
+gate; accept and reject are both the point.
+
+---
+
+## Claude Opus 4.7 usage (150 words, 147 counted)
+
+Four Opus 4.7 calls per loop, all with
+`thinking={"type":"adaptive","display":"summarized"}` and
+`output_config={"effort":"high"}`. `budget_tokens` is removed on Opus
+4.7 (400 error); `effort` is the control. (1) Scientist proposes
+three-to-five compact law families and writes the ex-ante skeptic
+test for each, before any fit. (2) The pre-registered test is then
+executed by plain Python, not by Opus. (3) Skeptic reviews the
+specific metric pattern (`perm_p = 0.049` is weaker than `0.001`;
+`ci_lower = 0.61` is marginal) and emits PASS / FAIL /
+NEEDS_MORE_TESTS with a written justification. (4) Interpreter
+writes the mechanism hypothesis and, critically, the "what this is
+not" paragraph. Extended thinking is what keeps the Skeptic turn
+from collapsing into rubber-stamp agreement with the Proposer turn
+— smaller models collapse; Opus 4.7 holds the tension.
+
+---
+
+## Claude Managed Agents usage (150 words, 141 counted)
+
+Three-agent architecture. Proposer = Opus 4.7 with adaptive
+thinking. Searcher = local PySR, no API. Falsifier = Opus 4.7 with
+adaptive thinking. Clean role separation, structured
+PASS / FAIL / NEEDS_MORE_TESTS output. Two delegation paths:
+
+- **Path B — public beta, live-verified.** Single Managed Agent with
+  `agent_toolset_20260401`; drives Night-2 sweep, Night-3
+  falsification, Night-4 replay through structured tool calls. End-
+  to-end trace committed at
+  `results/live_evidence/04_managed_agents_e2e.log` (`agents.create`
+  → `environments.create` → `sessions.create` → `stream` → `send`
+  → `session.status_idle`).
+- **Path A — `callable_agents`, waitlist-gated.** Three sequential
+  sessions in a shared environment; each receives the prior agent's
+  output. Guarded by `MANAGED_AGENTS_WAITLIST=approved`.
+
+Both paths expose `{session_id, agent_id, output, status}`.
+Switching is a one-line change.
+
+---
+
+## Prize category justification (100 words, 98 counted)
+
+**Keep Thinking ($5K).** Extended thinking is load-bearing on
+the Skeptic turn: that role has to hold the proposal in context
+and argue against it without the tokens that generated the proposal
+collapsing the dissent. Smaller models collapse; Opus 4.7 holds.
+
+**Best Claude Managed Agents ($5K).** Three-agent architecture with
+biological domain specialisation per agent; both Path A and Path B
+implemented against the verified 2026-04-01 API; Path B live-
+verified end-to-end; Path A one flag-flip away.
+
+---
+
+## GitHub
+
+```
+https://github.com/jang1563/theory-copilot-falsification
+```
+
+Repo is currently private; flipped to public immediately before
+submission cutoff per plan.
+
+---
+
+## Demo video
+
+```
+[to be pasted on 4/26 morning after Loom render]
+```
+
+Script: `docs/loom_script.md` (90 s, six cuts, single terminal +
+browser, no overlays). Fallback GIF path documented in the same file
+for upload failures.
+
+---
+
+## Broader Program Context (optional, 90 words)
+
+This hackathon artefact is the Opus 4.7-centered proof-of-concept of
+a larger research program — **NegBioDB**, a structured database
+aggregating ~32.8 million confirmed negative biomedical results
+(drug-target inactives, failed clinical trials, protein non-
+interactions, non-essential genes, benign variants) paired with
+benchmarks for how publication bias propagates into ML/LLM
+predictions. Theory Copilot operationalises NegBioDB's core thesis
+— that falsification is the expensive, neglected half of
+scientific inference — as a runnable Opus 4.7 loop on real
+cancer-genomics data.
