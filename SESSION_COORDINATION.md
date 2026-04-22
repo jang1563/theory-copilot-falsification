@@ -12,7 +12,7 @@ one git working tree. This file is the coordination contract. Do not skip.
 
 | Lane | Codename | Owns (exclusive write) | Primary scope |
 |---|---|---|---|
-| **L1** | Engineering | `src/**/*.py`, `tests/**/*.py`, `config/law_proposals.json`, `data/**`, `results/**`, `Makefile`, `.audit-patterns`, `.gitignore`, `.env.example`, HPC compute (`cayuga-login1`, `phobos`) | Code, tests, HPC compute, derived artifacts |
+| **L1** | Engineering | `src/**/*.py`, `tests/**/*.py`, `config/law_proposals.json`, `data/**`, `results/**`, `Makefile`, `.audit-patterns`, `.gitignore`, `.env.example`, remote compute hosts | Code, tests, HPC compute, derived artifacts |
 | **L2** | Narrative | `README.md`, `docs/**/*.md`, `prompts/**/*.md`, `STATUS.md`, `CLAUDE.md`, `AGENTS.md`, submission form, Loom script | Judge-facing narrative, dashboards, writing |
 | **Shared** | — | `pyproject.toml`, `.gitignore` (low-frequency), `SESSION_COORDINATION.md` (this file) | Either lane may edit, but only with the other lane's acknowledged pull |
 
