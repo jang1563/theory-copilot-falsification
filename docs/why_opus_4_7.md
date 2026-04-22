@@ -90,25 +90,51 @@ caveats; Sonnet produces a longer, less-anchored summary.
 ## 4. The honest demo moment
 
 The pipeline does **not** show "Opus 4.7 tried to falsify a law and it
-survived." Opus does not run the falsification.
+survived." Opus does not run the falsification. What it does show is
+the gate accepting and rejecting in complementary patterns on the
+same infrastructure, with Opus 4.7 in the Proposer, Skeptic, and
+Interpreter roles at the points where LLM judgement is load-bearing.
 
-What it does show:
+### The reject cycle (four tasks × 11-gene panel)
 
-1. Opus 4.7 proposes 5 law families for KIRC (3 pathway-grounded + 1
-   single-gene anchor + at least 1 housekeeping negative control) and writes
-   the ex-ante skeptic test for each.
-2. PySR instantiates the families using Opus's `initial_guess` seeds with
-   `variable_names=gene_cols` so equations come back in biological names.
+1. Opus 4.7 proposes 5-7 KIRC law families for each task (pathway-
+   grounded + single-gene anchor + at least one housekeeping negative
+   control) and writes the ex-ante skeptic test for each.
+2. PySR searches the space with `variable_names=gene_cols` so the
+   returned equations read in biological names.
 3. The 5-test gate (permutation, bootstrap, sign-invariant baseline,
-   incremental confound, decoy-feature null) runs on a held-out split of
-   TCGA-KIRC with BH-FDR across candidates.
-4. The demo shows the housekeeping negative control *failing* alongside the
-   survivors passing — which is the moment that makes the gate legible as
-   rigor rather than cherry-picked success.
-5. Opus 4.7 reviews the metric pattern of each survivor and adds a post-hoc
-   comment; any law where `train_auroc >> test_auroc` is flagged as overfit.
-6. The surviving laws are replayed on GSE40435 with per-cohort z-score
-   standardization to surface genuine cross-cohort replication.
+   incremental confound, decoy-feature null) runs on TCGA-KIRC
+   tumor-vs-normal / stage / 5-yr survival / metastasis with BH-FDR
+   across candidates.
+4. **100+ candidates are rejected** across the four tasks, including
+   the textbook HIF-axis law `log1p(CA9) + log1p(VEGFA) − log1p(AGXT)`
+   (AUROC 0.984, fails because CA9 alone reaches 0.965). Both the
+   Opus-planted negative controls *and* the Opus-proposed pathway
+   laws fail on the same threshold. The gate is not sparing its own
+   side.
+
+### The accept cycle (metastasis × 45-gene expanded panel)
+
+5. The Proposer is re-run with a 45-gene expanded panel that adds
+   proliferation markers (`TOP2A`, `MKI67`, `CDK1`, `CCNB1`, `TOP2A`,
+   `PCNA`, `MCM2`), HIF-2α and related hypoxia partners (`EPAS1`,
+   `BHLHE40`, `DDIT4`, `PGK1`), Warburg-expanded metabolism, and
+   metastasis / EMT markers on top of the original 11 genes.
+6. PySR emits 30 candidates; **9 pass the same pre-registered
+   5-test gate** on M0-vs-M1 with `delta_baseline` up to +0.069.
+7. The simplest surviving law is `TOP2A − EPAS1` — proliferation
+   minus HIF-2α — which reproduces the published ccA-vs-ccB ccRCC
+   subtype axis without being seeded with it.
+8. Opus 4.7 in the Interpreter role then writes the mechanism
+   hypothesis, the testable downstream prediction, and — critically
+   — the "what this is *not*" paragraph: not a diagnostic biomarker,
+   not novel biology, not dramatically superior to a 2-gene LR with
+   interaction (that baseline reaches AUROC 0.722 on the same pair).
+
+The shock moment is not one clip. It is the *pair* of outcomes on
+one pipeline: the gate kills the textbook law the user wrote on task
+1, and the gate accepts the subtype axis the user did not write on
+task 4. Pre-registered falsification is doing both jobs.
 
 ## 5. Why Sonnet cannot be dropped in
 
