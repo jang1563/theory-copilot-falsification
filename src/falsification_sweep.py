@@ -128,6 +128,30 @@ def main() -> None:
     for cand in candidates:
         fn = make_equation_fn(cand["equation"], gene_cols)
 
+        # Reject equations that numerically explode on this cohort. exp(exp(x))
+        # style candidates from PySR can overflow float64 on certain
+        # distributions; we record a failed row rather than crashing the run.
+        try:
+            probe_scores = np.asarray(fn(X_bio)).reshape(-1)
+        except Exception as exc:
+            raw_results.append({
+                **cand, "perm_p": 1.0, "ci_width": 1.0, "ci_lower": 0.0,
+                "law_auc": 0.5, "baseline_auc": 0.5,
+                "delta_baseline": 0.0, "delta_confound": None,
+                "confound_auc": None, "decoy_p": 1.0, "decoy_q95": 0.5,
+                "numeric_error": f"{type(exc).__name__}: {exc}",
+            })
+            continue
+        if not np.isfinite(probe_scores).all():
+            raw_results.append({
+                **cand, "perm_p": 1.0, "ci_width": 1.0, "ci_lower": 0.0,
+                "law_auc": 0.5, "baseline_auc": 0.5,
+                "delta_baseline": 0.0, "delta_confound": None,
+                "confound_auc": None, "decoy_p": 1.0, "decoy_q95": 0.5,
+                "numeric_error": "non_finite_scores",
+            })
+            continue
+
         perm_p, _ = label_shuffle_null(X_bio, y, fn, args.n_permutations)
         ci_width, ci_lower, _ = bootstrap_stability(X_bio, y, fn, args.n_resamples)
         delta_baseline, law_auc, baseline_auc = baseline_comparison(X_bio, y, fn)
