@@ -1,0 +1,78 @@
+# 05_proposer_live_tcga_kirc — 2026-04-22 19:46:30
+
+Model: claude-opus-4-7
+Dataset card: tcga_kirc_metastasis_expanded (505 samples)
+Features: 45 (45-gene expanded panel)
+Latency: 15.1 s
+Usage: input=1730 output=1056 tokens
+
+Families proposed: 5
+
+## 1. proliferation_minus_renal_lineage
+- form: `log1p(MKI67) + log1p(CCNB1) - log1p(EPAS1) - log1p(PAX8)`
+- rationale: Metastatic clones often upregulate proliferation while dedifferentiating from renal/HIF-2α lineage identity, producing a contrast between cycling and lineage programs.
+- skeptic_test: Reject if perm_p > 0.05 or delta_baseline < 0.05 against the MKI67=0.645 single-gene ceiling.
+- expected_verdict: PASS
+
+## 2. EMT_invasion_vs_tubule_identity
+- form: `log1p(MMP9) + log1p(SPP1) - log1p(AGXT) - log1p(CUBN)`
+- rationale: M1 lesions should show elevated invasion/EMT markers alongside loss of proximal tubule identity, a directional contrast independent of HIF state.
+- skeptic_test: Reject if delta_confound < 0.03 after adjusting for age/batch or if decoy_p > 0.05 suggesting the signal is shared with random gene pairs.
+- expected_verdict: PASS
+
+## 3. glycolysis_commitment_balance
+- form: `log1p(LDHA) + log1p(PDK1) - log1p(LDHB)`
+- rationale: A shift toward lactate-producing glycolysis (LDHA high, LDHB low, PDK1 blocking OXPHOS) is a candidate mechanism for metastatic metabolic rewiring.
+- skeptic_test: Reject if ci_lower < 0.6 or if the contrast collapses to a single-gene effect (delta_baseline < 0.05 vs best component).
+- expected_verdict: PASS
+
+## 4. hypoxia_stress_vs_vascular_response
+- form: `log1p(DDIT4) + log1p(NDUFA4L2) - log1p(VEGFA)`
+- rationale: Metastatic progression may decouple intracellular hypoxic stress response from angiogenic output, a balance not captured by any single HIF target.
+- skeptic_test: Reject if perm_p > 0.05 on TCGA or if replay on GSE40435/GSE53757 fails to reproduce sign.
+- expected_verdict: PASS
+
+## 5. housekeeping_negative_control
+- form: `log1p(ACTB) + log1p(GAPDH) - log1p(RPL13A)`
+- rationale: Housekeeping gene contrast with no mechanistic link to metastasis; expected to be near-null and serve as ex-ante negative control.
+- skeptic_test: Should fail with perm_p > 0.05 and delta_baseline < 0.05; if it passes, the pipeline has a normalization or leakage artifact.
+- expected_verdict: FAIL
+
+---
+
+## Raw response (first 2000 chars)
+
+{
+  "families": [
+    {
+      "name": "proliferation_minus_renal_lineage",
+      "form": "log1p(MKI67) + log1p(CCNB1) - log1p(EPAS1) - log1p(PAX8)",
+      "rationale": "Metastatic clones often upregulate proliferation while dedifferentiating from renal/HIF-2α lineage identity, producing a contrast between cycling and lineage programs.",
+      "skeptic_test": "Reject if perm_p > 0.05 or delta_baseline < 0.05 against the MKI67=0.645 single-gene ceiling.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "EMT_invasion_vs_tubule_identity",
+      "form": "log1p(MMP9) + log1p(SPP1) - log1p(AGXT) - log1p(CUBN)",
+      "rationale": "M1 lesions should show elevated invasion/EMT markers alongside loss of proximal tubule identity, a directional contrast independent of HIF state.",
+      "skeptic_test": "Reject if delta_confound < 0.03 after adjusting for age/batch or if decoy_p > 0.05 suggesting the signal is shared with random gene pairs.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "glycolysis_commitment_balance",
+      "form": "log1p(LDHA) + log1p(PDK1) - log1p(LDHB)",
+      "rationale": "A shift toward lactate-producing glycolysis (LDHA high, LDHB low, PDK1 blocking OXPHOS) is a candidate mechanism for metastatic metabolic rewiring.",
+      "skeptic_test": "Reject if ci_lower < 0.6 or if the contrast collapses to a single-gene effect (delta_baseline < 0.05 vs best component).",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "hypoxia_stress_vs_vascular_response",
+      "form": "log1p(DDIT4) + log1p(NDUFA4L2) - log1p(VEGFA)",
+      "rationale": "Metastatic progression may decouple intracellular hypoxic stress response from angiogenic output, a balance not captured by any single HIF target.",
+      "skeptic_test": "Reject if perm_p > 0.05 on TCGA or if replay on GSE40435/GSE53757 fails to reproduce sign.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "housekeeping_negative_control",
+      "form": "log1p(ACTB) + log1p(GAP
+

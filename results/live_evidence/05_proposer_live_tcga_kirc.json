@@ -1,0 +1,51 @@
+{
+  "model": "claude-opus-4-7",
+  "dataset_card_id": "tcga_kirc_metastasis_expanded",
+  "n_features": 45,
+  "n_families_parsed": 5,
+  "families": [
+    {
+      "name": "proliferation_minus_renal_lineage",
+      "form": "log1p(MKI67) + log1p(CCNB1) - log1p(EPAS1) - log1p(PAX8)",
+      "rationale": "Metastatic clones often upregulate proliferation while dedifferentiating from renal/HIF-2\u03b1 lineage identity, producing a contrast between cycling and lineage programs.",
+      "skeptic_test": "Reject if perm_p > 0.05 or delta_baseline < 0.05 against the MKI67=0.645 single-gene ceiling.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "EMT_invasion_vs_tubule_identity",
+      "form": "log1p(MMP9) + log1p(SPP1) - log1p(AGXT) - log1p(CUBN)",
+      "rationale": "M1 lesions should show elevated invasion/EMT markers alongside loss of proximal tubule identity, a directional contrast independent of HIF state.",
+      "skeptic_test": "Reject if delta_confound < 0.03 after adjusting for age/batch or if decoy_p > 0.05 suggesting the signal is shared with random gene pairs.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "glycolysis_commitment_balance",
+      "form": "log1p(LDHA) + log1p(PDK1) - log1p(LDHB)",
+      "rationale": "A shift toward lactate-producing glycolysis (LDHA high, LDHB low, PDK1 blocking OXPHOS) is a candidate mechanism for metastatic metabolic rewiring.",
+      "skeptic_test": "Reject if ci_lower < 0.6 or if the contrast collapses to a single-gene effect (delta_baseline < 0.05 vs best component).",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "hypoxia_stress_vs_vascular_response",
+      "form": "log1p(DDIT4) + log1p(NDUFA4L2) - log1p(VEGFA)",
+      "rationale": "Metastatic progression may decouple intracellular hypoxic stress response from angiogenic output, a balance not captured by any single HIF target.",
+      "skeptic_test": "Reject if perm_p > 0.05 on TCGA or if replay on GSE40435/GSE53757 fails to reproduce sign.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "housekeeping_negative_control",
+      "form": "log1p(ACTB) + log1p(GAPDH) - log1p(RPL13A)",
+      "rationale": "Housekeeping gene contrast with no mechanistic link to metastasis; expected to be near-null and serve as ex-ante negative control.",
+      "skeptic_test": "Should fail with perm_p > 0.05 and delta_baseline < 0.05; if it passes, the pipeline has a normalization or leakage artifact.",
+      "expected_verdict": "FAIL"
+    }
+  ],
+  "raw_response_preview": "{\n  \"families\": [\n    {\n      \"name\": \"proliferation_minus_renal_lineage\",\n      \"form\": \"log1p(MKI67) + log1p(CCNB1) - log1p(EPAS1) - log1p(PAX8)\",\n      \"rationale\": \"Metastatic clones often upregulate proliferation while dedifferentiating from renal/HIF-2\u03b1 lineage identity, producing a contrast between cycling and lineage programs.\",\n      \"skeptic_test\": \"Reject if perm_p > 0.05 or delta_baseline < 0.05 against the MKI67=0.645 single-gene ceiling.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"EMT_invasion_vs_tubule_identity\",\n      \"form\": \"log1p(MMP9) + log1p(SPP1) - log1p(AGXT) - log1p(CUBN)\",\n      \"rationale\": \"M1 lesions should show elevated invasion/EMT markers alongside loss of proximal tubule identity, a directional contrast independent of HIF state.\",\n      \"skeptic_test\": \"Reject if delta_confound < 0.03 after adjusting for age/batch or if decoy_p > 0.05 suggesting the signal is shared with random gene pairs.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"glycolysis_commitment_balance\",\n      \"form\": \"log1p(LDHA) + log1p(PDK1) - log1p(LDHB)\",\n      \"rationale\": \"A shift toward lactate-producing glycolysis (LDHA high, LDHB low, PDK1 blocking OXPHOS) is a candidate mechanism for metastatic metabolic rewiring.\",\n      \"skeptic_test\": \"Reject if ci_lower < 0.6 or if the contrast collapses to a single-gene effect (delta_baseline < 0.05 vs best component).\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"hypoxia_stress_vs_vascular_response\",\n      \"form\": \"log1p(DDIT4) + log1p(NDUFA4L2) - log1p(VEGFA)\",\n      \"rationale\": \"Metastatic progression may decouple intracellular hypoxic stress response from angiogenic output, a balance not captured by any single HIF target.\",\n      \"skeptic_test\": \"Reject if perm_p > 0.05 on TCGA or if replay on GSE40435/GSE53757 fails to reproduce sign.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"housekeeping_negative_control\",\n      \"form\": \"log1p(ACTB) + log1p(GAP",
+  "raw_thinking_length": 0,
+  "latency_sec": 15.11,
+  "usage": {
+    "input_tokens": 1730,
+    "output_tokens": 1056
+  },
+  "timestamp": "2026-04-22T19:46:30"
+}

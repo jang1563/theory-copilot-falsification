@@ -12,8 +12,8 @@ Flagship internal replay remains 5-fold stratified CV on TCGA-KIRC
 
 | Cohort | Platform | N | Task | TOP2A+EPAS1 present | M-stage | law_AUROC | perm_p | ci_lower | Δbase | Gate verdict | Honest caveat |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| gse53757 | Affymetrix HG-U133 Plus 2.0 (GPL570) | 144 | tumor_vs_normal_SANITY | yes | no | 0.723 | 0.000 | 0.632 | -0.248 | — | This is NOT a metastasis replay — the cohort lacks M-stage. The AUROC here refle… |
-| gse40435_expanded | Illumina HumanHT-12 v4 (GPL10558) | 202 | tumor_vs_normal_SANITY | yes | no | 0.643 | 0.000 | 0.560 | -0.351 | — | This is NOT a metastasis replay — the cohort lacks M-stage. The AUROC here refle… |
+| gse53757 | Affymetrix HG-U133 Plus 2.0 (GPL570) | 144 | tumor_vs_normal_SANITY | yes | no | 0.723 | 0.000 | 0.641 | -0.248 | — | This is NOT a metastasis replay — the cohort lacks M-stage. The AUROC here refle… |
+| gse40435_expanded | Illumina HumanHT-12 v4 (GPL10558) | 202 | tumor_vs_normal_SANITY | yes | no | 0.643 | 0.001 | 0.557 | -0.351 | — | This is NOT a metastasis replay — the cohort lacks M-stage. The AUROC here refle… |
 | cptac3_ccrcc | CPTAC-3 proteogenomic (PDC) | — | metastasis_preferred | stub | — | — | — | — | — | stub (see NOTE) |  |
 
 ## Interpretation

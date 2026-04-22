@@ -497,6 +497,30 @@ def run_sweep(workers: int = 6, repeats: int = 10, only_model: str | None = None
 # -----------------------------------------------------------------------
 
 
+def _df_to_md(df: pd.DataFrame, index_name: str | None = None) -> str:
+    """Render a DataFrame as a pipe-markdown table without the tabulate dep."""
+    df = df.copy()
+    if index_name is None:
+        index_name = df.index.name or ""
+    # Reset index so the first column shows index values
+    headers = [index_name] + [str(c) for c in df.columns]
+    rows = []
+    for idx, row in df.iterrows():
+        idx_str = str(idx) if not isinstance(idx, tuple) else " / ".join(str(p) for p in idx)
+        row_cells = [idx_str] + [
+            (f"{v:.2f}" if isinstance(v, (float, np.floating)) else str(v))
+            for v in row.values
+        ]
+        rows.append(row_cells)
+    sep = ["---"] * len(headers)
+    out = []
+    out.append("| " + " | ".join(headers) + " |")
+    out.append("| " + " | ".join(sep) + " |")
+    for r in rows:
+        out.append("| " + " | ".join(r) + " |")
+    return "\n".join(out)
+
+
 def analyze() -> None:
     if not JSONL_PATH.exists():
         raise SystemExit(f"{JSONL_PATH} not found — run sweep first.")
@@ -595,11 +619,11 @@ def analyze() -> None:
     lines.append("")
     lines.append("### Headline table")
     lines.append("")
-    lines.append(agg.to_markdown())
+    lines.append(agg.pipe(_df_to_md))
     lines.append("")
     lines.append("### Verdict distribution (rows = model, cols = verdict)")
     lines.append("")
-    lines.append(verdict_pivot.to_markdown())
+    lines.append(verdict_pivot.pipe(_df_to_md))
     lines.append("")
     lines.append("### Per-candidate × model specificity (% citing ≥2 metrics)")
     lines.append("")
@@ -609,7 +633,7 @@ def analyze() -> None:
         values="pct_cite_2plus",
         aggfunc="first",
     ).round(1)
-    lines.append(spec_pivot.to_markdown())
+    lines.append(spec_pivot.pipe(_df_to_md))
     lines.append("")
     lines.append("### Pre-registered prediction verification")
     lines.append("")

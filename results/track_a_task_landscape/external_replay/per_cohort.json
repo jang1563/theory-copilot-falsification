@@ -9,9 +9,9 @@
       "passes": false,
       "perm_p": 0.0,
       "original_auc": 0.7226080246913581,
-      "ci_width": 0.17084639955409786,
-      "ci_lower": 0.6320618130062886,
-      "mean_auc": 0.7234616851236951,
+      "ci_width": 0.16096070166136134,
+      "ci_lower": 0.6414392308232065,
+      "mean_auc": 0.7244654439881476,
       "delta_baseline": -0.24787808641975306,
       "law_auc": 0.7226080246913581,
       "baseline_auc": 0.9704861111111112,
@@ -31,11 +31,11 @@
     "n_disease": 101,
     "metrics": {
       "passes": false,
-      "perm_p": 0.0,
+      "perm_p": 0.001,
       "original_auc": 0.6431722380158807,
-      "ci_width": 0.1593537211887449,
-      "ci_lower": 0.5598991911185278,
-      "mean_auc": 0.6425986955511178,
+      "ci_width": 0.1687135550370854,
+      "ci_lower": 0.5565293254472549,
+      "mean_auc": 0.6406042154761875,
       "delta_baseline": -0.3506518968728557,
       "law_auc": 0.6431722380158807,
       "baseline_auc": 0.9938241348887364,
@@ -50,7 +50,7 @@
   {
     "cohort_id": "cptac3_ccrcc",
     "status": "csv_empty",
-    "csv_path": "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/data/cptac3_ccrcc.csv",
+    "csv_path": "data/cptac3_ccrcc.csv",
     "task_label": "metastasis_preferred",
     "message": "CSV is a header-only stub (see NOTE file)."
   }

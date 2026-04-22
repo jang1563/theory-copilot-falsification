@@ -66,20 +66,26 @@ def _run_cohort(
     m_stage_col: str | None = None,
     log_transform: bool = False,
 ) -> dict:
+    # Record only the project-relative path so artefacts don't leak the
+    # contributor's absolute filesystem path through `make audit`.
+    try:
+        rel = csv_path.relative_to(REPO)
+    except ValueError:
+        rel = Path(csv_path.name)
     if not csv_path.exists():
         return {
             "cohort_id": cohort_id,
             "status": "csv_missing",
-            "csv_path": str(csv_path),
+            "csv_path": str(rel),
             "task_label": task_label,
-            "message": f"{csv_path} does not exist — run the build script first.",
+            "message": f"{rel} does not exist — run the build script first.",
         }
     df = pd.read_csv(csv_path)
     if len(df) == 0:
         return {
             "cohort_id": cohort_id,
             "status": "csv_empty",
-            "csv_path": str(csv_path),
+            "csv_path": str(rel),
             "task_label": task_label,
             "message": "CSV is a header-only stub (see NOTE file).",
         }

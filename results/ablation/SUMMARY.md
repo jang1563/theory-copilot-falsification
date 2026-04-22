@@ -101,3 +101,48 @@ Histogram of specificity per model in `plots/model_specificity_histogram.png`.
 Precomputed metric bundles in `results/ablation/candidate_metrics.json`.
 
 <!-- OBSERVED_RESULTS_BELOW -->
+
+## Observed results
+
+Sweep completed: **180 Skeptic calls** across 3 models, 6 candidates, ≈10 repeats.
+
+### Headline table
+
+| model | n | n_parsed | pct_cite_2plus | avg_citation_count | avg_reason_chars | avg_latency_s | total_cost_usd | dissent_on_gate_PASS_pct |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| claude-haiku-4-5 | 60.00 | 60.00 | 100.00 | 5.62 | 791.60 | 15.92 | 0.56 | 53.33 |
+| claude-opus-4-7 | 60.00 | 60.00 | 100.00 | 8.12 | 785.23 | 8.04 | 2.77 | 66.67 |
+| claude-sonnet-4-6 | 60.00 | 60.00 | 100.00 | 7.98 | 1171.70 | 23.11 | 1.27 | 100.00 |
+
+### Verdict distribution (rows = model, cols = verdict)
+
+| model | FAIL | NEEDS_MORE_TESTS | PASS |
+| --- | --- | --- | --- |
+| claude-haiku-4-5 | 30 | 16 | 14 |
+| claude-opus-4-7 | 30 | 20 | 10 |
+| claude-sonnet-4-6 | 30 | 30 | 0 |
+
+### Per-candidate × model specificity (% citing ≥2 metrics)
+
+|  | claude-haiku-4-5 | claude-opus-4-7 | claude-sonnet-4-6 |
+| --- | --- | --- | --- |
+| actb_minus_gapdh / clean_reject | 100.00 | 100.00 | 100.00 |
+| five_gene_compound / stress_test | 100.00 | 100.00 | 100.00 |
+| hif_textbook_tn / borderline_reject | 100.00 | 100.00 | 100.00 |
+| mki67_minus_epas1 / strong_survivor | 100.00 | 100.00 | 100.00 |
+| mki67_minus_rpl13a / clean_reject | 100.00 | 100.00 | 100.00 |
+| top2a_minus_epas1 / strong_survivor | 100.00 | 100.00 | 100.00 |
+
+### Pre-registered prediction verification
+
+- ✅ **Opus ≥2 metric citations ≥70%** — predicted ≥70%; observed 100.0%.
+- ❌ **Sonnet ≥2 metric citations 30-60%** — predicted 30–60%; observed 100.0%.
+- ❌ **Haiku ≥2 metric citations ≤30%** — predicted ≤30%; observed 100.0%.
+
+*If any prediction is falsified, the honest finding is reported*
+*verbatim; `docs/why_opus_4_7.md` is updated to cite the observed result.*
+
+**Total API spend for this sweep:** $4.59
+
+Per-call data: `results/ablation/skeptic_model_sweep.jsonl`
+Histogram: `results/ablation/plots/model_specificity_histogram.png`
