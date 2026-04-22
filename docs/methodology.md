@@ -137,7 +137,84 @@ is reported as a three-way verdict:
 A `neither` verdict is not a failure of the artifact. It is the artifact
 working correctly on a cohort where the law does not generalize.
 
-## 6. Novelty accounting
+## 6. What the gate actually accepted and rejected
+
+Applied to real TCGA-KIRC the gate accepts and rejects in complementary
+patterns, which is the behaviour the pre-registration was designed to
+produce. Six task × panel combinations were evaluated.
+
+### Rejections on the original 11-gene HIF-axis panel
+
+Across four biologically distinct ccRCC tasks the 11-gene panel yielded
+zero survivors out of 100+ candidates:
+
+| Task | n | Dominant single gene | PySR candidates | Opus ex-ante | Survivors |
+|---|---|---|---|---|---|
+| Tumor vs Normal | 609 | CA9 (AUROC 0.965) | 26 | 7 | 0 / 33 |
+| Stage I-II vs III-IV | 534 | CUBN (0.610) | 27 | 7 | 0 / 34 |
+| 5-yr Survival | 301 | CUBN (0.696) | 29 | 7 | 0 / 36 |
+| Metastasis M0 vs M1 | 505 | MKI67 (0.645) | 30 | 7 | 0 / 37 |
+
+The operative constraint across all four tasks was `delta_baseline`: on
+tumor-vs-normal the CA9 signal saturates, on stage/survival a single
+tubule marker (CUBN) is already the best reader, and on metastasis the
+11-gene panel does not include the genes that encode the aggressive
+proliferation program. **All 33 Opus-proposed pathway laws also
+fail** in the same pattern — this is not a failure of LLM guidance,
+it is the gate refusing to call a single-gene task a multi-gene
+discovery.
+
+### Acceptance on the 45-gene expanded panel
+
+Expanding the gene list to a 45-gene HIF / Warburg / tubule / pro-
+liferation / metastasis / ccRCC-lineage / housekeeping panel produces
+the first survivor cohort at the default pre-registered thresholds:
+
+- **9 / 30 PySR candidates pass on metastasis** (`delta_baseline` up
+  to +0.069, `ci_lower` 0.654-0.670, two-sided perm `p < 0.001`,
+  decoy-feature `p < 0.001`).
+- The surviving laws cluster into three shapes, all centred on the
+  **proliferation-over-HIF-2α axis**:
+    - `TOP2A − EPAS1` (5 members, AUROC 0.726) — simplest form
+      `0.099·(TOP2A − EPAS1) + 0.161`
+    - `MKI67 − EPAS1` (2 members, AUROC 0.708, `Δbase` +0.051)
+    - 5-gene compound around `MKI67 / EPAS1 / LRP2 / PTGER3 / RPL13A`
+      (2 members, AUROC 0.726, same as the simpler forms)
+
+### What the accepted law reads as
+
+`EPAS1` is HIF-2α, the canonical well-differentiated / hypoxic ccRCC
+driver. `TOP2A` and `MKI67` are proliferation markers. The law
+`TOP2A − EPAS1` says *"proliferation running ahead of HIF-2α
+predicts metastasis"* — the published ccA-vs-ccB ccRCC subtype axis.
+The axis was not seeded into the search; PySR rediscovered it from
+unconstrained symbolic regression on 45 features and the gate
+accepted it on merits that were written down before the fit.
+
+### Honest caveat on the survivor
+
+The robustness profile at
+`results/track_a_task_landscape/survivor_robustness/` shows the
+survivor passes threshold, permutation, bootstrap, scaling, cohort-
+size, and 5-fold held-out CV tests, **with one caveat**: a logistic
+regression on `(TOP2A, EPAS1, TOP2A × EPAS1)` reaches AUROC 0.722 on
+the same cohort, so against that specific engineered baseline the
+compound only wins by `Δ = +0.004`. The survivor's distinctive
+contribution is therefore **interpretable compactness + pre-
+registered falsification**, not an AUROC ceiling that no other
+2-gene model can reach.
+
+### Transfer and replay status
+
+GSE40435 does not serve as an independent replay for this specific
+survivor: its 8-gene subset omits `TOP2A` and `EPAS1`, and the cohort
+lacks patient-level M-staging. The best available internal test is
+5-fold stratified CV on TCGA-KIRC (AUROC 0.722 ± 0.078, permutation
+null 0.509). A proper cross-cohort replay on CPTAC-3 ccRCC or
+cBioPortal MSKCC-IMPACT metastatic ccRCC is flagged as the natural
+follow-on.
+
+## 7. Novelty accounting
 
 Each surviving equation is scored for novelty against the Opus `initial_guess`
 set (`_novelty_score` in `pysr_sweep.py`):
@@ -149,7 +226,7 @@ A high-AUROC equation with `novelty = 0` is reported as *confirmation of the
 ex-ante hypothesis*, not as *discovery*. Only equations with `novelty > 0`
 that also survive the gate are flagged as discoveries in the demo.
 
-## 7. Language and framing
+## 8. Language and framing
 
 All outputs use restrained scientific language: `candidate law`, `empirical
 regularity`, `mechanism hypothesis`, `research use only`. The repository
