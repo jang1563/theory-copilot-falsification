@@ -1,0 +1,2379 @@
+{
+  "top_n": 5,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "n_grid": [
+    200,
+    500,
+    1000,
+    2000,
+    5000
+  ],
+  "candidates": [
+    {
+      "candidate_id": "flagship_pysr::015",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp(((ALB + PTGER3) - ((VEGFA / 0.7186556) - SLC2A1)) - CA9))",
+      "original_equation": "exp(-0.013298511 * exp(((x7 + x9) - ((x1 / 0.7186556) - x4)) - x0))",
+      "law_auc": 0.994620318642665,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.9881984253956304,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.994620318642665
+    },
+    {
+      "candidate_id": "flagship_pysr::011",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.01702503 * exp((ALB - (VEGFA - SLC2A1)) - (CA9 - PTGER3)))",
+      "original_equation": "exp(-0.01702503 * exp((x7 - (x1 - x4)) - (x0 - x9)))",
+      "law_auc": 0.9938961307676392,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.9851692109959671,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.9938961307676392
+    },
+    {
+      "candidate_id": "flagship_pysr::006",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp(((ALB + PTGER3) - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "original_equation": "exp(exp(((x7 + x9) - x3) - x1) * -0.010614875)",
+      "law_auc": 0.9927839851024209,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.9841774714862779,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.9927839851024209
+    },
+    {
+      "candidate_id": "flagship_pysr::009",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp((PTGER3 - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "original_equation": "exp(exp((x9 - x3) - x1) * -0.010614875)",
+      "law_auc": 0.991956341816677,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.985389003914833,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.991956341816677
+    },
+    {
+      "candidate_id": "flagship_pysr::017",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp((PTGER3 - VEGFA) - NDUFA4L2))",
+      "original_equation": "exp(-0.013298511 * exp((x9 - x1) - x3))",
+      "law_auc": 0.991956341816677,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.9853242819193183,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.991956341816677
+    },
+    {
+      "candidate_id": "tier2_pysr::000",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "0.4159849 + ((CUBN - NDUFA4L2) * -0.09313616)",
+      "original_equation": "0.4159849 + ((x8 - x3) * -0.09313616)",
+      "law_auc": 0.6385123135211934,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.5848925026070647,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.6385123135211934
+    },
+    {
+      "candidate_id": "tier2_pysr::010",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "((CUBN - NDUFA4L2) * -0.07060441) - -0.39114887",
+      "original_equation": "((x8 - x3) * -0.07060441) - -0.39114887",
+      "law_auc": 0.6385123135211934,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.5921357351447928,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.6385123135211934
+    },
+    {
+      "candidate_id": "tier2_pysr::017",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "(-0.07137078 * (CUBN - NDUFA4L2)) - -0.38469547",
+      "original_equation": "(-0.07137078 * (x8 - x3)) - -0.38469547",
+      "law_auc": 0.6385123135211934,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.5909176767205477,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.6385123135211934
+    },
+    {
+      "candidate_id": "tier2_pysr::023",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p(log1p(sqrt(exp(NDUFA4L2 - CUBN))) / 1.5258063)",
+      "original_equation": "log1p(log1p(sqrt(exp(x3 - x8))) / 1.5258063)",
+      "law_auc": 0.6385123135211934,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.5879268206777464,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.6385123135211934
+    },
+    {
+      "candidate_id": "tier2_pysr::025",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p((-0.13106725 * (CUBN - NDUFA4L2)) + 0.47160774)",
+      "original_equation": "log1p((-0.13106725 * (x8 - x3)) + 0.47160774)",
+      "law_auc": 0.6385123135211934,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.5936787435860316,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.6385123135211934
+    },
+    {
+      "candidate_id": "opus_exante_flagship::000",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "original_equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "law_auc": 0.9844558245396233,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.9709404268087309,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.9844558245396233
+    },
+    {
+      "candidate_id": "opus_exante_flagship::004",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9)",
+      "original_equation": "log1p(CA9)",
+      "law_auc": 0.9654976205255534,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.9450561398409668,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.9654976205255534
+    },
+    {
+      "candidate_id": "opus_exante_flagship::002",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "original_equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "law_auc": 0.9579971032485,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.9372899672717582,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.9579971032485
+    },
+    {
+      "candidate_id": "opus_exante_flagship::003",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "original_equation": "log1p(VEGFA) - log1p(ALB)",
+      "law_auc": 0.9246068694392716,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.8833325965008747,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.9246068694392716
+    },
+    {
+      "candidate_id": "opus_exante_flagship::006",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "original_equation": "log1p(MKI67) - log1p(RPL13A)",
+      "law_auc": 0.9114938961307677,
+      "baseline_auc": 0.9654976205255534,
+      "ci_lower": 0.8570583893819158,
+      "perm_p_fdr": 0.0,
+      "perm_p": 0.0,
+      "law_auc_replayed": 0.9114938961307677
+    },
+    {
+      "candidate_id": "opus_exante_tier2::006",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "original_equation": "log1p(MKI67) - log1p(RPL13A)",
+      "law_auc": 0.5851142552687663,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.536239338047678,
+      "perm_p_fdr": 0.014,
+      "perm_p": 0.002,
+      "law_auc_replayed": 0.5851142552687663
+    },
+    {
+      "candidate_id": "opus_exante_tier2::001",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(LDHA) - log1p(ALB)",
+      "original_equation": "log1p(LDHA) - log1p(ALB)",
+      "law_auc": 0.5596880179966848,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.505473938879356,
+      "perm_p_fdr": 0.07,
+      "perm_p": 0.02,
+      "law_auc_replayed": 0.5596880179966848
+    },
+    {
+      "candidate_id": "opus_exante_tier2::003",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "original_equation": "log1p(VEGFA) - log1p(ALB)",
+      "law_auc": 0.5515924698081932,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.500036413150937,
+      "perm_p_fdr": 0.08866666666666667,
+      "perm_p": 0.038,
+      "law_auc_replayed": 0.5515924698081932
+    },
+    {
+      "candidate_id": "opus_exante_tier2::002",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "original_equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "law_auc": 0.5355049727681743,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.4861154389507012,
+      "perm_p_fdr": 0.308,
+      "perm_p": 0.176,
+      "law_auc_replayed": 0.5355049727681743
+    },
+    {
+      "candidate_id": "opus_exante_tier2::000",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "original_equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "law_auc": 0.5136899123845607,
+      "baseline_auc": 0.609815297182098,
+      "ci_lower": 0.4616643898819348,
+      "perm_p_fdr": 0.7093333333333334,
+      "perm_p": 0.608,
+      "law_auc_replayed": 0.5136899123845607
+    }
+  ],
+  "records": [
+    {
+      "candidate_id": "flagship_pysr::015",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp(((ALB + PTGER3) - ((VEGFA / 0.7186556) - SLC2A1)) - CA9))",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::015",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp(((ALB + PTGER3) - ((VEGFA / 0.7186556) - SLC2A1)) - CA9))",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::015",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp(((ALB + PTGER3) - ((VEGFA / 0.7186556) - SLC2A1)) - CA9))",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::015",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp(((ALB + PTGER3) - ((VEGFA / 0.7186556) - SLC2A1)) - CA9))",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::015",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp(((ALB + PTGER3) - ((VEGFA / 0.7186556) - SLC2A1)) - CA9))",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::011",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.01702503 * exp((ALB - (VEGFA - SLC2A1)) - (CA9 - PTGER3)))",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::011",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.01702503 * exp((ALB - (VEGFA - SLC2A1)) - (CA9 - PTGER3)))",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::011",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.01702503 * exp((ALB - (VEGFA - SLC2A1)) - (CA9 - PTGER3)))",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::011",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.01702503 * exp((ALB - (VEGFA - SLC2A1)) - (CA9 - PTGER3)))",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::011",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.01702503 * exp((ALB - (VEGFA - SLC2A1)) - (CA9 - PTGER3)))",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::006",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp(((ALB + PTGER3) - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::006",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp(((ALB + PTGER3) - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::006",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp(((ALB + PTGER3) - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::006",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp(((ALB + PTGER3) - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::006",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp(((ALB + PTGER3) - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::009",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp((PTGER3 - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::009",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp((PTGER3 - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::009",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp((PTGER3 - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::009",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp((PTGER3 - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::009",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(exp((PTGER3 - NDUFA4L2) - VEGFA) * -0.010614875)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::017",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp((PTGER3 - VEGFA) - NDUFA4L2))",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::017",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp((PTGER3 - VEGFA) - NDUFA4L2))",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::017",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp((PTGER3 - VEGFA) - NDUFA4L2))",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::017",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp((PTGER3 - VEGFA) - NDUFA4L2))",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "flagship_pysr::017",
+      "source": "flagship_pysr",
+      "task": "flagship",
+      "equation": "exp(-0.013298511 * exp((PTGER3 - VEGFA) - NDUFA4L2))",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::000",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "0.4159849 + ((CUBN - NDUFA4L2) * -0.09313616)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::000",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "0.4159849 + ((CUBN - NDUFA4L2) * -0.09313616)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::000",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "0.4159849 + ((CUBN - NDUFA4L2) * -0.09313616)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::000",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "0.4159849 + ((CUBN - NDUFA4L2) * -0.09313616)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::000",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "0.4159849 + ((CUBN - NDUFA4L2) * -0.09313616)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::010",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "((CUBN - NDUFA4L2) * -0.07060441) - -0.39114887",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::010",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "((CUBN - NDUFA4L2) * -0.07060441) - -0.39114887",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::010",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "((CUBN - NDUFA4L2) * -0.07060441) - -0.39114887",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::010",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "((CUBN - NDUFA4L2) * -0.07060441) - -0.39114887",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::010",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "((CUBN - NDUFA4L2) * -0.07060441) - -0.39114887",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::017",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "(-0.07137078 * (CUBN - NDUFA4L2)) - -0.38469547",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::017",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "(-0.07137078 * (CUBN - NDUFA4L2)) - -0.38469547",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::017",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "(-0.07137078 * (CUBN - NDUFA4L2)) - -0.38469547",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::017",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "(-0.07137078 * (CUBN - NDUFA4L2)) - -0.38469547",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::017",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "(-0.07137078 * (CUBN - NDUFA4L2)) - -0.38469547",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::023",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p(log1p(sqrt(exp(NDUFA4L2 - CUBN))) / 1.5258063)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::023",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p(log1p(sqrt(exp(NDUFA4L2 - CUBN))) / 1.5258063)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::023",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p(log1p(sqrt(exp(NDUFA4L2 - CUBN))) / 1.5258063)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::023",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p(log1p(sqrt(exp(NDUFA4L2 - CUBN))) / 1.5258063)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::023",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p(log1p(sqrt(exp(NDUFA4L2 - CUBN))) / 1.5258063)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::025",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p((-0.13106725 * (CUBN - NDUFA4L2)) + 0.47160774)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::025",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p((-0.13106725 * (CUBN - NDUFA4L2)) + 0.47160774)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::025",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p((-0.13106725 * (CUBN - NDUFA4L2)) + 0.47160774)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::025",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p((-0.13106725 * (CUBN - NDUFA4L2)) + 0.47160774)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "tier2_pysr::025",
+      "source": "tier2_pysr",
+      "task": "tier2",
+      "equation": "log1p((-0.13106725 * (CUBN - NDUFA4L2)) + 0.47160774)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::000",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::000",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::000",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::000",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::000",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::004",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::004",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::004",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::004",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::004",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(CA9)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::002",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::002",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::002",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::002",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::002",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::003",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::003",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::003",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::003",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::003",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::006",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::006",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::006",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::006",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_flagship::006",
+      "source": "opus_exante_flagship",
+      "task": "flagship",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p_mean": 0.0,
+      "p_min": 0.0,
+      "p_max": 0.0,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_tier2::006",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.005
+      ],
+      "p_mean": 0.0016666666666666668,
+      "p_min": 0.0,
+      "p_max": 0.005,
+      "p_std": 0.002886751345948129
+    },
+    {
+      "candidate_id": "opus_exante_tier2::006",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0,
+        0.002
+      ],
+      "p_mean": 0.0006666666666666666,
+      "p_min": 0.0,
+      "p_max": 0.002,
+      "p_std": 0.0011547005383792516
+    },
+    {
+      "candidate_id": "opus_exante_tier2::006",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.001,
+        0.001
+      ],
+      "p_mean": 0.0006666666666666666,
+      "p_min": 0.0,
+      "p_max": 0.001,
+      "p_std": 0.0005773502691896258
+    },
+    {
+      "candidate_id": "opus_exante_tier2::006",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0,
+        0.0005,
+        0.0005
+      ],
+      "p_mean": 0.0003333333333333333,
+      "p_min": 0.0,
+      "p_max": 0.0005,
+      "p_std": 0.0002886751345948129
+    },
+    {
+      "candidate_id": "opus_exante_tier2::006",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(MKI67) - log1p(RPL13A)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0006,
+        0.0008,
+        0.0006
+      ],
+      "p_mean": 0.0006666666666666666,
+      "p_min": 0.0006,
+      "p_max": 0.0008,
+      "p_std": 0.0001154700538379252
+    },
+    {
+      "candidate_id": "opus_exante_tier2::001",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(LDHA) - log1p(ALB)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.01,
+        0.01,
+        0.01
+      ],
+      "p_mean": 0.01,
+      "p_min": 0.01,
+      "p_max": 0.01,
+      "p_std": 0.0
+    },
+    {
+      "candidate_id": "opus_exante_tier2::001",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(LDHA) - log1p(ALB)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.018,
+        0.02,
+        0.024
+      ],
+      "p_mean": 0.020666666666666667,
+      "p_min": 0.018,
+      "p_max": 0.024,
+      "p_std": 0.003055050463303894
+    },
+    {
+      "candidate_id": "opus_exante_tier2::001",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(LDHA) - log1p(ALB)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.02,
+        0.019,
+        0.015
+      ],
+      "p_mean": 0.018,
+      "p_min": 0.015,
+      "p_max": 0.02,
+      "p_std": 0.002645751311064591
+    },
+    {
+      "candidate_id": "opus_exante_tier2::001",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(LDHA) - log1p(ALB)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.019,
+        0.0205,
+        0.021
+      ],
+      "p_mean": 0.020166666666666666,
+      "p_min": 0.019,
+      "p_max": 0.021,
+      "p_std": 0.0010408329997330674
+    },
+    {
+      "candidate_id": "opus_exante_tier2::001",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(LDHA) - log1p(ALB)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.02,
+        0.0192,
+        0.0212
+      ],
+      "p_mean": 0.020133333333333333,
+      "p_min": 0.0192,
+      "p_max": 0.0212,
+      "p_std": 0.0010066445913694342
+    },
+    {
+      "candidate_id": "opus_exante_tier2::003",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.02,
+        0.025,
+        0.02
+      ],
+      "p_mean": 0.021666666666666667,
+      "p_min": 0.02,
+      "p_max": 0.025,
+      "p_std": 0.002886751345948129
+    },
+    {
+      "candidate_id": "opus_exante_tier2::003",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.03,
+        0.048,
+        0.048
+      ],
+      "p_mean": 0.042,
+      "p_min": 0.03,
+      "p_max": 0.048,
+      "p_std": 0.010392304845413265
+    },
+    {
+      "candidate_id": "opus_exante_tier2::003",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.033,
+        0.05,
+        0.044
+      ],
+      "p_mean": 0.042333333333333334,
+      "p_min": 0.033,
+      "p_max": 0.05,
+      "p_std": 0.008621678104251709
+    },
+    {
+      "candidate_id": "opus_exante_tier2::003",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.0375,
+        0.048,
+        0.0445
+      ],
+      "p_mean": 0.043333333333333335,
+      "p_min": 0.0375,
+      "p_max": 0.048,
+      "p_std": 0.005346338310781814
+    },
+    {
+      "candidate_id": "opus_exante_tier2::003",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(VEGFA) - log1p(ALB)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.041,
+        0.0486,
+        0.0462
+      ],
+      "p_mean": 0.04526666666666667,
+      "p_min": 0.041,
+      "p_max": 0.0486,
+      "p_std": 0.003885013942488922
+    },
+    {
+      "candidate_id": "opus_exante_tier2::002",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.135,
+        0.125,
+        0.145
+      ],
+      "p_mean": 0.135,
+      "p_min": 0.125,
+      "p_max": 0.145,
+      "p_std": 0.009999999999999995
+    },
+    {
+      "candidate_id": "opus_exante_tier2::002",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.152,
+        0.154,
+        0.194
+      ],
+      "p_mean": 0.16666666666666666,
+      "p_min": 0.152,
+      "p_max": 0.194,
+      "p_std": 0.023692474191889152
+    },
+    {
+      "candidate_id": "opus_exante_tier2::002",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.16,
+        0.153,
+        0.179
+      ],
+      "p_mean": 0.164,
+      "p_min": 0.153,
+      "p_max": 0.179,
+      "p_std": 0.013453624047073707
+    },
+    {
+      "candidate_id": "opus_exante_tier2::002",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.1635,
+        0.162,
+        0.169
+      ],
+      "p_mean": 0.16483333333333336,
+      "p_min": 0.162,
+      "p_max": 0.169,
+      "p_std": 0.003685557397916
+    },
+    {
+      "candidate_id": "opus_exante_tier2::002",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(SLC2A1) + log1p(NDUFA4L2) - log1p(AGXT)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.1718,
+        0.1658,
+        0.1684
+      ],
+      "p_mean": 0.16866666666666666,
+      "p_min": 0.1658,
+      "p_max": 0.1718,
+      "p_std": 0.0030088757590391382
+    },
+    {
+      "candidate_id": "opus_exante_tier2::000",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 200,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.64,
+        0.545,
+        0.605
+      ],
+      "p_mean": 0.5966666666666667,
+      "p_min": 0.545,
+      "p_max": 0.64,
+      "p_std": 0.04804511768466523
+    },
+    {
+      "candidate_id": "opus_exante_tier2::000",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 500,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.632,
+        0.586,
+        0.592
+      ],
+      "p_mean": 0.6033333333333334,
+      "p_min": 0.586,
+      "p_max": 0.632,
+      "p_std": 0.02500666577801476
+    },
+    {
+      "candidate_id": "opus_exante_tier2::000",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 1000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.608,
+        0.584,
+        0.587
+      ],
+      "p_mean": 0.593,
+      "p_min": 0.584,
+      "p_max": 0.608,
+      "p_std": 0.013076696830622032
+    },
+    {
+      "candidate_id": "opus_exante_tier2::000",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 2000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.6115,
+        0.5875,
+        0.5955
+      ],
+      "p_mean": 0.5981666666666667,
+      "p_min": 0.5875,
+      "p_max": 0.6115,
+      "p_std": 0.012220201853215583
+    },
+    {
+      "candidate_id": "opus_exante_tier2::000",
+      "source": "opus_exante_tier2",
+      "task": "tier2",
+      "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+      "n_permutations": 5000,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "p_values": [
+        0.6024,
+        0.5914,
+        0.5876
+      ],
+      "p_mean": 0.5938,
+      "p_min": 0.5876,
+      "p_max": 0.6024,
+      "p_std": 0.0076863515402302695
+    }
+  ]
+}

@@ -243,8 +243,52 @@ because the real data do not support a confident lower bound at 0.60.
 
 ---
 
-## B3 — Permutation stability  `2026-04-22` (running)
+## B3 — Permutation stability  `2026-04-22`
 
-Background job iterating n_permutations ∈ {200, 500, 1k, 2k, 5k} ×
-3 seeds for the top 5 candidates of each source. Will commit the
-result JSON + update this section when the run completes.
+**Code:** `src/track_b_permutation_stability.py`
+**Artifacts:** `results/track_b_gate_robustness/permutation_stability.json`
+**Run:** 20 candidates (top 5 × 4 sources) × n ∈ {200, 500, 1000, 2000, 5000}
+× 3 seeds = 300 permutation runs.
+
+### Per-candidate cross-n stability
+
+15 of 20 candidates have `perm_p = 0.000` at every n and every seed
+(both zero std and zero cross-n range):
+
+  - flagship_pysr (5): all 0.000
+  - opus_exante_flagship (5): all 0.000
+  - tier2_pysr (5): all 0.000
+
+The remaining 5 candidates are the **opus_exante_tier2** set (the weak
+stage-classification laws):
+
+| Candidate | p_mean 200 | p_mean 500 | p_mean 1000 | p_mean 2000 | p_mean 5000 | max p_std (seeds) |
+|---|---|---|---|---|---|---|
+| opus_exante_tier2::000 | 0.597 | 0.603 | 0.593 | 0.598 | 0.594 | 0.048 |
+| opus_exante_tier2::001 | 0.010 | 0.021 | 0.018 | 0.020 | 0.020 | 0.003 |
+| opus_exante_tier2::002 | 0.135 | 0.167 | 0.164 | 0.165 | 0.169 | 0.024 |
+| opus_exante_tier2::003 | 0.022 | 0.042 | 0.042 | 0.043 | 0.045 | 0.010 |
+| opus_exante_tier2::006 | 0.002 | 0.001 | 0.001 | 0.000 | 0.001 | 0.003 |
+
+### Finding
+
+**Zero candidates flip the 0.05 pass / fail verdict** across any
+combination of n_permutations and seed. Candidates with
+`p_mean < 0.05` (`::001`, `::003`, `::006`) stay below 0.05 at every
+n; candidates with `p_mean > 0.05` (`::000`, `::002`) stay above at
+every n.
+
+The closest-to-flip candidate is `opus_exante_tier2::003` with
+p_mean running 0.022 → 0.045 across n. At n=5000 seeds, p_mean =
+0.045 and max seed-std = 0.010, so a 1σ tail still lands at ≈ 0.055
+— a hair above threshold, but the point estimate is stable below.
+That's the only borderline case; every other candidate is far from
+the boundary.
+
+### Interpretation
+
+Permutation count choice does **not** drive the pass / fail verdict
+anywhere in the tested grid. The gate's `perm_p_fdr < 0.05` boundary
+is stable to the two freedoms (how many shuffles, which seed). This
+completes the robustness story — the permutation side contributes no
+flips to the 0-survivor verdict.

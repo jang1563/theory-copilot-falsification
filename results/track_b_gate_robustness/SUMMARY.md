@@ -18,7 +18,7 @@ performance, not an artifact of a sharply chosen threshold.
 |---|---|---|---|
 | B1 | Threshold sensitivity grid (5 thresholds × varying values on 67 candidates) | `threshold_grid.csv`, `threshold_heatmap.png`, `threshold_grid_summary.json` | **delta_baseline is the sole operative constraint**; cliff at +0.030 (below +0.05 pre-reg) |
 | B2 | Baseline definition ablation (sign_invariant_max, LR-single, LR-pair+interaction) | `baseline_ablation.csv`, `baseline_ablation_summary.json` | Verdict **hardens** under stronger baselines (flagship max Δ +0.029 → +0.010; tier2 → −0.005) |
-| B3 | Permutation stability (n ∈ {200,500,1k,2k,5k} × 3 seeds × top 5 per source) | `permutation_stability.json` | (Run pending — results folded in when complete) |
+| B3 | Permutation stability (n ∈ {200,500,1k,2k,5k} × 3 seeds × top 5 per source) | `permutation_stability.json`, `b3_permutation_stability.png` | No candidate's p-verdict flips across n or seed; `perm_p_fdr < 0.05` boundary is stable |
 | B4 | Bootstrap seed variance (20 candidates × 5 seeds × n_resamples=1000) | `bootstrap_seed_variance.json` | `ci_lower` stable to 3 decimals (max std 0.003); no seed-flip |
 | B5 | Feature-scaling ablation (raw / zscore / rank / minmax) on 67 candidates | `scaling_ablation.csv`, `scaling_ablation_summary.json` | Flagship invariant; **tier2 × zscore** produces 1/34 survivor under reduced gate |
 | B6 | Cohort-size subsampling (n ∈ {100, 200, 400, 600} × 5 seeds × HIF law) | `cohort_size_curve.json` | `ci_lower > 0.60` at every n tested; 0 survivors at every n |
@@ -40,10 +40,13 @@ does **not** produce a single survivor at any grid point.
 - **Bootstrap (B4):** `ci_lower` is seed-stable to the third decimal
   (max std 0.003, max range 0.008). No verdict flips across seeds
   for any of the 20 top candidates.
-- **Permutation (B3):** results in follow-up commit; interim
-  expectation is that law_auc values ≥ 0.98 (flagship) or ≈ 0.64
-  (tier2) produce perm_p ≈ 0 at every n, making the gate's
-  `perm_p_fdr < 0.05` boundary unaffected by permutation count.
+- **Permutation (B3):** 20 candidates × 5 n_permutations × 3 seeds →
+  **zero verdict flips**. 15 candidates have p=0.000 at every n; the
+  remaining 5 (opus_exante_tier2 set) stay cleanly on their respective
+  side of the 0.05 threshold at every n (min below / max above). The
+  closest-to-flip case (`opus_exante_tier2::003`) runs 0.022 → 0.045
+  across n (stable pass). `perm_p_fdr < 0.05` is robust to
+  permutation count choice.
 - **Scaling (B5):** flagship max Δ stays in [+0.025, +0.030] across
   all four scalings. **tier2 × zscore** raises max Δ to +0.055,
   passing the reduced-gate threshold for one candidate. Other three
@@ -61,13 +64,14 @@ every cohort size.
 
 ### Is +0.029 ceiling robust or soft?
 
-**Robust along four of five design axes; soft along one.**
+**Robust along five of six design axes; soft along one.**
 
 - **Robust:** threshold grid (cliff at empirical max, no gray zone),
   baseline definition (+0.029 → +0.010 under pair+interaction LR;
   compound advantage shrinks rather than grows), bootstrap seed
   (3-decimal stability), cohort size (n down to 100 keeps the gate's
-  stability floor).
+  stability floor), **permutation count / seed (no candidate's
+  p-verdict flips across n ∈ {200…5000})**.
 - **Soft:** feature scaling on tier2 — z-score bumps max delta to
   +0.055, the only configuration in the analysis that crosses the
   pre-registered +0.05 threshold. This is confined to the stage
@@ -102,6 +106,9 @@ zscore to confirm the rejection holds.
 - `b2_baseline_ablation.png` — bar chart of max delta_baseline per
   (task, baseline_kind). Pair+interaction baseline flattens the
   flagship advantage (+0.029 → +0.010) and turns tier2 negative.
+- `b3_permutation_stability.png` — perm_p across n_permutations on log
+  axis for 20 candidates; 15 are pinned to 0, the 5 opus_exante_tier2
+  candidates form a stable band well clear of the 0.05 line.
 - `b4_bootstrap_seed_variance.png` — scatter of 5-seed ci_lower per
   candidate; the 0.60 gate line separates flagship (all well above)
   from tier2 (all well below). Seed scatter is invisible at plot scale.
@@ -123,7 +130,8 @@ threshold_grid_summary.json       (B1) flip curves by threshold
 baseline_ablation.csv             (B2) 201 rows, 67 candidates × 3 baselines
 baseline_ablation_summary.json    (B2) task-level baseline AUCs + survivor counts
 b2_baseline_ablation.png          (B2) bar chart max delta per baseline kind
-permutation_stability.json        (B3) pending
+permutation_stability.json        (B3) 100 records (20 cand × 5 n × 3 seeds)
+b3_permutation_stability.png      (B3) per-candidate p vs n log-x line plot
 bootstrap_seed_variance.json      (B4) 20 candidates × 5 seeds
 b4_bootstrap_seed_variance.png    (B4) per-candidate seed scatter
 scaling_ablation.csv              (B5) 268 rows
@@ -148,5 +156,4 @@ Progress log: `research/TRACK_B_progress.md`
 
 ---
 
-*Draft v1 — 2026-04-22. Updated with B3 numbers when the permutation
-scan finishes.*
+*v1.1 — 2026-04-22, post-B3. All six experiments complete.*

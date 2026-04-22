@@ -203,11 +203,39 @@ def plot_b6_cohort_size_curve() -> Path:
     return out
 
 
+def plot_b3_permutation_stability() -> Path:
+    data = json.loads((OUT_DIR / "permutation_stability.json").read_text())
+    df = pd.DataFrame(data["records"])
+    pivot = (
+        df.pivot_table(index="candidate_id", columns="n_permutations", values="p_mean")
+        .sort_index()
+    )
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for cand in pivot.index:
+        ys = pivot.loc[cand].values
+        xs = pivot.columns.values
+        ax.plot(xs, ys, marker="o", alpha=0.7, label=cand)
+    ax.axhline(0.05, color="red", linestyle="--", linewidth=1, label="gate threshold (p < 0.05)")
+    ax.set_xscale("log")
+    ax.set_xlabel("n_permutations")
+    ax.set_ylabel("mean perm_p across 3 seeds")
+    ax.set_title("B3 — Permutation-null p across n (20 candidates)")
+    ax.legend(loc="center left", bbox_to_anchor=(1.02, 0.5), fontsize=7, ncol=1)
+    ax.grid(alpha=0.3)
+    fig.tight_layout()
+    out = OUT_DIR / "b3_permutation_stability.png"
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.parse_args()
     for fn in (
         plot_b2_baseline_ablation,
+        plot_b3_permutation_stability,
         plot_b4_bootstrap_variance,
         plot_b5_scaling_ablation,
         plot_b6_cohort_size_curve,
