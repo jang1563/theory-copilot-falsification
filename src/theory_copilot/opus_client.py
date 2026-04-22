@@ -41,17 +41,22 @@ class OpusClient:
         return (self.prompts_dir / filename).read_text()
 
     def _call(self, system: str, user_msg: str, role: str = "unknown") -> list:
-        response = self.client.messages.create(
+        # Streaming is required: non-streaming .messages.create with
+        # max_tokens=32000 + adaptive thinking trips the SDK's 10-minute
+        # guard before any network call. The `with ... stream:` pattern
+        # keeps the same completion semantics and returns a full Message.
+        with self.client.messages.stream(
             model=self.model,
             max_tokens=32000,
             thinking={"type": "adaptive", "display": "summarized"},
             output_config={"effort": "high"},
             system=system,
             messages=[{"role": "user", "content": user_msg}],
-        )
-        self._last_usage = getattr(response, "usage", None)
+        ) as stream:
+            final = stream.get_final_message()
+        self._last_usage = getattr(final, "usage", None)
         log_usage(self.model, role, self._last_usage)
-        return response.content
+        return final.content
 
     def _extract(self, blocks) -> tuple[str, str]:
         thinking_text = ""

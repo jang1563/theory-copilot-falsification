@@ -23,10 +23,25 @@ def _mock_content(*blocks):
 
 
 def _make_client(mock_anthropic, content_blocks):
+    """Mock the streaming .messages.stream context manager path.
+
+    OpusClient._call uses `with client.messages.stream(...) as stream:` and
+    then `stream.get_final_message()`, so tests must mock the context-manager
+    chain rather than the legacy `.messages.create` single-call path.
+    """
     mock_client = MagicMock()
     mock_anthropic.Anthropic.return_value = mock_client
     mock_response = MagicMock()
     mock_response.content = content_blocks
+    mock_response.usage = MagicMock(input_tokens=0, output_tokens=0)
+
+    # `with client.messages.stream(...) as stream:` returns the inner stream
+    stream_ctx = MagicMock()
+    stream_ctx.__enter__.return_value.get_final_message.return_value = mock_response
+    stream_ctx.__exit__.return_value = False
+    mock_client.messages.stream.return_value = stream_ctx
+
+    # Keep legacy mock as well in case older tests reach for it.
     mock_client.messages.create.return_value = mock_response
     return mock_client
 
