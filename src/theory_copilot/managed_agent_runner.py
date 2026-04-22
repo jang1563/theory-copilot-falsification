@@ -14,24 +14,23 @@ NIGHT2_SYSTEM = (
 
 NIGHT3_SYSTEM = (
     "You are a scientific computing assistant specializing in hypothesis falsification. "
-    "Your task: run the 4-test falsification gate on the top-50 candidate equations "
+    "Your task: run the 5-test falsification gate on the top-50 candidate equations "
     "from Night 2. Execute python3 src/falsification_sweep.py to test each candidate "
-    "against permutation null, bootstrap stability, best-single-feature baseline, and "
-    "covariate-only confound. Apply Benjamini-Hochberg FDR across candidates. Write "
-    "the ranked report (equation, passes, perm_p, perm_p_fdr, ci_lower, delta_baseline, "
-    "delta_confound, fail_reason) to results/night3/falsification_report.json. Confirm "
-    "completion with a structured summary."
+    "against permutation null, bootstrap stability, best-single-feature baseline, "
+    "covariate-only confound, and a decoy-feature null. Apply Benjamini-Hochberg FDR "
+    "across candidates. Write the ranked report (equation, passes, perm_p, perm_p_fdr, "
+    "ci_lower, delta_baseline, delta_confound, decoy_p, fail_reason) to "
+    "results/night3/falsification_report.json. Confirm completion with a structured summary."
 )
 
 NIGHT4_SYSTEM = (
-    "You are a scientific computing assistant specializing in biological law validation. "
-    "Your task: replay the top surviving laws from Night 3 on the GSE40435 cohort "
+    "You are a scientific computing assistant specializing in biological law replay. "
+    "Your task: replay the top surviving law from Night 3 on the GSE40435 cohort "
     "(independent ccRCC kidney tissue cohort, 101 paired tumor-normal samples, "
     "microarray platform — different from TCGA-KIRC's RNA-seq). Run the same "
-    "falsification gate on the independent cohort with per-cohort z-score "
-    "standardization. Compute three-way verdict: law_transfers (same equation "
-    "survives), workflow_transfers (some law in family survives), or neither. "
-    "Write all results (per-equation AUC with 95% CI, verdict) to "
+    "5-test falsification gate on the independent cohort with per-cohort z-score "
+    "standardization. Compute an honest replay verdict: pass, attenuated, or fail. "
+    "Write all results (AUC with 95% CI, replay verdict, caveat note) to "
     "results/night4/transfer_report.json. Confirm completion with a structured summary."
 )
 
@@ -52,12 +51,12 @@ _NIGHT_TASKS = {
         "Write the ranked results to falsification_report.json."
     ),
     4: (
-        "Run GSE40435 transfer validation on the surviving equations from "
+        "Run GSE40435 replay validation on the surviving equation from "
         "falsification_report.json:\n"
-        "  python3 src/transfer_validation.py "
-        "--report results/night3/falsification_report.json "
-        "--dataset GSE40435 --outfile results/night4/transfer_report.json\n"
-        "Write results with AUC and 95% CI to transfer_report.json."
+        "  theory-copilot replay "
+        "--flagship-artifacts results/night3 "
+        "--transfer-dataset GSE40435 --output-root results/night4\n"
+        "Write results with AUC and 95% CI to results/night4/transfer_run/transfer_report.json."
     ),
 }
 
@@ -72,7 +71,7 @@ def run_path_b(
 
     Night 2 task: run PySR sweep → batch Sonnet judgment → write manifest_night2.json
     Night 3 task: run falsification sweep on top 50 → write falsification_report.json
-    Night 4 task: run GSE40435 validation → write transfer_report.json
+    Night 4 task: run GSE40435 replay → write transfer_report.json
 
     Returns: {"session_id": str, "agent_id": str, "output": str, "status": "completed"|"error"}
     """
@@ -220,7 +219,7 @@ def run_path_a(
             "falsifier",
             falsifier,
             (
-                "Read the Searcher's candidate equations below and run the 4-test gate:\n"
+                "Read the Searcher's candidate equations below and run the 5-test gate:\n"
                 "  python3 src/falsification_sweep.py --candidates results/candidates.json "
                 "--data <flagship_csv> --genes <CSV of genes> --covariate-cols age,batch_index "
                 "--output results/falsification_report.json\n"

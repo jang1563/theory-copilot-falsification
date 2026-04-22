@@ -144,7 +144,19 @@ def _run_sweep(args: argparse.Namespace) -> list[dict[str, Any]]:
             kwargs["guesses"] = guesses
             kwargs["fraction_replaced_guesses"] = 0.3
 
-        model = pysr.PySRRegressor(**kwargs)
+        try:
+            model = pysr.PySRRegressor(**kwargs)
+        except TypeError as exc:
+            # Older PySR releases (<= 0.19) do not expose guesses /
+            # fraction_replaced_guesses. Fall back to unconstrained search;
+            # Opus-proposed templates are still evaluated separately by the
+            # falsification sweep via their initial_guess entries.
+            if "guesses" in str(exc) or "fraction_replaced_guesses" in str(exc):
+                kwargs.pop("guesses", None)
+                kwargs.pop("fraction_replaced_guesses", None)
+                model = pysr.PySRRegressor(**kwargs)
+            else:
+                raise
         model.fit(X_train, y_train)
 
         eqs: pd.DataFrame = model.equations_

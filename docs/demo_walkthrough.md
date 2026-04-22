@@ -69,12 +69,13 @@ Expected JSONL row (abbreviated):
  "auroc_holdout": 0.91, "complexity": 11, "loss": 0.18}
 ```
 
-## Step 3 — Falsify (Opus 4.7, Skeptic role)
+## Step 3 — Falsify (5-test gate, local)
 
-Each candidate passes through the 5-test gate. Opus 4.7 reads the
-equation + metrics and emits PASS / FAIL / NEEDS_MORE_TESTS with an
-explicit reason. Gate thresholds are enforced statistically; Opus 4.7
-cannot override them.
+Each candidate passes through the deterministic 5-test gate. The gate
+itself is plain Python: permutation null, bootstrap stability,
+sign-invariant best-single-feature baseline, incremental covariate
+confound, and a decoy-feature null. Opus 4.7 does not decide pass/fail
+here; it reviews the metric pattern afterward.
 
 ```bash
 python -m theory_copilot.falsification_sweep \
@@ -123,34 +124,44 @@ captures the HIF-stabilization-driven switch from oxidative metabolism
 to angiogenesis + hypoxic survival. Research use only.
 ```
 
-## Step 5 — Transfer (GSE40435)
+## Step 5 — Replay (independent cohort)
 
-Replay the same pipeline on the independent cohort. Sonnet 4.6 drives
-the replay; Opus 4.7 does the interpretation spot-check.
+Replay the top surviving law on an independent cohort. For the synthetic
+example below, the dataset id is `transfer_demo`. In the real judged
+path, replace it with `gse40435`.
 
 ```bash
-python -m theory_copilot.pysr_sweep \
-    --data data/examples/transfer_demo.csv \
-    --label-col label \
-    --feature-cols CA9 VEGFA LDHA AGXT ALB \
-    --proposals config/law_proposals.json \
-    --out artifacts/gse40435_candidates.jsonl
-
-python -m theory_copilot.falsification_sweep \
-    --candidates artifacts/gse40435_candidates.jsonl \
-    --data data/examples/transfer_demo.csv \
-    --label-col label \
-    --fdr 0.05 \
-    --out artifacts/gse40435_survivors.jsonl
+theory-copilot replay \
+    --flagship-artifacts artifacts/flagship_run \
+    --transfer-dataset transfer_demo \
+    --output-root artifacts
 ```
 
-AUROC comparison (example run):
+Replay summary (example run):
 
 ```text
-log1p(CA9) + log1p(VEGFA) - log1p(AGXT)
-  TCGA-KIRC  AUROC = 0.91  (survived gate)
-  GSE40435   AUROC = 0.88  (survived gate)
-  Verdict: law_transfers
+{
+  "ci_lower": 0.80,
+  "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+  "law_auc": 0.88,
+  "passes": true,
+  "status": "PASS",
+  "transfer_dataset": "transfer_demo"
+}
+```
+
+Artifacts written:
+
+- `artifacts/transfer_run/transfer_report.json`
+- `artifacts/transfer_run/interpretation.json`
+
+For the judged-core run, the same command becomes:
+
+```bash
+theory-copilot replay \
+    --flagship-artifacts artifacts/flagship_run \
+    --transfer-dataset gse40435 \
+    --output-root artifacts
 ```
 
 ## Managed Agents (Path B)
