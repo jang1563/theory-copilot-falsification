@@ -1,0 +1,19 @@
+# 06_managed_agents_path_a — 2026-04-22 19:52:42
+
+Purpose: probe whether `client.beta.agents.create(..., tools=[{'type':'agent_toolset_20260401'}])` succeeds on this API key, which is the Path A (callable_agents / multiagent) gate.
+
+## Attempt
+
+All three Path-A role agents (proposer / searcher / falsifier) **created successfully** — the multiagent feature is accessible for this API key.
+
+- **proposer**: agent.id = `agent_011CaKi6UWUJS917U4Xm5drg`
+- **searcher**: agent.id = `agent_011CaKi6WhSQFA8ztkW3vedo`
+- **falsifier**: agent.id = `agent_011CaKi6YtPwzSt5YjBJUd87`
+
+## Path A guard status
+
+`MANAGED_AGENTS_WAITLIST=unset` — `run_path_a()` in `src/theory_copilot/managed_agent_runner.py` raises `NotImplementedError` unless this env var is set to `approved`, so Path A remains a documented code path that can be activated the moment the waitlist opens for this key.
+
+## Path B status
+
+Path B (single-agent tool loop) was already verified end-to-end: see `04_managed_agents_e2e.log`. This is the path the live demo uses today.

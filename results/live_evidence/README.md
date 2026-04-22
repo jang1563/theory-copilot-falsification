@@ -14,6 +14,8 @@ synthetic, nothing mocked.
 | `02_proposer_kirc.log` | `OpusClient.propose_laws()` on a KIRC dataset card. Raw response is 1500+ chars of Opus 4.7's proposed law families with biology rationale and skeptic tests. |
 | `03_skeptic.log` | `OpusClient.judge_candidate()` on a deliberately borderline candidate. |
 | `04_managed_agents_e2e.log` | End-to-end Managed Agents Path B verification: `agents.create` → `environments.create` → `sessions.create` → `stream` → `send` → `session.status_idle`. Agent responded with a text message; the full chain works. |
+| `05_proposer_live_tcga_kirc.log` / `.json` | E6 refresh: live `OpusClient.propose_laws()` call against `claude-opus-4-7` using the real 45-gene TCGA-KIRC metastasis expanded dataset context. 5 law families parsed end-to-end with `initial_guess` / `skeptic_test` fields. Replaces the synthetic-data `02_proposer_kirc.log` with a cleanly JSON-parsed transcript. |
+| `06_managed_agents_path_a.log` | E10 probe: `client.beta.agents.create(tools=[{"type":"agent_toolset_20260401"}])` succeeds for all three Path-A role agents (proposer / searcher / falsifier). The multiagent feature is accessible for this key; `run_path_a` remains guarded by `MANAGED_AGENTS_WAITLIST=approved` until the full three-agent chain is exercised with the actual PySR environment. |
 
 ## Prior-run cost
 
