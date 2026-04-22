@@ -1,0 +1,74 @@
+Doc scan — Phase Q Q7  (2026-04-22)
+===================================
+
+Targets scanned:
+  README.md, STATUS.md, SESSION_COORDINATION.md,
+  docs/methodology.md, docs/why_opus_4_7.md,
+  docs/demo_walkthrough.md, docs/submission_description.md,
+  docs/survivor_narrative.md, docs/loom_script.md,
+  docs/managed_agents_verification.md, docs/opus47_api_verification.md,
+  docs/pysr_setup.md, docs/submission_form_draft.md
+
+Link scan (markdown [text](path) with relative paths):
+  Total unique relative links: 22.
+  All targets verified existing: YES (full inventory below).
+
+Existing targets:
+  config/law_proposals.json                                             OK
+  data/examples/make_kirc_demo.py                                       OK
+  docs/demo_walkthrough.md                                              OK
+  docs/methodology.md                                                   OK
+  docs/why_opus_4_7.md                                                  OK
+  research/TRACK_A_task_landscape.md                                    OK
+  research/TRACK_B_gate_robustness.md                                   OK
+  results/live_evidence/04_managed_agents_e2e.log                       OK
+  results/track_a_task_landscape/SUMMARY.md                             OK
+  results/track_a_task_landscape/survivor_robustness/
+       INTERPRETATION_top2a_epas1.md                                    OK
+  results/track_a_task_landscape/survivor_robustness/SUMMARY.md         OK
+  results/track_b_gate_robustness/SUMMARY.md                            OK
+  src/falsification_sweep.py                                            OK
+  src/pysr_sweep.py                                                     OK
+  src/theory_copilot/cli.py                                             OK
+  src/theory_copilot/falsification.py                                   OK
+  src/theory_copilot/managed_agent_runner.py                            OK
+  src/theory_copilot/opus_client.py                                     OK
+  prompts/                                                              OK
+
+Numeric consistency checks:
+
+  Flagship + Tier 2 + GSE40435 0-survivor verdict (11-gene panel):
+    README.md     : "100+ candidates across four tasks" / "9/30 on metastasis"
+    STATUS.md     : "0 / 100+ candidates" / "9 / 30 ... metastasis"
+    methodology.md: "9 / 30 PySR candidates pass on metastasis"
+    submission_description.md: "9 / 30 candidates on metastasis"
+    survivor_narrative.md: "+0.069 incremental gap"
+  All prose docs consistent with Track A SUMMARY.md headline.
+
+  +0.029 incremental ceiling (11-gene panel):
+    STATUS.md     : "+0.029" (in narrative)
+    survivor_narrative.md: implicitly cites "+0.069" vs "+0.05" threshold
+    Plots (results/plots/delta_baseline_hist.png title says "60 candidates
+      and two tasks" — stale, should be 67; see HANDOFF_to_N.md H2)
+
+  Deadlines:
+    Submit window: 2026-04-26 20:00 ET (STATUS)
+    Judging:       2026-04-28 12:00 ET (STATUS)
+    No contradictions.
+
+  `make audit` tracked sweep:
+    >>> OK — no sensitive strings in tracked files.
+
+Prose-level contradictions: NONE.
+
+Stale / scope-mismatched plots (not doc text): reported in HANDOFF_to_N.md
+  H1 falsification_panel_all.png  — "0/74 survivors", pre-Option A6
+  H2 delta_baseline_hist.png      — "60 candidates" (actual 67)
+  H3 task_auroc_comparison.png    — pre-Option A6, inconsistent n
+  H4 threshold_heatmap.png        — title "60" (actual 67) — Phase Q's own
+
+Institutional-leak re-check: NONE (see results/qa/q2_audit.txt).
+
+Conclusion: all prose docs are internally consistent. Plot titles are
+the only numeric drift surface; all four findings filed to
+HANDOFF_to_N.md.

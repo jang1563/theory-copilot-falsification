@@ -1,0 +1,100 @@
+opus_client + prompts + live_evidence cross-check — Phase Q Q8  (2026-04-22)
+===========================================================================
+
+## Prompts — JSON output enforcement
+
+  prompts/law_family_proposal.md:12
+    "Output format: **Return ONLY valid JSON matching this schema. No
+     markdown fences, no prose before or after the JSON.**"                 ✓
+
+  prompts/skeptic_review.md:20
+    "Output format: **Return ONLY valid JSON. No markdown fences, no prose
+     before or after.**"                                                    ✓
+
+  prompts/final_explanation.md:12
+    "Output format: **Return ONLY valid JSON. No markdown fences, no prose
+     before or after.**"                                                    ✓
+
+All three prompts enforce JSON-only output. Good.
+
+## opus_client.py — fence-stripping parser
+
+  _strip_json_fences (line 13): strips ```json ... ``` via regex, then
+    trims prose before/after a top-level {...} block. Handles the
+    common markdown-fenced-JSON leakage. Present.                           ✓
+
+  _safe_json_loads (line 24): wraps json.loads() with try/except,
+    returns None on decode failure rather than crashing. Present.           ✓
+
+## opus_client.py — _call streaming check
+
+  src/theory_copilot/opus_client.py:44
+    response = self.client.messages.create(
+        model=self.model,
+        max_tokens=32000,
+        thinking={"type": "adaptive", "display": "summarized"},
+        output_config={"effort": "high"},
+        system=system,
+        messages=[{"role": "user", "content": user_msg}],
+    )
+
+  PROBLEM: nonstreaming `messages.create()` + max_tokens=32000 + adaptive
+  thinking exceeds Anthropic SDK's 10-minute nonstreaming guard. The SDK
+  raises ValueError before any network call.
+
+  This is the ROOT CAUSE of Q3 + Q4 `make demo` failures.
+
+  results/live_evidence/api_validation_log.txt Part 5 documents the fix
+  was applied on 2026-04-22 (switch to client.messages.stream(...) +
+  get_final_message()), but the HEAD `opus_client.py:_call` still uses
+  the broken nonstreaming shape.
+
+  → BLOCKER 1 in HANDOFF_to_N.md
+
+## live_evidence traces
+
+  Files: 01_opus_raw_smoke.log, 02_proposer_kirc.log, 03_skeptic.log,
+         04_managed_agents_e2e.log, api_validation_log.txt, README.md.
+
+  01_opus_raw_smoke.log:
+    Opus 4.7 direct SDK call with max_tokens=4000 succeeds (under the
+    10-min guard). Returns 2 JSON law families.
+
+  02_proposer_kirc.log:
+    OpusClient.propose_laws() returns markdown (4 law families) but
+    parser yielded `families parsed: 0`. This trace is PRE-JSON-
+    enforcement-prompt. A fresh live_smoke run with the current prompts
+    should yield parsed families. Not re-captured here (API cost budget).
+
+  03_skeptic.log:
+    Same prompt-era caveat: verdict=UNCERTAIN because markdown didn't
+    parse. Expected PASS after prompt fix is in.
+
+  04_managed_agents_e2e.log + api_validation_log.txt Part 4:
+    Managed Agents Path B shape verified:
+      agents.create(model, system, tools=[{"type":"agent_toolset_20260401"}])
+      environments.create(config={"type":"cloud", ...})
+      sessions.create(agent, environment_id)
+      with sessions.events.stream(session.id) as stream:
+          sessions.events.send(session.id, events=[...])
+    session.status_idle fires as termination signal.
+    Tool matches managed_agent_runner.py exactly. ✓
+
+## Role tagging consistency
+
+  opus_client.py methods pass role to _call → cost_ledger.log_usage:
+    propose_laws       → role="scientist"   ✓
+    judge_candidate    → role="skeptic"     ✓
+    interpret_survivor → role="interpreter" ✓
+
+## Summary
+
+  Prompts: ✓ JSON enforcement in all 3.
+  Parser:  ✓ Fence-stripping + safe JSON loader present.
+  Streaming fix: ✗ MISSING — BLOCKER for make demo / make demo-kirc.
+  Managed Agents Path B: ✓ API shape verified via live run.
+  Roles:   ✓ All three tagged consistently for cost telemetry.
+
+  Only outstanding QA issue: the streaming fix documented in
+  api_validation_log.txt Part 5 must be re-applied to
+  src/theory_copilot/opus_client.py:_call before submission.

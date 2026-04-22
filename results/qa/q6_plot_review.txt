@@ -1,0 +1,100 @@
+Plot review — Phase Q Q6  (2026-04-22)
+======================================
+
+All findings also copied into HANDOFF_to_N.md (H1–H4 + notes).
+
+## Plots reviewed
+
+Under results/plots/:
+  - separation_top3_tier1.png
+  - falsification_panel_all.png
+  - delta_baseline_hist.png
+
+Under results/track_a_task_landscape/plots/:
+  - task_auroc_comparison.png
+  - delta_baseline_by_task.png
+  - expanded_panel_comparison.png
+  - survivor_scatter_top2a_vs_epas1.png
+  - survivor_score_histogram.png
+
+Under results/track_b_gate_robustness/:
+  - threshold_heatmap.png
+  - b2_baseline_ablation.png
+  - b3_permutation_stability.png
+  - b4_bootstrap_seed_variance.png
+  - b5_scaling_ablation.png
+  - b6_cohort_size_curve.png
+
+## Per-plot findings
+
+### separation_top3_tier1.png — GOOD
+  Axes / legend / title readable. Gene names present in equation
+  strings. AUROC + Δbase + Cohen's d shown per panel. Equations
+  are truncated mid-string ("exp(-0.013... *") but that's expected
+  for long PySR forms.
+
+### falsification_panel_all.png — HIGH (H1)
+  Title "0/74 survivors" predates Option A6 expansion. Missing
+  Track A metastasis (9/30) context. No per-bar candidate labels.
+  "Informative threshold" at AUROC 0.7 not cited in methodology.
+  → HANDOFF_to_N H1
+
+### delta_baseline_hist.png — HIGH (H2)
+  Title "across 60 candidates and two tasks"; legend sums to 67.
+  → HANDOFF_to_N H2
+
+### task_auroc_comparison.png — HIGH (H3)
+  Pre-Option A6. PySR candidate counts shown (13/9/19) differ from
+  Track A report counts (27/29/30). Informative but potentially
+  misleading next to expanded_panel_comparison.png.
+  → HANDOFF_to_N H3
+
+### delta_baseline_by_task.png — HIGH (H3 paired)
+  Same pre-Option A6 scope as task_auroc_comparison.png.
+  → HANDOFF_to_N H3
+
+### expanded_panel_comparison.png — GOOD
+  Clear title, bar labels, threshold line. 11-gene vs 45-gene side-
+  by-side. +0.069 metastasis bar clearly crosses the +0.05 line.
+
+### survivor_scatter_top2a_vs_epas1.png — GOOD
+  Axes labeled (EPAS1 log2 TPM x, TOP2A log2 TPM y). M0 n=426 and
+  M1 n=79 legend. Decision line TOP2A=EPAS1. M1 samples visibly
+  skew above the line.
+
+### survivor_score_histogram.png — GOOD
+  AUROC / ci_lower / Cohen's d in title. Density on y. TOP2A-EPAS1
+  score on x. M0/M1 bins overlaid with means. No issues.
+
+### threshold_heatmap.png — HIGH (H4; Phase Q's own)
+  Title "60 candidates"; actual 67. The CSV has correct per-
+  candidate rows. Title typo only; Phase Q can regen on request
+  from Phase N.
+  → HANDOFF_to_N H4
+
+### b2_baseline_ablation.png — GOOD
+  Threshold line, bar values (+0.029, +0.010, -0.005), 2 task
+  grouping. Clear.
+
+### b3_permutation_stability.png — GOOD (minor)
+  Log-x axis, p vs n. Legend list of 20 candidates is cramped;
+  most candidates are pinned at p=0 so their lines overlap. Points
+  still resolvable.
+
+### b4_bootstrap_seed_variance.png — GOOD
+  Per-candidate seed scatter vs ci_lower. Gate line 0.60. Tier2
+  candidates visibly below threshold; flagship candidates well above.
+
+### b5_scaling_ablation.png — GOOD
+  Tier2 × zscore bar visibly crosses +0.05 threshold; others stay
+  below. Clear labels.
+
+### b6_cohort_size_curve.png — GOOD
+  Dual panel: law_auc / ci_lower vs n (left); delta vs n (right).
+  Thresholds labeled. n ∈ {100, 200, 400, 600}.
+
+## Summary
+
+  13 plots reviewed.
+  4 HIGH findings: H1–H4 in HANDOFF_to_N.md.
+  9 plots pass without change.
