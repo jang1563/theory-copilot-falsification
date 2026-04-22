@@ -103,13 +103,26 @@ commit: `7a70919 [N] Restamp coordination contract header`.
 - 2026-04-22 12:00 ET · [S2] · HPC compute approved for heavy PySR sweeps; Managed Agents public-beta confirmed usable (Claude team reply).
 - 2026-04-22 (earlier) · [planning] · soft-sniffing-starlight backup plan 작성 완료.
 
-## 🧭 What's left (Phase N queue)
+## 🧭 Phase N queue (all items closed)
 
-1. **N1** STATUS.md refresh ← this commit
-2. **N2** docs/methodology.md: add positive-survivor section after §5
-3. **N3** docs/why_opus_4_7.md: update §4 demo moment with the survivor
-4. **N4** docs/submission_description.md: rewrite for accept+reject
-5. **N5** README persona section (Boris / Lydia / Jason / domain view)
-6. **N6** docs/survivor_narrative.md (replaces the null_narrative draft)
-7. **N7** docs/loom_script.md: 90-second demo script
-8. **N8** submission form draft ≤ 150 words
+1. **N1** STATUS.md refresh ✅
+2. **N2** docs/methodology.md §6 positive-survivor section ✅
+3. **N3** docs/why_opus_4_7.md §4 accept + reject demo moment ✅
+4. **N4** docs/submission_description.md accept + reject rewrite ✅
+5. **N5** README persona section (Boris / Lydia / Jason / domain view) ✅
+6. **N6** docs/survivor_narrative.md ✅
+7. **N7** docs/loom_script.md 90-second demo script ✅
+8. **N8** docs/submission_form_draft.md — every form field length-capped ✅
+
+Cross-phase emergency fixes committed on top:
+- `[N] BLOCKER-1 fix` — opus_client._call to streaming API (9997b23)
+- `[N] H1-H3 plot regeneration` — falsification_panel_all, delta_baseline_hist, task_auroc_comparison, delta_baseline_by_task updated with correct counts + metastasis_expanded inclusion (9b433e0)
+
+## 🧭 Submit-window action list (4/25 - 4/26)
+
+1. 4/25 12:00 – 18:00 ET — Record the Loom demo using `docs/loom_script.md`.
+2. 4/25 22:00 ET — Paste the Loom URL into `docs/submission_form_draft.md` "Demo video" section. Commit as `[N] Loom URL embed`.
+3. 4/26 12:00 ET — Full `make test` + `make audit`; review Phase Q `results/qa/SUMMARY_qa.md` for any last findings.
+4. 4/26 18:00 ET — Copy `docs/submission_form_draft.md` contents into the Cerebral Valley × Anthropic form. Verify every length cap.
+5. 4/26 19:30 ET — Flip GitHub repo `jang1563/theory-copilot-falsification` from private to public.
+6. 4/26 20:00 ET — Submit.
