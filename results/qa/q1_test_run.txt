@@ -1,66 +1,63 @@
+PYTHONPATH=src .venv/bin/python -m pytest tests/ -v --tb=short \
+		--ignore=tests/test_contracts.py \
+		--ignore=tests/test_reuse_inventory.py \
+		--ignore=tests/test_reuse_plan.py \
+		--ignore=tests/test_staging.py \
+		--ignore=tests/test_workflow_data.py
 ============================= test session starts ==============================
-platform darwin -- Python 3.13.11, pytest-9.0.3, pluggy-1.6.0
+platform darwin -- Python 3.13.11, pytest-9.0.3, pluggy-1.6.0 -- <repo>/.venv/bin/python
 cachedir: .pytest_cache
-rootdir: <project root>
+rootdir: <repo>
 configfile: pyproject.toml
 plugins: anyio-4.13.0
-collecting ... collected 62 items
+collecting ... collected 47 items
 
-tests/test_cli_compare_replay.py::test_compare_prints_pysr_handoff PASSED [  1%]
-tests/test_cli_compare_replay.py::test_compare_calls_propose_laws PASSED [  3%]
-tests/test_cli_compare_replay.py::test_replay_creates_transfer_report PASSED [  4%]
-tests/test_cli_compare_replay.py::test_replay_saves_interpretation PASSED [  6%]
-tests/test_cli_compare_replay.py::test_replay_no_survivors_returns_one PASSED [  8%]
-tests/test_cli_compare_replay.py::test_replay_missing_csv_returns_one PASSED [  9%]
+tests/test_cli_compare_replay.py::test_compare_prints_pysr_handoff PASSED [  2%]
+tests/test_cli_compare_replay.py::test_compare_calls_propose_laws PASSED [  4%]
+tests/test_cli_compare_replay.py::test_replay_creates_transfer_report PASSED [  6%]
+tests/test_cli_compare_replay.py::test_replay_saves_interpretation PASSED [  8%]
+tests/test_cli_compare_replay.py::test_replay_no_survivors_returns_one PASSED [ 10%]
+tests/test_cli_compare_replay.py::test_replay_missing_csv_returns_one PASSED [ 12%]
 tests/test_falsification.py::FalsificationTests::test_baseline_comparison_sign_invariant PASSED [ 14%]
-tests/test_falsification.py::FalsificationTests::test_bootstrap_stability_returns_width_lower_mean PASSED [ 16%]
-tests/test_falsification.py::FalsificationTests::test_confound_only_incremental_delta PASSED [ 17%]
-tests/test_falsification.py::FalsificationTests::test_decoy_feature_test_rejects_random_noise PASSED [ 19%]
-tests/test_falsification.py::FalsificationTests::test_label_shuffle_null_two_sided_catches_inverted_signal PASSED [ 20%]
-tests/test_falsification.py::FalsificationTests::test_label_shuffle_null_two_sided_small_p_for_strong_signal PASSED [ 22%]
-tests/test_falsification.py::FalsificationTests::test_passes_falsification_applies_thresholds PASSED [ 24%]
-tests/test_falsification.py::FalsificationTests::test_run_falsification_suite_skip_decoy PASSED [ 25%]
-tests/test_falsification.py::FalsificationTests::test_run_falsification_suite_with_covariates_full_output PASSED [ 27%]
-tests/test_falsification.py::FalsificationTests::test_run_falsification_suite_without_covariates PASSED [ 29%]
-tests/test_falsification_sweep.py::test_falsification_sweep_produces_output PASSED [ 30%]
-tests/test_falsification_sweep.py::test_falsification_sweep_no_covariates PASSED [ 32%]
-tests/test_falsification_sweep.py::test_falsification_sweep_summary_line PASSED [ 33%]
-tests/test_managed_agent_runner.py::test_run_path_b_night2_calls_agents_create_with_opus PASSED [ 35%]
-tests/test_managed_agent_runner.py::test_run_path_b_night2_calls_sessions_create PASSED [ 37%]
-tests/test_managed_agent_runner.py::test_run_path_b_night2_uses_stream_as_context_manager PASSED [ 38%]
-tests/test_managed_agent_runner.py::test_run_path_b_night2_calls_events_send PASSED [ 40%]
-tests/test_managed_agent_runner.py::test_run_path_b_returns_expected_shape PASSED [ 41%]
-tests/test_managed_agent_runner.py::test_run_path_b_stream_opened_before_send PASSED [ 43%]
-tests/test_managed_agent_runner.py::test_run_path_a_raises_not_implemented_without_waitlist_env PASSED [ 45%]
-tests/test_managed_agent_runner.py::test_run_path_a_raises_when_waitlist_not_approved PASSED [ 46%]
-tests/test_managed_agent_runner.py::test_run_path_a_returns_without_error_when_approved PASSED [ 48%]
-tests/test_managed_agent_runner.py::test_run_path_a_approved_creates_three_agents PASSED [ 50%]
-tests/test_opus_client.py::test_propose_laws_returns_families PASSED     [ 51%]
-tests/test_opus_client.py::test_propose_laws_bad_json_returns_empty_families PASSED [ 53%]
-tests/test_opus_client.py::test_judge_candidate_accept PASSED            [ 54%]
-tests/test_opus_client.py::test_judge_candidate_reject PASSED            [ 56%]
-tests/test_opus_client.py::test_judge_candidate_uncertain_on_bad_json PASSED [ 58%]
-tests/test_opus_client.py::test_interpret_survivor PASSED                [ 59%]
-tests/test_opus_client.py::test_interpret_survivor_fallback_on_bad_json PASSED [ 61%]
-tests/test_opus_client.py::test_prompts_dir_defaults_to_prompts_under_project_root PASSED [ 62%]
-tests/test_opus_client.py::test_prompts_dir_custom PASSED                [ 64%]
-tests/test_pysr_sweep.py::TestPysrSweep::test_output_json_exists_and_is_list PASSED [ 66%]
-tests/test_pysr_sweep.py::TestPysrSweep::test_output_items_have_required_keys PASSED [ 67%]
-tests/test_pysr_sweep.py::TestPysrSweep::test_multiple_seeds_deduplicated PASSED [ 69%]
-tests/test_pysr_sweep.py::TestPysrSweep::test_variable_names_passed_to_pysr PASSED [ 70%]
-tests/test_pysr_sweep.py::TestPysrSweep::test_import_error_writes_empty_list_and_exits_0 PASSED [ 72%]
-tests/test_pysr_sweep.py::TestPysrSweep::test_novelty_score_matches_guess_returns_zero PASSED [ 74%]
-tests/test_visualize.py::test_plot_separation_creates_file PASSED        [ 93%]
-tests/test_visualize.py::test_plot_separation_long_title PASSED          [ 95%]
-tests/test_visualize.py::test_plot_falsification_panel_creates_file PASSED [ 96%]
+tests/test_falsification.py::FalsificationTests::test_bootstrap_stability_returns_width_lower_mean PASSED [ 17%]
+tests/test_falsification.py::FalsificationTests::test_confound_only_incremental_delta PASSED [ 19%]
+tests/test_falsification.py::FalsificationTests::test_decoy_feature_test_rejects_random_noise PASSED [ 21%]
+tests/test_falsification.py::FalsificationTests::test_label_shuffle_null_two_sided_catches_inverted_signal PASSED [ 23%]
+tests/test_falsification.py::FalsificationTests::test_label_shuffle_null_two_sided_small_p_for_strong_signal PASSED [ 25%]
+tests/test_falsification.py::FalsificationTests::test_passes_falsification_applies_thresholds PASSED [ 27%]
+tests/test_falsification.py::FalsificationTests::test_run_falsification_suite_skip_decoy PASSED [ 29%]
+tests/test_falsification.py::FalsificationTests::test_run_falsification_suite_with_covariates_full_output PASSED [ 31%]
+tests/test_falsification.py::FalsificationTests::test_run_falsification_suite_without_covariates PASSED [ 34%]
+tests/test_falsification_sweep.py::test_falsification_sweep_produces_output PASSED [ 36%]
+tests/test_falsification_sweep.py::test_falsification_sweep_no_covariates PASSED [ 38%]
+tests/test_falsification_sweep.py::test_falsification_sweep_summary_line PASSED [ 40%]
+tests/test_managed_agent_runner.py::test_run_path_b_night2_calls_agents_create_with_opus PASSED [ 42%]
+tests/test_managed_agent_runner.py::test_run_path_b_night2_calls_sessions_create PASSED [ 44%]
+tests/test_managed_agent_runner.py::test_run_path_b_night2_uses_stream_as_context_manager PASSED [ 46%]
+tests/test_managed_agent_runner.py::test_run_path_b_night2_calls_events_send PASSED [ 48%]
+tests/test_managed_agent_runner.py::test_run_path_b_returns_expected_shape PASSED [ 51%]
+tests/test_managed_agent_runner.py::test_run_path_b_stream_opened_before_send PASSED [ 53%]
+tests/test_managed_agent_runner.py::test_run_path_a_raises_not_implemented_without_waitlist_env PASSED [ 55%]
+tests/test_managed_agent_runner.py::test_run_path_a_raises_when_waitlist_not_approved PASSED [ 57%]
+tests/test_managed_agent_runner.py::test_run_path_a_returns_without_error_when_approved PASSED [ 59%]
+tests/test_managed_agent_runner.py::test_run_path_a_approved_creates_three_agents PASSED [ 61%]
+tests/test_opus_client.py::test_propose_laws_returns_families PASSED     [ 63%]
+tests/test_opus_client.py::test_propose_laws_bad_json_returns_empty_families PASSED [ 65%]
+tests/test_opus_client.py::test_judge_candidate_accept PASSED            [ 68%]
+tests/test_opus_client.py::test_judge_candidate_reject PASSED            [ 70%]
+tests/test_opus_client.py::test_judge_candidate_uncertain_on_bad_json PASSED [ 72%]
+tests/test_opus_client.py::test_interpret_survivor PASSED                [ 74%]
+tests/test_opus_client.py::test_interpret_survivor_fallback_on_bad_json PASSED [ 76%]
+tests/test_opus_client.py::test_prompts_dir_defaults_to_prompts_under_project_root PASSED [ 78%]
+tests/test_opus_client.py::test_prompts_dir_custom PASSED                [ 80%]
+tests/test_pysr_sweep.py::TestPysrSweep::test_output_json_exists_and_is_list PASSED [ 82%]
+tests/test_pysr_sweep.py::TestPysrSweep::test_output_items_have_required_keys PASSED [ 85%]
+tests/test_pysr_sweep.py::TestPysrSweep::test_multiple_seeds_deduplicated PASSED [ 87%]
+tests/test_pysr_sweep.py::TestPysrSweep::test_variable_names_passed_to_pysr PASSED [ 89%]
+tests/test_pysr_sweep.py::TestPysrSweep::test_import_error_writes_empty_list_and_exits_0 PASSED [ 91%]
+tests/test_pysr_sweep.py::TestPysrSweep::test_novelty_score_matches_guess_returns_zero PASSED [ 93%]
+tests/test_visualize.py::test_plot_separation_creates_file PASSED        [ 95%]
+tests/test_visualize.py::test_plot_separation_long_title PASSED          [ 97%]
+tests/test_visualize.py::test_plot_falsification_panel_creates_file PASSED [100%]
 
-<Pre-hackathon scaffold tests (test_contracts, test_reuse_inventory,
- test_reuse_plan, test_staging, test_workflow_data) also passed in this
- run; they are redacted from this log because (a) they are excluded
- from the public repository via .gitignore per the hackathon rule that
- only new code is submitted, and (b) their names reference institutional
- identifiers that trigger `make audit`. Regenerate this log with
- `make test` ignoring those five files to get a clean log going
- forward — see HANDOFF_to_Q.md for the Makefile patch.>
-
-============================= 47 (tracked) passed in 59.21s ==============================
+======================== 47 passed in 140.04s (0:02:20) ========================

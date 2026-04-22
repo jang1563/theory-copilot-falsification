@@ -1,0 +1,11 @@
+Q5 rerun survivors: 9 / 30
+Committed report:  9 / 30
+Match: True
+
+Top 5 by delta_baseline (Q5 rerun):
+                                                          equation  law_auc  delta_baseline  passes
+log1p(log1p(exp(x28 - exp(((x4 - x23) + x22) - x44)))) * 0.6274355 0.726333        0.069383    True
+     log1p(log1p(log1p(exp(x28 - exp((x4 - (x23 + x44)) + x22))))) 0.726333        0.069383    True
+                          log1p(log1p(exp(x31 - x4)) * 0.21692236) 0.725560        0.068610    True
+                          log1p(log1p(exp(x31 - x4)) * 0.21792223) 0.725560        0.068610    True
+                            (0.09855198 * (x31 - x4)) + 0.16059029 0.725560        0.068610    True

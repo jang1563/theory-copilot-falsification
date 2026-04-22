@@ -1,0 +1,41 @@
+>>> Running KIRC-flavoured demo...
+PYTHONPATH=src .venv/bin/python -m theory_copilot.cli compare \
+		--config config/datasets.json \
+		--proposals config/law_proposals.json \
+		--flagship-dataset flagship_kirc_demo \
+		--output-root artifacts
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/cli.py", line 242, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/cli.py", line 238, in main
+    return args.func(args)
+           ~~~~~~~~~^^^^^^
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/cli.py", line 79, in _cmd_compare
+    proposer_result = client.propose_laws(
+        dataset_card=flagship_card,
+        features=features,
+        context=flagship_card.get("name", ""),
+    )
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 74, in propose_laws
+    blocks = self._call(system, user_msg, role="scientist")
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 44, in _call
+    response = self.client.messages.create(
+        model=self.model,
+    ...<4 lines>...
+        messages=[{"role": "user", "content": user_msg}],
+    )
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_utils/_utils.py", line 283, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/resources/messages/messages.py", line 982, in create
+    timeout = self._client._calculate_nonstreaming_timeout(
+        max_tokens, MODEL_NONSTREAMING_TOKENS.get(model, None)
+    )
+  File "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 736, in _calculate_nonstreaming_timeout
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Streaming is required for operations that may take longer than 10 minutes. See https://github.com/anthropics/anthropic-sdk-python#long-requests for more details
+make: *** [demo-kirc] Error 1

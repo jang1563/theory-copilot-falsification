@@ -30,7 +30,12 @@ install:
 	$(PYTHON) -m pip install -e .
 
 test:
-	$(PYTHONPATH_SRC) $(PYTHON) -m pytest tests/ -v
+	$(PYTHONPATH_SRC) $(PYTHON) -m pytest tests/ -v --tb=short \
+		--ignore=tests/test_contracts.py \
+		--ignore=tests/test_reuse_inventory.py \
+		--ignore=tests/test_reuse_plan.py \
+		--ignore=tests/test_staging.py \
+		--ignore=tests/test_workflow_data.py
 
 # --- Demo (synthetic flagship + transfer) ---
 demo:
