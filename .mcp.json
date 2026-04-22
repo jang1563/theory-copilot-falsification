@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "biology-validator": {
+      "type": "stdio",
+      "command": ".venv/bin/python",
+      "args": ["src/mcp_biology_validator.py", "--tool", "server"],
+      "env": {
+        "PYTHONPATH": "src"
+      }
+    }
+  },
+  "_notes": "Exposes two tools to the Claude Code skeptic-reviewer subagent: validate_law(gene_symbols, disease?) -> PubMed co-mention search; fetch_cohort_summary(project_id) -> TCGA project metadata. Optional MCP SDK dependency (`pip install mcp`); without it, the tools can still be called directly via `python src/mcp_biology_validator.py --tool <name>`."
+}

@@ -34,7 +34,14 @@ string will fail the audit and block `git push`.
 - `prompts/` — JSON-schema-enforced Opus 4.7 prompts.
 - `config/` — `datasets.json`, `law_proposals.json`, `dataset_cards/` (E4).
 - `.claude/agents/` — Claude Code subagents (below).
-- `.mcp.json` — MCP server registrations (biology-validator, E8).
+- `.mcp.json` — MCP server registrations. The `biology-validator`
+  server (stdio transport, `src/mcp_biology_validator.py`) exposes two
+  tools to the Skeptic subagent: `validate_law(gene_symbols, disease?)`
+  runs a PubMed co-mention E-utilities search; `fetch_cohort_summary
+  (project_id)` returns TCGA GDC project metadata. The MCP SDK is an
+  optional install — without it, the tools can still be exercised
+  directly: `python src/mcp_biology_validator.py --tool validate_law
+  --genes TOP2A,EPAS1 --disease ccRCC`.
 
 ## Agent roles (who does what)
 
