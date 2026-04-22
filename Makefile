@@ -6,10 +6,16 @@
 # Run `make help` for the list of targets.
 # ============================================================
 
-PYTHON ?= python3
+PYTHON ?= .venv/bin/python
 PYTHONPATH_SRC := PYTHONPATH=src
 DEMO_OUT := artifacts/flagship_run
 TRANSFER_OUT := artifacts/transfer_run
+
+# Note: PYTHON defaults to the project-local virtualenv to guarantee
+# Python 3.10+ (pyproject.toml requires >=3.10 for modern X | Y type hints).
+# If the venv does not yet exist, run `make install` after
+# `python3 -m venv .venv && . .venv/bin/activate && pip install -e .`, or
+# override with `make test PYTHON=python3.12`.
 
 help:
 	@echo "Theory Copilot Falsification — available targets:"

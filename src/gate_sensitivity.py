@@ -305,7 +305,12 @@ def main() -> None:
     print(f"Wrote {csv_path} ({len(grid_df)} rows)")
 
     heatmap_path = out_dir / "threshold_heatmap.png"
-    build_heatmap(grid_df, heatmap_path, title="Gate threshold sensitivity (60 candidates)")
+    n_candidates = grid_df["candidate_id"].nunique()
+    build_heatmap(
+        grid_df,
+        heatmap_path,
+        title=f"Gate threshold sensitivity ({n_candidates} candidates)",
+    )
     print(f"Wrote {heatmap_path}")
 
     summary = summarize_flips(grid_df)

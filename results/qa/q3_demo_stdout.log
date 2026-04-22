@@ -1,33 +1,4 @@
 >>> Running end-to-end demo on synthetic data...
-PYTHONPATH=src python3 -m theory_copilot.cli compare \
-		--config config/datasets.json \
-		--proposals config/law_proposals.json \
-		--flagship-dataset flagship_demo \
-		--output-root artifacts
-Traceback (most recent call last):
-  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/cli.py", line 242, in <module>
-    raise SystemExit(main())
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/cli.py", line 238, in main
-    return args.func(args)
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/cli.py", line 79, in _cmd_compare
-    proposer_result = client.propose_laws(
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 74, in propose_laws
-    blocks = self._call(system, user_msg, role="scientist")
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 44, in _call
-    response = self.client.messages.create(
-  File "<home>/Library/Python/3.9/lib/python/site-packages/anthropic/_utils/_utils.py", line 282, in wrapper
-    return func(*args, **kwargs)
-  File "<home>/Library/Python/3.9/lib/python/site-packages/anthropic/resources/messages/messages.py", line 978, in create
-    timeout = self._client._calculate_nonstreaming_timeout(
-  File "<home>/Library/Python/3.9/lib/python/site-packages/anthropic/_base_client.py", line 732, in _calculate_nonstreaming_timeout
-    raise ValueError(
-ValueError: Streaming is required for operations that may take longer than 10 minutes. See https://github.com/anthropics/anthropic-sdk-python#long-requests for more details
-make: *** [demo] Error 1
->>> Running end-to-end demo on synthetic data...
 PYTHONPATH=src .venv/bin/python -m theory_copilot.cli compare \
 		--config config/datasets.json \
 		--proposals config/law_proposals.json \
@@ -48,23 +19,33 @@ Traceback (most recent call last):
         features=features,
         context=flagship_card.get("name", ""),
     )
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 74, in propose_laws
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 79, in propose_laws
     blocks = self._call(system, user_msg, role="scientist")
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 44, in _call
-    response = self.client.messages.create(
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/src/theory_copilot/opus_client.py", line 48, in _call
+    with self.client.messages.stream(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
         model=self.model,
+        ^^^^^^^^^^^^^^^^^
     ...<4 lines>...
         messages=[{"role": "user", "content": user_msg}],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as stream:
+    ^
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/lib/streaming/_messages.py", line 167, in __enter__
+    raw_stream = self.__api_request()
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 1368, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 1062, in request
+    request = self._build_request(options, retries_taken=retries_taken)
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 521, in _build_request
+    headers = self._build_headers(options, retries_taken=retries_taken)
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 451, in _build_headers
+    self._validate_headers(headers_dict, custom_headers)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_client.py", line 196, in _validate_headers
+    raise TypeError(
+        '"Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"'
     )
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_utils/_utils.py", line 283, in wrapper
-    return func(*args, **kwargs)
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/resources/messages/messages.py", line 982, in create
-    timeout = self._client._calculate_nonstreaming_timeout(
-        max_tokens, MODEL_NONSTREAMING_TOKENS.get(model, None)
-    )
-  File "<home>/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 736, in _calculate_nonstreaming_timeout
-    raise ValueError(
-    ...<2 lines>...
-    )
-ValueError: Streaming is required for operations that may take longer than 10 minutes. See https://github.com/anthropics/anthropic-sdk-python#long-requests for more details
+TypeError: "Could not resolve authentication method. Expected either api_key or auth_token to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted"
 make: *** [demo] Error 1
