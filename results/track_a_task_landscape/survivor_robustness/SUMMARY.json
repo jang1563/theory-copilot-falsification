@@ -1,0 +1,17 @@
+{
+  "law": "TOP2A - EPAS1",
+  "task": "TCGA-KIRC metastasis M0 vs M1, n=505",
+  "robust_at_default_threshold_0p05_delta_baseline": true,
+  "smallest_threshold_that_rejects_delta_baseline": "0.07",
+  "survives_lr_single_baseline": true,
+  "survives_lr_pair_interaction_baseline": false,
+  "perm_p_verdict_flip": false,
+  "bootstrap_ci_lower_verdict_flip": false,
+  "scaling_invariance": {
+    "raw": true,
+    "zscore": true,
+    "rank": true,
+    "minmax": true
+  },
+  "min_cohort_size_still_passing": 200
+}

@@ -1,0 +1,46 @@
+{
+  "law": "TOP2A - EPAS1",
+  "metrics": {
+    "law_auc": 0.7255601117252035,
+    "baseline_auc": 0.6569501396565044,
+    "delta_baseline": 0.06860997206869912,
+    "ci_lower": 0.6645561277891102,
+    "perm_p": 0.0,
+    "decoy_p": 0.0
+  },
+  "grid_pass": {
+    "delta_baseline": {
+      "0.0": true,
+      "0.01": true,
+      "0.02": true,
+      "0.03": true,
+      "0.04": true,
+      "0.05": true,
+      "0.06": true,
+      "0.07": false,
+      "0.08": false,
+      "0.1": false
+    },
+    "ci_lower": {
+      "0.5": true,
+      "0.55": true,
+      "0.6": true,
+      "0.65": true,
+      "0.7": false,
+      "0.75": false
+    },
+    "perm_p": {
+      "0.001": true,
+      "0.01": true,
+      "0.05": true,
+      "0.1": true,
+      "0.2": true
+    },
+    "decoy_p": {
+      "0.001": true,
+      "0.01": true,
+      "0.05": true,
+      "0.1": true
+    }
+  }
+}

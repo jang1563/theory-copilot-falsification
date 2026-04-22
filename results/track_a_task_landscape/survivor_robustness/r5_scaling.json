@@ -1,0 +1,29 @@
+{
+  "law": "TOP2A - EPAS1",
+  "per_scale": {
+    "raw": {
+      "law_auc": 0.7255601117252035,
+      "baseline_auc": 0.6569501396565044,
+      "delta_baseline": 0.06860997206869912,
+      "pass_0p05": true
+    },
+    "zscore": {
+      "law_auc": 0.7275212456171628,
+      "baseline_auc": 0.6569501396565044,
+      "delta_baseline": 0.07057110596065841,
+      "pass_0p05": true
+    },
+    "rank": {
+      "law_auc": 0.7200332798478636,
+      "baseline_auc": 0.6569501396565044,
+      "delta_baseline": 0.06308314019135919,
+      "pass_0p05": true
+    },
+    "minmax": {
+      "law_auc": 0.7255006834254472,
+      "baseline_auc": 0.6569501396565044,
+      "delta_baseline": 0.06855054376894276,
+      "pass_0p05": true
+    }
+  }
+}

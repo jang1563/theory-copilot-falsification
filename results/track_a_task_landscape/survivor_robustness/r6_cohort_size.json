@@ -1,0 +1,35 @@
+{
+  "law": "TOP2A - EPAS1",
+  "per_n": {
+    "100": {
+      "ci_lower_mean": 0.5631354241255451,
+      "ci_lower_min": 0.4222705346450436,
+      "delta_baseline_mean": 0.010536309738071181,
+      "law_auc_mean": 0.6916654768544973
+    },
+    "200": {
+      "ci_lower_mean": 0.6571609751930647,
+      "ci_lower_min": 0.6420797000164129,
+      "delta_baseline_mean": 0.05466529955221102,
+      "law_auc_mean": 0.7453915372811508
+    },
+    "300": {
+      "ci_lower_mean": 0.6407353635851691,
+      "ci_lower_min": 0.5930689335834277,
+      "delta_baseline_mean": 0.04186768327198318,
+      "law_auc_mean": 0.7194563042106221
+    },
+    "400": {
+      "ci_lower_mean": 0.6501437917562275,
+      "ci_lower_min": 0.6241932647134935,
+      "delta_baseline_mean": 0.05802640013901032,
+      "law_auc_mean": 0.7187173501010019
+    },
+    "505": {
+      "ci_lower_mean": 0.6655885721598631,
+      "ci_lower_min": 0.6625960531145866,
+      "delta_baseline_mean": 0.06860997206869912,
+      "law_auc_mean": 0.7255601117252035
+    }
+  }
+}

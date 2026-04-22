@@ -1,0 +1,25 @@
+{
+  "law": "TOP2A - EPAS1",
+  "law_auc": 0.7255601117252035,
+  "baselines": {
+    "sign_invariant_max_single_gene": 0.6569501396565044,
+    "lr_single_best": {
+      "auc": 0.6569501396565044,
+      "gene": "CDK1"
+    },
+    "lr_pair_with_interaction_best": {
+      "auc": 0.7219349854400666,
+      "pair": "EPAS1 x TOP2A +int"
+    }
+  },
+  "delta_vs_baseline": {
+    "sign_invariant": 0.06860997206869912,
+    "lr_single_best": 0.06860997206869912,
+    "lr_pair_interaction": 0.0036251262851368926
+  },
+  "survives_0p05_threshold_under_each_baseline": {
+    "sign_invariant": true,
+    "lr_single_best": true,
+    "lr_pair_interaction": false
+  }
+}
