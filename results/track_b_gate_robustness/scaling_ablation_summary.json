@@ -1,0 +1,85 @@
+{
+  "per_task_per_scaling": [
+    {
+      "task": "flagship",
+      "scaling": "minmax",
+      "baseline_auc": 0.9654976205255534,
+      "baseline_feature": "CA9",
+      "max_law_auc": 0.9952669149596524,
+      "max_delta_baseline": 0.029769294434098925,
+      "survivors_reduced_gate": 0,
+      "n_candidates": 33
+    },
+    {
+      "task": "flagship",
+      "scaling": "rank",
+      "baseline_auc": 0.9654976205255534,
+      "baseline_feature": "CA9",
+      "max_law_auc": 0.9906631491827023,
+      "max_delta_baseline": 0.025165528657148828,
+      "survivors_reduced_gate": 0,
+      "n_candidates": 33
+    },
+    {
+      "task": "flagship",
+      "scaling": "raw",
+      "baseline_auc": 0.9654976205255534,
+      "baseline_feature": "CA9",
+      "max_law_auc": 0.994620318642665,
+      "max_delta_baseline": 0.029122698117111545,
+      "survivors_reduced_gate": 0,
+      "n_candidates": 33
+    },
+    {
+      "task": "flagship",
+      "scaling": "zscore",
+      "baseline_auc": 0.9654976205255534,
+      "baseline_feature": "CA9",
+      "max_law_auc": 0.9948789571694598,
+      "max_delta_baseline": 0.02938133664390641,
+      "survivors_reduced_gate": 0,
+      "n_candidates": 33
+    },
+    {
+      "task": "tier2",
+      "scaling": "minmax",
+      "baseline_auc": 0.609815297182098,
+      "baseline_feature": "CUBN",
+      "max_law_auc": 0.6404955008287947,
+      "max_delta_baseline": 0.030680203646696658,
+      "survivors_reduced_gate": 0,
+      "n_candidates": 34
+    },
+    {
+      "task": "tier2",
+      "scaling": "rank",
+      "baseline_auc": 0.609815297182098,
+      "baseline_feature": "CUBN",
+      "max_law_auc": 0.6506482358512905,
+      "max_delta_baseline": 0.040832938669192465,
+      "survivors_reduced_gate": 0,
+      "n_candidates": 34
+    },
+    {
+      "task": "tier2",
+      "scaling": "raw",
+      "baseline_auc": 0.609815297182098,
+      "baseline_feature": "CUBN",
+      "max_law_auc": 0.6385123135211934,
+      "max_delta_baseline": 0.028697016339095383,
+      "survivors_reduced_gate": 0,
+      "n_candidates": 34
+    },
+    {
+      "task": "tier2",
+      "scaling": "zscore",
+      "baseline_auc": 0.609815297182098,
+      "baseline_feature": "CUBN",
+      "max_law_auc": 0.6647673454889889,
+      "max_delta_baseline": 0.05495204830689082,
+      "survivors_reduced_gate": 1,
+      "n_candidates": 34
+    }
+  ],
+  "threshold": 0.05
+}
