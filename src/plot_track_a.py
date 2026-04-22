@@ -57,10 +57,12 @@ def plot_task_auroc_comparison() -> Path:
         pysr = _load(pysr_path)
         opus = _load(opus_path)
 
-        pysr_aucs = [e.get("law_auc", 0.5) for e in pysr
-                     if not e.get("numeric_error")]
-        opus_aucs = [e.get("law_auc", 0.5) for e in opus
-                     if not e.get("numeric_error")]
+        # Include all candidates (including any that emitted a numeric_error
+        # in earlier runs — those get recorded at AUROC 0.5 by the gate, so
+        # displaying them as a 0.5 dot keeps the legend n consistent with
+        # the per-task committed SUMMARY tables).
+        pysr_aucs = [e.get("law_auc", 0.5) for e in pysr]
+        opus_aucs = [e.get("law_auc", 0.5) for e in opus]
 
         # Scatter with jitter
         rng = np.random.default_rng(42)
@@ -115,10 +117,9 @@ def plot_delta_baseline_by_task() -> Path:
     for i, (tid, pysr_path, opus_path, top_gene, top_auc, n, title) in enumerate(TASK_SPECS):
         pysr = _load(pysr_path)
         opus = _load(opus_path)
-        pysr_d = [e.get("delta_baseline", 0.0) for e in pysr
-                  if not e.get("numeric_error")]
-        opus_d = [e.get("delta_baseline", 0.0) for e in opus
-                  if not e.get("numeric_error")]
+        # Include all candidates (see note above re: numeric_error rows).
+        pysr_d = [e.get("delta_baseline", 0.0) for e in pysr]
+        opus_d = [e.get("delta_baseline", 0.0) for e in opus]
 
         pysr_x = x_base + 0
         opus_x = x_base + width

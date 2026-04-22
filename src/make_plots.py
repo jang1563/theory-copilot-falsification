@@ -131,35 +131,47 @@ def plot_falsification_panel_all() -> Path:
                 "delta_baseline": float(r.get("delta_baseline", 0.0) or 0.0),
             })
 
+    # Load from every report currently tracked, including Option A6's
+    # metastasis_expanded run where the gate first accepted (9 / 30).
     _load(RESULTS / "opus_exante" / "kirc_flagship_report.json", "Opus ex-ante (tumor)")
     _load(RESULTS / "opus_exante" / "kirc_tier2_report.json", "Opus ex-ante (stage)")
     _load(RESULTS / "opus_exante" / "gse40435_report.json", "Opus ex-ante (GSE40435)")
-    _load(RESULTS / "flagship_run" / "falsification_report.json", "PySR tier 1")
-    _load(RESULTS / "tier2_run" / "falsification_report.json", "PySR tier 2")
+    _load(RESULTS / "flagship_run" / "falsification_report.json", "PySR tumor/normal (11-gene)")
+    _load(RESULTS / "tier2_run" / "falsification_report.json", "PySR stage (11-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "survival" / "falsification_report.json",
+          "PySR survival (11-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "metastasis" / "falsification_report.json",
+          "PySR metastasis (11-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "survival_expanded" / "falsification_report.json",
+          "PySR survival (45-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "metastasis_expanded" / "falsification_report.json",
+          "PySR metastasis (45-gene)")
 
     sources = sorted({r["source"] for r in rows})
     colours = {s: f"C{i}" for i, s in enumerate(sources)}
 
-    fig, ax = plt.subplots(figsize=(10, 5.5))
+    fig, ax = plt.subplots(figsize=(11, 7))
     for i, r in enumerate(rows):
         ax.barh(i, r["auc"], color=colours[r["source"]],
-                alpha=0.85 if r["passes"] else 0.55,
-                edgecolor="black" if r["passes"] else "none")
-    ax.axvline(x=0.5, color="gray", linestyle="--", linewidth=1, label="chance")
-    ax.axvline(x=0.7, color="black", linestyle="--", linewidth=1, label="informative threshold")
+                alpha=0.9 if r["passes"] else 0.45,
+                edgecolor="black" if r["passes"] else "none",
+                linewidth=1.0 if r["passes"] else 0.0)
+    ax.axvline(x=0.5, color="gray", linestyle="--", linewidth=1)
     ax.set_yticks([])
     ax.set_xlabel("AUROC")
     ax.set_xlim(0.0, 1.05)
+
+    n_total = len(rows)
+    n_pass = sum(1 for r in rows if r["passes"])
     ax.set_title(
-        f"Falsification across 5 runs — {sum(1 for r in rows if r['passes'])}/{len(rows)} survivors",
+        "Pre-registered 5-test gate across every tracked falsification run\n"
+        f"{n_pass} survivors of {n_total} candidates "
+        "(solid-edge bars = pass; transparent bars = fail)"
     )
     from matplotlib.patches import Patch
     handles = [Patch(color=c, label=s) for s, c in colours.items()]
-    handles.extend([
-        plt.Line2D([0], [0], color="gray", linestyle="--", label="chance"),
-        plt.Line2D([0], [0], color="black", linestyle="--", label="informative threshold"),
-    ])
-    ax.legend(handles=handles, loc="lower right", fontsize=8)
+    handles.append(plt.Line2D([0], [0], color="gray", linestyle="--", label="chance (0.5)"))
+    ax.legend(handles=handles, loc="lower right", fontsize=7, ncol=2)
     fig.tight_layout()
     out = PLOTS / "falsification_panel_all.png"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -181,9 +193,17 @@ def plot_delta_baseline_hist() -> Path:
             deltas.append((source, float(d)))
 
     _load(RESULTS / "opus_exante" / "kirc_flagship_report.json", "Opus ex-ante × tumor/normal")
-    _load(RESULTS / "flagship_run" / "falsification_report.json", "PySR × tumor/normal")
+    _load(RESULTS / "flagship_run" / "falsification_report.json", "PySR × tumor/normal (11-gene)")
     _load(RESULTS / "opus_exante" / "kirc_tier2_report.json", "Opus ex-ante × stage")
-    _load(RESULTS / "tier2_run" / "falsification_report.json", "PySR × stage")
+    _load(RESULTS / "tier2_run" / "falsification_report.json", "PySR × stage (11-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "survival" / "falsification_report.json",
+          "PySR × survival (11-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "metastasis" / "falsification_report.json",
+          "PySR × metastasis (11-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "survival_expanded" / "falsification_report.json",
+          "PySR × survival (45-gene)")
+    _load(RESULTS / "track_a_task_landscape" / "metastasis_expanded" / "falsification_report.json",
+          "PySR × metastasis (45-gene) — SURVIVORS")
 
     fig, ax = plt.subplots(figsize=(8, 4.5))
     sources = {}
@@ -198,9 +218,11 @@ def plot_delta_baseline_hist() -> Path:
                label="pre-registered threshold (+0.05)")
     ax.set_xlabel("delta_baseline  (law_AUROC − best single gene)")
     ax.set_ylabel("number of candidates")
+    n_total = sum(len(v) for v in sources.values())
     ax.set_title(
-        "Compound laws cap out at ~+0.03 incremental AUROC\n"
-        "across 60 candidates and two tasks",
+        f"Compound-law incremental AUROC across {n_total} candidates and 6 task-panel combinations\n"
+        "The pre-registered +0.05 bar (dashed) is only cleared by the\n"
+        "metastasis 45-gene run (TOP2A − EPAS1 cluster at Δ = +0.069)"
     )
     ax.legend(fontsize=8, loc="upper left")
     fig.tight_layout()
