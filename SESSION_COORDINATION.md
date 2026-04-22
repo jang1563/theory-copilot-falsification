@@ -6,13 +6,78 @@
 This project is edited in parallel by two long-running Claude sessions sharing
 one git working tree. This file is the coordination contract. Do not skip.
 
-## Current phase: **Scientific Research** (user directive 2026-04-22)
+## Current phase: **Narrative + QA** (user directive 2026-04-22 afternoon)
 
-Final-deliverable work (narrative polish, Loom, submission form) is
-paused. Both parallel sessions now work on science, not submission prep.
-Use the research-track split below instead of the L1/L2 engineering+
-narrative split (the latter is preserved below for reference and for
-the later narrative phase).
+Scientific research phase complete. Sci-A found a 9-survivor finding on
+TCGA-KIRC metastasis with the 45-gene expanded panel (`TOP2A − EPAS1`);
+Sci-B established 6-axis robustness on the flagship 0-survivor verdict;
+Sci-A's own follow-up applied Sci-B's methodology to the new survivor
+(see `results/track_a_task_landscape/survivor_robustness/`).
+
+Two parallel sessions now run complementary roles:
+
+| Phase | Session | Mandate | Primary outputs |
+|---|---|---|---|
+| **N (Narrative)** | formerly Sci-A | Judge-facing docs, dashboards, submission prep | `README.md`, `STATUS.md`, `docs/**`, `prompts/**`, submission form |
+| **Q (QA)** | formerly Sci-B | End-to-end tests, bug hunt, visual/audit sweep | `results/qa/**`, `HANDOFF_to_N.md` |
+
+### Phase N / Q file ownership
+
+**Phase N writes (exclusive):**
+- `README.md`, `STATUS.md`, `CLAUDE.md`, `AGENTS.md`
+- `docs/**/*.md` (methodology, why_opus_4_7, submission_description,
+  demo_walkthrough, survivor_narrative, loom_script, leakage_audit,
+  interpretation)
+- `prompts/**/*.md`
+- submission form drafts
+
+**Phase Q writes (exclusive):**
+- `results/qa/**`
+- `HANDOFF_to_N.md` at repo root (gitignored)
+
+**Both phases READ-ONLY:**
+- `src/**/*.py`
+- `data/**`, `config/**`
+- All `results/*` subdirs except `results/qa/**`
+- `Makefile`, `.audit-patterns`, `.gitignore`, `.env.example`
+- `results/track_b_gate_robustness/**`, `results/track_a_task_landscape/**`
+
+### Phase N / Q commit rules
+
+- N prefixes: `[N]` or `[Phase-N]`
+- Q prefixes: `[QA]` or `[Q]`
+- Commit within one hour of a work block
+- `make audit` must pass before every push
+- Cross-phase change requests: `HANDOFF_to_<phase>.md` at repo root
+  (gitignored) with severity + reproduction + suggested fix; read
+  before next commit
+
+### Phase N queue (this session)
+
+1. N1 — STATUS.md refresh with Track A survivor + Track B robustness
+2. N2 — docs/methodology.md positive-survivor section
+3. N3 — docs/why_opus_4_7.md honest-demo-moment update
+4. N4 — docs/submission_description.md accept+reject narrative
+5. N5 — README persona section (Boris / Lydia / Jason / domain expert)
+6. N6 — docs/survivor_narrative.md
+7. N7 — docs/loom_script.md 90-second demo
+8. N8 — submission form draft (≤ 150 words)
+
+### Phase Q queue (other session)
+
+1. Q1 — `make test` log
+2. Q2 — `make audit` log
+3. Q3 — `make demo` synthetic end-to-end
+4. Q4 — `make demo-kirc` end-to-end
+5. Q5 — metastasis_expanded falsification rerun (survivor count reproducibility)
+6. Q6 — judge-facing PNG sanity sweep
+7. Q7 — cross-doc link + number consistency pass
+8. Q8 — opus_client + prompts coherence against live transcripts
+9. Q9 — `results/qa/SUMMARY_qa.md`
+
+---
+
+## Archived: Scientific Research phase (Sci-A / Sci-B)
 
 ### Active research tracks
 
