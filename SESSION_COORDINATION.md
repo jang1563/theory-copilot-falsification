@@ -6,6 +6,79 @@
 This project is edited in parallel by two long-running Claude sessions sharing
 one git working tree. This file is the coordination contract. Do not skip.
 
+## Current phase: **Scientific Research** (user directive 2026-04-22)
+
+Final-deliverable work (narrative polish, Loom, submission form) is
+paused. Both parallel sessions now work on science, not submission prep.
+Use the research-track split below instead of the L1/L2 engineering+
+narrative split (the latter is preserved below for reference and for
+the later narrative phase).
+
+### Active research tracks
+
+| Track | Codename | Brief | Primary outputs |
+|---|---|---|---|
+| **Sci-A** | Task Landscape | [`research/TRACK_A_task_landscape.md`](research/TRACK_A_task_landscape.md) | Survival / metastasis task CSVs, per-task falsification reports, `results/track_a_task_landscape/` |
+| **Sci-B** | Gate Robustness | [`research/TRACK_B_gate_robustness.md`](research/TRACK_B_gate_robustness.md) | Threshold sensitivity, baseline ablation, permutation/bootstrap variance, `results/track_b_gate_robustness/` |
+
+### Research-track file ownership (exclusive write)
+
+| Path | Owner |
+|---|---|
+| `data/build_tcga_kirc_survival.py`, `data/build_tcga_kirc_metastasis.py`, `data/kirc_survival.csv`, `data/kirc_metastasis.csv`, any `data/kirc_<new_task>.csv` | Sci-A |
+| `src/task_landscape.py`, `src/track_a_*.py` | Sci-A |
+| `config/task_definitions.json` | Sci-A |
+| `research/TRACK_A_*.md` | Sci-A |
+| `results/track_a_task_landscape/**` | Sci-A |
+| `src/gate_sensitivity.py`, `src/robustness_*.py`, `src/track_b_*.py` | Sci-B |
+| `research/TRACK_B_*.md` | Sci-B |
+| `results/track_b_gate_robustness/**` | Sci-B |
+
+### Read-only for both research tracks
+
+Both tracks treat these as read-only and MUST open a
+`HANDOFF_to_shared.md` note at repo root before modifying:
+
+- `src/theory_copilot/**/*.py` (falsification, opus_client, cli,
+  visualize, managed_agent_runner, cost_ledger)
+- `src/pysr_sweep.py`, `src/falsification_sweep.py`,
+  `src/rename_candidates.py`, `src/build_exante_candidates.py`,
+  `src/make_plots.py`
+- `config/law_proposals.json`, `config/datasets.json`
+- `data/kirc_tumor_normal.csv`, `data/kirc_stage.csv`,
+  `data/gse40435_kirc.csv`, `data/examples/**`
+- `results/flagship_run/**`, `results/tier2_run/**`,
+  `results/opus_exante/**`, `results/plots/**`,
+  `results/live_evidence/**`
+- `README.md`, `STATUS.md`, `docs/**`, `prompts/**`
+- `Makefile`, `.audit-patterns`, `.gitignore`, `.env.example`
+
+### Research-track commit rules
+
+- Commit prefix: `[Sci-A]` or `[Sci-B]` (or `[T-A]` / `[T-B]`).
+- Commit within one hour of starting a work block.
+- `make audit` must pass before every push.
+- Never touch the other track's directories.
+- Share `HANDOFF_to_shared.md` for any change that would touch the
+  read-only module list.
+
+### Research-track sync points
+
+| When | What |
+|---|---|
+| Start of a work block | `git fetch origin && git pull --rebase origin main` |
+| After any commit | `git push origin main` |
+| Research-track kickoff (new session) | Read your track's `research/TRACK_<x>_*.md` brief end-to-end before writing any code |
+| Research-track handoff to narrative (later phase) | When the track's `SUMMARY.md` is written, commit under `[Sci-<x>]` and leave narrative interpretation to Lane 2 |
+
+---
+
+## Engineering + narrative split (preserved for the later phase)
+
+This is the original two-lane split used during Phases A–C. Keep it
+here as the template for when the project resumes submission-prep
+work after the scientific research phase completes.
+
 ---
 
 ## Lane assignment
