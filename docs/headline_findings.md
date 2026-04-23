@@ -154,6 +154,48 @@ an appendix — they are the central artefact. If we had cherry-picked
 a single AUROC 0.984 tumor-vs-normal "finding", we would have published
 the Sakana-v2 failure mode. The gate caught it; we publish that fact.
 
+### The gate kills our own downstream output too (PhL-1)
+
+On 2026-04-23 we went a step further: we let our own **H1 LLM-SR loop**
+(Opus 4.7 steering PySR across iterations, using failure history as
+context) propose a 3-gene extension to the flagship survivor. The
+winning form on TCGA-KIRC was
+
+    score = TOP2A − (EPAS1 + SLC22A8)
+
+reaching AUC 0.739 within that cohort (+0.013 vs the 2-gene form).
+
+We then pre-registered ([`preregistrations/20260423T181322Z_phl1_immotion150_slc22a8_extension.yaml`](../preregistrations/20260423T181322Z_phl1_immotion150_slc22a8_extension.yaml),
+committed as `d2352a9` **before** the analysis ran) a cross-cohort
+replay test on IMmotion150 with three kill tests (log-rank, Cox HR,
+Harrell C-index) plus a comparison gate vs the 2-gene form.
+
+**The 3-gene extension FAILED.** Log-rank p = 0.117, Cox HR = 1.16
+(95% CI 0.99–1.37, excludes significance), C-index = 0.566.
+Cross-cohort comparison: C-index **dropped** from 0.601 (2-gene) to
+0.566 (3-gene); HR **dropped** from 1.36 to 1.16. Verdict:
+**UNDERPERFORMS**. Full verdict + KM curve at
+[`results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md`](../results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md).
+
+This is the dynamic Boris Cherny calls *"never mark a task complete
+without proving it works"* and Thariq Shihipar called out at the
+2026-04-22 live session as an open problem — a verification script
+that forces the agent to test its own outputs against hard constraints.
+Our downstream H1 proposal got killed by the same deterministic Python
+gate that kills first-turn Opus proposals. The agent did not get to
+reward-hack its own extension into the survivor set. This is
+introspection made mechanical: the pipeline rejecting its own best
+guess because independent biology says no. Concretely:
+
+- **Prereg timestamp: committed 2026-04-23 18:13 UTC.** Analysis
+  script committed AFTER (60d3952). Git log proves the order.
+- **Same gate that accepts the 2-gene form kills the 3-gene form.**
+  No threshold change, no cherry-pick. A single consistent bar applied
+  to both our first-turn and downstream candidates.
+- **Parsimony wins honestly.** The 2-gene TOP2A − EPAS1 law remains
+  the canonical survivor; the +0.013 TCGA-KIRC lift was cohort-specific,
+  not a generalisable extension.
+
 ### Template others can adopt
 
 - Generate the equivalent page for your own repo with

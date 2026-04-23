@@ -29,29 +29,28 @@ Theory Copilot: Falsification-Aware Biological Law Discovery
 ## One-line pitch (140 char)
 
 ```
-Pre-registered falsification: Opus 4.7 discovers TOP2A-EPAS1 on TCGA-KIRC, replicates on IMmotion150 trial PFS (HR 1.36, p=0.00027).
+Verification-as-skill: Opus 4.7 rediscovers TOP2A-EPAS1, a gate kills 194/204 candidates — then kills our own H1-loop extension too.
 ```
-(133 chars.)
+(140 chars.)
 
 ---
 
 ## Project summary (150 words, 145 counted)
 
-Theory Copilot is a falsification-first biological law discovery loop
-powered by Opus 4.7 + Managed Agents (GA'd 2026-04-08). Opus plays
-Proposer, Skeptic, Interpreter around a deterministic 5-test Python gate.
-Of 204 candidates evaluated across 11 task-panel combinations, the gate
-rejected 194 (95.1%) and accepted 10 — including two explicit negative
-controls killed as predicted. The simplest surviving law is `TOP2A −
+Theory Copilot is a verification-as-shipped-skill biological discovery
+loop powered by Opus 4.7 + Managed Agents (public beta 2026-04-08).
+Opus plays Proposer, Skeptic, Interpreter around a deterministic 5-test
+Python gate that runs before any LLM judgement. The gate rejected 194
+of 204 candidates (95.1%) across 11 task-panel combinations — including
+two explicit negative controls. The simplest surviving law is `TOP2A −
 EPAS1`, the published ccA-vs-ccB ccRCC subtype axis, rediscovered on
-TCGA-KIRC and then replicated on an independent Phase-2 cohort
-(IMmotion150, metastatic ccRCC, n=263, three arms: atezolizumab,
-atezolizumab+bevacizumab, sunitinib) where it clears three pre-registered
-survival-analysis kill tests: log-rank p=0.00027, Cox HR 1.36, C-index
-0.601 — and remains significant (HR 1.365, p<0.001) after 3-arm treatment
-adjustment. Every pre-registration is a git-tracked YAML emitted before
-the search runs. The 194 rejected candidates are published as a live
-GitHub Pages rejection log — the reject rate is the product.
+TCGA-KIRC (AUROC 0.726) and replicated on IMmotion150 Phase-2 (n=263,
+log-rank p=0.00027, Cox HR 1.36, C-index 0.601, robust to 3-arm
+treatment adjustment). When our own H1 LLM-SR loop later proposed a
+3-gene extension adding SLC22A8, the same gate killed it on cross-cohort
+replay (PhL-1, pre-reg committed before the analysis ran — C-index
+dropped to 0.566, HR to 1.16). Pre-registrations are git-tracked YAMLs.
+The 194 rejections are the product, not an appendix.
 
 ---
 
@@ -118,16 +117,17 @@ and argue against it without the tokens that generated the proposal
 collapsing the dissent. Smaller models collapse; Opus 4.7 holds.
 
 **Best Claude Managed Agents ($5K).** Public-beta-only compliant per
-the 2026-04-23 hackathon fairness rule. Three delegation paths:
-Path B (single-agent `agent_toolset_20260401`, live), Path A (sequential
-falsification chain across three Path B sessions with structured JSON
-handoff — not Agent Teams), Path C (Claude Code Routines `/fire` HTTP
-client with local watch-dir fallback). Brain/body decoupling shipped
-as working primitives — `persist_session_events` dumps the durable
-event log, `replay_session_from_log` re-injects user-origin events
-into a different session. Two products composed (Managed Agents +
-Routines), domain-specialist framing, PR-triggered falsification
-gate demoable in <60 s.
+the 2026-04-23 hackathon fairness rule. Three delegation paths: Path B
+(single-agent `agent_toolset_20260401`, live), Path A (sequential
+falsification chain across three Path B sessions — not Agent Teams),
+Path C (Claude Code Routines `/fire` with local fallback). The Skeptic
+runs with isolated subagent context (Boris's architecture pattern);
+the 5-test gate is a shareable skill; `make audit` is the Stop hook
+that refuses to mark a task complete without verification. We killed
+our own H1 LLM-SR loop's 3-gene extension on cross-cohort replay
+(PhL-1) — the verification loop Thariq Shihipar flagged as an open
+problem, shipped as a skill. Brain/body decoupling as working
+primitives, not prose. <60s demo-able.
 
 ---
 

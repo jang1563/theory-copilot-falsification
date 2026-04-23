@@ -1,5 +1,15 @@
 # Methodology
 
+## Data provenance
+
+Every dataset the pipeline consumes is committed under `data/*.csv` and
+hashed in `data/SHA256SUMS` (SHA-256, `shasum -a 256`). The hashes are
+committed alongside pre-registration YAMLs so a reviewer can reproduce
+the verification: `shasum -c data/SHA256SUMS` should return `OK` for
+every CSV listed in any prereg's `references.cohort_build` field. All
+data sources are publicly accessible without email or dbGaP gate (see
+README Hackathon compliance notes).
+
 ## Goal
 
 Operationalize a falsification-first discovery loop: propose compact law

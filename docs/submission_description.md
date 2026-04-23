@@ -2,8 +2,14 @@
 
 ## Project Summary
 
-Theory Copilot is a falsification-first biological discovery loop
-powered by Opus 4.7. Opus 4.7 plays three roles around a deterministic
+**Theory Copilot is a verification-as-shipped-skill discovery pipeline — the
+agent kills its own best guesses, including ones it generates downstream,
+when independent data says no.** On real cancer data the pipeline rejected
+194 of its own 204 hypotheses; on cross-cohort replay it then rejected one
+of the 10 accepted ones' own H1-loop-proposed extensions. Our own output,
+killed by our own gate on data it had never seen.
+
+Powered by Opus 4.7, Opus plays three roles around a deterministic
 statistical gate: a Scientist that proposes compact symbolic law
 families (with pathway-level rationale and an ex-ante negative
 control), a Skeptic that reviews each candidate's metric pattern
@@ -12,7 +18,11 @@ hypothesis for the survivors. The gate itself — two-sided permutation
 null, bootstrap CI lower bound, sign-invariant single-feature
 baseline, incremental covariate confound, decoy-feature null, with
 Benjamini-Hochberg FDR across candidates — is plain Python, so Opus
-4.7 cannot rationalize its own proposals into passing.
+4.7 cannot rationalize its own proposals into passing. In Boris
+Cherny's dialect: the Skeptic is a sub-agent with isolated context,
+the 5-test gate is a shareable skill, the `make audit` + pre-
+registration contract is the Stop hook that refuses to mark the task
+complete without proving it works.
 
 Applied to real TCGA-KIRC, the gate rejects 100+ candidates across
 tumor-vs-normal, stage, and survival tasks on an 11-gene HIF-axis
