@@ -1,0 +1,45 @@
+{
+  "mutual_information": {
+    "I_TOP2A_Y": 0.03239061407452537,
+    "I_EPAS1_Y": 0.027765730949275813,
+    "I_score_Y (score = TOP2A - EPAS1)": 0.045042525636523445,
+    "I_joint_hist_Y (2D histogram, 20 bins)": 0.02033539519896954
+  },
+  "synergy": {
+    "definition": "synergy = I(joint; Y) - I(TOP2A; Y) - I(EPAS1; Y)",
+    "via_score": -0.015113819387277738,
+    "via_joint_hist": -0.03982094982483164,
+    "interpretation": "Positive synergy \u2192 TOP2A-EPAS1 carry non-redundant information about metastasis; the compound is INFORMATIONALLY NECESSARY. Near-zero synergy \u2192 the two genes are largely redundant."
+  },
+  "mdl_token_counts": {
+    "TOP2A - EPAS1": {
+      "tokens": 3,
+      "auroc": 0.7255601117252035
+    },
+    "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)": {
+      "tokens": 9,
+      "auroc": null
+    },
+    "log1p(LDHA) - log1p(ALB)": {
+      "tokens": 5,
+      "auroc": null
+    },
+    "MKI67 - EPAS1": {
+      "tokens": 3,
+      "auroc": 0.7076127651987877
+    },
+    "log1p(ACTB) - log1p(GAPDH)": {
+      "tokens": 5,
+      "auroc": null
+    },
+    "CA9 (single gene)": {
+      "tokens": 1,
+      "auroc": 0.5206513341653295
+    }
+  },
+  "notes": [
+    "MI estimator: sklearn.feature_selection.mutual_info_classif, k=5 NN.",
+    "Joint MI via 2D histogram (20 quantile bins per gene).",
+    "Both estimators are lower bounds on true MI at this sample size (n=505)."
+  ]
+}
