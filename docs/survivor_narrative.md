@@ -54,6 +54,21 @@ survivor's distinctive contribution is therefore interpretable
 compactness plus pre-registered falsification, not an AUROC ceiling
 that no other 2-gene model reaches.
 
+**Cross-cohort causal stability (anchor regression).** Anchor
+regression ([Rothenhäusler et al., JRSS-B 2021](https://arxiv.org/abs/1801.06229))
+pooling TCGA-KIRC (n=505) and IMmotion150 (n=263) as two independent
+environments yields: TOP2A coefficient +0.197 (stable γ=0→100),
+EPAS1 coefficient -0.201 (stable γ=0→100). Cochran Q heterogeneity
+tests: Q=1.39, p=0.238 (TOP2A); Q=0.68, p=0.410 (EPAS1). No
+significant inter-cohort disagreement. The coefficient direction and
+the sign of `TOP2A − EPAS1` do not change across cohorts or under
+increasing anchor penalty — consistent with a law that is not an
+artefact of one dataset's distribution shift. Honest caveat: both
+cohorts are kidney clear-cell (same disease), so this tests
+platform/patient-selection heterogeneity, not biological context
+transfer. IMmotion150 is metastatic-only (Stage IV), so the anchor
+does not swap biological context from M0 to M1.
+
 **What it is not.** Not a diagnostic biomarker. Not novel biology.
 Not a replacement for prospective validation. Research use only.
 

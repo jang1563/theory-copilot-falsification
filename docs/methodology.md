@@ -216,6 +216,31 @@ null 0.509). A proper cross-cohort replay on CPTAC-3 ccRCC or
 cBioPortal MSKCC-IMPACT metastatic ccRCC is flagged as the natural
 follow-on.
 
+### Anchor regression cross-cohort stability
+
+Anchor regression ([Rothenhäusler et al., JRSS-B 2021](https://arxiv.org/abs/1801.06229)),
+implemented in `src/g4_anchor_regression.py`, tests whether the TOP2A/EPAS1
+law is causally stable across TCGA-KIRC (n=505, M-staging endpoint) and
+IMmotion150 (n=263, PFS endpoint under immunotherapy), using cohort
+membership as the anchor variable.
+
+Results (`results/.../g4_anchor_regression/anchor_regression.json`):
+
+| Gene | TCGA coef | IMmotion coef | Cochran Q | p (heterogeneity) | Stable |
+|---|---|---|---|---|---|
+| TOP2A | +0.0843 | +0.0421 | 1.39 | 0.238 | ✅ |
+| EPAS1 | -0.0738 | -0.0443 | 0.68 | 0.410 | ✅ |
+
+At γ≥2 (anchor penalty), the pooled compound coefficient (TOP2A−EPAS1)
+converges to ≈ +0.398 and the residual-anchor correlation drops from
+-0.169 (OLS) to -0.003 (γ=100). No significant inter-cohort heterogeneity.
+
+**Honest caveat:** Both cohorts are ccRCC; the anchor captures
+platform and patient-selection differences, not biological context
+transfer. IMmotion150 is metastatic-only (Stage IV), so the
+cross-cohort comparison tests PFS stratification within metastatic
+disease, not M0→M1 prediction generalization.
+
 **Prior art and rigor-benchmark references.** ccA/ccB ccRCC subtype axis: Brannon 2010 ([PMID 20871783](https://pubmed.ncbi.nlm.nih.gov/20871783/)); ClearCode34 ([DOI 10.1016/j.eururo.2014.02.035](https://doi.org/10.1016/j.eururo.2014.02.035)); TOP2A in ccRCC 2024 ([PMID 38730293](https://pubmed.ncbi.nlm.nih.gov/38730293/)). Contemporary AI-for-Science rigor benchmarks this pipeline tracks: POPPER ([arXiv 2502.09858](https://arxiv.org/abs/2502.09858)); Sakana AI Scientist v2 ([arXiv 2504.08066](https://arxiv.org/abs/2504.08066)); SPOT ([arXiv 2505.11855](https://arxiv.org/abs/2505.11855)).
 
 ## 7. Novelty accounting
