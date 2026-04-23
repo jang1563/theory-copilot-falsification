@@ -1,7 +1,7 @@
 # STATUS — theory-copilot-falsification
 
-**Last updated:** 2026-04-23 03:40 ET (Phase G/H/N+H narrative additions pushed)
-**Days to submit:** T-3d 16h20m
+**Last updated:** 2026-04-23 10:10 ET (H2 LIVE + Lane I complete + paper §3.6-§3.8)
+**Days to submit:** T-3d 9h50m
 **Submit window:** 2026-04-26 20:00 ET
 **Judging:** 2026-04-28 12:00 ET
 
@@ -9,13 +9,18 @@
 
 ## 🎯 Headline artifact state
 
-All core phases complete and pushed. Latest additions (this session):
-- **Tharik (Cloud Code) quote integration** in methodology §4, why_opus_4_7, submission_description: public validation that falsification-first is the Claude team's stated stance.
-- **HPA v21.0 independent annotation**: TOP2A=prognostic_unfavorable, EPAS1=prognostic_favorable in renal cancer — independent of our cohort.
-- **Anchor regression stability** (Lane G/H): TOP2A/EPAS1 law anchor-stable across TCGA-KIRC + IMmotion150 (Cochran Q p=0.24 / p=0.41, γ=0→100 convergent).
-- **G3 immune-subtype adjusted Cox**: kill test 1 PASS (HR=1.365, CI excludes 1.0 after treatment adjustment); kill tests 2+3 NOT_FEASIBLE (cBioPortal IMMUNE_SUBTYPE = constant 'C4').
-- **H1 Falsification-Guided SR Loop** (falsification_sr_loop.py) + **H2 1M Synthesis** (opus_1m_synthesis.py) committed.
-- origin/main at `0cf327a` (pushed 2026-04-23 03:40 ET).
+All core phases complete and pushed. Latest additions (2026-04-23 AM):
+- **H2 1M Context Synthesis LIVE** (Opus 4.7 real call, 49.7s, 74 rejections + 9 survivors + 5 papers in 14K-char prompt): derived 5 new skeletons + 5 invariant conditions + bimodal failure landscape analysis. Genuine 1M-context cross-reasoning that RAG couldn't match.
+- **Lane I · I2 Rashomon (990 pairs)**: TOP2A-EPAS1 is rank 1/990, UNIQUE at ε=0.01; 15 of top 20 pairs contain proliferation axis → sufficient condition empirically established.
+- **Lane I · I3 clinical_utility.md**: OR 4.74, 7.53-mo PFS gap, comparison to ClearCode34 (2 vs 34 genes, same AUROC), 4 honest caveats.
+- **Lane I · I4 information_theory.md**: synergy -0.015 (honest redundancy finding); compound aggregates information but isn't strictly non-redundant.
+- **Paper §3.6 confounding** (G3 adjusted Cox, sunitinib arm = general prognostic) + **§3.7 Rashomon** + **§3.8 HPA consensus**. PDF regenerated 129 KB.
+- **Tharik (Cloud Code) quote integration** in methodology §4, why_opus_4_7, submission_description.
+- **HPA v21.0 independent annotation**: TOP2A=prognostic_unfavorable, EPAS1=prognostic_favorable in renal cancer.
+- **Anchor regression stability**: Cochran Q p=0.24/0.41, γ=0→100 convergent.
+- **G2 AUPRC + DeLong**: AUPRC=0.317 lift 2.03×, DeLong vs MKI67 p=0.004.
+- **G3 adjusted Cox**: HR=1.365 robust to 3-arm treatment + TMB (attenuation -0.9%).
+- origin/main at `2c6362e` (pushed 2026-04-23 10:10 ET).
 
 - **Flagship (11-gene panel, 4 ccRCC tasks):** 0 / 100+ candidates
   survive the pre-registered 5-test gate. `delta_baseline` ceiling at
@@ -59,7 +64,17 @@ All core phases complete and pushed. Latest additions (this session):
 | D17 | Benchmark vs SPOT / Sakana-v2 / POPPER (PhF-2) | F | 🟢 | 0f3ce58 | docs/paper/benchmark_vs_related.md + paper §4.2 |
 | D18 | Rejection Log static HTML + GitHub Pages (PhF-4) | F | 🟢 | 3ce8a6b | 204 candidates / 194 rejected; `.github/workflows/pages.yml` |
 | D19 | Path C Routine + Nightly Falsifier (PhF-5) | F | 🟢 | e81b8e6 | `theory-copilot loop` + `.github/workflows/nightly_falsifier.yml` |
-| D20 | Headline findings master-narrative doc | F | 🟢 | e81b8e6 | docs/headline_findings.md — 3 findings × before/after/"6 months ago" |
+| D20 | Headline findings master-narrative doc | F | 🟢 | e81b8e6 → 2c6362e | + G3/G2/Rashomon/HPA in Finding 1 |
+| D21 | G3-NEW Adjusted Cox (IMmotion150 confounding) | G | 🟢 | 8e11dc5 | HR=1.365 robust; sunitinib arm = general prognostic |
+| D22 | G2 AUPRC + DeLong + bootstrap CIs | G | 🟢 | b24b993 | AUPRC=0.317 lift 2.03×, DeLong p=0.004 |
+| D23 | G4-REV Anchor Regression cross-cohort | G | 🟢 | 0cf327a | Cochran Q p=0.24 / p=0.41, γ=0→100 convergent |
+| D24 | G1 Mardia + Knockoffs | G | 🟡 | f967d5a | exploratory, FDR threshold not met by equicorrelated KO |
+| D25 | H1 Falsification-Guided SR Loop (LaSR-style) | H | 🟢 | f967d5a | 681 LOC, 11 tests, Doom Loop detector, concept library |
+| D26 | **H2 1M Context Synthesis LIVE** | H | 🟢 | 2c6362e | Opus 4.7 live 49.7s → 5 skeletons + 5 invariants + bimodal analysis |
+| D27 | Lane I · I2 Rashomon (990 pairs enumeration) | I | 🟢 | 73eba48 | TOP2A-EPAS1 rank 1/990, unique at ε=0.01 |
+| D28 | Lane I · I3 Clinical utility translation | I | 🟢 | 73eba48 | OR 4.74, 7.53-mo PFS gap, 4 caveats |
+| D29 | Lane I · I4 Information theory | I | 🟢 | 73eba48 | synergy -0.015 (honest redundancy) |
+| D30 | Paper §3.6-§3.8 (G3+Rashomon+HPA) | F+G+I | 🟢 | 195154a | 129 KB PDF rebuilt with LaTeX |
 
 ## 🛡️ Backup Plan Dashboard
 
