@@ -37,6 +37,14 @@ months ago* → *what the pattern means for other researchers / companies*.
 - **Median PFS: 5.35 months** in the high-score half vs **12.88 months**
   in the low-score half — a 7.5-month separation on immunotherapy.
 
+> **Note on HR reporting.** HR is consistently computed on z-scored
+> `TOP2A − EPAS1` but reported at different precisions across sections:
+> **univariate HR = 1.361**, **3-arm-treatment-adjusted HR = 1.365**,
+> **treatment+log(TMB)-adjusted HR = 1.293**. All three models are
+> pre-registered; the pitch rounds to "HR 1.36" for the univariate result.
+> See `results/track_a_task_landscape/external_replay/immotion150_pfs/`
+> and the G3 addendum for all three adjustment stages.
+
 **Confounding control (G3-NEW, 2026-04-23):** Three pre-registered Cox
 models show HR is ROBUST to treatment-arm and TMB adjustment:
 - Univariate: HR=1.361 (1.165–1.591), p=1e-4

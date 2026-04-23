@@ -87,8 +87,8 @@ All core phases complete and pushed. Latest additions (2026-04-23 AM):
 | BP-6 ND2 audit | 🟢 clean | — | prompts/docs 0 matches |
 | BP-7 HPC naming | 🟢 clean | — | `make audit` via .audit-patterns external pattern file |
 | BP-8 Live smoke | 🟢 done | 4/22 early; api_validation_log.txt recorded | transcripts in results/live_evidence/ |
-| BP-9 Loom backup | ⚪ pending | 4/26 12:00 ET cutoff | Phase N7 |
-| BP-10 Judge personas | ⚪ pending | — | Phase N5 |
+| BP-9 Loom backup | ⚪ pending | 4/26 12:00 ET cutoff | Loom recording scheduled 4/25 |
+| BP-10 Judge personas | 🟢 done | — | README persona-based read-first section in place |
 | BP-11 Leakage audit | 🟡 deferred | — | implicit in train/test split + CV replay; doc N-task TBD |
 | BP-12 Scope freeze | 🟢 held | **4/24 24:00 ET 강제** | research additions stopped; Phase N/Q is narrative + QA only |
 | BP-NULL Honest null | 🟢 morphed | converted to "accept+reject narrative" after 9-survivor finding | survivor_narrative.md (N6) replaces null_narrative |
@@ -122,7 +122,7 @@ commit: `7a70919 [N] Restamp coordination contract header`.
 - [x] **G2** 4/24 22:00 — full E2E + replay done (5-fold CV stands in for GSE40435; documented limitation)
 - [x] **G3** 4/25 18:00 — ≥ 1 survivor OR null-narrative swap-ready (9 survivors on metastasis_expanded)
 - [x] **G4** 4/25 22:00 — live-API smoke pass (done 4/22)
-- [ ] **G5** 4/26 12:00 — Loom rendered (Phase N7)
+- [ ] **G5** 4/26 12:00 — Loom rendered (recording 4/25)
 - [ ] **G6** 4/26 18:00 — public push-ready, `make audit` pass (Phase Q validates)
 - [ ] **G7** 4/26 20:00 — SUBMIT
 

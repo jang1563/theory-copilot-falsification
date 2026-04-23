@@ -29,13 +29,13 @@ Theory Copilot: Falsification-Aware Biological Law Discovery
 ## One-line pitch (140 char)
 
 ```
-Pre-registered falsification: Opus 4.7 discovers TOP2A-EPAS1 on TCGA-KIRC, replicates on IMmotion150 trial PFS (HR 1.36, p=3e-4).
+Pre-registered falsification: Opus 4.7 discovers TOP2A-EPAS1 on TCGA-KIRC, replicates on IMmotion150 trial PFS (HR 1.36, p=0.00027).
 ```
-(131 chars.)
+(133 chars.)
 
 ---
 
-## Project summary (150 words, 149 counted)
+## Project summary (150 words, 145 counted)
 
 Theory Copilot is a falsification-first biological law discovery loop
 powered by Opus 4.7 + Managed Agents (GA'd 2026-04-08). Opus plays
@@ -44,13 +44,14 @@ Of 204 candidates evaluated across 11 task-panel combinations, the gate
 rejected 194 (95.1%) and accepted 10 — including two explicit negative
 controls killed as predicted. The simplest surviving law is `TOP2A −
 EPAS1`, the published ccA-vs-ccB ccRCC subtype axis, rediscovered on
-TCGA-KIRC and then replicated on an independent Phase-2 trial cohort
-(IMmotion150, atezolizumab+bevacizumab, n=263) where it clears three
-pre-registered survival-analysis kill tests: log-rank p=0.0003, Cox HR
-1.36, C-index 0.601. Every pre-registration is a git-tracked YAML
-emitted before the search runs. The 194 rejected candidates are
-published as a live GitHub Pages rejection log — the reject rate is
-the product.
+TCGA-KIRC and then replicated on an independent Phase-2 cohort
+(IMmotion150, metastatic ccRCC, n=263, three arms: atezolizumab,
+atezolizumab+bevacizumab, sunitinib) where it clears three pre-registered
+survival-analysis kill tests: log-rank p=0.00027, Cox HR 1.36, C-index
+0.601 — and remains significant (HR 1.365, p<0.001) after 3-arm treatment
+adjustment. Every pre-registration is a git-tracked YAML emitted before
+the search runs. The 194 rejected candidates are published as a live
+GitHub Pages rejection log — the reject rate is the product.
 
 ---
 

@@ -1,6 +1,6 @@
 # Theory Copilot: Falsification-Aware Biological Law Discovery
 
-Theory Copilot Discovery is a falsification-aware biological law discovery workflow built around Opus 4.7. Instead of celebrating the first high-scoring equation, the system proposes compact law families, searches for concrete candidates, attacks them with a five-test statistical gate, and only reports what survives. On real TCGA-KIRC the gate rejects 100+ candidates across four tasks with an 11-gene HIF-axis panel (each task is already solved by one gene) **and** accepts 9/30 candidates on metastasis with a 45-gene expanded panel, led by the two-gene law `TOP2A − EPAS1` that reproduces the published ccA-vs-ccB ccRCC subtype axis from unconstrained symbolic regression.
+Theory Copilot Discovery is a falsification-aware biological law discovery workflow built around Opus 4.7. Instead of celebrating the first high-scoring equation, the system proposes compact law families, searches for concrete candidates, attacks them with a five-test statistical gate, and only reports what survives. On real TCGA-KIRC the gate **rejects 194 of 204 candidates** across six task × panel combinations (each task dominated by a single gene) **and** accepts 10 on metastasis with a 45-gene expanded panel, led by `TOP2A − EPAS1` — the published ccA/ccB ccRCC subtype axis, rediscovered from unconstrained symbolic regression. The 2-gene law **replicates on the independent IMmotion150 Phase-2 trial cohort** (n=263, log-rank p=0.0003, Cox HR=1.36, 7.5-month median-PFS gap) under pre-registered survival-analysis kill tests committed before the analysis ran.
 
 Built for the Built with Opus 4.7 Hackathon · April 2026
 
@@ -84,9 +84,11 @@ Proposal → Search → Falsification → Survivor → Replay
 
 ## Quick Start
 
+**Python ≥ 3.10 required** (`pyproject.toml` needs `X | Y` union syntax; `match` statements in `src/theory_copilot/managed_agent_runner.py` also require 3.10+). macOS default `/usr/bin/python3` is 3.9.x — use a venv. `make install` creates `.venv/` and points the Makefile at it by default.
+
 ```bash
-# Install (Python 3.10+, Julia 1.10.0 for PySR)
-pip install -e .
+# Install into .venv (Python ≥ 3.10, Julia 1.10.0 for PySR)
+python3 -m venv .venv && .venv/bin/pip install -e .
 
 # Run tests (no API key needed — all mocked)
 python -m pytest tests/ -v
