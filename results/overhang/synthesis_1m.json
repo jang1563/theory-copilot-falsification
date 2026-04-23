@@ -1,8 +1,71 @@
 {
-  "_dry_run": true,
-  "prompt_chars": 14212,
-  "rejections_loaded": 74,
-  "survivors_loaded": 9,
+  "next_skeletons": [
+    {
+      "rank": 1,
+      "skeleton": "log1p(exp(TOP2A + MKI67 - EPAS1 - VEGFA))",
+      "pathway_crossing": "Proliferation \u00d7 HIF-2\u03b1/Angiogenesis (double anti-marker)",
+      "delta_baseline_hypothesis": "Survivors show Proliferation\u2212HIF gets +0.069; adding a second HIF-axis anti-marker (VEGFA, a direct EPAS1 target) should denoise the HIF component and push delta_baseline toward +0.08-0.10, since VEGFA and EPAS1 are correlated but noise-independent.",
+      "ex_ante_skeptic_test": "Falsified if delta_baseline < 0.05 despite AUROC > 0.73 \u2014 indicating VEGFA is redundant with EPAS1 and adds no orthogonal signal; or if ci_lower < 0.60 from over-parameterization."
+    },
+    {
+      "rank": 2,
+      "skeleton": "(CDK1 * MKI67) / (EPAS1 + PBRM1)",
+      "pathway_crossing": "Proliferation \u00d7 Chromatin-remodeling tumor suppressor \u00d7 HIF",
+      "delta_baseline_hypothesis": "PBRM1 loss is a ccB-enriched driver orthogonal to EPAS1; including a chromatin axis introduces independent variance beyond the Proliferation\u2212HIF survivor pattern, giving a plausible +0.07 over single-gene baseline.",
+      "ex_ante_skeptic_test": "Falsified if delta_confound < 0.03 when controlling for stage (PBRM1 may just track stage); or if decoy_p fails because ratio form is dominated by proliferation numerator alone."
+    },
+    {
+      "rank": 3,
+      "skeleton": "log1p(exp(TOP2A - CA9)) - log1p(exp(EPAS1 - VIM))",
+      "pathway_crossing": "Proliferation \u00d7 Warburg/CA9 minus HIF \u00d7 EMT",
+      "delta_baseline_hypothesis": "CA9 saturates alone at 0.965 but its residual after subtracting TOP2A is informative for ccA/ccB split; the compound form creates a two-axis contrast that no single gene can replicate, targeting delta_baseline > 0.05 against the CA9 ceiling.",
+      "ex_ante_skeptic_test": "Falsified if AUROC drops below 0.97 (CA9 reference) AND delta_baseline < 0.05, meaning the contrast destroys CA9 signal without compensating; or perm_p > 0.05 from sign cancellation."
+    },
+    {
+      "rank": 4,
+      "skeleton": "sqrt(TOP2A * CCNB1) - sqrt(EPAS1 * NDUFA4L2)",
+      "pathway_crossing": "Proliferation (geometric mean) \u00d7 HIF-target metabolic (geometric mean)",
+      "delta_baseline_hypothesis": "Geometric means within each pathway reduce single-gene outlier dominance; NDUFA4L2 is a HIF-2\u03b1 target in ccA with near-zero baseline AUROC alone, so a compound with it will have a large delta over best single gene.",
+      "ex_ante_skeptic_test": "Falsified if the sqrt(product) terms are numerically unstable (NaN rates >5%) or if delta_baseline < 0.05 because CCNB1 alone already captures the proliferation term."
+    },
+    {
+      "rank": 5,
+      "skeleton": "(TOP2A + PCNA - EPAS1) / (1 + exp(-(BAP1_loss)))",
+      "pathway_crossing": "Proliferation \u2212 HIF gated by BAP1 tumor-suppressor status",
+      "delta_baseline_hypothesis": "BAP1 loss is a ccRCC-specific aggression modifier orthogonal to both proliferation and HIF axes; a sigmoidal gate on a BAP1 indicator multiplies the survivor's linear Prol\u2212HIF contrast, creating a nonlinear interaction that no single gene (including BAP1 alone, which is weak) can match.",
+      "ex_ante_skeptic_test": "Falsified if the sigmoid gate is approximately constant across the cohort (no dynamic range) making the compound equivalent to the survivor skeleton; or if delta_confound < 0.03 because BAP1 loss collinearly tracks stage/grade covariates."
+    }
+  ],
+  "invariant_conditions": [
+    {
+      "rank": 1,
+      "condition": "The compound MUST contain at least one Proliferation marker (TOP2A/MKI67/CDK1/CCNB1/PCNA) AND at least one HIF/ccA marker (EPAS1 and/or its downstream targets) in OPPOSITE SIGN (subtraction or ratio form).",
+      "supporting_evidence": "All 9 survivors have the form f(proliferation_var \u2212 HIF_var); every single-axis skeleton (x0-only CA9, x8-only, pure exp(x2)-exp(x8) forms) failed delta_baseline with delta \u2264 0.03."
+    },
+    {
+      "rank": 2,
+      "condition": "The compound MUST NOT reduce to a monotone transform of a single high-baseline gene (e.g., CA9/x0). Compounds whose rank-ordering correlates >0.98 with any single input cannot clear delta_baseline > 0.05.",
+      "supporting_evidence": "All CA9-alone variants (log1p(exp(x0)), sqrt(log1p(exp(x0))), 0.878+0.258*x0) achieved AUROC 0.965 but delta_baseline = 0.000; 23 flagship rejections hit this ceiling."
+    },
+    {
+      "rank": 3,
+      "condition": "The compound MUST preserve dynamic range after nested transforms \u2014 triple/quadruple log1p stacks collapse signal to AUROC \u2248 0.50 and fail perm_p.",
+      "supporting_evidence": "All 14 log1p(log1p(log1p(...))) forms in tier2_run produced AUROC = 0.500 and failed all four gates simultaneously; log1p composition depth > 2 is mathematically saturating."
+    },
+    {
+      "rank": 4,
+      "condition": "The compound MUST operate at a sign-consistent contrast: ccB-high minus ccA-high (not ccA-high minus ccB-high). Sign-flipped forms produce AUROC < 0.5 and fail decoy_p.",
+      "supporting_evidence": "exp(exp(x1*(x3-x9))*...) yielded AUROC 0.021 (delta=-0.945); exp(-0.025/exp(exp(x9)*x0)) yielded 0.428. Sign-invariance in delta_baseline does not rescue decoy_p when direction is inverted."
+    },
+    {
+      "rank": 5,
+      "condition": "The compound MUST introduce at least one variance source not captured by the best single predictor \u2014 i.e., the two constituent axes must have correlation |r| < 0.7 in the cohort \u2014 otherwise delta_confound < 0.03.",
+      "supporting_evidence": "exp(exp((x1-(x9+x4))-exp(log1p(x7)))*x0) failed delta_baseline AND delta_confound (AUROC 0.904, delta=-0.062), indicating its multi-variable form collapsed onto a covariate-correlated single axis rather than adding orthogonal information."
+    }
+  ],
+  "synthesis_summary": "The campaign reveals a sharp bimodal failure landscape: 27 rejections collapse to AUROC \u2248 0.5 from log1p-stack saturation (pure mathematical pathology), while 23 rejections plateau at AUROC 0.96-0.99 but fail delta_baseline because they are monotone functions of CA9 alone. Only the Proliferation \u2212 HIF-2\u03b1 contrast survives, clearing the +0.05 delta_baseline hurdle by combining two biologically orthogonal ccRCC axes (the ccA/ccB partition of Brannon/Brooks). The CA9 ceiling (0.965) is effectively a trap: any law that fails to cross into the Proliferation \u00d7 HIF-2\u03b1 boundary cannot advance, regardless of mathematical complexity. Future candidates should target multi-pathway contrasts with bounded transform depth (\u22642 log1p nestings), preserve sign orientation toward ccB aggression, and introduce a third orthogonal axis (chromatin regulators, EMT, or metabolic HIF targets) to push beyond the survivor plateau at delta_baseline \u2248 0.07.",
+  "_thinking_excerpt": " I'm seeing that the winning combination pairs HIF-2\u03b1 with the inverse of proliferation markers, achieving a delta around 0.069 above baseline. The challenge is that CA9 alone plateaus too high to improve further, so I need to explore cross-pathway combinations that can beat the single-gene baseline by at least 0.05. Let me sketch out five new candidate skeletons that mix different biological pathways.",
+  "_elapsed_sec": 49.7,
   "_meta": {
     "rejections_loaded": 74,
     "survivors_loaded": 9,
