@@ -141,18 +141,19 @@ Role separation in `src/theory_copilot/managed_agent_runner.py`:
 
 Three delegation paths:
 
-- **Path A — Agent Teams multi-agent (research preview).** Orchestrator
-  agent declares `callable_agents=[proposer, searcher, skeptic]` at
-  `agents.create` time. The platform inserts a delegation tool into the
-  orchestrator's toolset, each sub-agent runs with its own context, and
-  sub-agent activity surfaces on the primary session stream as
-  `session.thread_created` / `agent.thread_message_sent` events. Requires
-  per-workspace allow-list via the Managed Agents waitlist form — this is
-  **not** a header or env var, it is application-level access approval.
-  Our `MANAGED_AGENTS_WAITLIST=approved` env var is a client-side feature
-  flag only. Without waitlist access the `run_path_a(fallback_on_no_waitlist=
-  True)` code path runs a sequential Path B × 3 chain with JSON handoff —
-  explicitly NOT multi-agent.
+- **Path A — sequential falsification chain (public-beta only).** Three
+  Managed Agents sessions (Proposer / Searcher / Skeptic) in a shared
+  environment, each receiving the prior agent's structured-JSON output via
+  user-message injection. Per the 2026-04-23 hackathon fairness rule
+  (Anthropic: research-preview Agent Teams / `callable_agents` disabled
+  for participants, public-beta features only), this is our actual Path A
+  execution model. The `_run_path_a_callable_agents` code path exists as
+  an architectural reference of the full Agent Teams shape
+  (orchestrator-with-`callable_agents`, `session.thread_created` /
+  `agent.thread_message_sent` delegation events) and is guarded behind
+  `MANAGED_AGENTS_WAITLIST=approved` — a client-side feature flag, not a
+  platform toggle — so it becomes live the day the research-preview opens
+  to this workspace.
 - **Path B — single agent + `agent_toolset_20260401` (public beta).** One
   Managed Agent with the full built-in tool bundle (bash, read, write,
   edit, glob, grep, web_fetch, web_search). Used for every Night task in

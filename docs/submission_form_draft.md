@@ -88,13 +88,12 @@ PASS / FAIL / NEEDS_MORE_TESTS output. Two delegation paths:
   `results/live_evidence/04_managed_agents_e2e.log` (`agents.create`
   → `environments.create` → `sessions.create` → `stream` → `send`
   → `session.status_idle`).
-- **Path A — Agent Teams, research preview (waitlist per-workspace).**
-  Orchestrator agent with `callable_agents=[Proposer, Searcher, Skeptic]`;
-  the platform inserts a delegation tool into the orchestrator's toolset
-  and sub-agent threads run with context isolation, surfacing on the
-  primary session stream as `session.thread_created` / `agent.thread_message_sent`.
-  Sequential fallback path (3 × Path B with JSON handoff) ships today;
-  `MANAGED_AGENTS_WAITLIST=approved` unlocks real `callable_agents`.
+- **Path A — sequential falsification chain (public-beta only).** Three
+  Managed Agents sessions (Proposer / Searcher / Skeptic) in a shared
+  environment with structured-JSON handoff. Per the 2026-04-23 hackathon
+  fairness rule, Agent Teams (`callable_agents`) research-preview features
+  are not used; the orchestrator-with-`callable_agents` code path is
+  retained as an architectural reference guarded by an env flag.
 - **Path C — Claude Code Routines (separate product; research preview).**
   `POST /v1/claude_code/routines/{trig_id}/fire` with per-routine bearer
   token (`src/theory_copilot/routines_client.py`). `--use-routine` flag
@@ -118,10 +117,11 @@ the Skeptic turn: that role has to hold the proposal in context
 and argue against it without the tokens that generated the proposal
 collapsing the dissent. Smaller models collapse; Opus 4.7 holds.
 
-**Best Claude Managed Agents ($5K).** Three delegation paths against
-the 2026-04-01 spec: Path B (single-agent `agent_toolset_20260401`,
-live), Path A (`callable_agents` Agent Teams with sequential fallback
-when waitlist unavailable), Path C (Claude Code Routines `/fire` HTTP
+**Best Claude Managed Agents ($5K).** Public-beta-only compliant per
+the 2026-04-23 hackathon fairness rule. Three delegation paths:
+Path B (single-agent `agent_toolset_20260401`, live), Path A (sequential
+falsification chain across three Path B sessions with structured JSON
+handoff — not Agent Teams), Path C (Claude Code Routines `/fire` HTTP
 client with local watch-dir fallback). Brain/body decoupling shipped
 as working primitives — `persist_session_events` dumps the durable
 event log, `replay_session_from_log` re-injects user-origin events

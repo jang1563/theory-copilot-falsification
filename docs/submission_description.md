@@ -58,12 +58,17 @@ Live transcripts of all four roles at `results/live_evidence/`.
   `results/live_evidence/04_managed_agents_e2e.log`
   (`agents.create` → `environments.create` → `sessions.create` →
   `stream` → `send` → `session.status_idle`).
-- **Path A — Agent Teams multi-agent, research preview.** Orchestrator
-  agent declares `callable_agents=[Proposer, Searcher, Skeptic]` at
-  `agents.create`; platform inserts a delegation tool and each sub-agent
-  runs with isolated context. Without waitlist, `fallback_on_no_waitlist=True`
-  runs three sequential Path B sessions with structured-JSON handoff —
-  explicitly not multi-agent, but keeps the discovery loop usable today.
+- **Path A — sequential falsification chain.** Per the hackathon fairness
+  rule (2026-04-23, Anthropic: Agent Teams / `callable_agents` multi-agent
+  research-preview access is disabled for participants, only public-beta
+  features are evaluated), Path A runs three sequential Managed Agents
+  sessions (Proposer → Searcher → Skeptic) with structured-JSON handoff in
+  a shared environment. This is NOT the `callable_agents` multi-agent
+  primitive; it is a client-side orchestration of three public-beta Path
+  B sessions. The orchestrator-with-`callable_agents` shape is kept in the
+  code (`run_path_a` waitlist-gated branch) as an architectural reference
+  that becomes live the day the research-preview opens, but is not
+  exercised in the submitted run.
 - **Path C — Claude Code Routines (separate product).** `POST
   /v1/claude_code/routines/{trig_id}/fire` with per-routine bearer
   token (`src/theory_copilot/routines_client.py`). GitHub trigger

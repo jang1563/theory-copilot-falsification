@@ -1,0 +1,27 @@
+{
+  "session_id": "sesn_011CaM69QsrMyjh8NKht3ePd",
+  "agent_id": "agent_011CaM69NKK2hQoAiVsa61B1",
+  "prompt_len_chars": 319,
+  "stream_event_types": [
+    "session.status_running",
+    "user.message",
+    "span.model_request_start",
+    "agent.thinking",
+    "agent.message",
+    "span.model_request_end",
+    "session.status_idle"
+  ],
+  "list_event_types": [
+    "session.status_running",
+    "user.message",
+    "span.model_request_start",
+    "agent.thinking",
+    "agent.message",
+    "span.model_request_end",
+    "session.status_idle"
+  ],
+  "stream_thinking_chars": 0,
+  "list_thinking_chars": 0,
+  "verdict": "NO_THINKING_OBSERVED",
+  "narrative": "Adaptive thinking did not produce agent.thinking events on this prompt. Re-run with a longer / harder problem before concluding."
+}

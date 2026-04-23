@@ -159,6 +159,35 @@ change without a human hitting a button. Managed Agents lives on
 `platform.claude.com`, Routines lives on `code.claude.com`; bridging
 them is an architectural seam most implementations conflate.
 
+**What the event log actually preserves** (empirically verified
+2026-04-23 via `src/phk_events_list_thinking_probe.py`, see
+`results/overhang/phk_events_list_probe/SUMMARY.md`):
+
+- ✅ Every `agent.message` is retrievable via `events.list` with full
+  content (up to 3.7k output tokens observed), including any
+  step-by-step reasoning the model chooses to write out.
+- ✅ `agent.thinking` events fire with server-attested
+  `processed_at` timestamps, giving an auditable ordering: *thinking
+  happened at T, output at T+Δ*.
+- ❌ The intermediate thinking TOKENS themselves are NOT in the event
+  payload — `agent.thinking` serialises to `{id, processed_at, type}`
+  only. Adaptive-thinking content drops after the turn completes.
+
+So the durable log is a *conclusions-and-output substrate* with
+attested timing, not a *reasoning-trace substrate*. Our 1M-context
+synthesis (`src/opus_1m_synthesis.py`) operates on the former — it
+ingests rejection records and survivor equations, not prior thinking
+tokens — so the architecture stands. This scoping is stated here to
+avoid a narrow overclaim that other entries might accidentally make.
+
+**Hackathon fairness caveat (2026-04-23).** Anthropic restricts
+participants to public-beta Managed Agents features; Agent Teams
+(`callable_agents` multi-agent coordination, research preview) is not
+used in the submitted run. Path A in our code executes as a sequential
+public-beta chain; the `_run_path_a_callable_agents` branch is an
+architectural reference that activates the day the research-preview
+opens to this workspace.
+
 ### The reject cycle (four tasks × 11-gene panel)
 
 1. Opus 4.7 proposes 5-7 KIRC law families for each task (pathway-

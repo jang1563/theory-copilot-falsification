@@ -193,30 +193,25 @@ Expected delegation log (abbreviated):
 [session.status_idle]
 ```
 
-Path A (`callable_agents` Agent Teams delegation) is implemented with
-the real orchestrator + sub-agent shape per
-`platform.claude.com/docs/en/managed-agents/multi-agent`:
+Path A (sequential falsification chain) is what actually runs in the
+hackathon submission. Three public-beta Managed Agents sessions
+(Proposer / Searcher / Skeptic) in a shared environment with
+structured-JSON handoff between them:
 
 ```python
-orchestrator = client.beta.agents.create(
-    name="orchestrator",
-    model="claude-opus-4-7",
-    tools=[{"type": "agent_toolset_20260401"}],
-    callable_agents=[
-        {"type": "agent", "id": proposer.id, "version": proposer.version},
-        {"type": "agent", "id": searcher.id, "version": searcher.version},
-        {"type": "agent", "id": skeptic.id,  "version": skeptic.version},
-    ],
-)
+from theory_copilot.managed_agent_runner import run_path_a
+result = run_path_a(night=2, fallback_on_no_waitlist=True)
+# result["delegation_mode"] == "sequential_fallback"
 ```
 
-The waitlist gate is per-workspace allow-list (request at
-`claude.com/form/claude-managed-agents`); our
-`MANAGED_AGENTS_WAITLIST=approved` env var is a client-side feature flag
-only, not a platform toggle. Without allow-list access,
-`run_path_a(fallback_on_no_waitlist=True)` runs three sequential Path B
-sessions with structured JSON handoff — explicitly not multi-agent, but
-the discovery loop stays usable.
+The real Agent Teams shape (orchestrator + `callable_agents=[proposer,
+searcher, skeptic]` per `platform.claude.com/docs/en/managed-agents/multi-agent`)
+is implemented in `_run_path_a_callable_agents` and retained as an
+architectural reference — gated by `MANAGED_AGENTS_WAITLIST=approved`,
+never reached during the submission run because Anthropic's 2026-04-23
+hackathon fairness rule restricts participants to public-beta features
+only. That code path becomes live the day the research-preview opens to
+this workspace, no other change required.
 
 ## Managed Agents durability (brain/body decouple)
 
