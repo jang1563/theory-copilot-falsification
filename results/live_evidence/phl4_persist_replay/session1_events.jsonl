@@ -1,0 +1,6 @@
+{"id": "sevt_01FWvHt8Nq9KD4J8iF9jcj37", "processed_at": "2026-04-23 20:46:38.307000+00:00", "type": "session.status_running"}
+{"id": "sevt_01E2GPW7b9kCZoQhUzzBGsFH", "content": [{"text": "Count from 1 to 3 inclusive.", "type": "text"}], "type": "user.message", "processed_at": "2026-04-23 20:46:38.662000+00:00"}
+{"id": "sevt_016QbarXbFMfkZt7hCJ8FrVW", "processed_at": "2026-04-23 20:46:38.773000+00:00", "type": "span.model_request_start"}
+{"id": "sevt_01Nb5hmbh6A84266n53kSVCh", "content": [{"text": "1, 2, 3", "type": "text"}], "processed_at": "2026-04-23 20:46:40.183000+00:00", "type": "agent.message"}
+{"id": "sevt_015To9gSqvgWSnwBsCmSxeZd", "is_error": false, "model_request_start_id": "sevt_016QbarXbFMfkZt7hCJ8FrVW", "model_usage": {"cache_creation_input_tokens": 7198, "cache_read_input_tokens": 0, "input_tokens": 6, "output_tokens": 12, "speed": null}, "processed_at": "2026-04-23 20:46:40.301000+00:00", "type": "span.model_request_end"}
+{"id": "sevt_01796MWB29nHeyx3qff1bWR1", "processed_at": "2026-04-23 20:46:40.462000+00:00", "stop_reason": {"type": "end_turn"}, "type": "session.status_idle"}

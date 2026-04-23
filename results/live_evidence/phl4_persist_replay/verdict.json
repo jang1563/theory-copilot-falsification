@@ -1,0 +1,22 @@
+{
+  "hypothesis_id": "phl4_persist_replay_smoke",
+  "run_date_utc": "2026-04-23T20:46:59Z",
+  "agent_id": "agent_011CaMMgN7GssWgsuzXQRk97",
+  "session1_id": "sesn_011CaMMhgYZymDn1ij7k4tgS",
+  "session1_reply": "1, 2, 3",
+  "persisted_event_count": 6,
+  "persisted_jsonl_path": "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/results/live_evidence/phl4_persist_replay/session1_events.jsonl",
+  "session2_id": "sesn_011CaMMjQ6uU6TJFYpSiUDXH",
+  "session2_replay_events_replayed": 1,
+  "session2_replay_events_skipped_by_type": {
+    "session.status_running": 1,
+    "span.model_request_start": 1,
+    "agent.message": 1,
+    "span.model_request_end": 1,
+    "session.status_idle": 1
+  },
+  "session2_followup_prompt": "Look at the conversation so far. What exactly did I ask you in my previous message? Quote it verbatim.",
+  "session2_reply": "1, 2, 3\"Count from 1 to 3 inclusive.\"",
+  "verdict": "PASS",
+  "narrative": "Session 1 event log was persisted to JSONL via events.list. A second session (different id, same agent) received the user-origin events replayed from the JSONL. The follow-up prompt asked the agent to quote the prior user message. If the agent reproduces 'Count from 1 to 3 inclusive.', the event log carried the user-side state across sessions."
+}

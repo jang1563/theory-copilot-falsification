@@ -53,6 +53,7 @@ results/overhang/*_hpc.json
 
 # Managed Agents local state cache (workspace-scoped agent/env/store IDs)
 results/live_evidence/phl3_state.json
+results/live_evidence/phl4_persist_replay/phl4_state.json
 
 # OS
 *.DS_Store
