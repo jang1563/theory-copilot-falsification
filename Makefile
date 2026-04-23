@@ -1,4 +1,4 @@
-.PHONY: help install test demo demo-kirc demo-templates clean status audit paper
+.PHONY: help install test demo demo-kirc demo-templates clean status audit paper skeptic-review
 
 # ============================================================
 # Theory Copilot Falsification — Developer Commands
@@ -26,6 +26,7 @@ help:
 	@echo "  make demo-kirc     KIRC-flavoured demo (flagship_kirc_demo.csv)"
 	@echo "  make status        Print project status snapshot"
 	@echo "  make audit         Run compliance grep (no sensitive strings)"
+	@echo "  make skeptic-review  Parallel 3-model skeptic consensus (dry-run; LIVE=1 for real)"
 	@echo "  make clean         Remove build + cache + transient artifacts"
 	@echo ""
 	@echo "Environment:"
@@ -98,6 +99,28 @@ clean:
 	rm -rf build/ dist/ *.egg-info src/*.egg-info
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type d -name .pytest_cache -exec rm -rf {} +
+
+# --- Parallel sub-agent skeptic review (E12) ---
+# Spawns three Claude sub-agents (Opus 4.7, Sonnet 4.6, Haiku 4.5) in parallel
+# on the 9 metastasis_expanded survivors and emits a consensus JSON + SUMMARY.md.
+# Default is dry-run (no API calls). Pass `LIVE=1` for a real sweep; requires
+# ANTHROPIC_API_KEY to be set.
+skeptic-review:
+	@echo ">>> Parallel sub-agent skeptic review (3 models x 9 survivors)..."
+	@mkdir -p results/skeptic_consensus
+	@if [ "$(LIVE)" = "1" ]; then \
+		echo ">>> LIVE mode (requires ANTHROPIC_API_KEY)"; \
+		$(PYTHONPATH_SRC) $(PYTHON) src/parallel_skeptic.py \
+			--input results/track_a_task_landscape/metastasis_expanded/falsification_report.json \
+			--output-dir results/skeptic_consensus; \
+	else \
+		echo ">>> DRY-RUN mode (pass LIVE=1 for real calls)"; \
+		$(PYTHONPATH_SRC) $(PYTHON) src/parallel_skeptic.py \
+			--input results/track_a_task_landscape/metastasis_expanded/falsification_report.json \
+			--output-dir results/skeptic_consensus \
+			--dry-run; \
+	fi
+	@echo ">>> Wrote results/skeptic_consensus/SUMMARY.md + consensus.json"
 
 # --- Paper (docs/paper/paper.md → PDF via pandoc + xelatex) ---
 paper:

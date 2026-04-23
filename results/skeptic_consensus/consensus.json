@@ -1,0 +1,456 @@
+[
+  {
+    "candidate_index": 0,
+    "equation": "-0.08599428 * ((EPAS1 + -1.5503553) - TOP2A)",
+    "gate_delta_baseline": 0.06860997206869912,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6644328338116875,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.7255601117252035,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.664; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.664; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.664; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "PASS",
+      "majority_count": 3,
+      "n_votes": 3,
+      "unanimous": true,
+      "breakdown": {
+        "PASS": 3
+      }
+    }
+  },
+  {
+    "candidate_index": 1,
+    "equation": "log1p(log1p(exp(TOP2A - EPAS1)) * 0.21792223)",
+    "gate_delta_baseline": 0.06860997206869912,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6699004989833176,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.7255601117252035,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.670; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.670; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.670; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "PASS",
+      "majority_count": 3,
+      "n_votes": 3,
+      "unanimous": true,
+      "breakdown": {
+        "PASS": 3
+      }
+    }
+  },
+  {
+    "candidate_index": 2,
+    "equation": "log1p(log1p(0.24403314) * log1p(exp(TOP2A - EPAS1)))",
+    "gate_delta_baseline": 0.06860997206869912,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6607985531838154,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.7255601117252035,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.661; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.661; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.661; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "PASS",
+      "majority_count": 3,
+      "n_votes": 3,
+      "unanimous": true,
+      "breakdown": {
+        "PASS": 3
+      }
+    }
+  },
+  {
+    "candidate_index": 3,
+    "equation": "0.16861118 * log1p(exp(MKI67 - EPAS1))",
+    "gate_delta_baseline": 0.05066262554228329,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6434023206023786,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.7076127651987877,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "NEEDS_MORE_TESTS",
+        "reason": "[dry-run synthetic] delta_baseline=0.051, decoy_p=0.000, ci_lower=0.643; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "NEEDS_MORE_TESTS",
+        "reason": "[dry-run synthetic] delta_baseline=0.051, decoy_p=0.000, ci_lower=0.643; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.051, decoy_p=0.000, ci_lower=0.643; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "NEEDS_MORE_TESTS",
+      "majority_count": 2,
+      "n_votes": 3,
+      "unanimous": false,
+      "breakdown": {
+        "NEEDS_MORE_TESTS": 2,
+        "PASS": 1
+      }
+    }
+  },
+  {
+    "candidate_index": 4,
+    "equation": "log1p(log1p(exp(MKI67 - exp(((EPAS1 - PTGER3) + LRP2) - RPL13A)))) * 0.6274355",
+    "gate_delta_baseline": 0.06938253996553156,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6544857720895456,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.726332679622036,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "NEEDS_MORE_TESTS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.654; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.654; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.654; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "PASS",
+      "majority_count": 2,
+      "n_votes": 3,
+      "unanimous": false,
+      "breakdown": {
+        "NEEDS_MORE_TESTS": 1,
+        "PASS": 2
+      }
+    }
+  },
+  {
+    "candidate_index": 5,
+    "equation": "log1p(log1p(log1p(exp(MKI67 - exp((EPAS1 - (PTGER3 + RPL13A)) + LRP2)))))",
+    "gate_delta_baseline": 0.06938253996553156,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6702959901676394,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.726332679622036,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.670; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.670; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.670; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "PASS",
+      "majority_count": 3,
+      "n_votes": 3,
+      "unanimous": true,
+      "breakdown": {
+        "PASS": 3
+      }
+    }
+  },
+  {
+    "candidate_index": 6,
+    "equation": "log1p(log1p(exp(MKI67 - EPAS1)) * 0.2149816)",
+    "gate_delta_baseline": 0.05066262554228329,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6515059273131886,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.7076127651987877,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "NEEDS_MORE_TESTS",
+        "reason": "[dry-run synthetic] delta_baseline=0.051, decoy_p=0.000, ci_lower=0.652; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "NEEDS_MORE_TESTS",
+        "reason": "[dry-run synthetic] delta_baseline=0.051, decoy_p=0.000, ci_lower=0.652; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.051, decoy_p=0.000, ci_lower=0.652; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "NEEDS_MORE_TESTS",
+      "majority_count": 2,
+      "n_votes": 3,
+      "unanimous": false,
+      "breakdown": {
+        "NEEDS_MORE_TESTS": 2,
+        "PASS": 1
+      }
+    }
+  },
+  {
+    "candidate_index": 7,
+    "equation": "(0.09855198 * (TOP2A - EPAS1)) + 0.16059029",
+    "gate_delta_baseline": 0.06860997206869912,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6579767149658812,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.7255601117252035,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "NEEDS_MORE_TESTS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.658; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.658; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.658; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "PASS",
+      "majority_count": 2,
+      "n_votes": 3,
+      "unanimous": false,
+      "breakdown": {
+        "NEEDS_MORE_TESTS": 1,
+        "PASS": 2
+      }
+    }
+  },
+  {
+    "candidate_index": 8,
+    "equation": "log1p(log1p(exp(TOP2A - EPAS1)) * 0.21692236)",
+    "gate_delta_baseline": 0.06860997206869912,
+    "gate_perm_p": 0.0,
+    "gate_ci_lower": 0.6653067356612097,
+    "gate_decoy_p": 0.0,
+    "gate_law_auc": 0.7255601117252035,
+    "votes": [
+      {
+        "model": "claude-opus-4-7",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.665; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-sonnet-4-6",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.665; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      },
+      {
+        "model": "claude-haiku-4-5",
+        "verdict": "PASS",
+        "reason": "[dry-run synthetic] delta_baseline=0.069, decoy_p=0.000, ci_lower=0.665; marginal=True",
+        "additional_test": "",
+        "latency_s": 0.0,
+        "error": null,
+        "thinking_chars": 0,
+        "response_chars": 86
+      }
+    ],
+    "consensus": {
+      "majority_verdict": "PASS",
+      "majority_count": 3,
+      "n_votes": 3,
+      "unanimous": true,
+      "breakdown": {
+        "PASS": 3
+      }
+    }
+  }
+]
