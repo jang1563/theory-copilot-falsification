@@ -5,7 +5,7 @@
   "session1_id": "sesn_011CaMMhgYZymDn1ij7k4tgS",
   "session1_reply": "1, 2, 3",
   "persisted_event_count": 6,
-  "persisted_jsonl_path": "/Users/jak4013/Dropbox/Lab/Post-doc_cmlab/Proposal/2026_Cerebralvalley_built_with_4_7_hackathon/theory_copilot_discovery/results/live_evidence/phl4_persist_replay/session1_events.jsonl",
+  "persisted_jsonl_path": "results/live_evidence/phl4_persist_replay/session1_events.jsonl",
   "session2_id": "sesn_011CaMMjQ6uU6TJFYpSiUDXH",
   "session2_replay_events_replayed": 1,
   "session2_replay_events_skipped_by_type": {

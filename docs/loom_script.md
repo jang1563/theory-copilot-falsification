@@ -28,9 +28,13 @@ Screen: single 1920 × 1080 terminal + browser split, no fancy overlays.
 
 ### 0 : 25 – 0 : 45 — The reject cycle
 
-**Screen:** `results/flagship_run/falsification_report.json` with
-`jq` or just open; then `results/track_a_task_landscape/SUMMARY.md`
-scrolled to the 4-task matrix.
+**Screen:** `results/track_a_task_landscape/SUMMARY.md` scrolled to
+the 4-task matrix (gene-name equations, explicit rejection rationale)
+— followed by a brief `jq` peek at
+`results/flagship_run/falsification_report.json` (positional vars
+from the first pass — useful to show the raw output the gate rejected,
+but keep the spoken focus on the SUMMARY's gene-named rationale). **Do
+not linger on the raw JSON; the SUMMARY is the narrative anchor.**
 **Narration (≈ 52 words):**
 
 > "On real TCGA-KIRC, the gate rejects 100-plus candidates across
@@ -42,10 +46,14 @@ scrolled to the 4-task matrix.
 
 ### 0 : 45 – 1 : 10 — The accept cycle
 
-**Screen:** `results/track_a_task_landscape/metastasis_expanded/falsification_report.json`
-showing the passing candidates, then
-`results/track_a_task_landscape/plots/survivor_scatter_top2a_vs_epas1.png`
-opened full-screen.
+**Screen:** `results/overhang/sr_loop_run.json` (H1 v2 — survivors in
+gene-name form: `TOP2A − EPAS1` variants, `(EPAS1 + SLC22A8)` member
+visible), then full-screen
+`results/track_a_task_landscape/plots/survivor_scatter_top2a_vs_epas1.png`.
+**Avoid** `metastasis_expanded/falsification_report.json` —
+earlier-pass PySR with positional variables (`x4`, `x31`) that do not
+read aloud as TOP2A/EPAS1; the narrative anchor is the H1 v2 result
+which uses gene names natively.
 **Narration (≈ 62 words):**
 
 > "Then we expand the panel from 11 to 45 genes. Same gate. Same
@@ -81,6 +89,23 @@ overhang pathway evolution.)
 > that survive only one kind of test aren't laws. That's the gate.
 > That's the point."
 
+### ALTERNATIVE close — PhL-3/PhL-4 Memory + persist-replay (trade off: cuts 2s from 1:10-1:25 IMmotion beat to make room)
+
+If the rehearsal clock shows ~3s of slack, use this variant instead.
+It surfaces the two 2026-04-23-shipped durability primitives (Memory
+public beta integrated day-of; event-log persist+replay as working
+code) which are the strongest "Best Managed Agents" signal the repo
+carries.
+
+**Screen (1:20-1:30):** `results/live_evidence/phl3_memory_smoke/SUMMARY.md`
+scrolled past the "server-side verification" section (shows 2 memory
+entries appended across sessions), then cut to `make audit` → `OK`.
+**Narration (≈ 25 words):**
+
+> "And the Skeptic writes every rejection pattern to a memory store
+> that persists across sessions — public beta shipped the day of
+> this submission, integrated day-of. Six experiments once."
+
 ## Total
 
 - Narration: ~ 210 spoken words / 90 seconds at ~140 WPM
@@ -99,12 +124,32 @@ overhang pathway evolution.)
 
 ## Rehearsal checklist
 
-- [ ] `make audit` passes before rolling camera
-- [ ] `results/flagship_run/falsification_report.json` has `passes:
-      false` rows visible
-- [ ] `results/track_a_task_landscape/metastasis_expanded/falsification_report.json`
-      has ≥ 1 `passes: true` row visible
-- [ ] `survivor_scatter_top2a_vs_epas1.png` opens without overflow on
+Walked end-to-end 2026-04-23 (Fri-5). All 8 screen assets verified
+present on disk; all reshoot gotchas listed below.
+
+- [x] `make audit` passes before rolling camera (confirmed clean post
+      PhL-4 sanitize, 2026-04-23 21:xx ET).
+- [x] `results/RESULTS.md` first paragraph reads as hook-able (gene
+      names + pre-registered gate framing in opening).
+- [x] `results/track_a_task_landscape/SUMMARY.md` 4-task matrix uses
+      **gene names** (CA9, CUBN, MKI67, TOP2A, EPAS1). Use THIS as
+      the reject-cycle anchor, NOT the raw
+      `flagship_run/falsification_report.json` which still has
+      positional `x4/x31` variables from an earlier PySR pass.
+- [x] `results/overhang/sr_loop_run.json` H1-v2 survivors ARE in
+      gene-name form (`TOP2A − EPAS1` variants). Use THIS for the
+      accept-cycle anchor, NOT `metastasis_expanded/falsification_report.json`
+      (positional vars).
+- [x] `survivor_scatter_top2a_vs_epas1.png` is 1050×825 (displays
+      cleanly inside a 1920×1080 frame; some margin around it — fine).
+- [x] `immotion150_pfs/km_median_split.png` is 900×675 — same frame
+      sizing as the scatter; both look OK at ~90% Loom crop.
+- [x] `immotion150_slc22a8/verdict.json` `"verdict": "FAIL"` +
+      `"score_formula": "TOP2A - (EPAS1 + SLC22A8)"` are both visible
+      at the top of the file without scrolling.
+- [x] `results/live_evidence/phl3_memory_smoke/SUMMARY.md` scrolls
+      past "server-side verification" cleanly (for the alternative
+      close).
       1920 × 1080
 - [ ] Narration cleared for institutional references (only "TCGA-KIRC",
       "GSE40435", "PySR", "Opus 4.7", "Managed Agents", "ccA",

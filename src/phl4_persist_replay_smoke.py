@@ -206,7 +206,7 @@ def main() -> int:
         "session1_id": session1.id,
         "session1_reply": "".join(s1_reply).strip(),
         "persisted_event_count": persist_report["event_count"],
-        "persisted_jsonl_path": str(jsonl_path),
+        "persisted_jsonl_path": str(jsonl_path.relative_to(REPO_ROOT)),
         "session2_id": session2.id,
         "session2_replay_events_replayed": replay_report["events_replayed"],
         "session2_replay_events_skipped_by_type":
