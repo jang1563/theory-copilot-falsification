@@ -9,11 +9,12 @@ Screen: single 1920 × 1080 terminal + browser split, no fancy overlays.
 ### 0 : 00 – 0 : 10 — Hook
 
 **Screen:** `results/RESULTS.md` open at the top in editor.
-**Narration (≈ 28 words):**
+**Narration (≈ 30 words):**
 
-> "AI for science has a cheap scalable failure mode: the model that
-> proposes a hypothesis is also the judge of whether the hypothesis
-> survives. This project fixes that by pre-registering the gate."
+> "Karpathy's autoresearch — 700 experiments, no humans, training loss
+> as judge — but in biology the judge has to be the data. A loop that
+> cannot reject is not a loop. Here's what the biology version looks
+> like."
 
 ### 0 : 10 – 0 : 25 — The setup
 
@@ -67,11 +68,13 @@ showing the robustness table.
 ### 1 : 25 – 1 : 30 — The close
 
 **Screen:** single terminal with `make audit` → `OK`, then git log
-one line: `TOP2A - EPAS1`.
-**Narration (≈ 18 words):**
+one line: `TOP2A - EPAS1`. (Alternate option: Slide 3 — Opus
+overhang pathway evolution.)
+**Narration (≈ 22 words):**
 
-> "Twin outcome on one infrastructure. The artefact is the gate.
-> Accept and reject are both the point."
+> "Six experiments once, not one experiment six times — because laws
+> that survive only one kind of test aren't laws. That's the gate.
+> That's the point."
 
 ## Total
 

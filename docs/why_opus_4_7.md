@@ -50,30 +50,58 @@ different reviewer's trust.
 
 ## 1. The problem: confirmation bias is automated now
 
-Most AI-for-Science pipelines have the same shape. A model proposes a hypothesis,
-runs a fit, observes a number that looks good, and ships the number as a finding.
-Nothing in that loop is adversarial. The model that generated the hypothesis is
-also the judge of whether the hypothesis survives, and it is rewarded for
-agreement.
+> *A loop that cannot reject is not a loop — it is a pipeline.*
 
-The older version of this failure mode was a human researcher p-hacking one
-dataset. The newer version is faster: an LLM generates forty plausible
-hypotheses, runs them all, and surfaces whichever one cleared an arbitrary
-threshold on one split. The search space is wide enough that a high AUROC on a
-single cohort is nearly free. Confirmation bias used to be a time-limited
-failure of individual scientists; it is now a cheap, scalable pipeline output.
+Most AI-for-Science systems today are pipelines dressed as loops. A model
+proposes a hypothesis, runs a fit, observes a number that looks good, and
+ships the number as a finding. Nothing in that sequence is adversarial. The
+model that generates the hypothesis is also the judge of whether the
+hypothesis survives, and it is rewarded for agreement.
 
-The remedy biology keeps pointing back to is pre-registration: write down what
-would falsify the claim *before* seeing whether it passes. This project takes
-that seriously: every law family is paired with skeptic tests Opus 4.7 writes
-**before any fit is attempted**, and the law has to survive those tests as a
-condition for being called a survivor. The skeptic tests are executed by plain
-Python against real data — not by another LLM call that could also rationalize
-its way to agreement.
+The older version of this failure mode was a human researcher p-hacking
+one dataset. The newer version is faster — an LLM generates forty plausible
+hypotheses, runs them all, and surfaces whichever one clears an arbitrary
+threshold on one split. **This is p-hacking at computational speed.** The
+search space is wide enough that a high AUROC on a single cohort is nearly
+free, and confirmation bias moves from a time-limited failure of individual
+scientists to a cheap, scalable pipeline output. The empirical record
+already shows the cost: Sakana's AI Scientist v2 ([arXiv 2504.08066](https://arxiv.org/abs/2504.08066))
+had 42% of its proposed experiments fail on coding errors alone, and
+several of its "novel" ideas were rediscoveries of well-known techniques;
+the 2025 LLM-hacking survey ([arXiv 2509.08825](https://arxiv.org/abs/2509.08825))
+measures a 31% false-conclusion rate across 13M machine-generated labels
+used as downstream evidence.
 
-This rigor framing matches the one the NeurIPS 2025 AI4Science workshop *"[The Reach and Limits of AI for Scientific Discovery](https://ai4sciencecommunity.github.io/neurips25.html)"* puts at the centre of its call.
+The remedy biology keeps pointing back to is pre-registration: write down
+what would falsify the claim *before* seeing whether it passes. Theory
+Copilot takes that seriously. Every law family is paired with skeptic
+tests that Opus 4.7 writes **before any fit is attempted**; the law must
+survive those tests as a condition for being called a survivor; the tests
+are executed by plain Python against held-out data, not by another LLM
+call that could also rationalise its way to agreement. The system
+**selects for truth, not self-consistency** — every candidate must
+survive contact with pre-specified experimental reality before it is
+reported.
 
-The same discipline has now been named publicly by the Claude Code team as the desired product-development stance. At the 2026-04-22 *Built with Opus 4.7* live session (Tharik, Cloud Code team), the recommendation was:
+This is what distinguishes an agentic loop from an agentic pipeline. The
+three structural requirements ([Karpathy autoresearch, 2026-03](https://karpathy.ai/posts/2026-03-autoresearch):
+630-line harness, 700 autonomous experiments, 11% benchmark improvement)
+are: (1) **measurable output**, (2) **pre-specified judgment function**,
+(3) **machine-executable falsification — no human decides whether the
+result is good enough; the comparison is automatic and deterministic.**
+Theory Copilot's three analogues: (1) H1 LLM-SR loop convergence on
+held-out AUROC + Δ-baseline lift, (2) the 5-test gate thresholds
+committed in `src/theory_copilot/falsification.py` and the YAMLs in
+`preregistrations/` before any analysis ran, (3) `make audit` + `make
+test` re-runnable by any reviewer without a human call.
+
+Karpathy's autoresearch judgment function is training loss — continuous
+but ungrounded. Theory Copilot's judgment function is a pre-registered
+statistical gate on independent biology — binary and experimentally
+grounded. Same loop shape, different truth conditions. That is the move
+biology needs.
+
+This rigor framing matches the NeurIPS 2025 AI4Science workshop *"[The Reach and Limits of AI for Scientific Discovery](https://ai4sciencecommunity.github.io/neurips25.html)"* call and has been named publicly by the Claude Code team as the desired product-development stance. At the 2026-04-22 *Built with Opus 4.7* live session (Tharik, Cloud Code team), the recommendation was:
 
 > "Have conviction... trying to **disprove it** versus trying to test a bunch of different hypotheses."
 
@@ -113,7 +141,22 @@ Theory Copilot ports that epistemic posture from product development into scient
 
 ## 3. Why these specific roles need Opus 4.7
 
-Three reasons, each measurable rather than stylistic.
+The researcher's role has shifted from *implementer* (writing code to test
+hypotheses) to *orchestrator* (specifying judgment criteria and letting
+agents iterate). In that framing, the single most important design
+decision is not the architecture of the agent but the specification of
+the judgment function: **what counts as better?** Opus 4.7 is Theory
+Copilot's orchestrator — it proposes law families, writes the kill-tests
+that would falsify each, and interprets survivors — but it does not
+decide pass/fail. The deterministic gate decides. This is the direct
+counter to the class of failure mode where an LLM-as-judge, trained on
+data that shaped what "good science" looks like, silently optimises for
+paper-acceptance probability rather than empirical truth. Our gate is
+not LLM-judged. Opus proposes; the gate disposes. Opus cannot
+re-negotiate the criterion mid-run.
+
+Three places where the orchestrator role concretely needs Opus 4.7,
+each measurable rather than stylistic.
 
 **Extended thinking for ex-ante skeptic tests.** Writing a falsification test
 *before* seeing data forces enumeration of failure modes the proposal does not

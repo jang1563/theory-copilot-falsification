@@ -59,8 +59,16 @@ Key parameters (`src/pysr_sweep.py`):
 
 ## 3. The falsification gate
 
-Every candidate passes through five tests. Thresholds are pre-registered in
-`src/theory_copilot/falsification.py` and applied uniformly.
+> *A loop that cannot reject is not a loop — it is a pipeline.*
+
+The gate is the single load-bearing component that turns the agentic
+pipeline into an agentic loop. It is deterministic, external to the
+model, and pre-specified: three properties (adapted from Karpathy's
+autoresearch criteria and elaborated in `docs/why_opus_4_7.md §1`) that
+together make the difference between selecting for self-consistency and
+selecting for truth. Every candidate passes through five tests.
+Thresholds are pre-registered in `src/theory_copilot/falsification.py`
+and applied uniformly.
 
 | Test | Statistic | Threshold |
 |---|---|---|
