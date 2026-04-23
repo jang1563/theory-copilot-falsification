@@ -1,0 +1,64 @@
+name: Deploy Rejection Log to GitHub Pages
+
+# PhF-4: re-renders results/rejection_log.html on every main push and
+# deploys a small static site (rejection log + README-derived index) to
+# GitHub Pages. The page makes the gate's rejection rate visible — the
+# 194 of 204 candidates that failed are the central artefact.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/**/*.json'
+      - 'src/render_rejection_log.py'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Render rejection log
+        run: python src/render_rejection_log.py
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp results/rejection_log.html _site/index.html
+          # Copy KM plot + verdict JSON for the external replay.
+          mkdir -p _site/immotion150_pfs
+          cp -r results/track_a_task_landscape/external_replay/immotion150_pfs/* _site/immotion150_pfs/ || true
+          # Render a tiny README header if a logo/asset dir is needed later.
+          echo "Theory Copilot — live rejection log." > _site/ABOUT.txt
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

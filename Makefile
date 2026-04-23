@@ -1,4 +1,4 @@
-.PHONY: help install test demo demo-kirc demo-templates clean status audit paper skeptic-review prereg prereg-validate prereg-audit
+.PHONY: help install test demo demo-kirc demo-templates clean status audit paper skeptic-review prereg prereg-validate prereg-audit rejection-log
 
 # ============================================================
 # Theory Copilot Falsification — Developer Commands
@@ -147,6 +147,11 @@ prereg-validate:
 
 prereg-audit:
 	$(PYTHONPATH_SRC) $(PYTHON) src/preregistration.py audit --dir preregistrations
+
+# --- Rejection log (PhF-4): one static HTML page listing every candidate,
+# accept rows at the top, filters by cohort/task/panel/source.
+rejection-log:
+	$(PYTHONPATH_SRC) $(PYTHON) src/render_rejection_log.py
 
 # --- Paper (docs/paper/paper.md → PDF via pandoc + xelatex) ---
 paper:
