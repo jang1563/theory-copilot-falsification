@@ -1,0 +1,54 @@
+[
+  {
+    "equation": "log1p(exp(TOP2A + MKI67 - EPAS1 - VEGFA))",
+    "complexity": 10,
+    "law_family": "phi1_h2_prop1",
+    "source": "opus_4_7_h2_1m_synthesis",
+    "biological_rationale": "Opus H2 rank 1 proposal: double HIF anti-marker",
+    "target_features": [
+      "TOP2A",
+      "MKI67",
+      "EPAS1",
+      "VEGFA"
+    ],
+    "perm_p": 0.0,
+    "ci_width": 0.12315251819008766,
+    "ci_lower": 0.6425409548255848,
+    "law_auc": 0.7027693587686458,
+    "baseline_auc": 0.6569501396565044,
+    "delta_baseline": 0.045819219112141374,
+    "delta_confound": null,
+    "confound_auc": null,
+    "decoy_p": 0.0,
+    "decoy_q95": 0.5662417543234087,
+    "perm_p_fdr": 0.0,
+    "passes": false,
+    "fail_reason": "delta_baseline"
+  },
+  {
+    "equation": "sqrt(TOP2A * CCNB1) - sqrt(EPAS1 * NDUFA4L2)",
+    "complexity": 8,
+    "law_family": "phi1_h2_prop4",
+    "source": "opus_4_7_h2_1m_synthesis",
+    "biological_rationale": "Opus H2 rank 4 proposal: geometric-mean dual-axis",
+    "target_features": [
+      "TOP2A",
+      "CCNB1",
+      "EPAS1",
+      "NDUFA4L2"
+    ],
+    "perm_p": 0.0,
+    "ci_width": 0.11430292868248992,
+    "ci_lower": 0.6233458741423947,
+    "law_auc": 0.6807214595590421,
+    "baseline_auc": 0.6569501396565044,
+    "delta_baseline": 0.02377131990253767,
+    "delta_confound": null,
+    "confound_auc": null,
+    "decoy_p": 0.0,
+    "decoy_q95": 0.5662417543234087,
+    "perm_p_fdr": 0.0,
+    "passes": false,
+    "fail_reason": "delta_baseline"
+  }
+]
