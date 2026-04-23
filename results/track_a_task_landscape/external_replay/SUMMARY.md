@@ -1,4 +1,22 @@
-# E3 — Independent-cohort replay for TOP2A − EPAS1
+# E3 + PhF-3 — Independent-cohort replay for TOP2A − EPAS1
+
+**Updated 2026-04-23.** PhF-3 added a fourth cohort — **IMmotion150** — and
+found a **pre-registered PASS** on a different (survival) endpoint. See
+[`immotion150_pfs/SUMMARY.md`](immotion150_pfs/SUMMARY.md) for the detailed
+write-up.
+
+| Cohort | Task | Verdict |
+|---|---|---|
+| GSE53757 (Affymetrix, 144) | tumor-vs-normal sanity | not a metastasis replay; AUROC 0.723 |
+| GSE40435 expanded (Illumina, 202) | tumor-vs-normal sanity | not a metastasis replay; AUROC 0.643 |
+| CPTAC-3 ccRCC | metastasis_preferred | stub (PDC auth required) |
+| **IMmotion150 (cBioPortal, 263)** | **PFS in metastatic ccRCC** | **PASS (3/3 pre-reg tests)** — log-rank p=0.0003, HR 1.36, C-index 0.601 |
+
+The IMmotion150 result **is** a bona-fide external validation: independent
+cohort, independent preprocessing (trial-grade log-TPM, not star_tpm),
+independent endpoint (time-to-event PFS, not binary M-stage), and the kill
+tests were pre-registered before the analysis (see
+`preregistrations/20260423T044446Z_phf3_immotion150_pfs_replay.yaml`).
 
 Three ccRCC cohorts evaluated in priority order. The plan:
 first cohort with `TOP2A + EPAS1 + M-status` wins the metastasis

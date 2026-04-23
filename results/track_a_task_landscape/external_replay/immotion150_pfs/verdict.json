@@ -1,0 +1,40 @@
+{
+  "hypothesis_id": "phf3_immotion150_pfs_replay",
+  "cohort": "IMmotion150 (rcc_iatlas_immotion150_2018)",
+  "n": 263,
+  "events": 164,
+  "median_score": -3.7348999999999997,
+  "median_pfs_high_group": 5.35,
+  "median_pfs_low_group": 12.88,
+  "kill_tests": [
+    {
+      "name": "logrank_median_split",
+      "p": 0.0002716323918974248,
+      "chi2": 13.256527243362635,
+      "threshold": "p < 0.05",
+      "pass": true
+    },
+    {
+      "name": "cox_hazard_ratio",
+      "hr": 1.3612591583597868,
+      "hr_ci_95": [
+        1.1648590841356643,
+        1.5907730999010554
+      ],
+      "p": 0.00010464976892071845,
+      "threshold": "abs(log(HR)) > log(1.3) AND 95%CI excludes 1",
+      "pass": true
+    },
+    {
+      "name": "concordance_index",
+      "c_index_risk_direction": 0.6007803833059179,
+      "c_index_inverse_direction": 0.39921961669408207,
+      "c_index_best": 0.6007803833059179,
+      "threshold": "> 0.55",
+      "pass": true
+    }
+  ],
+  "verdict": "PASS",
+  "direction": "high score \u2192 worse PFS",
+  "prereg_file": "preregistrations/20260423T044446Z_phf3_immotion150_pfs_replay.yaml"
+}

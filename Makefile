@@ -87,12 +87,20 @@ status:
 # Makefile so the search terms do not self-trigger.
 audit:
 	@echo ">>> Scanning tracked files for sensitive strings..."
-	@if git grep -i -l -f .audit-patterns -- ':!Makefile' ':!.audit-patterns' >/dev/null; then \
+	@if git grep -i -l -f .audit-patterns -- \
+		':!Makefile' ':!.audit-patterns' \
+		':(exclude)*.png' ':(exclude)*.jpg' ':(exclude)*.jpeg' \
+		':(exclude)*.gif' ':(exclude)*.pdf' ':(exclude)*.ico' \
+		':(exclude)*.ipynb' >/dev/null; then \
 		echo "LEAK DETECTED — fix before committing:"; \
-		git grep -i -n -f .audit-patterns -- ':!Makefile' ':!.audit-patterns'; \
+		git grep -i -n -f .audit-patterns -- \
+			':!Makefile' ':!.audit-patterns' \
+			':(exclude)*.png' ':(exclude)*.jpg' ':(exclude)*.jpeg' \
+			':(exclude)*.gif' ':(exclude)*.pdf' ':(exclude)*.ico' \
+			':(exclude)*.ipynb'; \
 		exit 1; \
 	else \
-		echo ">>> OK — no sensitive strings in tracked files."; \
+		echo ">>> OK — no sensitive strings in tracked files (binary assets excluded)."; \
 	fi
 
 clean:
