@@ -187,6 +187,44 @@ discovery in LUAD just as it does in KIRC. Pipeline generalization is
 demonstrated; a harder LUAD task (stage or metastasis) is the next
 step.
 
+## 3.5 External cohort replay — IMmotion150 metastatic ccRCC (PhF-3)
+
+The `TOP2A − EPAS1` survivor law, discovered on TCGA-KIRC
+(M0-vs-M1, binary classification, AUROC 0.726) replicates on an
+independent Phase-2 trial cohort under a *different statistical
+framework* — survival analysis — with kill tests pre-registered before
+the analysis ran. Cohort: IMmotion150 (McDermott *et al.*, *Nat Med*
+2018, PMID 29867230; cBioPortal `rcc_iatlas_immotion150_2018`),
+n = 263 metastatic ccRCC patients receiving atezolizumab ± bevacizumab.
+Endpoint: progression-free survival (PFS).
+
+**Pre-registered kill tests** (committed at
+`preregistrations/20260423T044446Z_phf3_immotion150_pfs_replay.yaml`
+*before* the analysis ran, tamper-evidence via
+`make prereg-audit`):
+
+| # | Test | Threshold | Observed | Pass |
+|---|---|---|---|---|
+| 1 | Log-rank on median split (two-sided) | `p < 0.05` | **p = 0.00027** | Yes |
+| 2 | Cox HR per z-score | `abs(log HR) > log 1.3` + 95% CI excludes 1 | **HR = 1.36** (1.16–1.59), p = 1e-4 | Yes |
+| 3 | Harrell C-index | `> 0.55` | **0.601** | Yes |
+
+Direction of effect was NOT pre-specified (two-sided); observed:
+*high score → worse PFS*, matching the ccA/ccB biological prediction.
+Median PFS was **5.35 months** in the high-score half vs
+**12.88 months** in the low-score half — a 7.5-month separation on
+an immunotherapy-treated cohort, using the same two-gene equation that
+cleared a binary-classification gate on an entirely different cohort,
+preprocessing pipeline, and endpoint.
+
+This is the artefact's strongest rigor claim: a symbolic-regression-
+discovered 2-gene law, accepted by a pre-registered deterministic gate
+on TCGA-KIRC, replicates under a fully different statistical
+framework (survival analysis) with *separately* pre-registered kill
+tests, on an independent cohort (clinical-trial metadata, different
+tissue-banking pipeline), with clinically meaningful effect
+size (median-PFS difference > 7 months).
+
 # 4 — Discussion
 
 ## 4.1 Pre-registration bites in both directions
@@ -199,7 +237,32 @@ side. The Opus ex-ante laws and the unconstrained PySR compounds
 fail together when the task is single-gene-dominated, and succeed
 together when the task has multi-gene structure.
 
-## 4.2 Why Opus 4.7 is load-bearing
+## 4.2 How this pipeline differs from SPOT, Sakana v2, and POPPER
+
+Detailed section in `docs/paper/benchmark_vs_related.md`. Short form:
+SPOT (arXiv 2505.11855) measures post-hoc error detection on retracted
+papers — SOTA LLMs get recall ≤ 21%, precision ≤ 6%. Theory Copilot is
+*pre-registered* error prevention at generation time, so its analogous
+"recall" is 100% against the two explicit negative controls. Sakana v2
+(arXiv 2504.08066) autonomously writes papers; its peer-review-passing
+result was later debunked for hallucinations and faked numbers.
+Theory Copilot does not try to write papers autonomously — the
+**deterministic 5-test gate decides**, the Skeptic role only reviews
+the gate's numbers, and the cross-model ablation
+(`results/ablation/SUMMARY.md`) shows that verdict distributions
+differ across Opus/Sonnet/Haiku, so the Skeptic is not rubber-stamping.
+POPPER (arXiv 2502.09858) covers the validation-leg statistics with
+sequential e-values; Theory Copilot uses classical BH-FDR because the
+hypothesis families are small (≤ 30 candidates per gate run). The two
+could compose: POPPER over cross-cohort replay, our 5-test gate
+within-cohort. The regulatory context — FDA-EMA 2026-01 Common
+Principles + EU AI Act 2026-08-02 high-risk provisions — makes
+pre-registered kill tests + independent-cohort replay the minimal
+specification for an AI-for-medicine credibility plan. A git-tracked
+`preregistrations/` directory is one concrete implementation of that
+specification.
+
+## 4.3 Why Opus 4.7 is load-bearing
 
 In principle the pipeline could run with Sonnet 4.6 at every LLM
 step. It would fail three measurable ways: the ex-ante skeptic tests
@@ -213,7 +276,7 @@ Opus can do it"; it is "Opus 4.7 does it correctly enough that the
 rest of the pipeline can stay deterministic, which is what makes the
 final artefact auditable."
 
-## 4.3 Limitations
+## 4.4 Limitations
 
 (i) The compact survivor is biological *rediscovery* of a published
 subtype axis, not novel biology. The novelty is procedural — that
