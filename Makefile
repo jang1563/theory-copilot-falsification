@@ -1,4 +1,4 @@
-.PHONY: help install test demo demo-kirc demo-templates clean status audit paper skeptic-review prereg prereg-validate prereg-audit rejection-log
+.PHONY: help install test demo demo-kirc demo-templates clean status audit paper skeptic-review prereg prereg-validate prereg-audit rejection-log h1 h2
 
 # ============================================================
 # Theory Copilot Falsification — Developer Commands
@@ -129,6 +129,47 @@ skeptic-review:
 			--dry-run; \
 	fi
 	@echo ">>> Wrote results/skeptic_consensus/SUMMARY.md + consensus.json"
+
+# --- Lane H: Falsification-Guided SR Loop + 1M Context Synthesis ---
+# H1: run the falsification-guided SR loop (Opus-steered, up to 10 iters).
+#   make h1          — full run with Opus 4.7 steering (requires ANTHROPIC_API_KEY)
+#   make h1 NO_OPUS=1 — rule-based fallback, no API calls
+# H2: 1M-context synthesis over all rejections + survivors.
+#   make h2          — live Opus 4.7 call (requires ANTHROPIC_API_KEY)
+#   make h2 DRYRUN=1 — write prompt to disk, no API call
+H1_CSV ?= data/kirc_metastasis_expanded.csv
+H1_ITERS ?= 10
+H1_PYSR ?= 200
+
+h1:
+	@echo ">>> [H1] Falsification-Guided SR Loop ($(H1_ITERS) iterations)..."
+	@mkdir -p results/overhang
+	@if [ "$(NO_OPUS)" = "1" ]; then \
+		$(PYTHONPATH_SRC) $(PYTHON) src/falsification_sr_loop.py \
+			--csv $(H1_CSV) \
+			--max-iterations $(H1_ITERS) \
+			--pysr-iterations $(H1_PYSR) \
+			--no-opus \
+			--output results/overhang/sr_loop_run.json; \
+	else \
+		$(PYTHONPATH_SRC) $(PYTHON) src/falsification_sr_loop.py \
+			--csv $(H1_CSV) \
+			--max-iterations $(H1_ITERS) \
+			--pysr-iterations $(H1_PYSR) \
+			--output results/overhang/sr_loop_run.json; \
+	fi
+
+h2:
+	@echo ">>> [H2] 1M-context synthesis (Opus 4.7)..."
+	@mkdir -p results/overhang
+	@if [ "$(DRYRUN)" = "1" ]; then \
+		$(PYTHONPATH_SRC) $(PYTHON) src/opus_1m_synthesis.py \
+			--dry-run \
+			--output results/overhang/synthesis_1m.json; \
+	else \
+		$(PYTHONPATH_SRC) $(PYTHON) src/opus_1m_synthesis.py \
+			--output results/overhang/synthesis_1m.json; \
+	fi
 
 # --- Pre-registration YAML artifacts (PhF-1) ---
 # Emit one machine-readable pre-registration per law family BEFORE any search.
