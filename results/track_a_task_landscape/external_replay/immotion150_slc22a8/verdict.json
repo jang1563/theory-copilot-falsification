@@ -1,0 +1,54 @@
+{
+  "hypothesis_id": "phl1_immotion150_slc22a8_extension",
+  "prereg_file": "preregistrations/20260423T181322Z_phl1_immotion150_slc22a8_extension.yaml",
+  "cohort": "IMmotion150 (rcc_iatlas_immotion150_2018)",
+  "n": 263,
+  "events": 164,
+  "score_formula": "TOP2A - (EPAS1 + SLC22A8)",
+  "median_score": -4.5122,
+  "median_pfs_high_group": 5.55,
+  "median_pfs_low_group": 11.04,
+  "kill_tests": [
+    {
+      "name": "logrank_median_split",
+      "p": 0.11666809734396667,
+      "chi2": 2.4614895495619464,
+      "threshold": "p < 0.05",
+      "pass": false
+    },
+    {
+      "name": "cox_hazard_ratio",
+      "hr": 1.1621058067818746,
+      "hr_ci_95": [
+        0.9855004949789858,
+        1.3703594397331564
+      ],
+      "p": 0.07405058708937803,
+      "threshold": "abs(log(HR)) > log(1.3) AND 95%CI excludes 1",
+      "pass": false
+    },
+    {
+      "name": "concordance_index",
+      "c_index_risk_direction": 0.5661604376267166,
+      "c_index_inverse_direction": 0.43383956237328336,
+      "c_index_best": 0.5661604376267166,
+      "threshold": "> 0.55",
+      "pass": true
+    }
+  ],
+  "all_kill_tests_pass": false,
+  "verdict": "FAIL",
+  "direction": "high 3-gene score \u2192 worse PFS",
+  "comparison_vs_2gene": {
+    "criterion": "3-gene outperforms 2-gene iff C(3) > C(2)+0.01 AND HR(3) > HR(2)",
+    "c_index_3gene": 0.5661604376267166,
+    "c_index_2gene_same_samples": 0.6007803833059179,
+    "c_delta": -0.034619945679201236,
+    "c_outperforms": false,
+    "hr_3gene": 1.1621058067818746,
+    "hr_2gene_same_samples": 1.3612591583597868,
+    "hr_delta": -0.19915335157791225,
+    "hr_outperforms": false,
+    "outperforms_verdict": "UNDERPERFORMS"
+  }
+}
