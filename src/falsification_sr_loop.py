@@ -239,21 +239,24 @@ def run_pysr_on_skeleton(
         maxsize=12,
         binary_operators=["+", "-", "*", "/"],
         unary_operators=["log1p", "exp", "sqrt"],
-        variable_names=gene_cols,
         verbosity=0,
         progress=False,
         random_state=seed,
     )
 
-    fit_kwargs: dict[str, Any] = {}
+    # PySR 1.5.9+: variable_names MUST be passed at .fit() time, not at init.
+    # Passing at init triggers a FutureWarning and the names are silently
+    # dropped — the model then emits equations with positional vars (x0..xN),
+    # which downstream make_equation_fn cannot bind to gene_cols.
+    fit_kwargs: dict[str, Any] = {"variable_names": gene_cols}
     if effective_skeleton:
         try:
             model.fit(X, y.astype(float), guesses=[effective_skeleton],
-                      fraction_replaced_guesses=0.3)
+                      fraction_replaced_guesses=0.3, **fit_kwargs)
         except TypeError:
-            model.fit(X, y.astype(float))
+            model.fit(X, y.astype(float), **fit_kwargs)
     else:
-        model.fit(X, y.astype(float))
+        model.fit(X, y.astype(float), **fit_kwargs)
 
     try:
         eqs = model.get_hof()
