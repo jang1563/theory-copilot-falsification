@@ -144,6 +144,21 @@ the gate accepting and rejecting in complementary patterns on the
 same infrastructure, with Opus 4.7 in the Proposer, Skeptic, and
 Interpreter roles at the points where LLM judgement is load-bearing.
 
+The *durability* axis of the demo is carried by Managed Agents +
+Routines, which are **two separate products** that we compose here
+for the first time (to our knowledge): Managed Agents give us a
+session event log that persists server-side, surviving harness
+crashes — `persist_session_events` dumps it to JSONL and
+`replay_session_from_log` re-injects client-originated events into a
+fresh session, literally decoupling the "brain" (event log) from the
+"body" (session container). Claude Code Routines (beta header
+`experimental-cc-routine-2026-04-01`) give us a trigger surface —
+GitHub `pull_request` / `release` events, scheduled cron (min 1 h),
+or API `/fire` — so the falsification gate runs on every proposed
+change without a human hitting a button. Managed Agents lives on
+`platform.claude.com`, Routines lives on `code.claude.com`; bridging
+them is an architectural seam most implementations conflate.
+
 ### The reject cycle (four tasks × 11-gene panel)
 
 1. Opus 4.7 proposes 5-7 KIRC law families for each task (pathway-

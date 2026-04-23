@@ -47,6 +47,10 @@ docs/open_access_staging.md
 # Large raw public-workflow caches (not the demo data under data/examples/)
 data/public_workflow/
 
+# HPC run tracking (local-only, never committed)
+.h1_last_job_id
+results/overhang/*_hpc.json
+
 # OS
 *.DS_Store
 HANDOFF_to_*.md

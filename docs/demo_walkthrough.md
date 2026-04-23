@@ -193,9 +193,68 @@ Expected delegation log (abbreviated):
 [session.status_idle]
 ```
 
-Path A (`callable_agents` multi-agent delegation) is implemented and
-gated behind the `MANAGED_AGENTS_MULTIAGENT=1` environment variable;
-it activates once the research-preview waitlist is granted.
+Path A (`callable_agents` Agent Teams delegation) is implemented with
+the real orchestrator + sub-agent shape per
+`platform.claude.com/docs/en/managed-agents/multi-agent`:
+
+```python
+orchestrator = client.beta.agents.create(
+    name="orchestrator",
+    model="claude-opus-4-7",
+    tools=[{"type": "agent_toolset_20260401"}],
+    callable_agents=[
+        {"type": "agent", "id": proposer.id, "version": proposer.version},
+        {"type": "agent", "id": searcher.id, "version": searcher.version},
+        {"type": "agent", "id": skeptic.id,  "version": skeptic.version},
+    ],
+)
+```
+
+The waitlist gate is per-workspace allow-list (request at
+`claude.com/form/claude-managed-agents`); our
+`MANAGED_AGENTS_WAITLIST=approved` env var is a client-side feature flag
+only, not a platform toggle. Without allow-list access,
+`run_path_a(fallback_on_no_waitlist=True)` runs three sequential Path B
+sessions with structured JSON handoff — explicitly not multi-agent, but
+the discovery loop stays usable.
+
+## Managed Agents durability (brain/body decouple)
+
+Two short CLI calls demonstrate the portability of a session's state
+independent of the original harness:
+
+```bash
+# 1. Run a session, then dump the server-side event log.
+theory-copilot persist-events \
+    --session-id sess_01H... --output artifacts/session_log.jsonl
+
+# 2. Kill the original harness. Later, re-inject user-origin events
+#    into a fresh session id.
+theory-copilot replay-events \
+    --log artifacts/session_log.jsonl \
+    --target-session-id sess_01H_NEW
+```
+
+`persist_session_events` pages through `sessions.events.list`;
+`replay_session_from_log` only re-sends the client-originated event
+types (`user.message`, `user.interrupt`, `user.custom_tool_result`,
+`user.tool_confirmation`). Agent / tool / span events are log-only — the
+platform owns those.
+
+## Claude Code Routines (Path C)
+
+Separate product from Managed Agents (`code.claude.com`, beta header
+`experimental-cc-routine-2026-04-01`). Fire endpoint:
+
+```bash
+export CLAUDE_ROUTINE_TRIG_ID=trig_01H...
+export CLAUDE_ROUTINE_TOKEN=sk-ant-oat01-...
+theory-copilot loop --night 3 --use-routine
+```
+
+Without the env vars, the command falls back to a local watch-dir /
+cadence loop around Path B. GitHub trigger categories supported by
+Routines: `pull_request` + `release` (no `push`).
 
 ## Offline Demo (no API key)
 

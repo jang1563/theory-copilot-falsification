@@ -1,0 +1,532 @@
+{
+  "dataset": "data/kirc_metastasis_expanded.csv",
+  "total_iterations": 5,
+  "total_candidates": 39,
+  "total_survivors": 0,
+  "iterations": [
+    {
+      "iteration": 1,
+      "skeleton": "TOP2A - EPAS1",
+      "pathway": "Proliferation_vs_HIF",
+      "candidates": 8,
+      "survivors": 0,
+      "best_law_auc": 0.5,
+      "best_delta_baseline": -0.1569501396565044,
+      "dominant_fail_reason": "evaluation_error: name 'x43' is not defined",
+      "doom_loop_triggered": false,
+      "elapsed_sec": 26.2,
+      "gated_candidates": [
+        {
+          "equation": "0.15650591",
+          "passes": false,
+          "fail_reason": "perm_p,ci_lower,delta_baseline,decoy_p",
+          "law_auc": 0.5,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": -0.1569501396565044,
+          "perm_p": 1.0,
+          "ci_lower": 0.5,
+          "ci_width": 0.0,
+          "delta_confound": null,
+          "decoy_p": 1.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        },
+        {
+          "equation": "(x43 * 0.07633577) + 0.15643604",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        },
+        {
+          "equation": "log1p(log1p(exp(x10))) * 0.28707153",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x10' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        },
+        {
+          "equation": "0.15643056 - ((x17 - x43) * 0.079066575)",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x17' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        },
+        {
+          "equation": "0.15643506 - ((x17 * 0.07380269) - (x43 * 0.084319204))",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x17' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        },
+        {
+          "equation": "sqrt(log1p(exp((x43 - x17) * 1.8169687))) * 0.17513028",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        },
+        {
+          "equation": "0.15643476 - (((x17 - x43) * 0.086488135) - (x27 * 0.034682363))",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x17' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        },
+        {
+          "equation": "log1p(sqrt(exp((x43 - x17) * (x11 - -1.7900172)))) * 0.17506512",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "TOP2A - EPAS1",
+          "iteration": 1
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "skeleton": "log1p(CA9) - log1p(LRP2)",
+      "pathway": "HIF x Renal_tubule",
+      "candidates": 8,
+      "survivors": 0,
+      "best_law_auc": 0.5,
+      "best_delta_baseline": -0.1569501396565044,
+      "dominant_fail_reason": "evaluation_error: name 'x43' is not defined",
+      "doom_loop_triggered": false,
+      "elapsed_sec": 13.2,
+      "gated_candidates": [
+        {
+          "equation": "0.1563836",
+          "passes": false,
+          "fail_reason": "perm_p,ci_lower,delta_baseline,decoy_p",
+          "law_auc": 0.5,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": -0.1569501396565044,
+          "perm_p": 1.0,
+          "ci_lower": 0.5,
+          "ci_width": 0.0,
+          "delta_confound": null,
+          "decoy_p": 1.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        },
+        {
+          "equation": "exp(-2.147817 - x40)",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x40' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        },
+        {
+          "equation": "(x43 * 0.076327346) + 0.15643914",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        },
+        {
+          "equation": "log1p(log1p(exp(x10))) * 0.28704047",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x10' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        },
+        {
+          "equation": "((x43 + 1.9788858) - x17) * 0.07905466",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        },
+        {
+          "equation": "log1p(log1p(exp(x43 - x17))) * 0.2877878",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        },
+        {
+          "equation": "log1p(log1p(exp(x43 - (x17 - x4)))) * 0.2825262",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        },
+        {
+          "equation": "((x43 + ((x27 * 0.40112114) - x17)) * 0.08647845) + 0.15643652",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "log1p(CA9) - log1p(LRP2)",
+          "iteration": 2
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "skeleton": "VEGFA / PAX8",
+      "pathway": "HIF x Renal_tubule",
+      "candidates": 7,
+      "survivors": 0,
+      "best_law_auc": 0.5,
+      "best_delta_baseline": -0.1569501396565044,
+      "dominant_fail_reason": "evaluation_error: name 'x17' is not defined",
+      "doom_loop_triggered": false,
+      "elapsed_sec": 11.5,
+      "gated_candidates": [
+        {
+          "equation": "0.1564568",
+          "passes": false,
+          "fail_reason": "perm_p,ci_lower,delta_baseline,decoy_p",
+          "law_auc": 0.5,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": -0.1569501396565044,
+          "perm_p": 1.0,
+          "ci_lower": 0.5,
+          "ci_width": 0.0,
+          "delta_confound": null,
+          "decoy_p": 1.0,
+          "origin_skeleton": "VEGFA / PAX8",
+          "iteration": 3
+        },
+        {
+          "equation": "exp(-2.035709 - x40)",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x40' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / PAX8",
+          "iteration": 3
+        },
+        {
+          "equation": "(x43 * 0.0763281) + 0.15643796",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / PAX8",
+          "iteration": 3
+        },
+        {
+          "equation": "log1p(log1p(exp(x10))) * 0.28707153",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x10' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / PAX8",
+          "iteration": 3
+        },
+        {
+          "equation": "((x17 - x43) * -0.07907727) + 0.15645726",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x17' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / PAX8",
+          "iteration": 3
+        },
+        {
+          "equation": "((x17 - (x43 / 0.8751108)) * -0.07379859) + 0.15643519",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x17' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / PAX8",
+          "iteration": 3
+        },
+        {
+          "equation": "((x27 * 0.034683164) + ((x17 - x43) * -0.08648883)) + 0.15643424",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x27' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / PAX8",
+          "iteration": 3
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "skeleton": "CA9 - LRP2",
+      "pathway": "HIF x Renal_tubule",
+      "candidates": 8,
+      "survivors": 0,
+      "best_law_auc": 0.5,
+      "best_delta_baseline": -0.1569501396565044,
+      "dominant_fail_reason": "evaluation_error: name 'x43' is not defined",
+      "doom_loop_triggered": false,
+      "elapsed_sec": 13.4,
+      "gated_candidates": [
+        {
+          "equation": "0.1564568",
+          "passes": false,
+          "fail_reason": "perm_p,ci_lower,delta_baseline,decoy_p",
+          "law_auc": 0.5,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": -0.1569501396565044,
+          "perm_p": 1.0,
+          "ci_lower": 0.5,
+          "ci_width": 0.0,
+          "delta_confound": null,
+          "decoy_p": 1.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        },
+        {
+          "equation": "exp(-1.9536886 - x40)",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x40' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        },
+        {
+          "equation": "(x43 * 0.076334015) + 0.1564261",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        },
+        {
+          "equation": "log1p(log1p(exp(x10))) * 0.28707114",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x10' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        },
+        {
+          "equation": "((x43 - x17) * 0.079060495) + 0.15643497",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        },
+        {
+          "equation": "log1p(log1p(exp(x43 - x17))) * 0.28786543",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        },
+        {
+          "equation": "log1p(log1p(log1p(log1p(log1p(exp(x43 - exp(x17)))))))",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        },
+        {
+          "equation": "log1p(log1p(log1p(log1p(exp(x25 - exp(x17 + x12))))))",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x25' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "CA9 - LRP2",
+          "iteration": 4
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "skeleton": "VEGFA / LRP2",
+      "pathway": "HIF x Renal_tubule",
+      "candidates": 8,
+      "survivors": 0,
+      "best_law_auc": 0.5,
+      "best_delta_baseline": -0.1569501396565044,
+      "dominant_fail_reason": "evaluation_error: name 'x43' is not defined",
+      "doom_loop_triggered": false,
+      "elapsed_sec": 13.0,
+      "gated_candidates": [
+        {
+          "equation": "0.15638363",
+          "passes": false,
+          "fail_reason": "perm_p,ci_lower,delta_baseline,decoy_p",
+          "law_auc": 0.5,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": -0.1569501396565044,
+          "perm_p": 1.0,
+          "ci_lower": 0.5,
+          "ci_width": 0.0,
+          "delta_confound": null,
+          "decoy_p": 1.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        },
+        {
+          "equation": "(x43 * 0.07633303) + 0.15643698",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        },
+        {
+          "equation": "log1p(log1p(exp(x10))) * 0.2870218",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x10' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        },
+        {
+          "equation": "((x17 - x10) * -0.072425775) + 0.15643698",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x17' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        },
+        {
+          "equation": "log1p(log1p(exp(x43 - x17))) * 0.28777242",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        },
+        {
+          "equation": "log1p(log1p(log1p(log1p(log1p(exp(x43 - exp(x17)))))))",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        },
+        {
+          "equation": "log1p(log1p(log1p(log1p(exp(x25 - exp(x12 + x17))))))",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x25' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        },
+        {
+          "equation": "log1p(log1p(log1p(log1p(log1p(exp(x43 - exp(x12 + x17)))))))",
+          "passes": false,
+          "fail_reason": "evaluation_error: name 'x43' is not defined",
+          "law_auc": 0.5,
+          "delta_baseline": 0.0,
+          "perm_p": 1.0,
+          "ci_lower": 0.0,
+          "origin_skeleton": "VEGFA / LRP2",
+          "iteration": 5
+        }
+      ]
+    }
+  ],
+  "survivors": [],
+  "pathway_usage": {
+    "Proliferation_vs_HIF": 1,
+    "HIF x Renal_tubule": 4
+  }
+}

@@ -257,12 +257,27 @@ def _cmd_replay(args: argparse.Namespace) -> int:
 
 def _cmd_loop(args: argparse.Namespace) -> int:
     """
-    Path C Routine driver — wraps run_path_b on a schedule or file-watch trigger.
-
-    See docs/managed_agents_verification.md for the Routine pattern framing and
-    plans/video_implications_for_plans_and_code.md for the Boris/Tharik context.
+    Path C Routine driver — wraps run_path_b locally, OR fires a real Claude
+    Code Routine via `/v1/claude_code/routines/{trig_id}/fire` when
+    --use-routine is set (requires CLAUDE_ROUTINE_TRIG_ID + CLAUDE_ROUTINE_TOKEN
+    env vars). Falls back to the local loop if either env var is missing.
     """
-    from .managed_agent_runner import run_path_c_routine
+    import os
+
+    from .managed_agent_runner import _NIGHT_TASKS, run_path_c_routine
+
+    invoke_fn = None
+    if getattr(args, "use_routine", False):
+        if os.environ.get("CLAUDE_ROUTINE_TRIG_ID") and os.environ.get("CLAUDE_ROUTINE_TOKEN"):
+            from .routines_client import make_routine_invoke_fn
+
+            invoke_fn = make_routine_invoke_fn(_NIGHT_TASKS)
+            print("[loop] Using real Routines /fire invocation.")
+        else:
+            print(
+                "[loop] --use-routine requested but CLAUDE_ROUTINE_TRIG_ID / "
+                "CLAUDE_ROUTINE_TOKEN not set; falling back to local Path B loop."
+            )
 
     result = run_path_c_routine(
         night=args.night,
@@ -270,6 +285,7 @@ def _cmd_loop(args: argparse.Namespace) -> int:
         max_iterations=args.max_iterations,
         watch_dir=args.watch_dir,
         log_path=args.log_path,
+        invoke_fn=invoke_fn,
     )
     print(
         json.dumps(
@@ -278,11 +294,36 @@ def _cmd_loop(args: argparse.Namespace) -> int:
                 "status": result.get("status", "unknown"),
                 "log_path": result.get("log_path"),
                 "last_session_id": result.get("session_id", ""),
+                "routine_session_url": result.get("routine_session_url", ""),
             },
             indent=2,
         )
     )
     return 0 if result.get("status") in {"completed", "skipped_no_change"} else 1
+
+
+def _cmd_persist_events(args: argparse.Namespace) -> int:
+    """Paginate `sessions.events.list` and dump every event to JSONL."""
+    from .managed_agent_runner import persist_session_events
+
+    result = persist_session_events(
+        session_id=args.session_id,
+        out_path=args.output,
+    )
+    print(json.dumps(result, indent=2))
+    return 0
+
+
+def _cmd_replay_events(args: argparse.Namespace) -> int:
+    """Replay user-origin events from a persisted log into a different session."""
+    from .managed_agent_runner import replay_session_from_log
+
+    result = replay_session_from_log(
+        log_path=args.log,
+        target_session_id=args.target_session_id,
+    )
+    print(json.dumps(result, indent=2))
+    return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -362,7 +403,38 @@ def build_parser() -> argparse.ArgumentParser:
         "--log-path", default="results/routine/verdicts.jsonl",
         help="Append-mode JSONL log of per-iteration verdicts.",
     )
+    p_loop.add_argument(
+        "--use-routine", action="store_true",
+        help=(
+            "Fire a real Claude Code Routine (`POST /v1/claude_code/routines/"
+            "{trig_id}/fire`) each iteration. Requires CLAUDE_ROUTINE_TRIG_ID + "
+            "CLAUDE_ROUTINE_TOKEN env vars. Falls back to local Path B loop if "
+            "either is missing."
+        ),
+    )
     p_loop.set_defaults(func=_cmd_loop)
+
+    p_persist = sub.add_parser(
+        "persist-events",
+        help="Dump every event in a Managed Agents session to JSONL (durable log).",
+    )
+    p_persist.add_argument("--session-id", required=True, help="Managed Agents session id.")
+    p_persist.add_argument("--output", required=True, help="Output JSONL file path.")
+    p_persist.set_defaults(func=_cmd_persist_events)
+
+    p_replay_ev = sub.add_parser(
+        "replay-events",
+        help=(
+            "Replay user-origin events from a persisted log into a different "
+            "session (brain/body-decouple demo)."
+        ),
+    )
+    p_replay_ev.add_argument("--log", required=True, help="JSONL log from `persist-events`.")
+    p_replay_ev.add_argument(
+        "--target-session-id", required=True,
+        help="Destination Managed Agents session id.",
+    )
+    p_replay_ev.set_defaults(func=_cmd_replay_events)
 
     return parser
 

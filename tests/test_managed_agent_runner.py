@@ -1,3 +1,4 @@
+import json
 import os
 from unittest.mock import MagicMock, patch
 
@@ -23,7 +24,6 @@ def _make_mock_client():
 
     idle_event = MagicMock()
     idle_event.type = "session.status_idle"
-    # __enter__ returns a list so `for event in stream` iterates over [idle_event]
     mock_client.beta.sessions.events.stream.return_value.__enter__.return_value = [idle_event]
 
     return mock_client
@@ -101,8 +101,6 @@ def test_run_path_b_stream_opened_before_send():
     call_order: list[str] = []
     mock_client = _make_mock_client()
 
-    # Capture the pre-configured context manager before overriding side_effect,
-    # so the tracking wrapper returns it directly (no recursive mock call).
     stream_ctx = mock_client.beta.sessions.events.stream.return_value
 
     def tracking_stream(*args, **kwargs):
@@ -125,8 +123,25 @@ def test_run_path_b_stream_opened_before_send():
     assert call_order.index("stream") < call_order.index("send")
 
 
+def test_run_path_b_pin_version_passes_versioned_agent_ref():
+    """With pin_version=True, sessions.create agent= is {type,id,version}."""
+    mock_client = _make_mock_client()
+    mock_client.beta.agents.create.return_value.version = 3
+
+    with patch("theory_copilot.managed_agent_runner.anthropic") as mock_anthropic:
+        mock_anthropic.Anthropic.return_value = mock_client
+        from theory_copilot import managed_agent_runner
+        result = managed_agent_runner.run_path_b(night=2, pin_version=True)
+
+    assert result["agent_version"] == 3
+    create_kwargs = mock_client.beta.sessions.create.call_args.kwargs
+    assert isinstance(create_kwargs.get("agent"), dict)
+    assert create_kwargs["agent"]["type"] == "agent"
+    assert create_kwargs["agent"]["version"] == 3
+
+
 # ---------------------------------------------------------------------------
-# run_path_a
+# run_path_a — real callable_agents + sequential fallback
 # ---------------------------------------------------------------------------
 
 def test_run_path_a_raises_not_implemented_without_waitlist_env(monkeypatch):
@@ -145,27 +160,23 @@ def test_run_path_a_raises_when_waitlist_not_approved(monkeypatch):
             managed_agent_runner.run_path_a(night=2)
 
 
-def test_run_path_a_returns_without_error_when_approved(monkeypatch):
+def test_run_path_a_approved_uses_real_callable_agents(monkeypatch):
+    """Waitlist-approved path creates 4 agents (proposer, searcher, skeptic,
+    orchestrator) and passes `callable_agents=` to the orchestrator."""
     monkeypatch.setenv("MANAGED_AGENTS_WAITLIST", "approved")
 
     mock_client = _make_mock_client()
-    # run_path_a creates 3 agents and 3 sessions; return distinct mocks to keep it clean
-    agent_ids = ["agent-proposer", "agent-searcher", "agent-falsifier"]
-    session_ids = ["session-p", "session-s", "session-f"]
-
     agent_mocks = []
-    for aid in agent_ids:
+    for i in range(4):
         m = MagicMock()
-        m.id = aid
+        m.id = f"agent-{i}"
+        m.version = 1
         agent_mocks.append(m)
     mock_client.beta.agents.create.side_effect = agent_mocks
 
-    session_mocks = []
-    for sid in session_ids:
-        m = MagicMock()
-        m.id = sid
-        session_mocks.append(m)
-    mock_client.beta.sessions.create.side_effect = session_mocks
+    session_mock = MagicMock()
+    session_mock.id = "orchestrator-session"
+    mock_client.beta.sessions.create.return_value = session_mock
 
     idle_event = MagicMock()
     idle_event.type = "session.status_idle"
@@ -176,28 +187,32 @@ def test_run_path_a_returns_without_error_when_approved(monkeypatch):
         from theory_copilot import managed_agent_runner
         result = managed_agent_runner.run_path_a(night=2)
 
-    assert isinstance(result, dict)
-    assert "session_id" in result
-    assert "agent_id" in result
-    assert result["status"] in ("completed", "error")
+    assert mock_client.beta.agents.create.call_count == 4, (
+        "Expected 4 agents (proposer, searcher, skeptic, orchestrator)"
+    )
+
+    # Orchestrator is the LAST agent created; it must have callable_agents set.
+    orch_kwargs = mock_client.beta.agents.create.call_args_list[-1].kwargs
+    assert "callable_agents" in orch_kwargs
+    assert len(orch_kwargs["callable_agents"]) == 3
+
+    models_used = [
+        c.kwargs.get("model") for c in mock_client.beta.agents.create.call_args_list
+    ]
+    assert models_used.count("claude-opus-4-7") == 3  # proposer + skeptic + orchestrator
+    assert "claude-sonnet-4-6" in models_used  # searcher
+
+    assert result["delegation_mode"] == "callable_agents"
 
 
-def test_run_path_a_approved_creates_three_agents(monkeypatch):
-    monkeypatch.setenv("MANAGED_AGENTS_WAITLIST", "approved")
+def test_run_path_a_fallback_creates_three_agents_and_three_sessions(monkeypatch):
+    """fallback_on_no_waitlist=True without approval: sequential chain of 3."""
+    monkeypatch.delenv("MANAGED_AGENTS_WAITLIST", raising=False)
 
     mock_client = _make_mock_client()
-    agent_mocks = []
-    for i in range(3):
-        m = MagicMock()
-        m.id = f"agent-{i}"
-        agent_mocks.append(m)
+    agent_mocks = [MagicMock(id=f"agent-{i}", version=1) for i in range(3)]
     mock_client.beta.agents.create.side_effect = agent_mocks
-
-    session_mocks = []
-    for i in range(3):
-        m = MagicMock()
-        m.id = f"session-{i}"
-        session_mocks.append(m)
+    session_mocks = [MagicMock(id=f"session-{i}") for i in range(3)]
     mock_client.beta.sessions.create.side_effect = session_mocks
 
     idle_event = MagicMock()
@@ -207,14 +222,13 @@ def test_run_path_a_approved_creates_three_agents(monkeypatch):
     with patch("theory_copilot.managed_agent_runner.anthropic") as mock_anthropic:
         mock_anthropic.Anthropic.return_value = mock_client
         from theory_copilot import managed_agent_runner
-        managed_agent_runner.run_path_a(night=2)
+        result = managed_agent_runner.run_path_a(
+            night=2, fallback_on_no_waitlist=True
+        )
 
     assert mock_client.beta.agents.create.call_count == 3
-    models_used = [
-        c.kwargs.get("model") for c in mock_client.beta.agents.create.call_args_list
-    ]
-    assert "claude-opus-4-7" in models_used
-    assert "claude-sonnet-4-6" in models_used
+    assert mock_client.beta.sessions.create.call_count == 3
+    assert result["delegation_mode"] == "sequential_fallback"
 
 
 # ---------------------------------------------------------------------------
@@ -246,7 +260,7 @@ def test_run_path_c_routine_runs_once_when_interval_zero(tmp_path):
     assert calls == [3]
     assert result["iteration_count"] == 1
     assert log.exists()
-    entries = [__import__("json").loads(line) for line in log.read_text().splitlines()]
+    entries = [json.loads(line) for line in log.read_text().splitlines()]
     assert entries[0]["night"] == 3
     assert entries[0]["status"] == "completed"
 
@@ -259,17 +273,13 @@ def test_run_path_c_routine_respects_max_iterations(tmp_path):
         calls.append(night)
         return {"session_id": f"s-{len(calls)}", "status": "completed", "output": ""}
 
-    def fake_sleep(seconds):
-        # no-op — we only care about iteration count
-        return None
-
     result = managed_agent_runner.run_path_c_routine(
         night=2,
         interval_seconds=1,
         max_iterations=3,
         log_path=str(tmp_path / "v.jsonl"),
         invoke_fn=fake_invoke,
-        sleeper=fake_sleep,
+        sleeper=lambda _s: None,
     )
     assert result["iteration_count"] == 3
     assert len(calls) == 3
@@ -296,11 +306,9 @@ def test_run_path_c_routine_watch_dir_skips_when_unchanged(tmp_path):
         invoke_fn=fake_invoke,
         sleeper=lambda _s: None,
     )
-    # Baseline iteration runs; subsequent iterations see unchanged fingerprint
     assert len(calls) == 1
     assert result["iteration_count"] == 3
-    # Verify at least one skip entry in the log
-    entries = [__import__("json").loads(line) for line in (tmp_path / "v.jsonl").read_text().splitlines()]
+    entries = [json.loads(line) for line in (tmp_path / "v.jsonl").read_text().splitlines()]
     skipped = [e for e in entries if e["status"] == "skipped_no_change"]
     assert len(skipped) == 2
 
@@ -314,7 +322,6 @@ def test_run_path_c_routine_watch_dir_triggers_on_change(tmp_path):
 
     def fake_invoke(night):
         calls.append(night)
-        # mutate watched dir on every invocation → next iter sees a change
         (watch / f"new_{len(calls)}.csv").write_text(f"row{len(calls)}")
         return {"session_id": "s", "status": "completed", "output": ""}
 
@@ -327,7 +334,6 @@ def test_run_path_c_routine_watch_dir_triggers_on_change(tmp_path):
         invoke_fn=fake_invoke,
         sleeper=lambda _s: None,
     )
-    # Every iteration triggers because fingerprint changes each time
     assert len(calls) == 3
 
 
@@ -344,9 +350,66 @@ def test_run_path_c_routine_log_path_is_jsonl_appendable(tmp_path):
         log_path=str(log),
         invoke_fn=fake_invoke,
     )
-    # Parent directories created; file is JSONL
     assert log.exists()
     line = log.read_text().strip()
-    parsed = __import__("json").loads(line)
+    parsed = json.loads(line)
     assert parsed["night"] == 4
     assert parsed["output_chars"] == 42
+
+
+# ---------------------------------------------------------------------------
+# persist_session_events / replay_session_from_log
+# ---------------------------------------------------------------------------
+
+def test_persist_session_events_dumps_jsonl(tmp_path):
+    from theory_copilot import managed_agent_runner
+
+    events = [
+        {"type": "user.message", "id": "ev1", "content": [{"type": "text", "text": "hi"}]},
+        {"type": "agent.thinking", "id": "ev2", "content": [{"type": "text", "text": "t"}]},
+        {"type": "agent.message", "id": "ev3", "content": [{"type": "text", "text": "ok"}]},
+        {"type": "session.status_idle", "id": "ev4"},
+    ]
+
+    mock_client = MagicMock()
+    mock_client.beta.sessions.events.list.return_value = events  # iterable, no pagination
+
+    out = tmp_path / "session.jsonl"
+    result = managed_agent_runner.persist_session_events(
+        "session-xyz", str(out), client=mock_client
+    )
+
+    assert result["event_count"] == 4
+    assert result["first_event_type"] == "user.message"
+    assert result["last_event_type"] == "session.status_idle"
+    lines = out.read_text().strip().splitlines()
+    assert len(lines) == 4
+    assert json.loads(lines[0])["type"] == "user.message"
+
+
+def test_replay_session_from_log_sends_only_user_events(tmp_path):
+    from theory_copilot import managed_agent_runner
+
+    log = tmp_path / "events.jsonl"
+    log.write_text(
+        "\n".join([
+            json.dumps({"type": "user.message", "content": [{"type": "text", "text": "q1"}]}),
+            json.dumps({"type": "agent.message", "content": [{"type": "text", "text": "a1"}]}),
+            json.dumps({"type": "user.interrupt"}),
+            json.dumps({"type": "agent.tool_use", "content": []}),
+            json.dumps({"type": "session.status_idle"}),
+        ])
+    )
+
+    mock_client = MagicMock()
+
+    result = managed_agent_runner.replay_session_from_log(
+        str(log), "new-session-id", client=mock_client
+    )
+
+    assert result["events_replayed"] == 2  # user.message + user.interrupt
+    assert mock_client.beta.sessions.events.send.call_count == 2
+    # skipped counts include agent.message, agent.tool_use, session.status_idle
+    skipped = result["events_skipped_by_type"]
+    assert skipped.get("agent.message", 0) == 1
+    assert skipped.get("session.status_idle", 0) == 1

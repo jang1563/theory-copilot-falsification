@@ -99,32 +99,90 @@ Failure on any single test kills the candidate; `fail_reason` reports every
 failing test (comma-separated) so the downstream Skeptic LLM review can see
 whether a law failed on one margin or many.
 
-## 4. Three-agent Managed Agents architecture
+## 4. Managed Agents + Routines architecture
 
-**Why agents and not skills within one harness.** Tharik (Cloud Code team) at the 2026-04-22 live session recommended skills over sub-agents as the default extension point on Opus 4.7, on the grounds that sub-agents over-constrain. That guidance is right for most coding-assistant workflows. It does not apply here: the whole falsification claim depends on the Skeptic not sharing context with the Proposer. A single-harness-with-skills setup would let the Proposer's rationale tokens drift into the Skeptic's review — the exact "looks good to me" failure the gate is supposed to prevent. The extended-thinking budget is also non-portable across skill invocations. Three separate Managed Agents preserve both the isolation and the adaptive-thinking state; the architecture choice is load-bearing to the artifact, not ornamental.
+**Product boundary (important).** Two distinct Anthropic products ship
+here under different beta headers and different host domains. Conflating
+them invites reviewer confusion:
+
+- **Managed Agents** (`platform.claude.com`, beta header
+  `managed-agents-2026-04-01`, public beta 2026-04-08). Primitives:
+  `client.beta.agents`, `environments`, `sessions`, `sessions.events`,
+  `vaults`, `skills`. Paths A and B live here.
+- **Claude Code Routines** (`code.claude.com`, beta header
+  `experimental-cc-routine-2026-04-01`, research preview 2026-04-14). No
+  Python SDK; the fire endpoint is `POST /v1/claude_code/routines/{trig_id}/fire`
+  with a per-routine bearer token generated once in the web UI. Path C
+  lives here.
+
+**Why agents and not skills within one harness.** Tharik (Cloud Code team)
+at the 2026-04-22 live session recommended skills over sub-agents as the
+default extension point on Opus 4.7, on the grounds that sub-agents
+over-constrain. That guidance is right for most coding-assistant
+workflows. It does not apply here: the whole falsification claim depends
+on the Skeptic not sharing context with the Proposer. A single-harness-
+with-skills setup would let the Proposer's rationale tokens drift into
+the Skeptic's review — the exact "looks good to me" failure the gate is
+supposed to prevent. Three separate Managed Agents preserve both the
+isolation and the adaptive-thinking state; the architecture choice is
+load-bearing to the artifact, not ornamental.
 
 Role separation in `src/theory_copilot/managed_agent_runner.py`:
 
 - **Proposer** — `claude-opus-4-7` with adaptive thinking. Emits 3–5 law
   families + ex-ante skeptic test per family. Required to include at least
   one negative control.
-- **Searcher** — local PySR. No API calls.
-- **Falsifier** — `claude-opus-4-7`. Receives candidate equations + gate
-  outputs; emits per-candidate review.
+- **Searcher** — `claude-sonnet-4-6` running PySR via bash. No judgement.
+- **Skeptic** — `claude-opus-4-7`. Receives candidate equations + gate
+  outputs as structured JSON only; emits per-candidate verdict + dissent flag.
+- **Orchestrator** — `claude-opus-4-7` with `callable_agents=[Proposer,
+  Searcher, Skeptic]`. Coordinates delegation; forbidden by prompt from
+  forwarding sub-agent rationale, only structured JSON.
 
-Two delegation paths:
+Three delegation paths:
 
-- **Path A (`callable_agents`, waitlist).** Three sequential sessions in a
-  shared environment; each session receives the previous agent's final output
-  as part of its user message, so the Searcher sees Proposer output and the
-  Falsifier sees Searcher output. Implemented; guarded by
-  `MANAGED_AGENTS_WAITLIST=approved`.
-- **Path B (single-agent tool loop, public beta).** One Managed Agent with
-  `agent_toolset_20260401`. Runs per Night task. This is the path the live
-  demo uses today.
+- **Path A — Agent Teams multi-agent (research preview).** Orchestrator
+  agent declares `callable_agents=[proposer, searcher, skeptic]` at
+  `agents.create` time. The platform inserts a delegation tool into the
+  orchestrator's toolset, each sub-agent runs with its own context, and
+  sub-agent activity surfaces on the primary session stream as
+  `session.thread_created` / `agent.thread_message_sent` events. Requires
+  per-workspace allow-list via the Managed Agents waitlist form — this is
+  **not** a header or env var, it is application-level access approval.
+  Our `MANAGED_AGENTS_WAITLIST=approved` env var is a client-side feature
+  flag only. Without waitlist access the `run_path_a(fallback_on_no_waitlist=
+  True)` code path runs a sequential Path B × 3 chain with JSON handoff —
+  explicitly NOT multi-agent.
+- **Path B — single agent + `agent_toolset_20260401` (public beta).** One
+  Managed Agent with the full built-in tool bundle (bash, read, write,
+  edit, glob, grep, web_fetch, web_search). Used for every Night task in
+  the live demo. Optional `pin_version=True` flag binds the session to a
+  specific immutable version of the agent
+  (`sessions.create(agent={"type":"agent","id":..,"version":N})`).
+- **Path C — Claude Code Routine driver.** Scheduled / API / GitHub-event
+  triggered cloud execution, plus a local watch-dir fallback for the case
+  where no routine bearer token is configured. GitHub triggers support
+  `pull_request` (opened / closed / labeled / synchronized) and `release`
+  (created / published / edited / deleted) event categories only — there
+  is no `push` trigger. The swap point is one line:
+  `invoke_fn=make_routine_invoke_fn(_NIGHT_TASKS)` replaces the local
+  `run_path_b` loop with a real `/fire` HTTP call
+  (`src/theory_copilot/routines_client.py`).
 
-Both paths expose the same `{session_id, agent_id, output, status}` return
-shape; switching is a one-line change.
+All paths expose the same `{session_id, agent_id, output, status}` return
+shape; switching is a one-line change. Path A additionally returns
+`delegation_mode: "callable_agents" | "sequential_fallback"`; Path C via
+native Routines adds `routine_session_url` for reviewer inspection.
+
+**Durability: session event log persistence + replay.** The Managed Agents
+session event log is append-only on the server and survives the original
+harness. `persist_session_events(session_id, out_path)` pages through
+`events.list` and dumps every event to JSONL; `replay_session_from_log`
+reads that log and re-injects the client-originated events
+(`user.message`, `user.interrupt`, `user.custom_tool_result`,
+`user.tool_confirmation`) into a different session. This is the
+brain/body decoupling the Anthropic engineering post foregrounds — plain
+Messages API has no equivalent queryable durable log.
 
 ## 5. Replay step
 

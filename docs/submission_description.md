@@ -58,11 +58,23 @@ Live transcripts of all four roles at `results/live_evidence/`.
   `results/live_evidence/04_managed_agents_e2e.log`
   (`agents.create` → `environments.create` → `sessions.create` →
   `stream` → `send` → `session.status_idle`).
-- **Path A — `callable_agents`, waitlist-gated.** Three sequential
-  sessions in a shared environment, each receiving the previous
-  agent's output as part of its user message. Guarded by
-  `MANAGED_AGENTS_WAITLIST=approved`; flips on when the multiagent
-  research-preview is granted.
+- **Path A — Agent Teams multi-agent, research preview.** Orchestrator
+  agent declares `callable_agents=[Proposer, Searcher, Skeptic]` at
+  `agents.create`; platform inserts a delegation tool and each sub-agent
+  runs with isolated context. Without waitlist, `fallback_on_no_waitlist=True`
+  runs three sequential Path B sessions with structured-JSON handoff —
+  explicitly not multi-agent, but keeps the discovery loop usable today.
+- **Path C — Claude Code Routines (separate product).** `POST
+  /v1/claude_code/routines/{trig_id}/fire` with per-routine bearer
+  token (`src/theory_copilot/routines_client.py`). GitHub trigger
+  categories: `pull_request` + `release`. Local watch-dir / cadence
+  loop runs when no token is configured, so the replication watchdog
+  ships regardless of whether the Routines research preview is
+  available to the reviewer's account.
+- **Durability:** `persist_session_events` pages `sessions.events.list`
+  into JSONL; `replay_session_from_log` re-injects user-origin events
+  into a different session. Brain/body decoupling as a working
+  primitive, not prose.
 
 ## External Validation of the Problem Framing
 

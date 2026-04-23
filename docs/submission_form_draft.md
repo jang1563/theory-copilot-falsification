@@ -88,12 +88,26 @@ PASS / FAIL / NEEDS_MORE_TESTS output. Two delegation paths:
   `results/live_evidence/04_managed_agents_e2e.log` (`agents.create`
   → `environments.create` → `sessions.create` → `stream` → `send`
   → `session.status_idle`).
-- **Path A — `callable_agents`, waitlist-gated.** Three sequential
-  sessions in a shared environment; each receives the prior agent's
-  output. Guarded by `MANAGED_AGENTS_WAITLIST=approved`.
+- **Path A — Agent Teams, research preview (waitlist per-workspace).**
+  Orchestrator agent with `callable_agents=[Proposer, Searcher, Skeptic]`;
+  the platform inserts a delegation tool into the orchestrator's toolset
+  and sub-agent threads run with context isolation, surfacing on the
+  primary session stream as `session.thread_created` / `agent.thread_message_sent`.
+  Sequential fallback path (3 × Path B with JSON handoff) ships today;
+  `MANAGED_AGENTS_WAITLIST=approved` unlocks real `callable_agents`.
+- **Path C — Claude Code Routines (separate product; research preview).**
+  `POST /v1/claude_code/routines/{trig_id}/fire` with per-routine bearer
+  token (`src/theory_copilot/routines_client.py`). `--use-routine` flag
+  swaps the local watch-dir loop for real cloud-triggered execution.
+  GitHub triggers: `pull_request` + `release` (no `push`).
 
-Both paths expose `{session_id, agent_id, output, status}`.
-Switching is a one-line change.
+**Durability primitives:** `persist_session_events` pages through
+`sessions.events.list` to JSONL; `replay_session_from_log` re-injects
+user-origin events into a different session — concrete brain/body
+decoupling, not just prose.
+
+All paths expose `{session_id, agent_id, output, status}`. Path A adds
+`delegation_mode`; Path C adds `routine_session_url`.
 
 ---
 
@@ -104,10 +118,16 @@ the Skeptic turn: that role has to hold the proposal in context
 and argue against it without the tokens that generated the proposal
 collapsing the dissent. Smaller models collapse; Opus 4.7 holds.
 
-**Best Claude Managed Agents ($5K).** Three-agent architecture with
-biological domain specialisation per agent; both Path A and Path B
-implemented against the verified 2026-04-01 API; Path B live-
-verified end-to-end; Path A one flag-flip away.
+**Best Claude Managed Agents ($5K).** Three delegation paths against
+the 2026-04-01 spec: Path B (single-agent `agent_toolset_20260401`,
+live), Path A (`callable_agents` Agent Teams with sequential fallback
+when waitlist unavailable), Path C (Claude Code Routines `/fire` HTTP
+client with local watch-dir fallback). Brain/body decoupling shipped
+as working primitives — `persist_session_events` dumps the durable
+event log, `replay_session_from_log` re-injects user-origin events
+into a different session. Two products composed (Managed Agents +
+Routines), domain-specialist framing, PR-triggered falsification
+gate demoable in <60 s.
 
 ---
 
