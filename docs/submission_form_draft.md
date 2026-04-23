@@ -29,27 +29,28 @@ Theory Copilot: Falsification-Aware Biological Law Discovery
 ## One-line pitch (140 char)
 
 ```
-Opus 4.7 proposes compact biology laws. A pre-registered gate rejects textbook HIF biology and accepts an unseeded ccRCC subtype axis.
+Pre-registered falsification: Opus 4.7 discovers TOP2A-EPAS1 on TCGA-KIRC, replicates on IMmotion150 trial PFS (HR 1.36, p=3e-4).
 ```
-(138 chars.)
+(131 chars.)
 
 ---
 
-## Project summary (150 words, 148 counted)
+## Project summary (150 words, 149 counted)
 
 Theory Copilot is a falsification-first biological law discovery loop
-powered by Opus 4.7. Opus 4.7 plays three roles — Scientist, Skeptic,
-Interpreter — around a plain-Python five-test statistical gate that
-cannot be rationalised by the model itself. On real TCGA-KIRC the gate
-rejects 100+ candidates across four ccRCC tasks on an 11-gene HIF-axis
-panel — each task is already solved by one gene. Then on a 45-gene
-expanded panel the same gate accepts nine candidates on the metastasis
-task, the simplest being `TOP2A − EPAS1`: when a tumour's proliferation
-program runs ahead of its HIF-2α program, metastasis is more likely.
-That is the published ccA-vs-ccB ccRCC subtype axis, rediscovered by
-unconstrained symbolic regression and accepted by a gate whose
-thresholds were written down before the search. The artefact is the
-gate; accept and reject are both the point.
+powered by Opus 4.7 + Managed Agents (GA'd 2026-04-08). Opus plays
+Proposer, Skeptic, Interpreter around a deterministic 5-test Python gate.
+Of 204 candidates evaluated across 11 task-panel combinations, the gate
+rejected 194 (95.1%) and accepted 10 — including two explicit negative
+controls killed as predicted. The simplest surviving law is `TOP2A −
+EPAS1`, the published ccA-vs-ccB ccRCC subtype axis, rediscovered on
+TCGA-KIRC and then replicated on an independent Phase-2 trial cohort
+(IMmotion150, atezolizumab+bevacizumab, n=263) where it clears three
+pre-registered survival-analysis kill tests: log-rank p=0.0003, Cox HR
+1.36, C-index 0.601. Every pre-registration is a git-tracked YAML
+emitted before the search runs. The 194 rejected candidates are
+published as a live GitHub Pages rejection log — the reject rate is
+the product.
 
 ---
 

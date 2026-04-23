@@ -215,3 +215,138 @@ def test_run_path_a_approved_creates_three_agents(monkeypatch):
     ]
     assert "claude-opus-4-7" in models_used
     assert "claude-sonnet-4-6" in models_used
+
+
+# ---------------------------------------------------------------------------
+# run_path_c_routine
+# ---------------------------------------------------------------------------
+
+def test_run_path_c_routine_rejects_invalid_night():
+    from theory_copilot import managed_agent_runner
+    with pytest.raises(ValueError):
+        managed_agent_runner.run_path_c_routine(night=1)
+
+
+def test_run_path_c_routine_runs_once_when_interval_zero(tmp_path):
+    from theory_copilot import managed_agent_runner
+    calls = []
+
+    def fake_invoke(night):
+        calls.append(night)
+        return {"session_id": "s-1", "agent_id": "a-1", "output": "ok", "status": "completed"}
+
+    log = tmp_path / "verdicts.jsonl"
+    result = managed_agent_runner.run_path_c_routine(
+        night=3,
+        interval_seconds=0,
+        max_iterations=0,
+        log_path=str(log),
+        invoke_fn=fake_invoke,
+    )
+    assert calls == [3]
+    assert result["iteration_count"] == 1
+    assert log.exists()
+    entries = [__import__("json").loads(line) for line in log.read_text().splitlines()]
+    assert entries[0]["night"] == 3
+    assert entries[0]["status"] == "completed"
+
+
+def test_run_path_c_routine_respects_max_iterations(tmp_path):
+    from theory_copilot import managed_agent_runner
+    calls = []
+
+    def fake_invoke(night):
+        calls.append(night)
+        return {"session_id": f"s-{len(calls)}", "status": "completed", "output": ""}
+
+    def fake_sleep(seconds):
+        # no-op — we only care about iteration count
+        return None
+
+    result = managed_agent_runner.run_path_c_routine(
+        night=2,
+        interval_seconds=1,
+        max_iterations=3,
+        log_path=str(tmp_path / "v.jsonl"),
+        invoke_fn=fake_invoke,
+        sleeper=fake_sleep,
+    )
+    assert result["iteration_count"] == 3
+    assert len(calls) == 3
+
+
+def test_run_path_c_routine_watch_dir_skips_when_unchanged(tmp_path):
+    from theory_copilot import managed_agent_runner
+    calls = []
+
+    def fake_invoke(night):
+        calls.append(night)
+        return {"session_id": "s", "status": "completed", "output": ""}
+
+    watch = tmp_path / "watch"
+    watch.mkdir()
+    (watch / "data.csv").write_text("sample_id,label\ns1,1\n")
+
+    result = managed_agent_runner.run_path_c_routine(
+        night=2,
+        interval_seconds=1,
+        max_iterations=3,
+        watch_dir=str(watch),
+        log_path=str(tmp_path / "v.jsonl"),
+        invoke_fn=fake_invoke,
+        sleeper=lambda _s: None,
+    )
+    # Baseline iteration runs; subsequent iterations see unchanged fingerprint
+    assert len(calls) == 1
+    assert result["iteration_count"] == 3
+    # Verify at least one skip entry in the log
+    entries = [__import__("json").loads(line) for line in (tmp_path / "v.jsonl").read_text().splitlines()]
+    skipped = [e for e in entries if e["status"] == "skipped_no_change"]
+    assert len(skipped) == 2
+
+
+def test_run_path_c_routine_watch_dir_triggers_on_change(tmp_path):
+    from theory_copilot import managed_agent_runner
+    calls = []
+    watch = tmp_path / "watch"
+    watch.mkdir()
+    (watch / "data.csv").write_text("sample_id,label\ns1,1\n")
+
+    def fake_invoke(night):
+        calls.append(night)
+        # mutate watched dir on every invocation → next iter sees a change
+        (watch / f"new_{len(calls)}.csv").write_text(f"row{len(calls)}")
+        return {"session_id": "s", "status": "completed", "output": ""}
+
+    result = managed_agent_runner.run_path_c_routine(
+        night=2,
+        interval_seconds=1,
+        max_iterations=3,
+        watch_dir=str(watch),
+        log_path=str(tmp_path / "v.jsonl"),
+        invoke_fn=fake_invoke,
+        sleeper=lambda _s: None,
+    )
+    # Every iteration triggers because fingerprint changes each time
+    assert len(calls) == 3
+
+
+def test_run_path_c_routine_log_path_is_jsonl_appendable(tmp_path):
+    from theory_copilot import managed_agent_runner
+    log = tmp_path / "a" / "b" / "verdicts.jsonl"
+
+    def fake_invoke(night):
+        return {"session_id": "s", "status": "completed", "output": "x" * 42}
+
+    managed_agent_runner.run_path_c_routine(
+        night=4,
+        interval_seconds=0,
+        log_path=str(log),
+        invoke_fn=fake_invoke,
+    )
+    # Parent directories created; file is JSONL
+    assert log.exists()
+    line = log.read_text().strip()
+    parsed = __import__("json").loads(line)
+    assert parsed["night"] == 4
+    assert parsed["output_chars"] == 42

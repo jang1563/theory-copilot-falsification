@@ -168,6 +168,43 @@ law earned that survival by genuinely adding 0.11 over any single gene.
 
 ---
 
+## Running as a Routine (Path C)
+
+Boris Cherny in the 2026-04-21 *Built with Opus 4.7* kickoff flagged server-side
+Routines — Claude sessions that wake on a schedule and outlive the laptop — as
+the feature space "no one has cracked yet." Path C is Theory Copilot's answer:
+a replication-watchdog driver that re-runs the Managed Agent on a cadence or
+when a watched directory changes.
+
+```bash
+# Fire once (equivalent to Path B, but with a JSONL verdict log)
+theory-copilot loop --night 3 --interval-seconds 0 --max-iterations 1
+
+# Poll every 30 minutes, 10 times, logging to a dated JSONL
+theory-copilot loop --night 3 --interval-seconds 1800 --max-iterations 10
+
+# Watch an input directory — only invoke when a new cohort CSV lands
+theory-copilot loop \
+    --night 3 \
+    --watch-dir inputs/new_cohorts \
+    --interval-seconds 600 \
+    --max-iterations 0       # unbounded, exit with SIGINT
+```
+
+Each iteration appends a verdict to `results/routine/verdicts.jsonl`
+(`iteration`, `timestamp`, `night`, `watch_fingerprint`, `session_id`,
+`status`, `output_chars`). The implementation in
+`src/theory_copilot/managed_agent_runner.py::run_path_c_routine` exposes an
+`invoke_fn` hook so a native Routines API can be swapped in once the public
+interface stabilizes — today's loop driver is intentionally local so the repo
+ships without a dependency on an unreleased API.
+
+For the best long-running experience, use **Claude Code's Auto permission
+mode** (shift+tab ×3 from the CLI) so the loop does not stall on permission
+prompts. Max-plan or API-credit users only; Pro plan does not support it.
+
+---
+
 ## Demo Data
 
 `data/examples/flagship_kirc_demo.csv` and `transfer_kirc_demo.csv` are

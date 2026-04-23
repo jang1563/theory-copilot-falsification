@@ -18,9 +18,9 @@ string will fail the audit and block `git push`.
 ## Repo map
 
 - `src/theory_copilot/` — library: `falsification.py` (5-test gate),
-  `opus_client.py` (Opus 4.7 streaming wrapper), `cli.py` (`compare` + `replay`),
-  `managed_agent_runner.py` (Path B public beta + Path A waitlist), `data_loader.py`
-  (DatasetCard abstraction — E4).
+  `opus_client.py` (Opus 4.7 streaming wrapper), `cli.py` (`compare` + `replay`
+  + `loop`), `managed_agent_runner.py` (Path B public beta + Path A waitlist
+  + Path C Routine driver), `data_loader.py` (DatasetCard abstraction — E4).
 - `src/` (top-level) — runnable scripts: `pysr_sweep.py`, `falsification_sweep.py`,
   `make_plots.py`, `plot_track_a.py`, `track_a_survivor_*.py`,
   `track_a_model_ablation.py` (E2), `mcp_biology_validator.py` (E8).
@@ -119,3 +119,9 @@ One-liner notes on non-obvious learnings (compounding-engineering loop).
 - 2026-04-22 · Falsification gate must broadcast scalar law scores:
   `if arr.ndim == 0: arr = np.full(X.shape[0], float(arr))` — symbolic
   regression can emit constants for degenerate candidates.
+- 2026-04-22 · Path C Routine driver (`run_path_c_routine`) is the shippable
+  answer to Boris Cherny's "no one has cracked server-side Routines yet"
+  (4/21 kickoff). Keep it local: inject `invoke_fn` + `sleeper` for testability
+  and leave the native Routines API swap-in as a single function pointer.
+  Watch-dir uses `(name, size, mtime)` fingerprint — deterministic and no
+  external watcher daemon.

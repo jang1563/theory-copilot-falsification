@@ -1,4 +1,9 @@
+import hashlib
+import json
 import os
+import time
+from pathlib import Path
+from typing import Callable
 
 import anthropic
 
@@ -274,4 +279,129 @@ def run_path_a(
         "agent_id": falsifier.id,
         "output": _json.dumps(role_outputs),
         "status": status,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Path C — Routine (long-running scheduled driver)
+#
+# Boris Cherny (2026-04-21 Built with Opus 4.7 kickoff) flagged server-side
+# Routines as the area "no one has cracked yet." Path C is Theory Copilot's
+# concrete answer: a replication-watchdog that wakes on an interval (or when
+# a watched directory changes), runs the Path B Managed Agent for whichever
+# night is relevant, and writes a dated verdict log. The loop is deliberately
+# local so the repo ships today without requiring a not-yet-public Routines
+# API, but the `invoke_fn` injection point lets a native Routine swap in
+# once the API is stable.
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def _dir_fingerprint(path: Path) -> str:
+    """Hash of (filename, size, mtime) tuples under path. Cheap, non-recursive."""
+    if not path.exists():
+        return "missing"
+    entries = sorted(
+        (f.name, f.stat().st_size, int(f.stat().st_mtime))
+        for f in path.iterdir()
+        if f.is_file()
+    )
+    return hashlib.sha256(json.dumps(entries).encode()).hexdigest()[:16]
+
+
+def run_path_c_routine(
+    night: int,
+    *,
+    interval_seconds: int = 1800,
+    max_iterations: int = 0,
+    watch_dir: str | None = None,
+    log_path: str = "results/routine/verdicts.jsonl",
+    invoke_fn: Callable[[int], dict] | None = None,
+    sleeper: Callable[[float], None] = time.sleep,
+) -> dict:
+    """
+    Path C: scheduled Routine wrapper around Path B.
+
+    Parameters
+    ----------
+    night : int (2, 3, or 4)
+        Which night task to drive each iteration.
+    interval_seconds : int
+        Seconds between iterations. Default 30 min. Set to 0 for fire-and-return.
+    max_iterations : int
+        Hard stop after this many invocations (0 = unbounded, exit via SIGINT).
+    watch_dir : str | None
+        If set, only invoke when this directory's file fingerprint changes
+        between iterations. The first iteration always runs (baseline).
+    log_path : str
+        Append-mode JSONL file of per-iteration verdicts.
+    invoke_fn : callable(night) -> dict
+        Override the invocation (testing / swap-in for native Routines API).
+        Defaults to `run_path_b`.
+    sleeper : callable(float) -> None
+        Override sleep (testing).
+
+    Returns
+    -------
+    dict with last iteration's result plus `iteration_count` and `status`.
+    """
+    if night not in (2, 3, 4):
+        raise ValueError(f"night must be 2, 3, or 4; got {night}")
+
+    invoke = invoke_fn or (lambda n: run_path_b(n))
+    watch_path = Path(watch_dir) if watch_dir else None
+    log = Path(log_path)
+    log.parent.mkdir(parents=True, exist_ok=True)
+
+    last_fingerprint: str | None = None
+    last_result: dict = {"status": "not_started"}
+    iteration = 0
+
+    try:
+        while True:
+            iteration += 1
+            current_fp = _dir_fingerprint(watch_path) if watch_path else None
+
+            should_run = (
+                watch_path is None  # unconditional cadence
+                or last_fingerprint is None  # first pass always runs
+                or current_fp != last_fingerprint  # change-triggered
+            )
+
+            if should_run:
+                last_result = invoke(night)
+                entry = {
+                    "iteration": iteration,
+                    "timestamp": int(time.time()),
+                    "night": night,
+                    "watch_fingerprint": current_fp,
+                    "session_id": last_result.get("session_id", ""),
+                    "status": last_result.get("status", "unknown"),
+                    "output_chars": len(last_result.get("output", "") or ""),
+                }
+                with log.open("a") as fh:
+                    fh.write(json.dumps(entry) + "\n")
+                last_fingerprint = current_fp
+            else:
+                entry = {
+                    "iteration": iteration,
+                    "timestamp": int(time.time()),
+                    "night": night,
+                    "watch_fingerprint": current_fp,
+                    "status": "skipped_no_change",
+                }
+                with log.open("a") as fh:
+                    fh.write(json.dumps(entry) + "\n")
+
+            if max_iterations and iteration >= max_iterations:
+                break
+            if interval_seconds <= 0:
+                break
+            sleeper(interval_seconds)
+    except KeyboardInterrupt:
+        last_result["status"] = last_result.get("status", "interrupted")
+
+    return {
+        **last_result,
+        "iteration_count": iteration,
+        "log_path": str(log),
     }

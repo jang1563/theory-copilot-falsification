@@ -255,6 +255,36 @@ def _cmd_replay(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_loop(args: argparse.Namespace) -> int:
+    """
+    Path C Routine driver — wraps run_path_b on a schedule or file-watch trigger.
+
+    See docs/managed_agents_verification.md for the Routine pattern framing and
+    plans/video_implications_for_plans_and_code.md for the Boris/Tharik context.
+    """
+    from .managed_agent_runner import run_path_c_routine
+
+    result = run_path_c_routine(
+        night=args.night,
+        interval_seconds=args.interval_seconds,
+        max_iterations=args.max_iterations,
+        watch_dir=args.watch_dir,
+        log_path=args.log_path,
+    )
+    print(
+        json.dumps(
+            {
+                "iteration_count": result.get("iteration_count", 0),
+                "status": result.get("status", "unknown"),
+                "log_path": result.get("log_path"),
+                "last_session_id": result.get("session_id", ""),
+            },
+            indent=2,
+        )
+    )
+    return 0 if result.get("status") in {"completed", "skipped_no_change"} else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="theory-copilot",
@@ -307,6 +337,32 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_replay.add_argument("--output-root", required=True, help="Root for artifacts.")
     p_replay.set_defaults(func=_cmd_replay)
+
+    p_loop = sub.add_parser(
+        "loop",
+        help="Path C Routine: run the Managed Agent on a schedule or file-watch trigger.",
+    )
+    p_loop.add_argument(
+        "--night", type=int, required=True, choices=[2, 3, 4],
+        help="Night task to drive (2 = PySR sweep, 3 = falsification, 4 = replay).",
+    )
+    p_loop.add_argument(
+        "--interval-seconds", type=int, default=1800,
+        help="Seconds between iterations (default 1800 = 30min). 0 = fire once and exit.",
+    )
+    p_loop.add_argument(
+        "--max-iterations", type=int, default=1,
+        help="Hard stop after N iterations (0 = unbounded until SIGINT). Default 1 for safety.",
+    )
+    p_loop.add_argument(
+        "--watch-dir", default=None,
+        help="Only invoke when files under this directory change (baseline iteration always runs).",
+    )
+    p_loop.add_argument(
+        "--log-path", default="results/routine/verdicts.jsonl",
+        help="Append-mode JSONL log of per-iteration verdicts.",
+    )
+    p_loop.set_defaults(func=_cmd_loop)
 
     return parser
 

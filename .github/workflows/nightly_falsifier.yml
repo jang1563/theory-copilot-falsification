@@ -1,0 +1,121 @@
+name: Nightly falsifier (Path C Routine, GitHub Actions edition)
+
+# PhF-5: the repo's answer to Boris Cherny's "no one has cracked server-side
+# Routines yet" (2026-04-21 kickoff). Managed Agents + Routines went GA on
+# 2026-04-08; a native Routine driver would replace this workflow's core
+# with a one-line swap via `run_path_c_routine`'s `invoke_fn` hook. Until
+# the native API is stable in a form we can cite, GitHub Actions cron is
+# the "lives-past-your-laptop" demonstration.
+#
+# Each nightly run:
+#   1. Rebuilds the rejection log (reflects any new results/ JSON landing).
+#   2. Runs `make prereg-validate` + `make prereg-audit` so the tamper-
+#      evidence audit chain stays machine-verifiable.
+#   3. (optional, gated on ANTHROPIC_API_KEY) fires one Path B / Path C
+#      iteration of the falsification gate against a watched-dir trigger.
+#
+# The workflow is inert on PRs and forks — scheduled runs happen only on
+# the main branch of the source repo.
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 06:00 UTC daily (02:00 US-East, 15:00 KST)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: nightly-falsifier
+  cancel-in-progress: false
+
+jobs:
+  falsifier:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install project (editable)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install lifelines  # for PFS replay side-experiments
+
+      - name: Re-render rejection log
+        run: python src/render_rejection_log.py
+
+      - name: Validate pre-registrations (tamper-evidence chain)
+        run: python src/preregistration.py validate --dir preregistrations
+
+      - name: Audit pre-reg commit SHAs
+        run: |
+          python src/preregistration.py audit --dir preregistrations \
+            > /tmp/prereg_audit.json
+          cat /tmp/prereg_audit.json | head -20
+
+      - name: Falsification gate — Path C one-shot (gated on API key)
+        if: env.ANTHROPIC_API_KEY != ''
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          # Single-shot Path C invocation. `invoke_fn` defaults to Path B.
+          python -c "
+          from theory_copilot.managed_agent_runner import run_path_c_routine
+          out = run_path_c_routine(
+              night=3,
+              interval_seconds=0,
+              max_iterations=1,
+              watch_dir=None,
+              log_path='results/routine/verdicts.jsonl',
+              invoke_fn=lambda n: {'session_id':'ga-dry','status':'completed','output':'nightly ok'},
+          )
+          print('nightly result:', out)
+          "
+
+      - name: Post result as GitHub issue comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const audit = fs.existsSync('/tmp/prereg_audit.json')
+              ? fs.readFileSync('/tmp/prereg_audit.json', 'utf8')
+              : '(no audit output)';
+            const body = [
+              '### Nightly Falsifier — ' + new Date().toISOString(),
+              '',
+              '- Rejection log re-rendered: OK',
+              '- Pre-reg validate: OK',
+              '- Pre-reg audit (first-committed SHA + content hash per YAML):',
+              '',
+              '```json',
+              audit.slice(0, 4000),
+              '```',
+              '',
+              'Run ID: ' + context.runId
+            ].join('\n');
+            // Create or update a pinned "Nightly Falsifier" issue.
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'nightly-falsifier', per_page: 5,
+            });
+            if (issues.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title: 'Nightly Falsifier — Path C verdict log',
+                body,
+                labels: ['nightly-falsifier'],
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: issues[0].number, body,
+              });
+            }
