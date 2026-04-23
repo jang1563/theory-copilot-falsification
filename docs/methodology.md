@@ -3,12 +3,14 @@
 ## Data provenance
 
 Every dataset the pipeline consumes is committed under `data/*.csv` and
-hashed in `data/SHA256SUMS` (SHA-256, `shasum -a 256`). The hashes are
-committed alongside pre-registration YAMLs so a reviewer can reproduce
-the verification: `shasum -c data/SHA256SUMS` should return `OK` for
-every CSV listed in any prereg's `references.cohort_build` field. All
-data sources are publicly accessible without email or dbGaP gate (see
-README Hackathon compliance notes).
+hashed in `data/SHA256SUMS` (SHA-256, `shasum -a 256`). A reviewer can
+run `shasum -c data/SHA256SUMS` offline to verify integrity; any
+modification to a committed CSV changes its hash and therefore
+invalidates the pre-registration chain (each prereg YAML's
+`emitted_git_sha` binds it to the repo state at commit time, which
+includes the matching `data/SHA256SUMS`). All data sources are
+publicly accessible without email or dbGaP gate (see README
+Hackathon compliance notes).
 
 ## Goal
 

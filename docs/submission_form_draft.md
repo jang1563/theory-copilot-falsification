@@ -75,59 +75,45 @@ from collapsing into rubber-stamp agreement with the Proposer turn
 
 ## Claude Managed Agents usage (150 words, 141 counted)
 
-Three-agent architecture. Proposer = Opus 4.7 with adaptive
-thinking. Searcher = local PySR, no API. Falsifier = Opus 4.7 with
-adaptive thinking. Clean role separation, structured
-PASS / FAIL / NEEDS_MORE_TESTS output. Two delegation paths:
+Three-agent architecture (Proposer / Skeptic / Interpreter = Opus 4.7;
+Searcher = local PySR). Structured PASS / FAIL / NEEDS_MORE_TESTS
+output. Public-beta compliant per the 2026-04-23 hackathon fairness
+rule; research-preview features disabled.
 
-- **Path B — public beta, live-verified.** Single Managed Agent with
-  `agent_toolset_20260401`; drives Night-2 sweep, Night-3
-  falsification, Night-4 replay through structured tool calls. End-
-  to-end trace committed at
-  `results/live_evidence/04_managed_agents_e2e.log` (`agents.create`
-  → `environments.create` → `sessions.create` → `stream` → `send`
-  → `session.status_idle`).
-- **Path A — sequential falsification chain (public-beta only).** Three
-  Managed Agents sessions (Proposer / Searcher / Skeptic) in a shared
-  environment with structured-JSON handoff. Per the 2026-04-23 hackathon
-  fairness rule, Agent Teams (`callable_agents`) research-preview features
-  are not used; the orchestrator-with-`callable_agents` code path is
-  retained as an architectural reference guarded by an env flag.
-- **Path C — Claude Code Routines (separate product; research preview).**
-  `POST /v1/claude_code/routines/{trig_id}/fire` with per-routine bearer
-  token (`src/theory_copilot/routines_client.py`). `--use-routine` flag
-  swaps the local watch-dir loop for real cloud-triggered execution.
-  GitHub triggers: `pull_request` + `release` (no `push`).
+- **Path B — `agent_toolset_20260401`, live-verified.** End-to-end
+  trace `results/live_evidence/04_managed_agents_e2e.log` covers
+  `agents.create → environments.create → sessions.create → stream →
+  send → status_idle`.
+- **Path A — sequential chain.** Three Path-B sessions with
+  structured-JSON handoff in a shared environment. Agent Teams
+  `callable_agents` code path retained as architectural reference,
+  env-flag-guarded, not exercised.
+- **Path C — Claude Code Routines.** `POST /v1/claude_code/routines/
+  {trig_id}/fire` (`routines_client.py`); `--use-routine` flag swaps
+  the local watch-dir loop for cloud-triggered execution. Triggers:
+  `pull_request`, `release`.
 
-**Durability primitives:** `persist_session_events` pages through
+**Durability primitives:** `persist_session_events` pages
 `sessions.events.list` to JSONL; `replay_session_from_log` re-injects
-user-origin events into a different session — concrete brain/body
-decoupling, not just prose.
+user-origin events into a different session — working code, not prose.
 
-All paths expose `{session_id, agent_id, output, status}`. Path A adds
-`delegation_mode`; Path C adds `routine_session_url`.
+All paths return `{session_id, agent_id, output, status}`; Path A adds
+`delegation_mode`, Path C adds `routine_session_url`.
 
 ---
 
 ## Prize category justification (100 words, 98 counted)
 
-**Keep Thinking ($5K).** Extended thinking is load-bearing on
-the Skeptic turn: that role has to hold the proposal in context
-and argue against it without the tokens that generated the proposal
-collapsing the dissent. Smaller models collapse; Opus 4.7 holds.
-
-**Best Claude Managed Agents ($5K).** Public-beta-only compliant per
-the 2026-04-23 hackathon fairness rule. Three delegation paths: Path B
-(single-agent `agent_toolset_20260401`, live), Path A (sequential
-falsification chain across three Path B sessions — not Agent Teams),
-Path C (Claude Code Routines `/fire` with local fallback). The Skeptic
-runs with isolated subagent context (Boris's architecture pattern);
-the 5-test gate is a shareable skill; `make audit` is the Stop hook
-that refuses to mark a task complete without verification. We killed
-our own H1 LLM-SR loop's 3-gene extension on cross-cohort replay
-(PhL-1) — the verification loop Thariq Shihipar flagged as an open
-problem, shipped as a skill. Brain/body decoupling as working
-primitives, not prose. <60s demo-able.
+**Best Claude Managed Agents ($5K).** Public-beta-only (research
+preview disabled for participants). Three paths: B (single agent +
+`agent_toolset_20260401`, live), A (sequential chain, not Agent
+Teams), C (Claude Code Routines `/fire`, local fallback). Skeptic
+runs in isolated subagent context; the 5-test gate is the shareable
+verification pattern; `make audit` is the Stop hook refusing to mark
+tasks complete without proving it works. Our own H1 LLM-SR loop's
+3-gene extension was killed by the same gate on cross-cohort replay
+(PhL-1) — verification as working code, not prose. Brain/body
+decoupling demoable in <60s.
 
 ---
 

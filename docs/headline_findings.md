@@ -234,22 +234,28 @@ rare case where LLM reasoning produces a structural rule that is
 
 ### What we did
 
-1. **`preregistrations/` directory** — 17 YAMLs (16 retroactive +
-   1 prospective IMmotion150 replay), each pinning H0 / H1 / 5 kill
-   tests / BH-FDR / α / stopping rule / analyst / data cutoff / regulatory
-   references to FDA-EMA 2026-01 Common Principles + EU AI Act high-risk
-   provisions effective 2026-08-02.
+1. **`preregistrations/` directory** — 21 YAMLs (retroactive Phase-F
+   + prospective IMmotion150 2-gene PhF-3 replay + prospective PhL-1
+   3-gene SLC22A8 extension replay), each pinning H0 / H1 / kill
+   tests / BH-FDR / α / stopping rule / analyst / data cutoff /
+   regulatory references to FDA-EMA 2026-01 Common Principles + EU AI
+   Act high-risk provisions effective 2026-08-02.
 2. **Tamper-evidence via git.** Each YAML is committed once and never
    modified. `make prereg-audit` prints the first-committed SHA + content
    hash per file — an external auditor can machine-verify the chain.
+   PhL-1 is the strongest instance: prereg committed at `d2352a9` →
+   analysis script committed later at `60d3952` → verdict is `FAIL`
+   against a 3-gene extension the system itself proposed. Order proven
+   by git log.
 3. **Path C Routine driver** (`run_path_c_routine` in
-   `src/theory_copilot/managed_agent_runner.py`). Boris Cherny at the
-   2026-04-21 *Built with Opus 4.7* kickoff named server-side Routines
-   as *"the area no one has cracked yet."* Managed Agents + Routines
-   went GA on 2026-04-08. Path C is our shipped driver: interval
-   cadence OR watch-dir fingerprint change triggers an iteration;
-   verdicts appended to `results/routine/verdicts.jsonl`; `invoke_fn`
-   hook lets a native Routines API drop in as a one-line swap. A
+   `src/theory_copilot/managed_agent_runner.py`). Managed Agents
+   (`managed-agents-2026-04-01`) shipped in public beta 2026-04-08;
+   Claude Code Routines (`experimental-cc-routine-2026-04-01`) shipped
+   in research preview 2026-04-14. Path C is our shipped driver:
+   interval cadence OR watch-dir fingerprint change triggers an
+   iteration; verdicts appended to `results/routine/verdicts.jsonl`;
+   `invoke_fn` hook lets a native Routine `/fire` call drop in via
+   `src/theory_copilot/routines_client.py`. A
    `.github/workflows/nightly_falsifier.yml` fires this nightly on
    main, posts a pinned GitHub Issue comment with the audit chain,
    and exercises the full pipeline without the laptop being awake.

@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-**Theory Copilot is a verification-as-shipped-skill discovery pipeline — the
+**Theory Copilot is a verification-first discovery pipeline — the
 agent kills its own best guesses, including ones it generates downstream,
 when independent data says no.** On real cancer data the pipeline rejected
 194 of its own 204 hypotheses; on cross-cohort replay it then rejected one
@@ -18,11 +18,11 @@ hypothesis for the survivors. The gate itself — two-sided permutation
 null, bootstrap CI lower bound, sign-invariant single-feature
 baseline, incremental covariate confound, decoy-feature null, with
 Benjamini-Hochberg FDR across candidates — is plain Python, so Opus
-4.7 cannot rationalize its own proposals into passing. In Boris
-Cherny's dialect: the Skeptic is a sub-agent with isolated context,
-the 5-test gate is a shareable skill, the `make audit` + pre-
-registration contract is the Stop hook that refuses to mark the task
-complete without proving it works.
+4.7 cannot rationalize its own proposals into passing. The Skeptic
+runs as a sub-agent with isolated context; the 5-test gate is the
+shareable verification pattern; `make audit` + pre-registration
+YAMLs form the Stop hook that refuses to mark a task complete
+without proving it works.
 
 Applied to real TCGA-KIRC, the gate rejects 100+ candidates across
 tumor-vs-normal, stage, and survival tasks on an 11-gene HIF-axis

@@ -55,15 +55,20 @@ opened full-screen.
 > likely to be metastatic. That's the published ccA-vs-ccB subtype
 > axis. PySR re-derived it from scratch. The gate accepted it."
 
-### 1 : 10 – 1 : 25 — The robustness
+### 1 : 10 – 1 : 25 — Cross-cohort replay + the own-output kill
 
-**Screen:** `results/track_a_task_landscape/survivor_robustness/SUMMARY.md`
-showing the robustness table.
-**Narration (≈ 32 words):**
+**Screen (0:10 split):** Kaplan–Meier curve from
+`results/track_a_task_landscape/external_replay/immotion150_pfs/km_median_split.png`
+(red vs blue, 7.5-month gap), then cut to the PhL-1 verdict at
+`results/track_a_task_landscape/external_replay/immotion150_slc22a8/verdict.json`
+with `"verdict": "FAIL"` visible, plus **Slide 2 — Headline findings**
+overlay.
+**Narration (≈ 40 words):**
 
-> "Same toolkit Track B used to harden the reject verdict now applied
-> to the accept. Five of six axes robust, one honest caveat: a 2-gene
-> LR with interaction also hits AUROC 0.722 on the same pair."
+> "Cross-cohort replay on IMmotion150, the Phase-2 immunotherapy
+> trial: same equation, different cohort, HR 1.36, log-rank p=0.0003,
+> seven-and-a-half-month PFS gap. Then our own H1 LLM-SR loop proposed
+> a 3-gene extension. Same gate. On independent data. Killed it."
 
 ### 1 : 25 – 1 : 30 — The close
 
