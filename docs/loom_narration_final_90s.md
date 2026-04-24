@@ -1,8 +1,8 @@
 # Loom narration — final ≤2:00 cut (includes DIPG generalization tag)
 
-**Status:** submission-locked final script (updated 2026-04-24 post-DIPG-run).
+**Status:** submission-locked final script (updated 2026-04-24 post-DIPG-run; hook refined 2026-04-24 per Session 3 video advice).
 **Target:** ≤ 120 seconds end-to-end; soft 100 s target; hard 180 s cap.
-**Word count:** 254 words / ~109 s at 140 WPM / ~127 s at 120 WPM (see ledger below for per-segment breakdown).
+**Word count:** 253 words / ~108 s at 140 WPM / ~127 s at 120 WPM (see ledger below for per-segment breakdown).
 **Parent:** `docs/loom_narration_verbatim.md` (longer 246-word "six
 experiments once" variant). Use this file as the primary script for the
 final recording. Revert to the parent only if the user wants to restore
@@ -19,13 +19,13 @@ the Karpathy opening.
 
 ---
 
-## 0:00 – 0:10 — Hook (22 words)
+## 0:00 – 0:10 — Hook (21 words)
 
 **Cue: editor pane A — `results/RESULTS.md` open at top.**
 
-> "Most AI-for-Science demos celebrate the first high-scoring result.
-> This one starts with rejection. … A loop that cannot reject is not
-> a loop."
+> "AI-for-science tools help you confirm almost anything.
+> This one was built to say no. … One hundred ninety-four rejected.
+> Nine survived."
 
 ## 0:10 – 0:25 — Architecture (30 words)
 
@@ -100,7 +100,7 @@ with aggregate score 13/15.**
 
 | Segment | Words | Cumul | Time @ 140 WPM | Time @ 120 WPM |
 |---|---|---|---|---|
-| 0:00-0:10 Hook | 22 | 22 | 9 s | 11 s |
+| 0:00-0:10 Hook | 21 | 21 | 9 s | 11 s |
 | 0:10-0:25 Architecture | 30 | 52 | 13 s | 15 s |
 | 0:25-0:45 Rejection | 38 | 90 | 16 s | 19 s |
 | 0:45-1:07 Survivor (with citation emphasis) | 52 | 142 | 22 s | 26 s |

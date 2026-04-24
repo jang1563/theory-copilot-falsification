@@ -29,29 +29,28 @@ Theory Copilot: Falsification-Aware Biological Law Discovery
 ## One-line pitch (140 char)
 
 ```
-Opus 4.7 rediscovers TOP2A-EPAS1; 5-test gate kills 194/203; separate pre-registered survival replay then kills our own H1 extension.
+AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws, Opus 4.7's own included. Survivor validates cross-cohort.
 ```
-(140 chars.)
+(139 chars.)
 
 ---
 
-## Project summary (150 words, 145 counted)
+## Project summary (150 words, 137 counted)
 
-Theory Copilot is a verification-first biological discovery loop
-powered by Opus 4.7 + Managed Agents (public beta 2026-04-08). Opus
-plays Proposer, Skeptic, Interpreter around a deterministic 5-test
-Python gate that runs before any LLM judgement. The 5-test
-classification gate rejected 194 of 203 candidate evaluations across
-11 task-panel combinations — 9 survivors on metastasis_expanded
-(confound leg null for this task; 4 active legs + FDR/decoy). The
-simplest surviving law is `TOP2A − EPAS1`, the published ccA-vs-ccB
-ccRCC subtype axis, rediscovered on TCGA-KIRC (AUROC 0.726). Under
-three separately pre-registered survival kill tests on IMmotion150
-Phase-2 (n=263), the 2-gene form passes (log-rank p=0.0003, Cox
-HR=1.36, C-index 0.601, robust to treatment adjustment). Our own H1
-LLM-SR loop then proposed a 3-gene extension (adding SLC22A8); the
-same IMmotion150 survival gate killed it (PhL-1, C-index dropped to
-0.566). Pre-registrations are git-tracked YAMLs.
+AI-for-Science tools accelerate hypothesis generation — not rejection.
+Theory Copilot is the rejection step. Opus 4.7 plays Proposer (emits
+compact cancer-law families and the kill-test for each, before any
+fit), Skeptic (reviews gate output — never the Proposer's reasoning),
+and Interpreter (explains only what the gate failed to reject). On
+TCGA-KIRC (n=505), the gate rejected 194 of 203 candidate evaluations
+across 11 task-panel combinations. The simplest survivor — `TOP2A −
+EPAS1`, the published ccA/ccB ccRCC subtype axis — was rediscovered
+by PySR without being seeded. A separately pre-registered survival gate
+on IMmotion150 Phase-2 (n=263) confirmed it: log-rank p=0.0003,
+HR=1.36, C-index 0.601, robust to treatment adjustment. Our own
+LLM-SR loop then proposed a 3-gene extension; same survival gate killed
+it (PhL-1, C-index dropped to 0.566). Pre-registrations are
+git-tracked YAMLs.
 
 ---
 
