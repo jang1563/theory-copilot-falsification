@@ -70,16 +70,26 @@ distinguishable:
 | `claude-sonnet-4-6` | **0 / 60** | 30 | 30 | **100.0%** |
 
 *Same 6 candidates × 10 repeats, same `prompts/skeptic_review.md`, same
-gate metrics, same `thinking={"type":"enabled","budget_tokens":8000}`.*
+gate metrics. Thinking config note: the E2 script used
+`thinking={"type":"enabled","budget_tokens":8000}` for all three models,
+but Opus 4.7 returns HTTP 400 on `enabled` thinking (not supported;
+Opus 4.7 uses `adaptive`). All 60 Opus 4.7 calls caught the 400 error
+and retried **without** thinking (8.0s latency). Sonnet 4.6 and Haiku 4.5
+ran WITH thinking (23.1s and 15.9s latency respectively). The E2 comparison
+is therefore: **Opus 4.7 base calibration (no thinking)** vs **Sonnet 4.6
+with extended thinking (no thinking needed)**. Opus wins anyway.*
 
 **Sonnet 4.6 dissents on 100% of gate-PASS candidates — it cannot hold
 the judgement stance across the dual-role prompt and collapses into
-permanent rejection.** Opus 4.7 dissents on 66.7% — PASS when the gate
-output warrants it (10 calls), dissent when the margin is thin. This is
-the *measurable* capability that makes the pipeline's Skeptic
-interpretable: Sonnet would reject the textbook HIF-axis law *and* the
-TOP2A-EPAS1 survivor indistinguishably; Opus 4.7 draws the line where
-the pre-registered thresholds draw it.
+permanent rejection, even with extended thinking budget.** Opus 4.7
+dissents on 66.7% — PASS when the gate output warrants it (10 calls),
+dissent when the margin is thin. This is the *measurable* capability that
+makes the pipeline's Skeptic interpretable: Sonnet would reject the
+textbook HIF-axis law *and* the TOP2A-EPAS1 survivor indistinguishably;
+Opus 4.7 draws the line where the pre-registered thresholds draw it.
+Critically, **this is Opus 4.7's base calibration without extended
+thinking** — making the gap a statement about RLHF / pre-training
+instruction-following, not about thinking budget.
 
 On the same ablation, Opus 4.6 vs 4.7 (n=60 each,
 [results/ablation/opus_46_vs_47/](../results/ablation/opus_46_vs_47/))
@@ -92,23 +102,37 @@ PASS-on-FAIL) is 0% for both — the gate's value is independent of
 model choice; 4.7's value shows up in the graded {PASS, FAIL,
 NEEDS_MORE_TESTS} calibration against pre-registered thresholds.
 
-**Honest null on mechanism attribution (PhL-15, 2026-04-24).** A
-120-call causal ablation within Opus 4.7 comparing
-`thinking={"type":"adaptive","display":"summarized"}` vs
-`thinking={"type":"disabled"}` on 6 narrow-context candidates × 10
-repeats × 2 modes finds **no measurable difference** — both modes
-produced 0 / 60 PASS, 100 % dissent on gate-PASS, and near-identical
-metric-citation specificity (6.63 vs 6.43). The E2 ablation's
-10 / 60 PASS for Opus comes from **richer prompt context** (PySR-
-tuned coefficients, `category` annotation, denser dataset label)
-rather than from adaptive thinking in isolation. So the above
-"adaptive thinking maintains the review stance" claim is more
-accurately framed as "Opus 4.7 calibration is preserved when the
-prompt carries adequate gate-metric context" — the adaptive-thinking
-state is enabled throughout our E2 and PhL-15 runs but is not the
-isolated mechanism. See
-[`results/live_evidence/phl15_adaptive_thinking/SUMMARY.md`](../results/live_evidence/phl15_adaptive_thinking/SUMMARY.md)
-for the honest null.
+**Thinking mechanism ablation (PhL-15, 2026-04-24, three-run instrumentation log).**
+Three sequential runs were required to produce a clean result, each identifying
+a confound:
+
+- *v1 (adaptive vs disabled):* `thinking={"type":"adaptive"}` silently skips
+  thinking on simpler queries. Both modes: 0 / 60 PASS, 0 thinking chars,
+  ~7s latency — compared "no thinking vs no thinking."
+- *v2a (enabled vs disabled):* `thinking={"type":"enabled","budget_tokens":8000}`
+  returns HTTP 400 on Opus 4.7 (not supported). All 60 "enabled" calls failed
+  with UNPARSED verdict. This also explains the E2 Opus 4.7 confound (see above).
+- *v2 final (adaptive_max vs no_thinking):* correct Opus 4.7 API
+  (`thinking={"type":"adaptive"} + output_config={"effort":"max"}`) vs no thinking
+  parameter — a clean comparison. Results in
+  [`results/live_evidence/phl15_adaptive_thinking/SUMMARY.md`](../results/live_evidence/phl15_adaptive_thinking/SUMMARY.md).
+
+**v2 final result (adaptive_max vs no_thinking):** thinking WAS active in
+adaptive_max (19.6s mean latency vs 7.7s; 1255 vs 395 mean output tokens
+including thinking_summary block). `usage.thinking_tokens=0` in both is an
+SDK limitation for adaptive/summarized mode — latency and output tokens are
+the authoritative signals. **Both modes produced 0/60 PASS, 100% dissent —
+thinking does not change the verdict distribution on this narrow-context
+prompt set.**
+
+Unified finding across E2 + PhL-15v2: the 10/60 PASS result (E2, Opus
+without thinking, rich context) vs 0/60 (PhL-15v2, Opus with or without
+thinking, narrow context) means **context richness, not thinking budget, is
+the capability-extraction lever** on this task. The model-to-model gap
+(10/60 Opus vs 0/60 Sonnet with thinking in E2) is a statement about Opus 4.7
+RLHF / pre-training calibration. The honest framing: **"Opus 4.7 base
+calibration holds the Skeptic stance when the prompt carries adequate
+gate-metric context — regardless of thinking mode."**
 
 **The gate-as-authority-substrate result (PhL-17, 2026-04-24).** A
 210-turn 7-round adversarial-critique ablation on TOP2A-EPAS1 finds

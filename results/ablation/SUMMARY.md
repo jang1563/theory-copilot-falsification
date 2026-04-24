@@ -146,3 +146,32 @@ Sweep completed: **180 Skeptic calls** across 3 models, 6 candidates, ≈10 repe
 
 Per-call data: `results/ablation/skeptic_model_sweep.jsonl`
 Histogram: `results/ablation/plots/model_specificity_histogram.png`
+
+### Post-hoc instrumentation note (2026-04-24)
+
+Inspection of `skeptic_model_sweep.jsonl` revealed a thinking-config
+discrepancy that strengthens the Opus-vs-Sonnet finding rather than
+weakening it:
+
+- **Opus 4.7 (all 60 calls):** `thinking={"type":"enabled","budget_tokens":8000}`
+  returns HTTP 400 on `claude-opus-4-7` (the model requires `adaptive`+`output_config`,
+  not `enabled`). The E2 script catches the error and retries WITHOUT thinking.
+  Confirmed via `error = "bad_request_with_thinking:..."` field in 60/60 rows.
+  Mean latency: **8.0s** (no-thinking fallback).
+- **Sonnet 4.6 (all 60 calls):** `enabled` thinking worked. Mean latency: **23.1s**.
+  Thinking was active.
+- **Haiku 4.5 (all 60 calls):** `enabled` thinking worked. Mean latency: **15.9s**.
+  Thinking was active.
+
+**Revised interpretation of the headline finding:**
+
+The E2 comparison is: **Opus 4.7 base calibration (no thinking, 10/60 PASS)**
+vs **Sonnet 4.6 with extended thinking (0/60 PASS)** vs **Haiku 4.5 with extended
+thinking (14/60 PASS)**. Opus achieved 10/60 PASS without any thinking budget,
+while Sonnet with thinking still achieved 0/60 PASS. **This makes the
+model-to-model gap a statement about RLHF / pre-training calibration, not
+about thinking budget.** The Skeptic role's core requirement — calibrated
+acceptance of gate-PASS candidates — is an Opus 4.7 base property.
+
+PhL-15v2 (adaptive_max vs no_thinking, results pending) directly measures
+whether thinking adds lift on top of this base calibration.

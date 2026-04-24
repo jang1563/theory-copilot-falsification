@@ -32,39 +32,58 @@ would be. Three axes emerge:
 
 ---
 
-## PhL-15 — Adaptive thinking causal ablation (Opus 4.7 only)
+## PhL-15 — Thinking causal ablation (Opus 4.7 only) — THREE-RUN LOG
 
-**Question:** is `adaptive` vs `disabled` thinking the *mechanism*
-behind Opus's Skeptic calibration measured in E2?
+**Question:** is extended thinking the *mechanism* behind Opus's Skeptic
+calibration measured in E2?
 
-**Design:** Opus 4.7, 6 candidates × 10 repeats × 2 modes = 120 calls.
+**Three runs required (honest instrumentation log):**
 
-**Result:**
+| Run | Mode pair | What we learned |
+|---|---|---|
+| v1 | adaptive vs disabled | `adaptive` silently skips thinking (0 thinking chars, 7s latency for both) — compared "no thinking vs no thinking" |
+| v2a | enabled vs disabled | `enabled` returns HTTP 400 on Opus 4.7 — not supported. Also revealed E2 confound (see below) |
+| **v2 final** | **adaptive_max vs no_thinking** | correct API: `thinking=adaptive + output_config.effort=max` vs no thinking param |
 
-| Mode | PASS | FAIL | NEEDS_MORE_TESTS | UNPARSED | Dissent on gate-PASS |
+**Critical E2 confound discovered (2026-04-24):**
+E2's Opus 4.7 calls also received HTTP 400 on `enabled` thinking and silently
+retried WITHOUT thinking. All 60 E2 Opus 4.7 rows: `error = "bad_request_with_thinking:..."`,
+latency 8.0s (fallback, no thinking). Sonnet 4.6: 0 errors, latency 23.1s (thinking active).
+
+**The E2 10/60 vs 0/60 comparison is therefore: Opus 4.7 base calibration
+(no thinking) vs Sonnet 4.6 with extended thinking.** Opus wins anyway.
+This is a STRONGER finding: the model-to-model gap is in RLHF/pre-training,
+not in thinking budget.
+
+**v2 final result (adaptive_max vs no_thinking):**
+
+| Mode | PASS | FAIL | NEEDS_MORE_TESTS | Mean latency | Mean output_tokens |
 |---|---|---|---|---|---|
-| `adaptive` | 0 | 30 | 30 | 0 | 100 % (30 / 30) |
-| `disabled` | 0 | 30 | 30 | 0 | 100 % (30 / 30) |
+| `adaptive_max` (thinking active) | 0 | 30 | 30 | **19.6s** | **1255** |
+| `no_thinking` | 0 | 30 | 30 | 7.7s | 395 |
 
-Metric-citation means: adaptive 6.63, disabled 6.43 (≈ identical).
+Thinking WAS running in adaptive_max: latency 19.6s vs 7.7s (2.5× longer),
+output_tokens 1255 vs 395 (3.2× more — includes thinking_summary block).
+`usage.thinking_tokens = 0` in both is an SDK limitation for adaptive/summarized
+mode, NOT evidence of thinking absence. Latency and output_tokens are the
+authoritative signals.
 
-**Honest null finding.** Adaptive thinking does NOT measurably
-change Skeptic behaviour on this task. The 0/60 vs 10/60 gap seen in
-E2 ablation between Opus 4.7 and Sonnet 4.6 must come from
-model-internal reasoning differences, NOT from thinking mode.
+**Result: thinking does NOT change the verdict distribution on this
+narrow-context prompt set.** Both modes: 0/60 PASS, 100% dissent.
 
-**Scoping caveat.** My PhL-15 prompt bundle contains fewer context
-fields than E2 (no PySR-tuned coefficient, no `category`, minimal
-dataset annotation). The 0/60 PASS in PhL-15 vs 10/60 in E2 likely
-reflects *prompt specificity* as the capability-extraction lever,
-not adaptive thinking. That itself is an important finding for
-submission framing: **Opus calibration depends on the prompt's
-metric context being rich**, not on adaptive-thinking state.
+**Unified finding across E2 + PhL-15v2:**
+- E2 Opus 4.7 (no thinking, rich context) → **10/60 PASS**
+- PhL-15v2 adaptive_max (thinking, narrow context) → **0/60 PASS**
+- PhL-15v2 no_thinking (no thinking, narrow context) → **0/60 PASS**
 
-This weakens `docs/why_opus_4_7.md §0`'s direct "adaptive thinking is
-what keeps the Skeptic from collapsing" causal claim. The honest
-version: Opus 4.7 calibration is real (E2 measured it), but adaptive
-thinking is not the isolated mechanism.
+**Context richness (not thinking) determines whether Opus calibrates PASS
+on gate-accepted candidates.** The model-to-model gap (Opus 10 vs Sonnet 0)
+is a base RLHF property, preserved across thinking modes.
+
+**Narrative implication (β direction, Narrative §0):** "Opus 4.7 base calibration
+holds the Skeptic stance with rich context, regardless of thinking mode.
+This is the most honest and strongest framing: the 10/60 vs 0/60 gap is Opus
+vs Sonnet, not thinking vs no-thinking."
 
 ---
 

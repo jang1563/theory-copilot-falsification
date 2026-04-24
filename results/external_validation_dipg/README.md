@@ -18,6 +18,13 @@ leaving the `theory_copilot_discovery` tree.
 - Pre-registration lock commit: `8a4ecc5` — "PREREG LOCK: 15 DIPG
   rescue candidates, 4-role engine, 5-axis falsification gate"
   (locked before any engine run).
+- **`registered_at_commit` convention:** every pre-reg YAML contains
+  the placeholder string `PENDING_COMMIT_SHA` in this field; the
+  authoritative registration SHA is `8a4ecc5` as recorded in the
+  sibling repo's `git log`. A YAML cannot self-reference its own
+  future commit hash, so the placeholder is the honest form of
+  "this YAML was committed at the SHA you see in git log" — no
+  post-commit field edit has occurred.
 - Full run directory: `../dipg_rescue/runs/2026-04-24_run01/`
   (1.3 MB, 15 candidates × 4 roles × JSON + raw + usage).
 

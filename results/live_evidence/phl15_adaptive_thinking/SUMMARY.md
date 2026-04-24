@@ -1,49 +1,68 @@
-# PhL-15 — Adaptive thinking causal ablation (Opus 4.7)
+# PhL-15v2 — Thinking causal ablation on Opus 4.7 (rerun 2026-04-24)
 
-**Question:** is adaptive thinking the *mechanism* behind Opus 4.7's Skeptic calibration?
+**Question:** is a thinking budget the *mechanism* behind Opus 4.7's Skeptic calibration,
+or does Opus remain calibrated even without any thinking?
 
-## Design
+## Original v1 confound (honest)
+
+The original PhL-15 (v1) used `thinking={'type':'adaptive'}` which lets the model
+**skip thinking** for simple queries. All 120 v1 calls: thinking_length_chars=0, latency ~7s
+for BOTH modes — compared 'no thinking vs no thinking.' An intermediate v2a attempt used
+`thinking={'type':'enabled','budget_tokens':8000}` which returns 400 on Opus 4.7 (not supported).
+**Key E2 finding (critical context):** E2's Opus 4.7 calls also received 400 errors on
+`enabled` thinking and silently fell back to NO thinking — so E2's 10/60 PASS was achieved
+WITHOUT thinking. Sonnet 4.6 and Haiku 4.5 DID run with thinking (23s vs 16s latency).
+E2 comparison was: Opus 4.7 (no thinking) vs Sonnet/Haiku (with thinking). Opus won.
+This final v2 design compares Opus 4.7 WITH vs WITHOUT thinking to isolate the mechanism.
+
+## Design (v2 final)
 
 - Opus 4.7 only (single model isolates mechanism)
 - 6 candidates (same as E2 ablation, pass/borderline/fail spread)
 - 10 repeats × 2 modes = **120 API calls**
 - Modes:
-  - `adaptive`: `thinking={'type':'adaptive','display':'summarized'}`
-  - `disabled`: `thinking={'type':'disabled'}`
+  - `adaptive_max`: `thinking={'type':'adaptive'}` + `output_config={'effort':'max'}`
+    (Opus 4.7 correct thinking API; effort=max forces allocation even for simpler queries)
+  - `no_thinking`: no thinking parameter (mirrors E2 Opus 4.7 fallback: 10/60 PASS baseline)
+- Thinking verification: `usage.thinking_tokens` (API-attested)
 
 ## Result
 
 | Mode | PASS | FAIL | NEEDS_MORE_TESTS | UNPARSED |
 |---|---|---|---|---|
-| `adaptive` | 0 | 30 | 30 | 0 |
-| `disabled` | 0 | 30 | 30 | 0 |
+| `adaptive_max` | 0 | 30 | 30 | 0 |
+| `no_thinking` | 0 | 30 | 30 | 0 |
 
 **Dissent rate on gate-PASS candidates** (TOP2A-EPAS1, MKI67-EPAS1, 5-gene compound):
 
-- `adaptive`: 100.0% dissent (30 gate-PASS calls)
-- `disabled`: 100.0% dissent (30 gate-PASS calls)
+- `adaptive_max`: 100.0% dissent (30 gate-PASS calls)
+- `no_thinking`: 100.0% dissent (30 gate-PASS calls)
 
 **Mean metric citations per response**:
 
-- `adaptive`: 6.63
-- `disabled`: 6.43
+- `adaptive_max`: 6.30
+- `no_thinking`: 6.35
 
-**Mean thinking content length (chars)**:
+**Mean thinking tokens (API-attested, `usage.thinking_tokens`)**:
 
-- `adaptive`: 0
-- `disabled`: 0
+- `adaptive_max`: 0
+- `no_thinking`: 0
 
 ## Interpretation
 
-**Honest null — adaptive thinking is NOT the differentiator.** Adaptive ON and OFF both produce 0/60 PASS, 100% dissent on gate-PASS candidates, and nearly identical metric-citation specificity (6.63 vs 6.43). Within Opus 4.7, adaptive thinking ON/OFF does not measurably change Skeptic verdict behavior on this narrow-context prompt.
+**INSTRUMENTATION WARNING**: adaptive_max mode shows only 0 mean thinking tokens — thinking may not have activated despite effort=max. Results below may not represent a clean with-vs-without-thinking comparison.
 
-**Important scoping caveat**: the 0/60 PASS here differs from E2 ablation's 10/60 PASS for Opus 4.7. The difference is likely **prompt specificity** — E2 used pre-computed metrics with full dataset annotation (PySR-tuned coefficients, `category` field, "TCGA-KIRC metastasis M1 vs M0 n=505 45 genes"), while PhL-15 uses compact metrics ("TCGA-KIRC metastasis_expanded n=505"). Opus appears more calibrated with richer prompt context — Opus-vs-Sonnet calibration gap in E2 is real, but the isolated cause is not adaptive thinking.
+## Run history comparison (honest instrumentation log)
 
-**Implication for `docs/why_opus_4_7.md §0`**: the causal claim that "adaptive thinking keeps the Skeptic from collapsing" should be softened to "Opus 4.7 calibration" without attributing the mechanism specifically to adaptive thinking.
+| Run | Mode pair | Thinking status | Latency | PASS count |
+|---|---|---|---|---|
+| v1 (2026-04-24) | adaptive vs disabled | adaptive silently skipped (0 tokens, 7.1s) | 7.1s ≈ 7.7s | 0/60 vs 0/60 |
+| v2a (2026-04-24) | enabled vs disabled | enabled→400 error on Opus 4.7 (not supported) | N/A | 0/60 UNPARSED |
+| v2 final (2026-04-24) | adaptive_max vs no_thinking | 0 tokens vs 0 tokens | see jsonl | 0/60 vs 0/60 |
+| **E2 context** | Opus 4.7 in E2 (enabled→fallback) | enabled→400→fallback NO thinking | 8.0s | **10/60 PASS** |
 
-**Thinking content length**: `thinking_chars_mean_by_mode` is 0 in both — the `display=summarized` blocks in the API stream were not captured as `type=thinking` in my extraction code. Instrumentation limitation, not capability finding.
-
-**Raw data**: `sweep.jsonl` (120 rows)
+**Raw data**: `sweep.jsonl` (120 v2 rows, modes: adaptive_max/no_thinking)
+**v1 archive**: `sweep_v1_adaptive_disabled.jsonl` (120 rows, adaptive/disabled)
 
 **Reproduce**:
 ```bash
