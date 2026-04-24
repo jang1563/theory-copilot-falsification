@@ -107,11 +107,11 @@ with aggregate score 13/15.**
 | 1:07-1:22 Validation + kill | 34 | 176 | 15 s | 17 s |
 | 1:22-1:30 Routine + close | 18 | 194 | 8 s | 9 s |
 | 1:30-2:00 DIPG generalization (NEW) | 60 | 254 | 26 s | 30 s |
-| **TOTAL** | **254** | — | **~109 s** | **~127 s** |
+| **TOTAL** | **253** | — | **~108 s** | **~127 s** |
 
 Budget (post-DIPG-tag): 120 s soft target, 180 s hard cap. At 140 WPM
-the full cut with the DIPG generalization tag runs 109 s (under the
-120 s soft cap — 11 s margin). At 120 WPM (slower, authoritative
+the full cut with the DIPG generalization tag runs 108 s (under the
+120 s soft cap — 12 s margin). At 120 WPM (slower, authoritative
 pace) it runs 127 s — 7 s over soft cap, 53 s under hard cap.
 
 **Budget controls at recording time:**
