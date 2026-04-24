@@ -443,14 +443,61 @@ the whole pipeline is reducible to a single reward function.
 ## 4.5 Limitations
 
 (i) The compact survivor is biological *rediscovery* of a published
-subtype axis, not novel biology. The novelty is procedural — that
-pre-registered falsification accepted it. (ii) The caveat on the
-pair-with-interaction baseline is real. (iii) Cross-cohort replay
-on a dataset with both TOP2A/EPAS1 and M-staging is still pending
-(GSE40435's 8-gene subset omits TOP2A and EPAS1; CPTAC-3 proteogenomic
-ccRCC is the natural target). (iv) Second-disease generalization was
-shown on an easier task (LUAD tumor-vs-normal); a LUAD-stage run
-would test whether the survivor-accept behaviour also generalizes.
+subtype axis (Brannon 2010, ClearCode34), not novel biology. The
+novelty is procedural — that pre-registered falsification accepted
+it. (ii) The caveat on the pair-with-interaction baseline is real:
+a logistic regression on TOP2A, EPAS1, and TOP2A×EPAS1 reaches
+AUROC 0.722 on the same cohort, so the survivor's distinctive
+contribution is interpretable compactness + pre-registered
+falsification, not an AUROC ceiling no other 2-gene model can
+reach. (iii) The 9 metastasis-expanded passes all clear 4 active
+legs of the 5-test gate — the `delta_confound` leg is null because
+the M0/M1 task has no surviving non-degenerate covariates after
+filtering. The framework is 5-test; the active legs depend on data
+availability and are recorded per-row in the report JSON. (iv) The
+external-cohort replays (PhF-3 2-gene, PhL-1 3-gene, PhL-6
+microarray stage) use a separately pre-registered 3-test survival
+gate (log-rank, Cox HR, Harrell C), NOT the 5-test classification
+gate; honest framing distinguishes the two. (v) The PhL-1 SLC22A8
+3-gene extension was a pure-cohort win on TCGA-KIRC (+0.013 AUC) but
+failed cross-cohort under the survival gate; this is the gate
+working correctly on our own downstream output but it constrains
+what we can claim about the H1 LLM-SR loop's discovery yield. (vi)
+The `confound_only` leg is in-sample AUC (treated as screening, not
+robust confound control); for plug-in datasets the upgrade to
+out-of-fold scoring is flagged as a concrete future fix. (vii)
+Second-disease generalization on TCGA-BRCA (PhL-5) confirms ccRCC-
+specificity as a pre-registered negative control; broader cross-
+cancer survey (LUAD-stage, BRCA subtypes, TCGA pan-cancer) remains
+out of scope for this submission.
+
+## 4.6 Industry convergence (2026-04-23 same-week signals)
+
+Two same-week external developments validate the architectural
+direction but do not change the artefact:
+
+- **Anthropic Claude Managed Agents `outcomes`** (research preview;
+  Michael Cohen, 2026-04-23 live session): described as
+  *"effectively a self-verification loop"* with plain-text rubrics
+  stating *"these things have to be true."* The 5-test
+  classification gate this paper uses is exactly that shape, shipping
+  as Python months ahead of `outcomes` release. We ship the pattern
+  Anthropic is about to release.
+- **Comet/Opik 1.0** (Gideon Mendels CV Deep Dive 2026-04-23):
+  "close the loop between production and development for AI agents,"
+  "self-improving agents," "Test Suites auto-created from fixes."
+  Theory Copilot's pre-registered gate + H1 LLM-SR loop + PhL-3
+  Memory chain instantiate the same close-the-loop pattern at the
+  scientific-discovery layer rather than the production-API layer.
+  The differentiator: our judgment function is *deterministic
+  Python* (not LLM-as-judge), pre-registered (not post-hoc), and
+  bound to a domain-specific notion of "law" — Opus proposes,
+  Python disposes, and the agent cannot re-negotiate the criterion
+  mid-run.
+
+These are convergence signals, not citations of the artefact. They
+matter for the submission only insofar as they show the architecture
+is on a trend, not against it.
 
 # 5 — Conclusion
 

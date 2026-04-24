@@ -26,5 +26,37 @@
     "public_license_status": "synthetic demo data included for local validation; replace with a second public omics export for the judged run",
     "allowed_covariates": ["age", "batch_index"],
     "notes": "Designed to replay the same workflow with a related but non-identical compact law family."
+  },
+  {
+    "dataset_id": "flagship_kirc_demo",
+    "name": "Flagship KIRC-flavoured synthetic demo (HIF-axis gene panel)",
+    "source_url": "local://data/examples/flagship_kirc_demo.csv",
+    "local_path": "data/examples/flagship_kirc_demo.csv",
+    "disease_label": "disease",
+    "control_label": "control",
+    "modality": "synthetic-omics-summary",
+    "species": "human",
+    "sample_count": 100,
+    "public_license_status": "synthetic; gene-name contract matches real TCGA-KIRC for plug-in compatibility",
+    "allowed_covariates": ["age", "batch_index"],
+    "gene_columns_csv": "CA9,VEGFA,LDHA,SLC2A1,NDUFA4L2,AGXT,ALB,ACTB,GAPDH,RPL13A,MKI67",
+    "covariate_columns_csv": "age,batch_index",
+    "notes": "Used by `make demo-kirc`. Same gene names + label semantics as real TCGA-KIRC so the pipeline path is identical to the published runs."
+  },
+  {
+    "dataset_id": "transfer_kirc_demo",
+    "name": "Transfer KIRC-flavoured synthetic demo (independent-cohort replay)",
+    "source_url": "local://data/examples/transfer_kirc_demo.csv",
+    "local_path": "data/examples/transfer_kirc_demo.csv",
+    "disease_label": "disease",
+    "control_label": "control",
+    "modality": "synthetic-omics-summary",
+    "species": "human",
+    "sample_count": 90,
+    "public_license_status": "synthetic; serves as the GSE40435-shaped transfer cohort for the demo replay step",
+    "allowed_covariates": ["age", "batch_index"],
+    "gene_columns_csv": "CA9,VEGFA,LDHA,SLC2A1,NDUFA4L2,AGXT,ALB,ACTB,GAPDH,RPL13A,MKI67",
+    "covariate_columns_csv": "age,batch_index",
+    "notes": "Used by `make demo-kirc` as the synthetic transfer cohort. Same gene-name contract as flagship_kirc_demo."
   }
 ]

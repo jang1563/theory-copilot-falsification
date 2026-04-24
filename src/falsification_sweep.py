@@ -128,7 +128,19 @@ def main() -> None:
     exclude_cols = {label_col, "sample_id"} | set(covariate_cols)
 
     if args.genes:
-        gene_cols = [g.strip() for g in args.genes.split(",") if g.strip() and g.strip() in df.columns]
+        requested = [g.strip() for g in args.genes.split(",") if g.strip()]
+        gene_cols = [g for g in requested if g in df.columns]
+        missing = [g for g in requested if g not in df.columns]
+        if missing:
+            # Review-handoff finding #9: warn-on-missing instead of silent
+            # drop. Same rationale as pysr_sweep._load_data.
+            print(
+                f"falsification_sweep WARNING: {len(missing)} requested gene(s) "
+                f"absent from {args.data} and dropped: {missing[:8]}"
+                f"{'...' if len(missing) > 8 else ''}. Proceeding with the "
+                f"{len(gene_cols)} present columns.",
+                file=sys.stderr,
+            )
     else:
         gene_cols = [
             c for c in df.select_dtypes(include=[np.number]).columns

@@ -45,10 +45,26 @@ def _load_data(
     df = pd.read_csv(csv_path)
     y = _parse_labels(df["label"])
     gene_cols = [g for g in genes if g in df.columns]
+    missing = [g for g in genes if g not in df.columns]
     if not gene_cols:
         raise ValueError(
             f"None of the requested genes found in {csv_path}. "
             f"Requested: {genes[:10]}... Available: {list(df.columns)[:20]}..."
+        )
+    if missing:
+        # Review-handoff finding #9: silently dropping missing genes
+        # masks feature-space mismatches between handoff commands and
+        # actual CSV. Warn loudly so the operator notices, then proceed
+        # with what's available (refusing entirely would break legacy
+        # handoff scripts that pass the union panel for cross-cohort
+        # robustness; warning is the safer mid-ground).
+        import sys as _sys
+        print(
+            f"_load_data WARNING: {len(missing)} requested gene(s) absent "
+            f"from {csv_path} and dropped: {missing[:8]}"
+            f"{'...' if len(missing) > 8 else ''}. Proceeding with the "
+            f"{len(gene_cols)} present columns.",
+            file=_sys.stderr,
         )
     X = df[gene_cols].values.astype(float)
     if standardize:

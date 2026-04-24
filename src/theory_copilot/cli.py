@@ -31,6 +31,7 @@ from .opus_client import OpusClient
 
 
 _DISEASE_TOKENS = {"disease", "tumor", "case", "cancer", "1", "true"}
+_CONTROL_TOKENS = {"control", "normal", "healthy", "0", "false"}
 _NUMPY_FUNCS = ["log", "log1p", "exp", "abs", "sqrt", "sin", "cos"]
 
 
@@ -42,9 +43,29 @@ def _write_json(path: Path, payload: dict | list) -> Path:
 
 
 def _parse_labels(series: pd.Series) -> np.ndarray:
+    """Parse a label column into 0/1.
+
+    Disease tokens → 1, control tokens → 0. Unknown string labels print
+    a warning to stderr (review-handoff finding #16: silently mapping
+    unknowns to control can invert or dilute cohorts; especially risky
+    for plug-in datasets with stage / metastasis labels). They are
+    still mapped to 0 to preserve current behaviour, but the warning
+    surfaces them. Custom tokens → use DatasetCard with explicit
+    `disease_tokens` (see `data_loader._parse_labels`).
+    """
     if pd.api.types.is_numeric_dtype(series):
         return series.astype(int).values
     s = series.astype(str).str.strip().str.lower()
+    unknown = sorted(set(s.unique()) - _DISEASE_TOKENS - _CONTROL_TOKENS)
+    if unknown:
+        print(
+            f"_parse_labels WARNING: {len(unknown)} unknown label value(s) "
+            f"mapped to 0 (control): {unknown[:5]}"
+            f"{'...' if len(unknown) > 5 else ''}. "
+            "If these are valid disease labels (e.g. stage IV / M1) use "
+            "DatasetCard with explicit `disease_tokens=[...]` instead.",
+            file=sys.stderr,
+        )
     return s.map(lambda v: 1 if v in _DISEASE_TOKENS else 0).values.astype(int)
 
 
@@ -240,7 +261,13 @@ def _cmd_replay(args: argparse.Namespace) -> int:
     y = _parse_labels(df[label_col])
     X_cov = df[covariate_cols].values.astype(float) if covariate_cols else None
 
-    top = max(survivors, key=lambda r: r.get("auroc", r.get("law_auc", 0.0)))
+    # Prefer the falsification gate's `law_auc` (gate-time, sign-invariant)
+    # over the candidate-search `auroc` (PySR search-time). They can differ
+    # when sign-invariance + bootstrap re-evaluation move the metric. Fix
+    # for review-handoff finding #5 (2026-04-23): the prior order
+    # `r.get("auroc", r.get("law_auc", ...))` could promote a search-time
+    # winner that the gate later down-ranked.
+    top = max(survivors, key=lambda r: r.get("law_auc", r.get("auroc", 0.0)))
     equation = top["equation"]
     fn = _equation_callable(equation, gene_cols)
 
