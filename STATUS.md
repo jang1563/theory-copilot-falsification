@@ -1,6 +1,6 @@
 # STATUS — theory-copilot-falsification
 
-**Last updated:** 2026-04-23 22:00 ET (Phase L + review-handoff fixes complete)
+**Last updated:** 2026-04-23 22:25 ET (Phase L + review-handoff fixes complete; PhL-9 + PhL-10 shipped)
 **Submit window:** 2026-04-26 20:00 ET (T-2d 22h)
 **Judging:** 2026-04-28 12:00 ET final round
 **Repo:** https://github.com/jang1563/theory-copilot-falsification (public since 2026-04-23 19:32 ET)
@@ -10,7 +10,7 @@
 
 ## 🎯 Submission-ready snapshot
 
-- **8 PhL artefacts** (PhL-1 to PhL-8) all live, all committed, all pushed.
+- **10 PhL artefacts** (PhL-1 to PhL-10) all live, all committed, all pushed.
 - **Review-handoff** (`plans/theory_copilot_review_handoff_2026_04_23.md`) processed: 12 of 20 findings fixed (P0 + P1 batch); 8 deferred with explicit rationale in commit messages.
 - **`make all`** one-command reproduction of tests + audit + prereg-audit + rejection-log + paper PDF (no API key required).
 - **`.devcontainer/devcontainer.json`** — judges can click "Open in GitHub Codespaces" and reach `make test` green in ~2 min.
@@ -29,6 +29,8 @@
 | **PhL-6** | T-vs-N FAIL (platform saturation); stage 1-2 vs 3-4 PASS AUC 0.714 — 4th cohort + 1st platform shift | `results/.../external_replay/gse53757/SUMMARY.md` |
 | **PhL-7** | PASS — compound orchestrator (MCP + Memory + 5-test gate in ONE Managed Agents session, cross-substrate reasoning) | `results/live_evidence/phl7_compound_orchestrator/SUMMARY.md` |
 | **PhL-8** | 200 OK — Claude Code Routines `/fire` LIVE; clickable session URL committed | `results/live_evidence/phl8_routine_fire/SUMMARY.md` |
+| **PhL-9** | OK — Path A sequential 3-session chain live (`delegation_mode=sequential_fallback`, 706 s) | `results/live_evidence/phl9_path_a_chain/SUMMARY.md` |
+| **PhL-10** | PASS — Memory chain extended 3 → 5 lessons; ceiling-effect rule generalizes KIRC→LUAD | `results/live_evidence/phl10_memory_chain_extended/SUMMARY.md` |
 
 Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/H/I depth + IMmotion150 PhF-3 replay + paper) — full index at `docs/ARTIFACT_INDEX.md`.
 

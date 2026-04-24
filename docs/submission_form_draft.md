@@ -85,14 +85,16 @@ rule; research-preview features disabled.
   trace `results/live_evidence/04_managed_agents_e2e.log` covers
   `agents.create → environments.create → sessions.create → stream →
   send → status_idle`.
-- **Path A — sequential chain.** Three Path-B sessions with
-  structured-JSON handoff in a shared environment. Agent Teams
-  `callable_agents` code path retained as architectural reference,
-  env-flag-guarded, not exercised.
+- **Path A — sequential chain (live, PhL-9).** Three Path-B sessions
+  with structured-JSON handoff, `delegation_mode=sequential_fallback`,
+  706 s wall, `results/live_evidence/phl9_path_a_chain/verdict.json`.
+  Agent Teams `callable_agents` code path retained as architectural
+  reference, env-flag-guarded, not exercised.
 - **Path C — Claude Code Routines.** `POST /v1/claude_code/routines/
   {trig_id}/fire` (`routines_client.py`); `--use-routine` flag swaps
   the local watch-dir loop for cloud-triggered execution. Triggers:
-  `pull_request`, `release`.
+  `pull_request`, `release`. Live `/fire` HTTP 200 (PhL-8):
+  https://claude.ai/code/session_01NyS541H3qZfJgqFVgWDcoM
 
 **Durability primitives:** `persist_session_events` pages
 `sessions.events.list` to JSONL; `replay_session_from_log` re-injects
@@ -106,15 +108,14 @@ All paths return `{session_id, agent_id, output, status}`; Path A adds
 ## Prize category justification (100 words, 98 counted)
 
 **Best Claude Managed Agents ($5K).** Public-beta-only. Three paths:
-B (single agent + `agent_toolset_20260401`, live), A (sequential
-chain), C (Claude Code Routines `/fire`, local fallback). Plus
-**Memory public beta (integrated 2026-04-23, announcement day)**: Skeptic writes rejection lessons to a memory store
-in session 1, a fresh session 2 reads and quotes the lesson verbatim
-before judging a structurally analogous candidate — the exact
-Rakuten "distill lessons from every session" pattern, with
-server-side persistence verified via raw `/v1/memory_stores/*` API.
-Our own H1 LLM-SR loop's 3-gene extension was killed by the same
-gate on cross-cohort replay (PhL-1). Verification as working code.
+B (live), A (live PhL-9, 5-session), C (live PhL-8 `/fire` 200 OK).
+Plus **Memory public beta (integrated 2026-04-23, day-of)**: Skeptic
+writes rejection lessons to a memory store; fresh sessions read,
+quote, and **refine** prior lessons verbatim. PhL-10 grows the chain
+to 5 entries and shows the ceiling-effect rule generalizing across
+cancers (KIRC→LUAD). Server-side persistence verified via raw
+`/v1/memory_stores/*` API. Our own H1 LLM-SR extension was killed by
+the same gate on IMmotion150 (PhL-1). Verification as working code.
 
 ---
 

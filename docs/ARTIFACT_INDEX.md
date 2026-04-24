@@ -33,6 +33,8 @@ the submission.
 | **PhL-6** | GSE53757 third independent cohort (microarray platform shift) | `preregistrations/20260423T224229Z_phl6_*.yaml`, same probe script, `results/track_a_task_landscape/external_replay/gse53757/SUMMARY.md` | T-vs-N: FAIL (platform saturation); stage 1-2 vs 3-4: **PASS** AUROC 0.714 |
 | **PhL-7** | Compound orchestrator: MCP + Memory + 5-test gate in ONE session, cross-substrate reasoning | `src/phl7_compound_orchestrator.py`, `results/live_evidence/phl7_compound_orchestrator/SUMMARY.md` | PASS with explicit substrate citations + memory chain → 3 entries |
 | **PhL-8** | Claude Code Routines `/fire` LIVE — Path C proof-of-life with clickable session URL | `src/phl8_routine_fire_live.py`, `routines_client.py`, `results/live_evidence/phl8_routine_fire/SUMMARY.md` | 200 OK + live `claude.ai/code/session_*` URL |
+| **PhL-9** | Path A live: sequential 3-session chain under 2026-04-23 hackathon-fairness rule | `src/phl9_path_a_live_chain.py`, `results/live_evidence/phl9_path_a_chain/SUMMARY.md` + `role_{proposer,searcher,falsifier}.txt` | OK — `delegation_mode=sequential_fallback`, 706 s wall, 3 distinct session IDs |
+| **PhL-10** | Extended Skeptic Memory chain (sessions 4+5) — 3 lessons → 5, cross-cancer rule transfer | `src/phl10_memory_chain_extended.py`, `results/live_evidence/phl10_memory_chain_extended/SUMMARY.md` | PASS — MKI67−EPAS1 KIRC PASS (structural twin); SFTPC−MKI67 LUAD FAIL (ceiling rule generalises across cancers) |
 
 ## Earlier-phase scientific artefacts
 

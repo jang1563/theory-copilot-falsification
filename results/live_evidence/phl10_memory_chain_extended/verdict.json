@@ -1,0 +1,51 @@
+{
+  "hypothesis_id": "phl10_memory_chain_extended",
+  "run_date_utc": "2026-04-24T02:17:14Z",
+  "agent_id": "agent_011CaMLDBC4hUfmb9MCZpjQW",
+  "store_id": "memstore_01XvqsnMxmHQPyL25X4t56Wq",
+  "sessions": [
+    {
+      "session_label": "session4_mki67_epas1",
+      "session_id": "sesn_011CaMnnzc4MAT6pjNf9YDqi",
+      "candidate_eq": "MKI67 - EPAS1",
+      "cohort": "TCGA-KIRC metastasis_expanded (n=505, 16% M1)",
+      "metrics_supplied": {
+        "perm_p": 0.0,
+        "ci_lower": 0.642,
+        "delta_baseline": 0.063,
+        "delta_confound": null,
+        "decoy_p": 0.0,
+        "law_auc": 0.708,
+        "baseline_auc_best_single_gene": 0.645
+      },
+      "agent_text": "## Step 1: Prior lesson check\n\nQuoting the directly applicable prior lesson from `/mnt/memory/skeptic-lessons/lessons.md`:\n\n> [PASS] `TOP2A \u2212 EPAS1` on TCGA-KIRC metastasis_expanded (n=505, best-single=0.657, law=0.728, delta=0.071, ci_lower=0.670, perm_p=decoy_p=0, delta_confound=null-allowed). \u2026 Do not promote PubMed co-mention to a gate; treat it as orthogonal context only. delta_confound=null is acceptable per spec when cohort lacks covariates \u2014 do not invent a failure reason from a permitted null.\n\nThis is the structural twin: proliferation-marker \u2212 EPAS1 on the identical metastasis_expanded cohort. The ceiling-effect rejection template (`CA9+VEGFA\u2212AGXT`, `LDHA+SLC2A1\u2212ALB`) does NOT apply \u2014 best-single here is 0.645, far from saturation, same headroom regime the earlier lesson routed toward.\n\n## Step 2: Gate application\n\n| Gate | Threshold | Value | Pass? | Margin |\n|---|---|---|---|---|\n| perm_p | < 0.05 | 0.0 | \u2713 | max |\n| ci_lower | > 0.6 | 0.642 | \u2713 | +0.042 |\n| delta_baseline | > 0.05 | 0.063 | \u2713 | +0.013 |\n| delta_confound | > 0.03 or null | null | \u2713 (null-allowed) | \u2014 |\n| decoy_p | < 0.05 | 0.0 | \u2713 | max |\n\nAll 5 gates clear. Margins are thinner than TOP2A\u2212EPAS1 (ci_lower 0.642 vs 0.670; delta 0.063 vs 0.071; law_auc 0.708 vs 0.728) but pre-registered thresholds are thresholds \u2014 \"one failed gate = FAIL; do not negotiate the threshold\" cuts both ways: a passed gate with narrow margin is still a pass.\n\n## Step 3: Verdict\n\n**PASS** \u2014 no failing gates.\n\n## Step 4: Append lesson## Final verdict\n\n**PASS** \u2014 `MKI67 \u2212 EPAS1` clears all 5 pre-registered gates (perm_p=0.0, ci_lower=0.642, delta_baseline=0.063, delta_confound=null-allowed, decoy_p=0.0). No failing gates. Structurally identical template to the prior TOP2A\u2212EPAS1 survivor on the same cohort, so the ceiling-effect rejection pattern (reserved for T-vs-N tasks with best-single \u2265 0.95) explicitly does not apply. Margins are tighter than TOP2A\u2212EPAS1 but still above threshold, and pre-registered thresholds are not to be re-negotiated either direction.",
+      "event_count": 17
+    },
+    {
+      "session_label": "session5_luad_sftpc_mki67",
+      "session_id": "sesn_011CaMnr7xfMzcBWoFrRVz2V",
+      "candidate_eq": "SFTPC - log1p(MKI67)",
+      "cohort": "TCGA-LUAD tumor-vs-normal (n=540)",
+      "metrics_supplied": {
+        "perm_p": 0.001,
+        "ci_lower": 0.95,
+        "delta_baseline": 0.011,
+        "delta_confound": 0.005,
+        "decoy_p": 0.0,
+        "law_auc": 0.991,
+        "baseline_auc_best_single_gene": 0.98
+      },
+      "agent_text": "## Gate evaluation\n\n**Prior lesson that applies** (quoting lesson.md line 6):\n> \"stop proposing tumor-vs-normal KIRC compounds when best-single \u2265 0.95 \u2014 route to grade/metastasis/survival tasks where there is headroom\"\n\nAnd line 5:\n> \"when baseline_auc_best_single_gene \u2265 ~0.95 on an easy binary task, compound lifts < 0.05 are almost always redundancy-reduction noise, not emergent law. One failed gate = FAIL; do not negotiate the threshold.\"\n\nThis candidate is the **exact structural cross-cancer analog**: SFTPC (canonical lung epithelial marker, saturated for LUAD T-vs-N, baseline=0.98) minus a proliferation marker (MKI67) \u2014 same template as `CA9 \u2212 normal_tissue_marker` on KIRC T-vs-N. The ceiling-effect pattern generalizes across cancers.\n\n**Applying the pre-registered gates:**\n\n| Gate | Threshold | Value | Pass? |\n|---|---|---|---|\n| perm_p < 0.05 | 0.05 | 0.001 | \u2705 |\n| ci_lower > 0.6 | 0.6 | 0.95 | \u2705 |\n| **delta_baseline > 0.05** | 0.05 | **0.011** | \u274c |\n| **delta_confound > 0.03** | 0.03 (non-null here) | **0.005** | \u274c |\n| decoy_p < 0.05 | 0.05 | 0.0 | \u2705 |\n\nBest-single AUC = 0.98 \u2192 law AUC = 0.991 is only +0.011 lift. Classic saturation. `delta_confound = 0.005` is a real numeric value (not a permitted null), and it is below 0.03, so it also fails. Two gates fail.\n\n## Verdict: **FAIL**\n\nFailing gates: `delta_baseline` (0.011 < 0.05) and `delta_confound` (0.005 < 0.03).## Summary\n\n**Verdict: FAIL**\n\n**Failing gates:**\n- `delta_baseline = 0.011` < 0.05 threshold\n- `delta_confound = 0.005` < 0.03 threshold (this is a real numeric value, not a permitted null)\n\n**Passing gates:** `perm_p` (0.001), `ci_lower` (0.95), `decoy_p` (0.0) \u2014 but these are expected to look strong when the baseline AUC is already 0.98; they do not rescue the failing lift-over-baseline gate, which is the whole purpose of that gate.\n\n**Prior-lesson application:** The KIRC ceiling-effect template (`CA9`-class saturation \u2192 compound lifts <0.05 are redundancy-reduction noise, not emergent law) generalizes cleanly to LUAD with `SFTPC` as the tissue-of-origin marker. The answer to the context question \"does the prior lesson generalize across cancers?\" is **yes** \u2014 and the lesson has been upgraded in memory to explicitly cover any tissue-marker-dominated TCGA T-vs-N cohort (LUAD/SFTPC, KIRC/CA9, THCA/TG, PRAD/KLK3, HCC/AFP, etc.), with routing to headroom tasks (grade/metastasis/survival) as the standing recommendation.",
+      "event_count": 21
+    }
+  ],
+  "memory_file_count_after": 1,
+  "lesson_entries_after_estimate": 5,
+  "memory_snapshot_after": [
+    {
+      "path": "/lessons.md",
+      "content_sha256": "9c31f05c8d238e90b946f6f494003c443c5481f671419dd33c91893f3ac7e863",
+      "content_len": 4601
+    }
+  ]
+}
