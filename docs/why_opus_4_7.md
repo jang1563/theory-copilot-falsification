@@ -25,6 +25,22 @@ the upcoming `outcomes` research-preview feature in the same terms on
 2026-04-23: *"It is effectively a self-verification loop... in order
 for you to think of this task as done, these things have to be true."*
 
+Jan Leike's
+[*Automated Alignment Researchers*](https://www.anthropic.com/research/automated-alignment-researchers)
+(Anthropic, 2026-04-14) makes the same requirement explicit in the
+opposite direction: *"any deployment of automated researchers will
+require evaluations that the AARs can't tamper with — and human
+inspections of both their results and their methods."* Theory Copilot
+is neither an AAR nor a replacement for human oversight; it is the
+tamper-resistant evaluation component that makes human inspection
+*scalable* — the deterministic gate's thresholds are committed in git
+before any fit runs, so the Opus-proposed law cannot re-negotiate the
+criterion mid-session, and the skeptic review reads the gate's output
+(not its own rationale). The AAR paper documents reward-hacking and
+non-generalisation as *"findings,"* not obstacles; Theory Copilot
+encodes the same stance by publishing the 194 rejections alongside
+the 9 survivors.
+
 Theory Copilot is the external script that turns native self-verification
 into an audit-grade measurement harness. The two layers compose:
 
@@ -134,6 +150,21 @@ but ungrounded. Theory Copilot's judgment function is a pre-registered
 statistical gate on independent biology — binary and experimentally
 grounded. Same loop shape, different truth conditions. That is the move
 biology needs.
+
+Anthropic's own engineering frames harnesses in the same posture.
+[*Harness design for long-running application development*](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+(2026-03-24) argues that *"every component in a harness encodes an
+assumption about what the model can't do on its own, and those
+assumptions are worth stress testing."* The 5-test falsification gate
+is the biology-side stress test of one specific such assumption — that
+Opus 4.7 alone would not distinguish a textbook HIF-axis compound from
+a novel metastasis signal on a small cohort without an external
+decisional surface. The companion engineering post
+[*Demystifying evals for AI agents*](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
+recommends *"deterministic graders where possible"* and flags LLM-as-
+judge eval-gaming explicitly — Theory Copilot's Python gate is that
+deterministic grader, at the scientific-claim level rather than the
+coding-task level.
 
 This rigor framing matches the NeurIPS 2025 AI4Science workshop *"[The Reach and Limits of AI for Scientific Discovery](https://ai4sciencecommunity.github.io/neurips25.html)"* call and has been named publicly by the Claude Code team as the desired product-development stance. At the 2026-04-22 *Built with Opus 4.7* live session (Tharik, Cloud Code team), the recommendation was:
 

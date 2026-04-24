@@ -29,7 +29,7 @@ Theory Copilot: Falsification-Aware Biological Law Discovery
 ## One-line pitch (140 char)
 
 ```
-Opus 4.7 rediscovers TOP2A-EPAS1; 5-test gate kills 194/203; separately-preregistered survival replay then kills our own H1 extension.
+Opus 4.7 rediscovers TOP2A-EPAS1; 5-test gate kills 194/203; separate pre-registered survival replay then kills our own H1 extension.
 ```
 (140 chars.)
 
@@ -99,20 +99,18 @@ a different session.
 
 ---
 
-## Prize category justification (100 words, 98 counted)
+## Prize category justification (100 words, 95 counted)
 
-**Best Claude Managed Agents ($5K).** Public-beta-only. Three paths:
-B (live), A (live PhL-9 sequential 3-session + **v2 on real TCGA-KIRC**
-PhL-9v2), C (live PhL-8 `/fire` 200 OK).
-Plus **Memory public beta (integrated 2026-04-23, day-of)**: Skeptic
-writes rejection lessons to a memory store; fresh sessions read,
-quote, and **refine** prior lessons verbatim. PhL-10 + PhL-12 grow
-the chain to 8 entries and show the ceiling-effect rule generalizing
-across cancers (KIRC→LUAD→PRAD/KLK3). Server-side persistence verified
-via raw `/v1/memory_stores/*` API. Our own H1 LLM-SR extension was
-killed by the separately-pre-registered IMmotion150 survival replay
-gate (PhL-1, NOT the TCGA classification gate). Verification as working
-code.
+**Best Claude Managed Agents.** Public-beta-only. Three paths: B
+(live), A (PhL-9 sequential 3-session + PhL-9v2 on real TCGA-KIRC),
+C (PhL-8 `/fire` HTTP 200). Plus **Memory public beta (integrated
+2026-04-23 day-of)**: Skeptic writes rejection lessons; fresh
+sessions read, quote, and refine them. PhL-10 + PhL-12 grow the chain
+to 8 entries with the ceiling-effect rule generalizing KIRC→LUAD→PRAD.
+Server-side persistence verified via raw `/v1/memory_stores/*` API.
+Our own H1 LLM-SR extension was killed by the separately pre-registered
+IMmotion150 survival replay (PhL-1, not the TCGA classification gate).
+Verification as working code.
 
 ---
 
@@ -132,11 +130,11 @@ Repo has been public since 2026-04-23 19:32 ET.
 [to be pasted on 4/26 morning after Loom render]
 ```
 
-Canonical narration: `docs/loom_narration_final_90s.md` (178 words,
-76-89 s, six segments, opens with biomedical-researcher confirmation-
-bias hook). Shot-list / rehearsal assets: `docs/loom_script.md`
-(pre-narration shot list, 6 cuts, single terminal + browser, no
-overlays). Fallback GIF path documented for upload failures.
+Canonical narration: `docs/loom_narration_final_90s.md` (194 words,
+83-97 s, six segments, opens with biomedical-researcher confirmation-
+bias hook + published-ccA/ccB-axis unseeded-rediscovery citation).
+Shot-list / rehearsal assets: `docs/loom_script.md` (pre-narration
+shot list, 6 cuts, single terminal + browser, no overlays).
 
 ---
 

@@ -6,6 +6,42 @@ shipped 2026-04-08), Memory public beta (shipped 2026-04-23), and
 Claude Code Routines research preview (`experimental-cc-routine-2026-04-01`,
 shipped 2026-04-14).*
 
+## Why this maps to the Managed Agents engineering posture
+
+Anthropic's engineering blog
+[*Scaling Managed Agents*](https://www.anthropic.com/engineering/managed-agents)
+defines the product abstraction as *"decoupling the brain from the
+hands,"* virtualising the agent into three components: *"a session (the
+append-only log of everything that happened), a harness (the loop that
+calls Claude and routes Claude's tool calls to the relevant
+infrastructure), and a sandbox."* Theory Copilot exercises each of
+those three substrates as scientific-audit surfaces:
+
+- **Session (append-only log)** — PhL-4 `persist_session_events` pages
+  `events.list` to JSONL and `replay_session_from_log` re-injects
+  user-origin events into a fresh session. The event log becomes the
+  reproducibility object: a survivor claim has to be derivable from
+  the committed events, not only from the committed source code.
+- **Harness (loop + tool routing)** — Path A sequential three-session
+  chain (PhL-9 + PhL-9v2 on real TCGA-KIRC) with structured-JSON
+  handoff isolates the Skeptic's context from the Proposer's
+  reasoning tokens. The per-session harness boundary is the mechanism
+  that keeps the Skeptic from rationalising its own proposal into
+  passing.
+- **Sandbox (tool substrate)** — public-beta `agent_toolset_20260401`
+  (Path B) + `beta.files.upload()` mounts (PhL-9v2) + MCP biology
+  validator (PhL-2) — every tool call is logged as an event, every
+  uploaded file is referenceable by `file_id`, every memory write is
+  immutable-versioned.
+
+The AAR paper ([Leike et al.,
+2026-04-14](https://www.anthropic.com/research/automated-alignment-researchers))
+requires *"evaluations that the AARs can't tamper with"* — the sessions,
+harnesses, and sandboxes here are the tamper-resistant substrate;
+the pre-registered 5-test gate is the tamper-resistant evaluation;
+together they make human inspection (`make audit`, `make smoke`,
+`make prereg-audit`, the rejection log) *scalable*, not obsolete.
+
 ## Compliance note
 
 - **Public-beta features only** in the submitted live run, per the
