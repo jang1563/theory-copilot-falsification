@@ -1,0 +1,218 @@
+{
+  "opus_4_7": {
+    "total_unique_survivors": 5,
+    "first_survivor_iter": 1,
+    "final_held_out_auroc": 0.7470703125,
+    "pathway_diversity": 7,
+    "skeleton_evolution": [
+      {
+        "iteration": 1,
+        "skeleton": "TOP2A - EPAS1",
+        "pathway": "Proliferation_vs_HIF",
+        "outcome": "positive",
+        "survivors": 5,
+        "best_train_auc": 0.719,
+        "best_held_out_auc": 0.747,
+        "doom_loop": false
+      },
+      {
+        "iteration": 2,
+        "skeleton": "TOP2A / EPAS1",
+        "pathway": "Proliferation vs HIF",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.509,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 3,
+        "skeleton": "CA9 + VEGFA - LRP2",
+        "pathway": "HIF vs Renal_tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.531,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 4,
+        "skeleton": "TOP2A / EPAS1",
+        "pathway": "Proliferation vs HIF",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.509,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 5,
+        "skeleton": "LDHA / CUBN",
+        "pathway": "Warburg / Renal_tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.53,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 6,
+        "skeleton": "VEGFA - PAX8",
+        "pathway": "HIF vs Renal_tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.555,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 7,
+        "skeleton": "log1p(SPP1) - log1p(CA9)",
+        "pathway": "Metastasis_EMT vs HIF",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.5,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 8,
+        "skeleton": "TOP2A * CA9 / EPAS1",
+        "pathway": "Proliferation x HIF",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.608,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 9,
+        "skeleton": "TOP2A / EPAS1",
+        "pathway": "Proliferation vs HIF",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.509,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 10,
+        "skeleton": "log1p(LDHA) - log1p(LRP2)",
+        "pathway": "Warburg vs Renal_tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.5,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      }
+    ]
+  },
+  "sonnet_4_6": {
+    "total_unique_survivors": 5,
+    "first_survivor_iter": 1,
+    "final_held_out_auroc": 0.7470703125,
+    "pathway_diversity": 7,
+    "skeleton_evolution": [
+      {
+        "iteration": 1,
+        "skeleton": "TOP2A - EPAS1",
+        "pathway": "Proliferation_vs_HIF",
+        "outcome": "positive",
+        "survivors": 5,
+        "best_train_auc": 0.719,
+        "best_held_out_auc": 0.747,
+        "doom_loop": false
+      },
+      {
+        "iteration": 2,
+        "skeleton": "TOP2A / EPAS1",
+        "pathway": "Proliferation / HIF",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.509,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 3,
+        "skeleton": "CA9 - PTGER3",
+        "pathway": "HIF vs Renal_tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.535,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 4,
+        "skeleton": "TOP2A - AGXT",
+        "pathway": "Proliferation / Renal_tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.646,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 5,
+        "skeleton": "log1p(MMP9) + log1p(S100A4) - log1p(EPAS1)",
+        "pathway": "Metastasis_EMT",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.5,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 6,
+        "skeleton": "TOP2A / (LRP2 + 1)",
+        "pathway": "Proliferation / Renal_tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.509,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 7,
+        "skeleton": "TOP2A - EPAS1",
+        "pathway": "Proliferation_vs_HIF",
+        "outcome": "marginal",
+        "survivors": 0,
+        "best_train_auc": 0.719,
+        "best_held_out_auc": 0.747,
+        "doom_loop": false
+      },
+      {
+        "iteration": 8,
+        "skeleton": "TOP2A / (EPAS1 + 1)",
+        "pathway": "Proliferation / HIF",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.566,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 9,
+        "skeleton": "log1p(LDHA) - log1p(AGXT)",
+        "pathway": "Warburg_vs_Tubule",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.5,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      },
+      {
+        "iteration": 10,
+        "skeleton": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+        "pathway": "HIF_axis",
+        "outcome": "negative",
+        "survivors": 0,
+        "best_train_auc": 0.5,
+        "best_held_out_auc": 0.5,
+        "doom_loop": false
+      }
+    ]
+  }
+}

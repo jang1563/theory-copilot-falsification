@@ -1,6 +1,6 @@
 # STATUS — theory-copilot-falsification
 
-**Last updated:** 2026-04-24 (deep-research rebuild + PhL-9v2 real-data + PhL-11/12/13 shipped + Codex stale-phrase pass)
+**Last updated:** 2026-04-24 (deep-research rebuild + PhL-9v2 real-data + PhL-11/12/13 shipped + Codex stale-phrase pass + PhL-14 LLM-SR 10-iter convergence in progress)
 **Submit window:** 2026-04-26 20:00 ET (T-2d 22h)
 **Judging:** 2026-04-28 12:00 ET final round
 **Repo:** https://github.com/jang1563/theory-copilot-falsification (public since 2026-04-23 19:32 ET)
@@ -10,7 +10,7 @@
 
 ## 🎯 Submission-ready snapshot
 
-- **14 PhL artefacts** (PhL-1 to PhL-13 + PhL-9v2) all live, all committed, all pushed.
+- **15 PhL artefacts** (PhL-1 to PhL-14 + PhL-9v2) all live, all committed.
 - **Review-handoff** (`plans/theory_copilot_review_handoff_2026_04_23.md`) processed: 12 of 20 findings fixed (P0 + P1 batch); 8 deferred with explicit rationale in commit messages.
 - **`make all`** one-command reproduction of tests + audit + prereg-audit + rejection-log + paper PDF (no API key required).
 - **`.devcontainer/devcontainer.json`** — judges can click "Open in GitHub Codespaces" and reach `make test` green in ~2 min.
@@ -35,6 +35,7 @@
 | **PhL-11** | Mixed — Opus 4.7 vs Sonnet 4.6 3-turn adversarial: Opus literal per-attack rule following (5 vs 1 CRISPR KO); both 100% concede (Petri-2.0 consistent) | `results/live_evidence/phl11_adversarial_critique/SUMMARY.md` |
 | **PhL-12** | PASS — Memory chain deepened 5 → **8** lessons; agent quoted + applied prior meta-rules across 3 edge cases | `results/live_evidence/phl12_memory_chain_deepen/SUMMARY.md` |
 | **PhL-13** | **DISCOVERY SIGNAL** — TOP2A-EPAS1 in 0/10 Opus 4.7 zero-shot top picks; refutes LLM-SRBench memorization concern | `results/live_evidence/phl13_memorization_audit/SUMMARY.md` |
+| **PhL-14** | HONEST NULL — 10-iter × 2-model × 6-variant sweep: 18 post-seed LLM-proposed skeleton families, 0 clear the gate; gate is the binding constraint (not the LLM proposer) | `results/overhang/llm_sr_10iter/SUMMARY.md` |
 
 Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/H/I depth + IMmotion150 PhF-3 replay + paper) — full index at `docs/ARTIFACT_INDEX.md`.
 
