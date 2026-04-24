@@ -85,11 +85,17 @@ having access to HPA — an external sanity check on direction.
 
 ### Why this was not possible 6 months ago
 
-- **Opus 4.7 1M-context, extended thinking, Managed Agents** — the
-  Proposer/Skeptic/Interpreter role split stays coherent across long
-  context; Opus 4.6 and Sonnet 4.6 (measured in our Phase-E2 180-call
-  ablation, `results/ablation/SUMMARY.md`) produce different verdict
-  distributions on the same gate output.
+- **Opus 4.7 adaptive thinking + Managed Agents session isolation** —
+  the Proposer/Skeptic/Interpreter role split stays coherent across
+  adversarial multi-turn prompting because the Skeptic reads the gate
+  output, not the Proposer's reasoning tokens; Opus 4.6 and Sonnet 4.6
+  (measured in our Phase-E2 180-call ablation,
+  `results/ablation/SUMMARY.md`) produce different verdict
+  distributions on the same gate output (Sonnet 0/60 PASS, Opus
+  10/60, Haiku 14/60). Context window is not the differentiator —
+  Opus 4.7, Sonnet 4.6, and Opus 4.6 all support 1M-token context in
+  the production API. The measured differentiator is
+  reasoning/instruction-following calibration under dual-role prompts.
 - **Managed Agents GA on 2026-04-08** — the Skeptic turn runs in a
   separate session that cannot re-read the Proposer's internal tokens.
   Pre-4.7 Managed Agents did not support this cleanly at the $0.08/hr
@@ -218,11 +224,12 @@ guess because independent biology says no. Concretely:
 - Make it live via the GitHub Pages workflow at
   `.github/workflows/pages.yml` (deploys on every main push).
 
-### Opus 4.7 1M-context cross-reasoning over the rejection log (H2)
+### Opus 4.7 cross-reasoning synthesis over the rejection log (H2)
 
 On 2026-04-23 we ran `make h2` (49.7 seconds, single Opus 4.7 call,
-14,212-char prompt): the 74 rejection records + 9 survivor records + 5
-paper abstracts were loaded into one prompt, and Opus synthesized:
+14,212-char prompt ≈ 3,553 tokens): the 74 rejection records + 9
+survivor records + 5 paper abstracts were loaded into one prompt, and
+Opus synthesized:
 
 - **5 new equation skeletons** (each with a Δbaseline hypothesis and
   pre-registered skeptic test — Opus writes the kill-test before we
@@ -234,14 +241,23 @@ paper abstracts were loaded into one prompt, and Opus synthesized:
   fail Δbaseline (CA9 ceiling). Only Proliferation − HIF-2α survives
   the +0.05 hurdle.
 
+Honest scoping: the prompt occupies ~0.35% of Opus 4.7's 1M context
+cap and fits comfortably in Sonnet 4.6's 1M context too. This is an
+**adaptive-thinking synthesis** demonstration, *not* a context-window-
+gated capability demo — every major frontier model's production API
+(Sonnet 4.6, Opus 4.6, several 200k-context models) would accept this
+prompt. The research signal is the *quality* of the synthesis given
+the gate output, not the context size.
+
 Critically, Opus's invariant condition #1 ("compound MUST contain a
 proliferation marker AND a HIF marker in opposite sign") was
 *independently* confirmed by Lane I · I2's exhaustive 990-pair
 enumeration: 15 of top 20 pairs contain a proliferation gene. Two
-methods — LLM 1M-context synthesis and exhaustive empirical
-enumeration — arrive at the same sufficient condition. This is the
-rare case where LLM reasoning produces a structural rule that is
-*empirically testable on a different scale of evidence*.
+methods — LLM structural synthesis under adaptive thinking, and
+exhaustive empirical enumeration — arrive at the same sufficient
+condition. This is the rare case where LLM reasoning produces a
+structural rule that is *empirically testable on a different scale
+of evidence*.
 
 ---
 

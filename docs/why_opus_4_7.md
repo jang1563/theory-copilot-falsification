@@ -288,11 +288,14 @@ them is an architectural seam most implementations conflate.
   only. Adaptive-thinking content drops after the turn completes.
 
 So the durable log is a *conclusions-and-output substrate* with
-attested timing, not a *reasoning-trace substrate*. Our 1M-context
-synthesis (`src/opus_1m_synthesis.py`) operates on the former — it
-ingests rejection records and survivor equations, not prior thinking
-tokens — so the architecture stands. This scoping is stated here to
-avoid a narrow overclaim that other entries might accidentally make.
+attested timing, not a *reasoning-trace substrate*. Our Opus-4.7
+cross-reasoning synthesis (`src/opus_1m_synthesis.py`; actual prompt
+~3,553 tokens ≪ the 1M cap, though both Opus 4.7 and Sonnet 4.6
+support 1M so the demo is not context-gated) operates on the former —
+it ingests rejection records and survivor equations, not prior
+thinking tokens — so the architecture stands. This scoping is stated
+here to avoid a narrow overclaim that other entries might accidentally
+make.
 
 **Hackathon fairness caveat (2026-04-23).** Anthropic restricts
 participants to public-beta Managed Agents features; Agent Teams
