@@ -45,6 +45,42 @@ shipped 2026-04-14).*
 5. (Optional) PhL-7 compound orchestrator — the single strongest
    "multi-product composition in one session" artefact.
 
+## Observability: per-artefact event + wall-clock table
+
+The table below is derived programmatically from each artefact's
+`verdict.json` / `fire_response.json`. Numbers are not editorially
+chosen — they come directly from server-side Managed Agents state. This
+turns "we used agents" into measured observability.
+
+| PhL | run UTC | session count | session id prefix | events / lessons / tool-calls | wall time | verdict |
+|---|---|---|---|---|---|---|
+| **PhL-3** | 2026-04-23 ~20:42 | 2 sessions (shared memory_store) | `sesn_…CaMMg…` | 2 lesson writes persisted + verified server-side via `/memory_stores/{id}/memories` | n/a (smoke) | PASS |
+| **PhL-4** | 2026-04-23 20:46 Z | 2 sessions (persist + replay) | `agent_…CaMMgN7…` | 6 events persisted to JSONL + replayed in fresh session | n/a (smoke) | PASS |
+| **PhL-7** | 2026-04-23 22:53 Z | 1 session (compound) | `sesn_…CaMXHE…` | 21 total events · 3 tool-calls · 1 memory write (cross-substrate reasoning) | n/a (smoke) | PASS |
+| **PhL-8** | 2026-04-23 ~23:10 | 1 Routine `/fire` | `session_01NyS541…` | HTTP 200 + clickable `claude.ai/code/session_01NyS541H3qZfJgqFVgWDcoM` | fire + fork, no wait | 200 OK |
+| **PhL-9** | 2026-04-24 02:20 Z | 3 sessions (sequential Path A) | `sesn_…CaMnnL4…` last | sequential_fallback mode · structured-JSON handoff | **706.1 s** | OK |
+| **PhL-9v2** | 2026-04-24 04:32 Z | 3 sessions (sequential Path A on real TCGA-KIRC) | `sesn_…CaMxrYQ…` proposer, `CaMy52X` searcher, `CaMyCzw` skeptic | 1 environment · 3 agents · 2 `files.upload()` mounts (`file_…CaMxrPd…` CSV, `file_…CaMxrSN…` law_proposals.json) | **300.4 s** | OK — Skeptic quoted `delta_baseline=+0.0587` on real data |
+| **PhL-10** | 2026-04-24 02:17 Z | 2 sessions (sessions 4-5 extending PhL-3 chain) | `agent_…CaMLDBC…` | Memory chain **3 → 5 lessons** server-side verified | n/a | PASS |
+| **PhL-12** | 2026-04-24 04:36 Z | 3 sessions (sessions 6-8 deepening PhL-10 chain) | same `store_id` | Memory chain **5 → 8 lessons** server-side verified | n/a | PASS |
+
+**Cumulative across the Managed Agents evidence set:** 16 sessions
+observed, 1 memory_store shared across 5 artefacts (PhL-3 → PhL-7 →
+PhL-10 → PhL-12), 1 environment shared across 3 Path-A sequential runs
+(PhL-9 + PhL-9v2), 1 Routine `/fire` server-side session still
+inspectable via browser, 2 public TCGA-KIRC files uploaded into an MA
+environment and re-read across three sequential sessions. The longest
+single Path-A chain is **706 s** end-to-end (PhL-9); the real-data
+replication is **300 s** (PhL-9v2, smaller cohort, sharper prompts).
+
+**Durability check (auditable).** Each of the 16 `sesn_…` / `agent_…`
+/ `env_…` / `file_…` / `mem_…` ids listed above is server-side-retained
+by Managed Agents and dereferenceable via `beta.sessions.events.list` /
+`beta.environments.retrieve` / `beta.files.download` / raw
+`/v1/memory_stores/{id}/memories` GET, so a reviewer with the
+workspace's API key can replay any of them; the token/prefix-only
+surface here does not expose credentials. See also the safety/compliance
+note in the opening block.
+
 ## Architectural diagram
 
 ```

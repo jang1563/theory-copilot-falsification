@@ -75,8 +75,9 @@ the submission.
 | **Pre-registration framework** | `preregistrations/*.yaml` (21 files), `src/preregistration.py` | Tamper-evidence — every YAML is committed once, bound to a `emitted_git_sha`; `make prereg-audit` machine-verifies the chain |
 | **MCP biology validator** | `src/mcp_biology_validator.py`, `.mcp.json` | PubMed E-utilities + GDC REST tools, exercisable both via MCP and direct CLI |
 | **Console script** | `pyproject.toml [project.scripts]`, `src/theory_copilot/cli.py` | `theory-copilot` CLI with `compare` / `replay` / `loop` / `persist-events` / `replay-events` / `plug-in-dataset` subcommands |
-| **`make` targets** | `Makefile` | `make venv`, `make test` (105/105 local-runnable), `make audit`, `make h1`, `make h2`, `make paper`, `make prereg-audit`, `make rejection-log`, `make skeptic-review` |
-| **Data provenance** | `data/SHA256SUMS` | 13 CSVs hashed; reviewer can `shasum -c data/SHA256SUMS` |
+| **`make` targets** | `Makefile` | `make venv`, `make test` (105/105 local-runnable), `make smoke` (~22s fast judge-visible confidence check), `make audit`, `make h1`, `make h2`, `make paper`, `make prereg-audit`, `make rejection-log`, `make skeptic-review` |
+| **Data provenance** | `data/SHA256SUMS` + `docs/public_data_provenance.md` | 13 CSVs hashed; every CSV's upstream source / access tier / builder script / submission role listed in the provenance doc; reviewer can `shasum -c data/SHA256SUMS` offline |
+| **Managed Agents observability** | `docs/managed_agents_evidence_card.md` | Per-artefact event + wall-clock table: 16 sessions, 8-lesson shared memory_store, 706 s Path-A chain (PhL-9) + 300 s real-data Path-A (PhL-9v2), 21-event compound orchestrator (PhL-7), Routine session URL (PhL-8) |
 | **Compliance** | `.audit-patterns`, `make audit` | Catches institutional identifiers + API key shapes (`sk-ant-api{2}-{6+}`); blocks commits that introduce leaks |
 
 ## Doc reading order for technical reviewers
