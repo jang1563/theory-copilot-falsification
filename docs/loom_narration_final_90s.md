@@ -52,12 +52,12 @@ rejection log scrolled to CA9 row.**
 **Cut to image viewer A — survivor_scatter PNG, then pane D —
 interpretation markdown.**
 
-> "Expand the panel from eleven to forty-five genes. Same gate, same
-> thresholds. Nine candidates pass on metastasis. The simplest —
-> [breath] top-two-A minus EE-pass-one — says: when a tumour's
-> proliferation program runs ahead of its HIF-two-alpha program, it's
-> more likely to be metastatic. That's the published see-see-A vs
-> see-see-B subtype axis. PySR re-derived it from scratch."
+> "Expand the panel from eleven to forty-five genes. Same gate. Nine
+> candidates pass on metastasis. The simplest — top-two-A minus
+> EE-pass-one — says proliferation running ahead of HIF-two-alpha
+> predicts metastasis. [breath] **That is the published see-see-A vs
+> see-see-B ccRCC subtype axis — Brannon twenty-ten, ClearCode
+> thirty-four. Our symbolic regression re-derived it unseeded."
 
 ## 1:05 – 1:20 — External validation + own-output kill (34 words)
 
@@ -86,14 +86,20 @@ live, then terminal — type `make audit`, wait for `OK`.**
 | 0:00-0:10 Hook | 22 | 22 | 9 s | 11 s |
 | 0:10-0:25 Architecture | 30 | 52 | 13 s | 15 s |
 | 0:25-0:45 Rejection | 38 | 90 | 16 s | 19 s |
-| 0:45-1:05 Survivor | 36 | 126 | 15 s | 18 s |
-| 1:05-1:20 Validation + kill | 34 | 160 | 15 s | 17 s |
-| 1:20-1:30 Close | 18 | 178 | 8 s | 9 s |
-| **TOTAL** | **178** | — | **~76 s** | **~89 s** |
+| 0:45-1:07 Survivor (with citation emphasis) | 52 | 142 | 22 s | 26 s |
+| 1:07-1:22 Validation + kill | 34 | 176 | 15 s | 17 s |
+| 1:22-1:30 Close | 18 | 194 | 8 s | 9 s |
+| **TOTAL** | **194** | — | **~83 s** | **~97 s** |
 
-Budget: 90 s target, 120 s hard cap. At 140 WPM the script runs 76 s
-(room for B-roll cuts). At 120 WPM (slower, more authoritative pace)
-it runs 89 s — still under the 90 s target.
+Budget: 90 s target, 120 s hard cap. At 140 WPM the script runs 83 s
+(under 90 s target — 7 s margin). At 120 WPM (slower, more authoritative
+pace) it runs 97 s — slightly over the soft 90 s target but well under
+the 120 s hard cap.
+
+If recording time pressure demands 90 s at slower pace, drop the
+"Brannon twenty-ten, ClearCode thirty-four" citation line from the
+survivor segment — saves 5 words / 2 s. The citation lives in
+`docs/survivor_narrative.md §Prior art` for anyone who pauses the video.
 
 ## Pre-flight (before camera rolls)
 

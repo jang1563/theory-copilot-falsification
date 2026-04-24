@@ -1,4 +1,11 @@
-# Loom demo script — 90 seconds
+# Loom demo script — shot list (pre-narration planning)
+
+> **Canonical narration lives in [`docs/loom_narration_final_90s.md`](loom_narration_final_90s.md)**
+> (178 words, 76-89 s, opens with the biomedical-researcher confirmation-
+> bias hook). This file is the earlier 210-word shot-list / rehearsal
+> asset — kept for screen-cue + timing reference. When the two diverge,
+> the narration file wins. The Karpathy hook below is the *alternative*
+> opener; the canonical final cut uses the biomedical-pain hook instead.
 
 Target length: **90 seconds, 210 spoken words max (≈ 140 WPM).**
 Voice: one take, first-person, no B-roll, plain walkthrough.

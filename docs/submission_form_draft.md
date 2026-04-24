@@ -55,24 +55,22 @@ same IMmotion150 survival gate killed it (PhL-1, C-index dropped to
 
 ---
 
-## Claude Opus 4.7 usage (150 words, 147 counted)
+## Claude Opus 4.7 usage (150 words, 125 counted)
 
-Four Opus 4.7 calls per loop, all with
+Four Opus 4.7 calls per loop with
 `thinking={"type":"adaptive","display":"summarized"}` and
-`output_config={"effort":"high"}`. `budget_tokens` is removed on Opus
-4.7 (400 error); `effort` is the control. (1) Scientist proposes
-three-to-five compact law families and writes the ex-ante skeptic
-test for each, before any fit. (2) The pre-registered test is then
-executed by plain Python, not by Opus. (3) Skeptic reviews the
-specific metric pattern (`perm_p = 0.049` is weaker than `0.001`;
-`ci_lower = 0.61` is marginal) and emits PASS / FAIL /
-NEEDS_MORE_TESTS with a written justification. (4) Interpreter
-writes the mechanism hypothesis and, critically, the "what this is
-not" paragraph. Extended thinking is what keeps the Skeptic turn
-from collapsing across the dual-role prompt. Measured in our 180-call
-ablation (`results/ablation/SUMMARY.md`): Sonnet 4.6 emits **0 PASS of
-60** on gate-PASS candidates (full dissent collapse); Opus 4.7 emits
-**10 of 60** (PASS when warranted). Same prompt, same metrics.
+`output_config={"effort":"high"}`. (1) Proposer emits 3-5 compact law
+families and the ex-ante skeptic test for each, before any fit. (2)
+The test is executed by plain Python, not Opus. (3) Skeptic reviews
+the specific metric pattern (`perm_p=0.049` is weaker than `0.001`;
+`ci_lower=0.61` is marginal) and emits PASS / FAIL / NEEDS_MORE_TESTS.
+(4) Interpreter writes the mechanism hypothesis and the "what this is
+not" paragraph. Adaptive thinking keeps the Skeptic turn from
+collapsing across the dual-role prompt: in our 180-call ablation,
+Sonnet 4.6 emits **0 PASS of 60** on gate-PASS candidates (full dissent
+collapse); Opus 4.7 emits **10 of 60**. **PhL-13 memorization audit:
+Opus 4.7 does not retrieve TOP2A−EPAS1 zero-shot (0/10 repeats) —
+refutes the LLM-SRBench memorization concern.**
 
 ---
 
