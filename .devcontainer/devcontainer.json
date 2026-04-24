@@ -1,0 +1,37 @@
+{
+  "name": "theory-copilot-falsification",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "python -m pip install --upgrade pip && python -m pip install -e . && python -m pip install -e .[test]",
+  "postStartCommand": "make audit || true",
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "anthropic.claude-code"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": ["tests"]
+      }
+    },
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "docs/submission_description.md",
+        "docs/methodology.md"
+      ]
+    }
+  }
+}
