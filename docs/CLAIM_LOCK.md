@@ -171,12 +171,41 @@ Triggered by `rg` in P0.1:
 
 ## Cross-check command
 
-Before every submission-bound commit, run from repo root:
+Before every submission-bound commit, run from repo root. Two passes:
 
+**Pass 1 — forbidden phrases:**
 ```bash
-rg -n "194 of 204|194/204|204 candidates|10 survivor|full five-test|same gate|repo private|5-session|one flag-flip|smaller models collapse|47/47|ci_width|open.source data|diagnostic tool|universal biological law" \
+rg -n "194 of 204|194/204|204 candidates|10 survivor|full five-test pass|same gate on IMmotion|same gate.*survival|repo private|5-session|one flag-flip|smaller models collapse to rubber|47/47|ci_width|open.source data|diagnostic tool|universal biological law" \
   README.md docs STATUS.md CLAUDE.md results -g '*.md' \
-  | rg -v "(historical|was the pre-registered|previously|previous why_opus|not rubber|pre-registered strong form|rubber-stamp agreement. This ablation)"
+  -g '!docs/CLAIM_LOCK.md' \
+  -g '!docs/loom_narration_final_90s.md' \
+  -g '!results/qa/SUMMARY_qa.md' \
+  | rg -v "(historical|was the pre-registered|previously|previous why_opus|not rubber|pre-registered strong form|rubber-stamp agreement. This ablation|This is NOT the same gate|perm_p_fdr, ci_lower, ci_width, delta)"
+```
+*Excludes: `CLAIM_LOCK.md` (documents the forbidden list), and
+`loom_narration_final_90s.md` honest-framing trigger section
+(which cites the forbidden phrases as rules not-to-say). The `same gate`
+regex is scoped to IMmotion / survival context — "same gate" applied
+to TCGA panels/tasks/models is legitimate (cross-model ablation, the
+11→45-gene expansion, etc.) and does NOT trigger.*
+
+**Pass 2 — stale numbers (catches lock-table drift):**
+```bash
+# Memory chain must say 8 entries (not 3 or 5 — those are intermediate snapshots)
+rg -n "chain to (3|5) entries|(3|5) lesson entries|memory.chain.*(3|5)[^0-9]" \
+  README.md docs STATUS.md -g '*.md' \
+  | rg -v "(grew|extended|deepened|→)"
+# PhL-9 wall-time must be 706 s (PhL-9v2 is 300 s; do not swap)
+rg -n "PhL-9[^v0-9].*[0-9]+\s*s\b|sequential_fallback.*[0-9]+\s*s" \
+  README.md docs STATUS.md -g '*.md' \
+  | rg -v "706|300"
+# IMmotion150 n must be 263 (not 150 or 245); HR must be 1.36; C-index 0.601
+rg -n "IMmotion.*n\s*=\s*(?!263)" README.md docs -g '*.md'
+rg -n "IMmotion.*HR\s*=?\s*(?!1\.36)" README.md docs -g '*.md'
+# Flagship AUROC must be 0.726 (full-train) or 0.722 ± 0.078 (5-fold CV)
+rg -n "TOP2A.*EPAS1.*AUROC\s*0\.(?!726|722)" README.md docs -g '*.md'
 ```
 
-A clean result is the pre-flight check.
+Both passes MUST return zero results before `git push` on any
+submission-bound commit. If either fires, fix the drift rather than
+suppress it.

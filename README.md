@@ -12,9 +12,10 @@ Built by a biomedical postdoc for the *Built with Opus 4.7* Hackathon · April 2
 
 ## Read first (by persona)
 
-- **If you are evaluating the agentic / Claude-Code architecture (Boris-ish):**
-  start with [`docs/methodology.md §4`](docs/methodology.md) (three-agent
-  Managed Agents split with verified Path B run) and
+- **If you are evaluating the agentic / Claude-Code architecture:**
+  start with [`docs/methodology.md §4`](docs/methodology.md) (three
+  Managed Agents sessions with verification isolation and a verified
+  Path B run) and
   [`src/theory_copilot/managed_agent_runner.py`](src/theory_copilot/managed_agent_runner.py).
   Live agent / environment / session / stream trace is at
   [`results/live_evidence/04_managed_agents_e2e.log`](results/live_evidence/04_managed_agents_e2e.log).
@@ -24,7 +25,7 @@ Built by a biomedical postdoc for the *Built with Opus 4.7* Hackathon · April 2
   Routines `/fire` with local watch-dir fallback.
   Brain/body-decouple demo: `theory-copilot persist-events` +
   `replay-events` CLI two-liner.
-- **If you are evaluating developer experience (Lydia-ish):** `make
+- **If you are evaluating developer experience and reproducibility:** `make
   venv && make test && make audit` is the local-runnable happy path
   (105 tests, ~90 s, no API key needed). The `make demo` / `make
   demo-kirc` targets are scaffolding for the full pipeline (Opus call
@@ -38,8 +39,8 @@ Built by a biomedical postdoc for the *Built with Opus 4.7* Hackathon · April 2
   `src/track_a_survivor_plots.py`. `make audit` returns `OK` on
   every commit — the compliance check runs against a pattern file
   in `.audit-patterns`.
-- **If you are evaluating real-world impact and accessibility
-  (Jason-ish):** the project started as a bioinformatics-postdoc
+- **If you are evaluating real-world impact and accessibility:**
+  the project started as a bioinformatics-postdoc
   question about confirmation bias in AI-for-Science and ends with
   a concrete engineering artefact that rejects textbook biology the
   researcher had expected to survive and accepts a 2-gene subtype

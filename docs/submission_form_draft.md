@@ -76,34 +76,28 @@ ablation (`results/ablation/SUMMARY.md`): Sonnet 4.6 emits **0 PASS of
 
 ---
 
-## Claude Managed Agents usage (150 words, 141 counted)
+## Claude Managed Agents usage (150 words, 119 counted)
 
-Three-agent architecture (Proposer / Skeptic / Interpreter = Opus 4.7;
-Searcher = local PySR). Structured PASS / FAIL / NEEDS_MORE_TESTS
-output. Public-beta compliant per the 2026-04-23 hackathon fairness
-rule; research-preview features disabled.
+**Verification-isolated Managed Agents orchestration.** Three separate
+public-beta sessions (Proposer / Skeptic / Interpreter = Opus 4.7;
+Searcher = local PySR) with separate context windows and structured-
+JSON handoff — the Skeptic never sees the Proposer's reasoning tokens,
+so it cannot rationalise its own proposal into passing. Public-beta
+compliant per the 2026-04-23 hackathon fairness rule; research-preview
+`callable_agents` disabled.
 
-- **Path B — `agent_toolset_20260401`, live-verified.** End-to-end
-  trace `results/live_evidence/04_managed_agents_e2e.log` covers
+- **Path B (live).** Single-agent `agent_toolset_20260401`; end-to-end
   `agents.create → environments.create → sessions.create → stream →
-  send → status_idle`.
-- **Path A — sequential chain (live, PhL-9).** Three Path-B sessions
-  with structured-JSON handoff, `delegation_mode=sequential_fallback`,
-  706 s wall, `results/live_evidence/phl9_path_a_chain/verdict.json`.
-  Agent Teams `callable_agents` code path retained as architectural
-  reference, env-flag-guarded, not exercised.
-- **Path C — Claude Code Routines.** `POST /v1/claude_code/routines/
-  {trig_id}/fire` (`routines_client.py`); `--use-routine` flag swaps
-  the local watch-dir loop for cloud-triggered execution. Triggers:
-  `pull_request`, `release`. Live `/fire` HTTP 200 (PhL-8):
+  send → status_idle` at `04_managed_agents_e2e.log`.
+- **Path A (live, PhL-9 + PhL-9v2 on real TCGA-KIRC).** Sequential
+  three-session chain, structured-JSON handoff,
+  `delegation_mode=sequential_fallback`, 706 s wall.
+- **Path C (live, PhL-8).** `/fire` HTTP 200 +
   https://claude.ai/code/session_01NyS541H3qZfJgqFVgWDcoM
 
-**Durability primitives:** `persist_session_events` pages
-`sessions.events.list` to JSONL; `replay_session_from_log` re-injects
-user-origin events into a different session — working code, not prose.
-
-All paths return `{session_id, agent_id, output, status}`; Path A adds
-`delegation_mode`, Path C adds `routine_session_url`.
+**Durability.** `persist_session_events` pages `sessions.events.list`
+to JSONL; `replay_session_from_log` re-injects user-origin events into
+a different session.
 
 ---
 
@@ -114,12 +108,13 @@ B (live), A (live PhL-9 sequential 3-session + **v2 on real TCGA-KIRC**
 PhL-9v2), C (live PhL-8 `/fire` 200 OK).
 Plus **Memory public beta (integrated 2026-04-23, day-of)**: Skeptic
 writes rejection lessons to a memory store; fresh sessions read,
-quote, and **refine** prior lessons verbatim. PhL-10 grows the chain
-to 5 entries and shows the ceiling-effect rule generalizing across
-cancers (KIRC→LUAD). Server-side persistence verified via raw
-`/v1/memory_stores/*` API. Our own H1 LLM-SR extension was killed by the separately-pre-registered
-IMmotion150 survival replay gate (PhL-1, NOT the TCGA classification
-gate). Verification as working code.
+quote, and **refine** prior lessons verbatim. PhL-10 + PhL-12 grow
+the chain to 8 entries and show the ceiling-effect rule generalizing
+across cancers (KIRC→LUAD→PRAD/KLK3). Server-side persistence verified
+via raw `/v1/memory_stores/*` API. Our own H1 LLM-SR extension was
+killed by the separately-pre-registered IMmotion150 survival replay
+gate (PhL-1, NOT the TCGA classification gate). Verification as working
+code.
 
 ---
 
@@ -139,9 +134,11 @@ Repo has been public since 2026-04-23 19:32 ET.
 [to be pasted on 4/26 morning after Loom render]
 ```
 
-Script: `docs/loom_script.md` (90 s, six cuts, single terminal +
-browser, no overlays). Fallback GIF path documented in the same file
-for upload failures.
+Canonical narration: `docs/loom_narration_final_90s.md` (178 words,
+76-89 s, six segments, opens with biomedical-researcher confirmation-
+bias hook). Shot-list / rehearsal assets: `docs/loom_script.md`
+(pre-narration shot list, 6 cuts, single terminal + browser, no
+overlays). Fallback GIF path documented for upload failures.
 
 ---
 

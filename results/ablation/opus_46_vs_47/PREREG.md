@@ -49,8 +49,9 @@ confirmatory powered trial.
 | Reversal | Unchanged | Used as honest caveat: biology task may not exercise the same capability Anthropic benchmarked |
 
 In all three cases the primary "Rejection-as-Product" thesis
-(the 5-test gate rejects 194/204 regardless of which frontier
-model is in the Skeptic seat) is independent of the outcome.
+(the 5-test classification gate rejects 194 of 203 candidate
+evaluations regardless of which frontier model is in the Skeptic
+seat) is independent of the outcome.
 
 ## Commit discipline
 
