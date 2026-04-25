@@ -118,19 +118,19 @@ At the 2026-04-22 *Built with Opus 4.7* live session, Tharik (Cloud Code team) n
   of 60** on gate-PASS candidates (full dissent collapse); Opus 4.7
   emits **10 of 60** (PASS when warranted). Same prompt, same gate
   metrics. Adaptive thinking is what keeps the judgement calibrated.
-- **Agentic / Managed Agents track ($5K special-prize tier).**
-  4.7 hackathon announced three unnamed $5K specials; this submission
-  fits whichever track values verification-isolated Managed Agents
-  orchestration. Explicit three-role delegation with biological
-  domain specialization per agent (Proposer, Searcher, Skeptic).
-  Three delegation paths, all live: Path B (single public-beta agent
-  + `agent_toolset_20260401`), Path A (public-beta-compliant
-  sequential 3-session chain — PhL-9 architecture smoke, PhL-9v2 on
-  real TCGA-KIRC CSV mounted via `files.upload()` +
-  `resources=[{"type":"file",...}]`), Path C (Claude Code Routine
-  `/fire` HTTP 200 live — PhL-8). Research-preview `callable_agents`
-  retained as architectural reference code only, per 2026-04-23
-  hackathon fairness ruling.
+- **Best use of Claude Managed Agents ($5K).** Per the official 4.7
+  rules: *"the project that best uses Managed Agents to hand off
+  meaningful, long-running tasks — not just a demo, but something
+  you'd actually ship."* Explicit three-role delegation with
+  biological domain specialization per agent (Proposer, Searcher,
+  Skeptic). Three delegation paths, all live: Path B (single
+  public-beta agent + `agent_toolset_20260401`), Path A
+  (public-beta-compliant sequential 3-session chain — PhL-9
+  architecture smoke, PhL-9v2 on real TCGA-KIRC CSV mounted via
+  `files.upload()` + `resources=[{"type":"file",...}]`), Path C
+  (Claude Code Routine `/fire` HTTP 200 live — PhL-8). Research-
+  preview `callable_agents` retained as architectural reference code
+  only, per 2026-04-23 hackathon fairness ruling.
 
 ## What We Built
 

@@ -1,9 +1,23 @@
 # Submission Form Draft
 
-Target constraints per the Cerebral Valley × Anthropic submission form
-(inferred from the 4.6 hackathon form structure; confirm at submit time):
+**Verified 2026-04-24** against the official Cerebral Valley × Anthropic
+[Built with Opus 4.7 participant resources page](https://cerebralvalley.ai/e/built-with-4-7-hackathon/details).
+Per official rules, the actual submission requires **only three items**:
 
-| Field | Length cap |
+| Required item | Cap |
+|---|---|
+| Demo video link (YouTube / Loom / similar) | **3 minute maximum** |
+| GitHub repository or code link | URL |
+| Written description / summary | **100–200 words** |
+
+The actual submission form may include additional sub-fields (e.g.
+prize-category select, problem-statement select, project name, team
+info). The detailed sub-section drafts below (one-line pitch, Opus 4.7
+usage, Managed Agents usage, prize-category justification) are
+**inferred from the 4.6 hackathon precedent** and should be adapted at
+submit time once the live form fields are visible:
+
+| Inferred sub-section | Length cap (4.6 precedent) |
 |---|---|
 | Project name | 60 characters |
 | One-line pitch | 140 characters |
@@ -11,9 +25,25 @@ Target constraints per the Cerebral Valley × Anthropic submission form
 | Claude Opus 4.7 usage | 150 words |
 | Claude Managed Agents usage | 150 words |
 | Prize category justification | 100 words |
-| GitHub link | URL |
-| Demo video link | URL |
 | Team | name / role / contact |
+
+**Problem statement alignment.** Per the official rules, two problem
+statements are offered: *Build From What You Know* (domain expertise →
+real-world workflow acceleration) and *Build For What's Next* (a
+workflow that doesn't have a name yet). This submission targets
+**Build From What You Know**: a biomedical postdoc's domain question
+about confirmation bias in AI-for-Science → a verification harness
+that any researcher can re-run on any disease CSV in 30 minutes.
+
+**Judging criteria mapping** (Stage 1 async, 4/26-27, weights from
+official rules):
+
+| Criterion | Weight | Our load-bearing evidence |
+|---|---|---|
+| Impact (problem-statement fit, real-world potential) | 30% | DIPG generalization (7/15 supported, panobinostat-CED-MTX110 lead with Souweidane CED deployment pathway); DatasetCard CLI = 30-min plug-in for any disease cohort |
+| Demo (working, holds up live, cool to watch) | 25% | 3-minute Loom (≤2:00 cut), 24 reproducible plots, `make demo` end-to-end, Path C Routine session URL live |
+| Opus 4.7 use (creative, beyond basic, surprises) | 25% | 180-call cross-model ablation (10/60 vs 0/60 PASS gap); PhL-15 thinking-mode confound resolution; PhL-13 memorization audit (0/10 zero-shot retrieval); 1M-context cross-reasoning synthesis on full failure history |
+| Depth & execution (push past first idea, real craft) | 20% | Self-killed our own H1 3-gene extension (PhL-1) on a separately pre-registered survival gate; ICP causal-invariance + anchor regression + Knockoffs + Westfall-Young + AUPRC stack; 90/90 tests + audit clean on every commit |
 
 ---
 
@@ -32,6 +62,34 @@ Theory Copilot: Falsification-Aware Biological Law Discovery
 AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws, Opus 4.7's own included. Survivor validates cross-cohort.
 ```
 (139 chars.)
+
+---
+
+## Unified 100–200 word summary (official spec — single field)
+
+The official rules require **one written description / summary
+(100–200 words)**. Use this version if the live form has only a
+single summary box. (Word count: 178; cap 200.)
+
+```
+AI-for-Science tools accelerate hypothesis generation — not rejection.
+Theory Copilot is the rejection step. Opus 4.7 plays Proposer (emits
+compact cancer-law families and the kill-test for each, before any
+fit), Skeptic (reviews gate output via a separate Managed Agents
+session — never the Proposer's reasoning), and Interpreter (explains
+only what survived). On TCGA-KIRC (n=505), a deterministic Python
+gate rejected 194 of 203 candidate evaluations across 11 task-panel
+combinations. The simplest survivor — TOP2A − EPAS1 — is the
+published ccA/ccB ccRCC subtype axis, rediscovered by symbolic
+regression unprompted, then replicated on the IMmotion150 Phase-2
+trial cohort (HR=1.36, log-rank p=0.0003) under a separately
+pre-registered survival gate. Our own LLM-SR loop's 3-gene extension
+was killed by that same survival gate. The same engine on H3 K27M
+DIPG yielded 7/15 supported rescue hypotheses (top lead:
+panobinostat-CED-MTX110, Souweidane deployment pathway). Three
+Managed Agents paths (sequential / single / Routine) live;
+pre-registrations are git-tracked YAMLs.
+```
 
 ---
 
@@ -100,17 +158,18 @@ a different session — any reviewer can replay the run end-to-end.
 
 ## Prize category justification (100 words, 95 counted)
 
-**Agentic / Managed Agents special-prize track.** Public-beta-only,
-verification-isolated Managed Agents orchestration: three live paths —
-B (single-agent `agent_toolset_20260401`), A (PhL-9 sequential
-three-session chain on real TCGA-KIRC, structured-JSON handoff),
-C (PhL-8 Routine `/fire` HTTP 200). Plus Memory public beta
-(integrated 2026-04-23 day-of): Skeptic writes rejection lessons;
-fresh sessions read, quote, refine them; server-side persistence
-verified via raw `/v1/memory_stores/*` API. Our own H1 LLM-SR
-extension was killed by the separately pre-registered IMmotion150
-survival replay (PhL-1, distinct from the TCGA classification gate).
-Verification as working code.
+**Best use of Claude Managed Agents ($5K).** Public-beta-only,
+verification-isolated Managed Agents orchestration that hands off
+meaningful long-running work the team would actually ship: three
+live paths — B (single-agent `agent_toolset_20260401`), A (PhL-9
+sequential three-session chain on real TCGA-KIRC, structured-JSON
+handoff), C (PhL-8 Routine `/fire` HTTP 200). Plus Memory public
+beta (integrated 2026-04-23 day-of): Skeptic writes rejection
+lessons; fresh sessions read, quote, refine them; server-side
+persistence verified via raw `/v1/memory_stores/*` API. Our own H1
+LLM-SR extension was killed by the separately pre-registered
+IMmotion150 survival replay (PhL-1, distinct from the TCGA
+classification gate). Verification as working code.
 
 ---
 
