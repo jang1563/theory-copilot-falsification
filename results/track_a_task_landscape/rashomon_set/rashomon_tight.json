@@ -1,0 +1,151 @@
+{
+  "n_samples": 505,
+  "n_genes": 45,
+  "n_pairs": 990,
+  "anchor_law": "TOP2A \u2212 EPAS1",
+  "anchor_auroc_rounded": 0.726,
+  "anchor_auroc_actual": 0.7275212456171629,
+  "anchor_rank": 1,
+  "tight_set": {
+    "epsilon": 0.02,
+    "threshold_auroc": 0.706,
+    "n_pairs": 3,
+    "pairs": [
+      {
+        "gene_a": "EPAS1",
+        "gene_b": "TOP2A",
+        "auroc": 0.7275212456171629
+      },
+      {
+        "gene_a": "CDK1",
+        "gene_b": "EPAS1",
+        "auroc": 0.7191715695013965
+      },
+      {
+        "gene_a": "EPAS1",
+        "gene_b": "MKI67",
+        "auroc": 0.7100493254887977
+      }
+    ],
+    "contains_proliferation_or_epas1_pct": 100.0
+  },
+  "loose_set": {
+    "epsilon": 0.05,
+    "threshold_auroc": 0.6759999999999999,
+    "n_pairs": 19,
+    "pairs": [
+      {
+        "gene_a": "EPAS1",
+        "gene_b": "TOP2A",
+        "auroc": 0.7275212456171629
+      },
+      {
+        "gene_a": "CDK1",
+        "gene_b": "EPAS1",
+        "auroc": 0.7191715695013965
+      },
+      {
+        "gene_a": "EPAS1",
+        "gene_b": "MKI67",
+        "auroc": 0.7100493254887977
+      },
+      {
+        "gene_a": "CCNB1",
+        "gene_b": "EPAS1",
+        "auroc": 0.7030665002674273
+      },
+      {
+        "gene_a": "PGK1",
+        "gene_b": "TOP2A",
+        "auroc": 0.6971830985915493
+      },
+      {
+        "gene_a": "CDK1",
+        "gene_b": "PGK1",
+        "auroc": 0.6965591014441077
+      },
+      {
+        "gene_a": "PDK1",
+        "gene_b": "TOP2A",
+        "auroc": 0.6932311166577525
+      },
+      {
+        "gene_a": "CXCR4",
+        "gene_b": "EPAS1",
+        "auroc": 0.6909431271171332
+      },
+      {
+        "gene_a": "PFKP",
+        "gene_b": "TOP2A",
+        "auroc": 0.6886254234266358
+      },
+      {
+        "gene_a": "CCNB1",
+        "gene_b": "PGK1",
+        "auroc": 0.6873180008319962
+      },
+      {
+        "gene_a": "CDK1",
+        "gene_b": "PFKP",
+        "auroc": 0.6870802876329708
+      },
+      {
+        "gene_a": "CCNB1",
+        "gene_b": "PFKP",
+        "auroc": 0.6858322933380876
+      },
+      {
+        "gene_a": "CDK1",
+        "gene_b": "PDK1",
+        "auroc": 0.684703155642717
+      },
+      {
+        "gene_a": "MCM2",
+        "gene_b": "TOP2A",
+        "auroc": 0.6829500207999049
+      },
+      {
+        "gene_a": "CDK1",
+        "gene_b": "KRT7",
+        "auroc": 0.682444880251976
+      },
+      {
+        "gene_a": "CDK1",
+        "gene_b": "SLC22A8",
+        "auroc": 0.6815534557556308
+      },
+      {
+        "gene_a": "SLC22A8",
+        "gene_b": "TOP2A",
+        "auroc": 0.6811077435074583
+      },
+      {
+        "gene_a": "ACTB",
+        "gene_b": "EPAS1",
+        "auroc": 0.679354608664646
+      },
+      {
+        "gene_a": "MKI67",
+        "gene_b": "SLC22A8",
+        "auroc": 0.6772151898734178
+      }
+    ]
+  },
+  "predictions": {
+    "p1_top2a_epas1_in_top_5": {
+      "pass": true,
+      "rank": 1,
+      "threshold": 5
+    },
+    "p2_tight_rashomon_le_20": {
+      "pass": true,
+      "n_pairs": 3,
+      "threshold": 20
+    },
+    "p3_dominated_by_proliferation_or_epas1": {
+      "pass": true,
+      "pct": 100.0,
+      "threshold_pct": 80.0
+    }
+  }
+}

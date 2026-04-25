@@ -71,6 +71,21 @@ predicts 32% M1 and observes 35% — well-calibrated at the high
 dimension to the AUROC discrimination claim without changing any
 gate decision.
 
+**Rashomon set — how unique among 2-gene laws (I2).** A pre-registered
+enumeration of all `C(45, 2) = 990` two-gene differences on this panel
+([`results/track_a_task_landscape/rashomon_set/`](../results/track_a_task_landscape/rashomon_set/SUMMARY.md))
+finds that **TOP2A − EPAS1 is rank 1 / 990** by sign-invariant AUROC.
+The tight Rashomon set (within ε = 0.02 of the survivor) is exactly
+**3 pairs** — TOP2A − EPAS1 (0.7275), CDK1 − EPAS1 (0.7192), and
+EPAS1 − MKI67 (0.7100) — all of the form *(proliferation marker −
+HIF-2α)*. 100% of the tight set contains either EPAS1 or a
+proliferation marker. All three pre-registered predictions
+(P1: top-5 rank, P2: tight set ≤ 20 pairs, P3: ≥ 80% prolif/EPAS1
+membership) PASS. The compactness claim is now a measured one:
+within the 2-gene-difference model class, TOP2A − EPAS1 *is* the
+AUROC ceiling, and the entire near-equivalent neighbourhood is a
+three-pair cluster of the same biology.
+
 **Individual-feature FDR check (G1 knockoff v2).** A Model-X
 knockoff filter
 ([`results/track_a_task_landscape/knockoff_v2/`](../results/track_a_task_landscape/knockoff_v2/SUMMARY.md);

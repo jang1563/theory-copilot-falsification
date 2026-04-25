@@ -1,0 +1,74 @@
+hypothesis_id: i2_rashomon_set_2026-04-25
+emitted_at_utc: 2026-04-25T18:57:17Z
+emitted_git_sha: ea065b1
+retroactive: false
+gate_logic_changed: false
+extension_type: descriptive_enumeration
+
+title: >
+  I2 — Rashomon set analysis: enumerate all C(45,2) = 990 two-gene
+  difference laws on kirc_metastasis_expanded and report how many
+  reach AUROC within ε of the TOP2A−EPAS1 survivor.
+
+motivation: >
+  The survivor narrative claim is "TOP2A − EPAS1 is the compact
+  representation of the ccA/ccB axis". A reviewer can reasonably
+  ask: how many other 2-gene differences in this panel reach
+  comparable AUROC? If the Rashomon set is small, the claim is
+  strong (compact uniqueness). If it is large, the claim narrows
+  to "TOP2A − EPAS1 is one of N equivalent compact representations
+  of the same biological axis", which is also a publishable finding.
+
+design:
+  panel: 45-gene metastasis_expanded panel
+  candidate_form: g_i − g_j for every ordered pair (i, j) with i ≠ j
+  metric: sign-invariant AUROC, max(AUROC(score), 1 − AUROC(score))
+  rashomon_thresholds:
+    - tight: AUROC >= 0.706 (within 0.02 of TOP2A−EPAS1's 0.726)
+    - loose: AUROC >= 0.676 (within 0.05 of TOP2A−EPAS1's 0.726)
+  total_pairs_evaluated: 990 (C(45,2))
+  data_used: data/kirc_metastasis_expanded.csv (n=505, prevalence 0.156)
+  no_fitting: pure enumeration, no Platt scaling, no FDR adjustment
+  seed: not_applicable (deterministic enumeration)
+
+pre_registered_predictions:
+  p1:
+    description: TOP2A−EPAS1 is in the top 5 pairs by sign-invariant AUROC.
+    falsification: If TOP2A−EPAS1 is outside the top 10, the "simplest
+      compact representation" claim weakens.
+  p2:
+    description: The tight Rashomon set (ε=0.02) is small (≤ 20 pairs).
+    falsification: If > 20 pairs reach AUROC ≥ 0.706, the compactness
+      claim widens to "one of many equivalent compact forms".
+  p3:
+    description: The tight Rashomon set is dominated by pairs containing
+      EPAS1 OR a proliferation marker (TOP2A, MKI67, CDK1, CCNB1, PCNA,
+      MCM2). This is the ccA/ccB axis manifesting at multiple gene-pair
+      proxies.
+    falsification: If the set contains pairs with neither EPAS1 nor any
+      proliferation marker, the ccA/ccB-axis interpretation needs revising.
+
+go_no_go:
+  go_criterion: Enumeration completes; CSV of all 990 (g_i, g_j, AUROC)
+    rows + sorted Rashomon set + verdict on each pre-registered
+    prediction is committed.
+  no_go_fallback: This is a pure enumeration; the only failure mode is
+    a data-loading error.
+
+output_files:
+  - src/track_a_rashomon_set.py
+  - results/track_a_task_landscape/rashomon_set/all_pairs.csv
+  - results/track_a_task_landscape/rashomon_set/rashomon_tight.json
+  - results/track_a_task_landscape/rashomon_set/SUMMARY.md
+
+gate_logic_changed: false
+v1_v2_relationship: >
+  This is descriptive analysis, not a falsification gate. It does not
+  affect any pre-registered survivor decision; it simply contextualizes
+  the TOP2A−EPAS1 finding by comparison to other 2-gene differences in
+  the same panel.
+
+citations:
+  - "Breiman 2001. Statistical Modeling: The Two Cultures. Statistical Science, 16(3):199-231 — Rashomon effect"
+  - "Semenova, Rudin, Parr 2022. On the Existence of Simpler Machine Learning Models. arXiv:1908.01755"
+  - "Marx, Calmon, Ustun 2020. Predictive Multiplicity in Classification. arXiv:1909.06677"
