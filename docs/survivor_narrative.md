@@ -54,6 +54,40 @@ survivor's distinctive contribution is therefore interpretable
 compactness plus pre-registered falsification, not an AUROC ceiling
 that no other 2-gene model reaches.
 
+**Beyond AUROC — imbalance-aware metrics (G2 rigor extension).** Per
+TRIPOD+AI 2024 and Steyerberg (2019), AUROC alone is incomplete on
+a 16% prevalence task. The G2 reporting layer
+([`results/track_a_task_landscape/rigor_extension/`](../results/track_a_task_landscape/rigor_extension/SUMMARY.md))
+adds: **AUPRC 0.321** (2.05× over the 0.156 prevalence baseline);
+**Brier 0.122** (7.6% reduction vs the uninformative reference 0.132,
+on 5-fold OOF Platt-scaled probabilities); **calibration slope 0.540**
+with intercept −1.85. The slope being below the well-calibrated
+range [0.85, 1.15] is itself an honest signal: the raw `TOP2A − EPAS1`
+score is more discriminative than its scale, and the Platt-scaled
+probability — not the raw difference — is the right object for any
+downstream probability claim. The reliability curve's top quintile
+predicts 32% M1 and observes 35% — well-calibrated at the high
+(screening-relevant) end. This adds a probabilistic-correctness
+dimension to the AUROC discrimination claim without changing any
+gate decision.
+
+**Individual-feature FDR check (G1 knockoff v2).** A Model-X
+knockoff filter
+([`results/track_a_task_landscape/knockoff_v2/`](../results/track_a_task_landscape/knockoff_v2/SUMMARY.md);
+LedoitWolf Sigma, MVR construction, q=0.10, 25 derandomized
+replicates per Ren & Candès 2020) applied to the 45-gene panel
+selects **0 / 45 genes** individually. TOP2A and EPAS1 are ranked
+#1 and #2 by W statistic but neither crosses threshold at the
+pre-registered q=0.10. Read honestly, this is **not** a contradiction
+of the v1 5-test gate's compound finding — it confirms the signal in
+`TOP2A − EPAS1` is *genuinely compound*. The v1 gate evaluates the
+contrast directly; the v2 knockoff gate evaluates each gene under a
+univariate-FDR procedure that has no compound-aware test surface.
+Both gates agree on negatives (rejected laws have no constituent
+genes selected). The compound-vs-individual disagreement is the
+same pattern that makes the published ccA/ccB axis a *contrast*,
+not two independent markers.
+
 **Cross-cohort causal stability (anchor regression).** Anchor
 regression ([Rothenhäusler et al., JRSS-B 2021](https://arxiv.org/abs/1801.06229))
 pooling TCGA-KIRC (n=505) and IMmotion150 (n=263) as two independent
