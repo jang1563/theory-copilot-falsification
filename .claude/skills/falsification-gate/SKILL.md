@@ -1,6 +1,7 @@
 ---
 name: falsification-gate
 description: "Use this skill whenever a candidate biological law, compact equation, symbolic-regression survivor, or gene-expression classifier needs to be subjected to the pre-registered 5-test falsification gate (permutation null, bootstrap CI lower bound, sign-invariant best-single-feature baseline, incremental-covariate confound, decoy-feature null) and logged as a pass/fail verdict. TRIGGER when: the user asks to falsify, reject, gate, or stress-test a candidate law; the user hands you an equation plus a metric bundle (perm_p, ci_lower, delta_baseline, confound_delta, decoy_p); the user asks 'does this survive the falsification gate?'; a PySR run emits candidates that need adjudication; the user mentions the TOP2A-EPAS1 survivor, the 11-gene or 45-gene panel, or the pre-registered thresholds. SKIP when: the user wants to propose new law families (that's the Proposer), write a mechanism hypothesis (that's the Interpreter), or is asking a general statistics question not bound to this repo's pre-registered thresholds."
+when_to_use: "Also triggers on: 'audit this claim', 'audit this candidate', 'would this hold up?', 'hold up against the gate?', 'is this PASS or FAIL?', 'verify the verdict', 'does this candidate survive?'. If the user has a hypothesis but no metric bundle yet, route to `pre-register-claim` first to lock the kill-tests, then return here once metrics are computed."
 allowed-tools: Read, Grep, Bash
 ---
 

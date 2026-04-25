@@ -31,6 +31,13 @@ Built by a biomedical postdoc for the *Built with Opus 4.7* Hackathon · April 2
   Routines `/fire` with local watch-dir fallback.
   Brain/body-decouple demo: `theory-copilot persist-events` +
   `replay-events` CLI two-liner.
+  Two Agent Skills wrap the methodology as natural-language entry
+  points: [`.claude/skills/falsification-gate/SKILL.md`](.claude/skills/falsification-gate/SKILL.md)
+  applies the pre-registered 5-test gate to a candidate, and
+  [`.claude/skills/pre-register-claim/SKILL.md`](.claude/skills/pre-register-claim/SKILL.md)
+  locks a claim's kill-tests into a tamper-evident YAML before any
+  fit runs. Compose them as `pre-register-claim` → `falsification-gate`;
+  the second skill reads the YAML the first emits.
 - **If you are evaluating developer experience and reproducibility:** `make
   venv && make test && make audit` is the local-runnable happy path
   (105 tests, ~90 s, no API key needed). The `make demo` / `make

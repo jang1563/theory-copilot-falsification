@@ -139,6 +139,19 @@ At the 2026-04-22 *Built with Opus 4.7* live session, Tharik (Cloud Code team) n
   with adaptive thinking, JSON-fence-tolerant parser, cost ledger.
 - `src/theory_copilot/managed_agent_runner.py` — Path A + Path B.
 - `src/theory_copilot/cli.py` — `theory-copilot compare` + `replay`.
+- `.claude/skills/falsification-gate/SKILL.md` and
+  `.claude/skills/pre-register-claim/SKILL.md` — the methodology made
+  portable. Two Agent Skills that wrap the deterministic gate and the
+  pre-registration emitter as natural-language entry points, so any
+  Claude Code session in this repo can adjudicate a candidate law or
+  lock a claim's kill-tests without touching the Python harness. The
+  skills explicitly preserve the role boundary: they apply the
+  pre-registered thresholds and emit a verdict, but do NOT propose
+  laws (the `proposer` subagent does that) or write mechanism
+  hypotheses (the `interpreter` subagent does that). Composability —
+  named directly by Boris Cherny as a Claude Code value — runs as
+  `pre-register-claim` → `falsification-gate`, with the second skill
+  reading the YAML the first emits.
 - `src/pysr_sweep.py` — PySR 1.5.9 sweep with law-family injection,
   train/test split, novelty scoring.
 - `src/falsification_sweep.py` — BH-FDR batch falsification.
