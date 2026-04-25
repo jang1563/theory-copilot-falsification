@@ -1,6 +1,10 @@
-# Theory Copilot: Falsification-Aware Biological Law Discovery
+# Theory Copilot
 
-> *AI-for-Science tools confirm everything. This one rejects 194 of 203 candidates under its 5-test gate — and then rejects one of its own H1-loop extensions again, on a separately pre-registered cross-cohort survival gate.*
+> *Rejects 194 of 203 candidate laws — including its own.*
+
+<img src="https://img.shields.io/badge/Python-3.10+-1E3A8A?style=flat-square" alt="Python 3.10+" />
+<img src="https://img.shields.io/badge/Built_with-Claude_Opus_4.7-1E3A8A?style=flat-square" alt="Built with Claude Opus 4.7" />
+<img src="https://img.shields.io/badge/Hackathon-Cerebral_Valley_2026-faf9f5?labelColor=141413&style=flat-square" alt="Cerebral Valley Hackathon 2026" />
 
 Theory Copilot is a **verification-first** pipeline for biological law discovery, built around Opus 4.7. A verification-isolated three-session loop (Proposer / Skeptic / Interpreter, each in its own Managed Agents session with separate context windows) proposes compact symbolic laws; a pre-registered five-test Python gate — running **before** any LLM judgement — rejects the ones that can't survive contact with held-out biology. On real TCGA-KIRC the gate **rejects 194 of 203 candidate evaluations under the 5-test classification gate** across 11 task × panel combinations; **9 candidates pass on metastasis** (45-gene expanded panel), led by `TOP2A − EPAS1` — the published ccA/ccB ccRCC subtype axis, rediscovered from unconstrained symbolic regression. The 2-gene law then **replicates on the independent IMmotion150 Phase-2 trial cohort** (n=263, log-rank p=0.0003, Cox HR=1.36, 7.5-month median-PFS gap) under **three separately pre-registered survival kill tests** (log-rank on median split, Cox HR per z-score, Harrell C-index) — a different gate, not the same 5-test classification gate, committed before the survival analysis ran. When the system's own H1 LLM-SR loop later proposed a 3-gene extension (adding `SLC22A8`), that **extension failed the same separately pre-registered IMmotion150 survival replay** ([PhL-1, commit 60d3952](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md)) — **our own downstream best output, killed by our own gate on independent data**. That is what a verification loop looks like when the judgment function is outside the model.
 
@@ -86,6 +90,8 @@ Proposal → Search → Falsification → Survivor → Replay
 | **Survivor** | Opus 4.7 reviews each candidate's metric pattern and writes a biological mechanism hypothesis for the survivors. | Opus 4.7 (extended thinking) |
 | **Replay** | Survivors replayed on an independent cohort with per-cohort z-score standardization. Three-way verdict: law_transfers / workflow_transfers / neither. | Opus 4.7 spot-check |
 
+![Theory Copilot — 5-stage discovery pipeline](docs/architecture.png)
+
 ---
 
 ## Key Modules
@@ -161,6 +167,8 @@ Thresholds pre-registered in [`falsification.py`](src/theory_copilot/falsificati
 
 Multiple candidates are tested per run → permutation p-values are adjusted with
 Benjamini-Hochberg FDR across the family, and **the gate uses the FDR-adjusted p**.
+
+![Rejection landscape — 194/203 candidate evaluations rejected across 11 task × panel combinations](docs/figures/rejection_landscape.png)
 
 ---
 
