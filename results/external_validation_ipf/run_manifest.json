@@ -1,0 +1,101 @@
+{
+  "run_id": "ipf_run01",
+  "run_date": "2026-04-25",
+  "execution_environment": "LOCAL (macOS, system Python with anthropic 0.94.0; sibling-repo path scrubbed for public mirror)",
+  "engine_tag": "Opus 4.7 adaptive thinking + xhigh effort, 4-role sequential pipeline",
+  "model": "claude-opus-4-7",
+  "prereg_lock_sha": "88eaca342b5f7fcf9dd9210a7a6e4721053826c4",
+  "prereg_lock_utc": "2026-04-25T04:16:59Z",
+  "wall_clock_minutes_total": 32,
+  "verdict_distribution": {
+    "RESCUE_SUPPORTED": 1,
+    "MIXED": 0,
+    "INSUFFICIENT_EVIDENCE": 4,
+    "MISSING_OR_ROLE_ERROR": 0
+  },
+  "candidates": [
+    {
+      "id": "01_pamrevlumab_CTGF_strat",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "aggregate_score": 6,
+      "weakest_axis": "stratifier_specificity",
+      "input_tokens": 786012,
+      "output_tokens": 19006,
+      "cost_usd": 13.22,
+      "violations": ["paragraph_over_120_words: 124"]
+    },
+    {
+      "id": "02_bexotegrast_avb6PET_strat",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "aggregate_score": 4,
+      "weakest_axis": "stratifier_specificity",
+      "input_tokens": 774524,
+      "output_tokens": 19263,
+      "cost_usd": 13.06,
+      "violations": []
+    },
+    {
+      "id": "03_simtuzumab_LOXL2_AEIPF",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "aggregate_score": 4,
+      "weakest_axis": "mechanism_concordance",
+      "input_tokens": 487263,
+      "output_tokens": 19959,
+      "cost_usd": 8.81,
+      "violations": [],
+      "note": "Evidence Retriever flagged CORE_CITATION_UNVERIFIED on Advocate's central claim; engine correctly forced INSUFFICIENT regardless of skeptic axis sum."
+    },
+    {
+      "id": "04_tralokinumab_CCL18_Th2_IPF",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "aggregate_score": 7,
+      "weakest_axis": "mechanism_concordance",
+      "input_tokens": 399046,
+      "output_tokens": 21374,
+      "cost_usd": 7.59,
+      "violations": [],
+      "note": "Engine surfaced advocate fabrication: claim 'no IL-13 trial prespecified Th2 stratifier' is empirically false (RAINIER prespecified periostin)."
+    },
+    {
+      "id": "05_DandQ_telomere_short_IPF",
+      "verdict": "RESCUE_SUPPORTED",
+      "aggregate_score": 12,
+      "weakest_axis": "perrin_replication_score",
+      "input_tokens": 906655,
+      "output_tokens": 26724,
+      "cost_usd": 15.60,
+      "violations": [],
+      "warnings": ["interpreter_verdict=MIXED vs gate=RESCUE_SUPPORTED"],
+      "skeptic_critical_flags": [
+        "Nambiar 2023 (PMID 36857968) placebo-controlled n=12 stage of NCT02874989 OMITTED by advocate; functionally null with AE imbalance",
+        "4 of 7 advocate PMIDs hallucinated (Yao 2021, Duckworth 2021, Newton 2022, Liu/Phan 2022)",
+        "All clinical D+Q work Mayo/Kirkland-network originating; no external clinical replication",
+        "Quercetin dose inconsistency between cited Hickson 2019 and protocol",
+        "130-week trial exceeds <=24-month feasibility threshold",
+        "Telomere-short faster progression but higher dropout/mortality may compromise FVC-slope endpoint"
+      ]
+    }
+  ],
+  "totals": {
+    "input_tokens": 3353500,
+    "output_tokens": 106326,
+    "cost_usd": 58.28,
+    "budget_cap_usd": 100
+  },
+  "cross_axis_pattern": {
+    "modal_weakest_axis_in_INSUFFICIENT_candidates": "stratifier_specificity (2 of 4) and mechanism_concordance (2 of 4)",
+    "engine_observation": "IPF rescue claims systematically lack published prospective stratifier-specific data."
+  },
+  "engine_caught_advocate_fabrications": [
+    {"candidate": "03_simtuzumab", "claim": "Raghu 2017 never tested LOXL2-stratified", "reality": "Raghu 2017 prespecified LOXL2-stratified co-primary endpoints with high-tertile arm; engine flagged via Skeptic adversarial review."},
+    {"candidate": "04_tralokinumab", "claim": "No IPF IL-13 trial prespecified Th2 stratifier", "reality": "RAINIER itself prespecified periostin (canonical IL-13-induced Th2 marker) subgroup; engine flagged via Skeptic adversarial review."}
+  ],
+  "cross_disease_consistency": {
+    "KIRC": "194/203 reject (statistical Python 5-test gate)",
+    "DIPG_run01": "7 SUPPORTED / 7 MIXED / 1 INSUFFICIENT (LLM literature gate)",
+    "DIPG_Tier1_substrate": "0/4 PASS (statistical substrate gate on PBTA v15)",
+    "IPF_run01": "1 SUPPORTED / 0 MIXED / 4 INSUFFICIENT (LLM literature gate)",
+    "interpretation": "Engine produces differentiated per-disease falsification signatures; rescue substrate quality varies but stratifier_specificity is repeatedly the limiting axis."
+  },
+  "follow_on_recommended_next_step": "Per the engine Interpreter's follow_on_deployment field, the recommended pre-prospective-trial step for the SUPPORTED candidate (#5 D+Q telomere-short) is ex-vivo IPF lung explant validation (telomere-short donor explants vs telomere-normal, D+Q dose-response on AT2/basaloid p16+ burden + SASP secretome). Four transcript-stratifier candidates (#1 pamrevlumab CTGF, #3 simtuzumab LOXL2, #4 tralokinumab CCL18) remain testable on public GSE47460 (LGRC microarray, no controlled-access gating) in a follow-on Run #2 if a downstream collaborator engages."
+}

@@ -40,8 +40,8 @@ official rules):
 
 | Criterion | Weight | Our load-bearing evidence |
 |---|---|---|
-| Impact (problem-statement fit, real-world potential) | 30% | DIPG generalization (7/15 supported, panobinostat-CED-MTX110 lead with Souweidane CED deployment pathway); DatasetCard CLI = 30-min plug-in for any disease cohort |
-| Demo (working, holds up live, cool to watch) | 25% | 3-minute Loom (≤2:00 cut), 24 reproducible plots, `make demo` end-to-end, Path C Routine session URL live |
+| Impact (problem-statement fit, real-world potential) | 30% | DIPG generalization (7/15 Tier-2 supported, panobinostat-CED-MTX110 lead); Tier-1 prognostic-substrate gate on PBTA v15 (n=192, 182 events) refuses to mint substrate-PASS on 0/4 — cross-disease falsification consistent with KIRC's 194/203 reject pattern; **IPF Run #1 (2026-04-25): same engine, third structurally distant disease, 1/5 SUPPORTED + 4 INSUFFICIENT, Skeptic caught two Advocate fabrications about prior trial design (RAINIER + Raghu 2017 prespecified stratifiers Advocate claimed were "never tested") — runtime demonstration of dual-role context isolation; $58, 32 min sequential local**; DatasetCard CLI = 30-min plug-in for any disease cohort |
+| Demo (working, holds up live, cool to watch) | 25% | 3-minute Loom (current 2:23-2:47 cut with KIRC + DIPG + IPF tags), 24 reproducible plots, `make demo` end-to-end, Path C Routine session URL live |
 | Opus 4.7 use (creative, beyond basic, surprises) | 25% | 180-call cross-model ablation (10/60 vs 0/60 PASS gap); PhL-15 thinking-mode confound resolution; PhL-13 memorization audit (0/10 zero-shot retrieval); 1M-context cross-reasoning synthesis on full failure history |
 | Depth & execution (push past first idea, real craft) | 20% | Self-killed our own H1 3-gene extension (PhL-1) on a separately pre-registered survival gate; ICP causal-invariance + anchor regression + Knockoffs + Westfall-Young + AUPRC stack; 90/90 tests + audit clean on every commit |
 
@@ -69,7 +69,7 @@ AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws,
 
 The official rules require **one written description / summary
 (100–200 words)**. Use this version if the live form has only a
-single summary box. (Word count: 196; cap 200.)
+single summary box. (Word count: 176; cap 200.)
 
 ```
 AI-for-Science tools accelerate hypothesis generation — not rejection.
@@ -84,18 +84,19 @@ published ccA/ccB ccRCC subtype axis, rediscovered by symbolic
 regression unprompted, then replicated on the IMmotion150 Phase-2
 trial cohort (HR=1.36, log-rank p=0.0003) under a separately
 pre-registered survival gate. Our own LLM-SR loop's 3-gene extension
-was killed by that same survival gate. The same engine on H3 K27M
-DIPG yielded 7/15 supported rescue hypotheses (top lead:
-panobinostat-CED-MTX110, Souweidane deployment pathway). Three
-Managed Agents paths (sequential / single / Routine) live;
-pre-registrations are git-tracked YAMLs. The frame is Kepler-style
-induction — data → compact law — constrained by a falsification gate
+was killed by that same survival gate. Same engine on H3 K27M DIPG:
+7/15 Tier-2 supported (top lead panobinostat-CED-MTX110), then Tier-1
+substrate gating on PBTA v15 returned 0/2/2 — the intended falsifier
+output. Same engine on IPF: 1/5 supported, Skeptic caught two
+Advocate fabrications about prior trial design — dual-role isolation
+working at runtime. Pre-registrations are git-tracked YAMLs; the
+frame is Kepler-style induction constrained by a falsification gate
 the LLM cannot renegotiate.
 ```
 
 ---
 
-## Project summary (150 words, 137 counted)
+## Project summary (150 words, 146 counted)
 
 AI-for-Science tools accelerate hypothesis generation — not rejection.
 Theory Copilot is the rejection step. Opus 4.7 plays Proposer (emits
@@ -107,14 +108,15 @@ across 11 task-panel combinations. The simplest survivor — `TOP2A −
 EPAS1`, the published ccA/ccB ccRCC subtype axis — was rediscovered
 by PySR without being seeded. A separately pre-registered survival gate
 on IMmotion150 Phase-2 (n=263) confirmed it: log-rank p=0.0003,
-HR=1.36, C-index 0.601, robust to treatment adjustment. Our own
-LLM-SR loop then proposed a 3-gene extension; same survival gate killed
-it (PhL-1, C-index dropped to 0.566). Pre-registrations are
-git-tracked YAMLs.
+HR=1.36. Our own LLM-SR loop's 3-gene extension was killed by that
+same survival gate (PhL-1). **Same engine generalises to DIPG (7/15
+Tier-2 supported) and IPF (1/5 supported, Skeptic caught two Advocate
+fabrications about prior trial design — runtime demonstration of
+dual-role context isolation).** Pre-registrations are git-tracked YAMLs.
 
 ---
 
-## Claude Opus 4.7 usage (150 words, 125 counted)
+## Claude Opus 4.7 usage (150 words, 134 counted)
 
 Four Opus 4.7 calls per loop with
 `thinking={"type":"adaptive","display":"summarized"}` and
@@ -124,16 +126,18 @@ The test is executed by plain Python, not Opus. (3) Skeptic reviews
 the specific metric pattern (`perm_p=0.049` is weaker than `0.001`;
 `ci_lower=0.61` is marginal) and emits PASS / FAIL / NEEDS_MORE_TESTS.
 (4) Interpreter writes the mechanism hypothesis and the "what this is
-not" paragraph. Adaptive thinking keeps the Skeptic turn from
-collapsing across the dual-role prompt: in our 180-call ablation,
-Sonnet 4.6 emits **0 PASS of 60** on gate-PASS candidates (full dissent
-collapse); Opus 4.7 emits **10 of 60**. **PhL-13 memorization audit:
-Opus 4.7 does not retrieve TOP2A−EPAS1 zero-shot (0/10 repeats) —
-refutes the LLM-SRBench memorization concern.**
+not" paragraph. **180-call cross-model ablation: Sonnet 4.6 = 0/60
+PASS on gate-PASS candidates (full dissent collapse); Opus 4.7 =
+10/60 — RLHF calibration gap, not thinking-mode**. **PhL-13: Opus 4.7
+zero-shot retrieval of TOP2A−EPAS1 = 0/10 (rebuts LLM-SRBench
+memorization concern).** **IPF Run #1 (2026-04-25): Skeptic caught
+two Advocate fabrications about prior trial design — RAINIER + Raghu
+2017 prespecified stratifiers Advocate claimed "never tested". Context
+isolation working at runtime.**
 
 ---
 
-## Claude Managed Agents usage (150 words, 127 counted)
+## Claude Managed Agents usage (150 words, 149 counted)
 
 **Verification-isolated Managed Agents orchestration.** Three separate
 public-beta sessions (Proposer / Skeptic / Interpreter = Opus 4.7;
@@ -156,22 +160,26 @@ compliant per the 2026-04-23 hackathon fairness rule; research-preview
 to JSONL; `replay_session_from_log` re-injects user-origin events into
 a different session — any reviewer can replay the run end-to-end.
 
+**IPF Run #1 (2026-04-25).** Skeptic caught two Advocate fabrications
+about prior trial design (RAINIER + Raghu 2017) — context isolation
+working at runtime. See `results/external_validation_ipf/`.
+
 ---
 
-## Prize category justification (100 words, 95 counted)
+## Prize category justification (100 words, 96 counted)
 
-**Best use of Claude Managed Agents ($5K).** Public-beta-only,
-verification-isolated Managed Agents orchestration that hands off
-meaningful long-running work the team would actually ship: three
-live paths — B (single-agent `agent_toolset_20260401`), A (PhL-9
-sequential three-session chain on real TCGA-KIRC, structured-JSON
-handoff), C (PhL-8 Routine `/fire` HTTP 200). Plus Memory public
-beta (integrated 2026-04-23 day-of): Skeptic writes rejection
-lessons; fresh sessions read, quote, refine them; server-side
-persistence verified via raw `/v1/memory_stores/*` API. Our own H1
-LLM-SR extension was killed by the separately pre-registered
-IMmotion150 survival replay (PhL-1, distinct from the TCGA
-classification gate). Verification as working code.
+**Best use of Claude Managed Agents ($5K).** Public-beta-only Managed
+Agents orchestration with isolated sessions: three live paths — B
+(single-agent `agent_toolset_20260401`), A (PhL-9 sequential
+three-session chain on real TCGA-KIRC, structured-JSON handoff), C
+(PhL-8 Routine `/fire` HTTP 200). Plus Memory public beta (integrated
+2026-04-23 day-of): Skeptic writes rejection lessons; fresh sessions
+read, quote, refine them; server-side persistence verified via raw
+`/v1/memory_stores/*` API. Our own H1 LLM-SR extension was killed by
+the separately pre-registered IMmotion150 survival replay (PhL-1).
+**IPF Run #1: Skeptic caught two Advocate fabrications about RAINIER
++ Raghu 2017 — single-harness pipelines cannot catch this.**
+Verification as working code.
 
 ---
 
@@ -191,23 +199,25 @@ Repo has been public since 2026-04-23 19:32 ET.
 [to be pasted on 4/26 morning after Loom render]
 ```
 
-Canonical narration: `docs/loom_narration_final_90s.md` (254 words,
-~109 s at 140 WPM / ~127 s at 120 WPM, seven segments incl. DIPG
-generalization tag, opens with problem-first "AI-for-science... built
-to say no" hook + published-ccA/ccB-axis unprompted-rediscovery citation).
-Shot-list / rehearsal assets: `docs/loom_script.md` (pre-narration
-shot list, 6 cuts, single terminal + browser, no overlays).
+Canonical narration: `docs/loom_narration_final_90s.md` (333 words,
+~143 s at 140 WPM / ~167 s at 120 WPM, **eight segments** incl. DIPG
++ IPF generalization tags, opens with problem-first "AI-for-science...
+built to say no" hook and closes with the IPF dual-fabrication-catch
+demonstration of 4-role context isolation). Shot-list / rehearsal
+assets: `docs/loom_script.md` (pre-narration shot list) +
+`docs/loom_visual_cue_map.md` (8-segment asset cue map).
 
 ---
 
-## Broader Program Context (optional, 90 words)
+## Broader Program Context (optional, 90 words, 89 counted)
 
 Opus 4.7 proof-of-concept of a larger program (NegBioDB + failure
 network + rescue engine for prematurely-rejected clinical hypotheses).
-Same 4-role engine re-run on 15 H3 K27M DMG rescue hypotheses (git
-SHA 8a4ecc5, locked before engine output): 7 supported, 7 mixed, 1
+Same 4-role engine re-run on 15 H3 K27M DMG rescue hypotheses
+(locked-before-output git SHA 8a4ecc5): 7 supported, 7 mixed, 1
 insufficient; top lead CED-delivered MTX110 panobinostat (13/15
-delivery class). Tier-1 statistical substrate gate then re-tested 4
-of those candidates on PBTA v15 (n=237, 192 survival-evaluable):
-0 PASS, 2 FAIL, 2 UNDERPOWERED — engine's intended falsifier output.
+delivery class). Tier-1 prognostic-substrate gate then re-tested 4
+candidates on PBTA v15 (n=192 survival-evaluable, 182 events): 0
+PASS, 2 FAIL, 2 UNDERPOWERED — intended falsifier output. **IPF Run
+#1: 1/5 supported, two Advocate fabrications caught (2026-04-25).**
 Research-grade hypotheses; prospective validation required.

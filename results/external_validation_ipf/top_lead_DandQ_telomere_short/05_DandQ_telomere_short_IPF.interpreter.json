@@ -1,0 +1,23 @@
+{
+  "candidate_id": "05_DandQ_telomere_short_IPF",
+  "verdict": "MIXED",
+  "aggregate_score": 12,
+  "axis_scores": {
+    "perrin_replication_score": 2,
+    "mechanism_concordance": 2,
+    "stratifier_specificity": 3,
+    "clinical_plausibility": 3,
+    "kill_or_confirm_feasibility": 2
+  },
+  "rescue_class": "stratification",
+  "one_paragraph_summary": "The Justice/Nambiar investigators executed a methodologically sound pilot-then-placebo-controlled program within NCT02874989's unstratified-senolytic paradigm. As a research-grade hypothesis, telomere-short IPF (lymphocyte qPCR \u226410th age-adjusted percentile or germline TERT/TERC/RTEL1/PARN carriers) plausibly enriches alveolar senescence where D+Q pharmacodynamic activity (PMID 31542391) might be detectable, with senescent basaloid epithelium localized to fibroblast foci (PMID 32832599). However, Nambiar 2023 (PMID 36857968) placebo-controlled extension of the same NCT was functionally null with adverse-event imbalance, and the cross-disease stratification precedent is an exploratory subgroup of a null primary. Further prospective validation required. The falsifying experiment is a telomere-short stratified Phase 2 with 52-week FVC-slope primary and 26-week SASP/p16 PD interim, deliverable within ~24\u201330 months. Verdict upgrades only on prospective PD-and-FVC concordance.",
+  "novel_insight": "The Unity Biotechnology liquidation (Sept 2025) terminating UBX1325 leaves D+Q without a next-generation senolytic successor in IPF translation just as Farr 2024 (Nat Med) provides the first prospective signal \u2014 albeit exploratory on a null primary in bone \u2014 that senescent-cell-burden stratification can rescue a null D+Q readout, jointly creating a narrow but non-trivial window in which the telomere-short IPF stratified test is the highest-information remaining experiment in the senolytic-IPF program despite the unstratified clinical track record.",
+  "follow_on_deployment": {
+    "recommended_next_step": "ex-vivo IPF lung explant validation (telomere-short donor explants vs telomere-normal explants, D+Q dose-response on AT2/basaloid p16+ burden and SASP secretome) prior to committing to a stratified Phase 2, given absent external clinical replication and the Nambiar 2023 placebo-controlled null",
+    "lead_investigator_profile_needed": "an IPFnet- or PETAL-network-experienced Phase 2 ILD trialist with in-house telomere-length qPCR / Flow-FISH biomarker infrastructure, a validated peripheral-blood SASP / T-cell p16 PD assay, and access to a curated IPF lung explant biobank \u2014 explicitly external to the Mayo/UTHSCSA/Kirkland network to provide the missing independent-clinical-replication leg"
+  },
+  "disagreement_record": {
+    "advocate_vs_skeptic_delta": "Advocate framed post-2020 mechanistic convergence (AT2 senescence causality, basaloid scRNA-seq localization, telomere MR) plus Farr 2024 substrate-stratification precedent as a coherent rescue case and proposed an n=80 stratified Phase 2. Skeptic flagged six kill attempts: critical omission of Nambiar 2023 (PMID 36857968) placebo-controlled null extension of the same NCT, four hallucinated advocate PMIDs (substantive claims mostly recoverable under correct PMIDs), absent external clinical replication of D+Q in IPF outside the Kirkland network, Farr 2024 being a null-primary exploratory subgroup in bone not lung, quercetin dose drift (1250 mg in Justice \u2192 1000 mg in proposed protocol) without IPF tolerability/PD co-demonstration, and a 130-week timeline exceeding the 24-month falsification-gate.",
+    "interpreter_adjudication": "Skeptic prevails on adjudication of the verdict ceiling. The Nambiar 2023 omission is a falsification-gate failure: a placebo-controlled negative readout in the very NCT being rescued cannot be silently treated as substrate-dilution without an explicit re-analysis. The citation-hygiene failure (4/7 hallucinated PMIDs) further degrades the advocate's reliability even where substantive claims are recoverable. However, the skeptic's preliminary RESCUE_SUPPORTED is over-generous given the absent external clinical replication and the single-source nature of the substrate-stratification precedent. The interpreter therefore downgrades to MIXED. The advocate prevails only on the narrow point that no next-generation senolytic has superseded D+Q in IPF (Unity liquidation 2025) and that telomere-short stratification feasibility is now reproduced (Belgian 2025, Adegunsoye 2023), keeping the stratified hypothesis alive but not yet trial-ready. Ex-vivo explant validation is required before Phase 2 commitment."
+  }
+}

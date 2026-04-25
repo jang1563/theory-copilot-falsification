@@ -1,0 +1,66 @@
+{
+  "candidate_id": "05_DandQ_telomere_short_IPF",
+  "rescue_claim_one_line": "Dasatinib+quercetin is a candidate for a rescue trial in telomere-short / SASP-high IPF, where alveolar-epithelial senescence burden is genetically enriched and the original Mayo 2019 pilot was underpowered and unstratified.",
+  "post_rejection_evidence": [
+    {
+      "citation": "PMID 33147406",
+      "year": 2021,
+      "claim": "Senescence of alveolar type 2 cells, induced by telomere dysfunction or epithelial-specific Sin3a loss, is sufficient to drive progressive pulmonary fibrosis in mice; senolytic targeting of AT2 senescent cells attenuates fibrosis. Establishes AT2 senescence as causal, not merely correlative, in fibrotic lung disease post-rejection of the unstratified Mayo pilot.",
+      "lab": "Yao C / Stripp / Borok (Cedars-Sinai / USC)",
+      "independence": "independent"
+    },
+    {
+      "citation": "PMID 32832599",
+      "year": 2020,
+      "claim": "Single-cell RNA-seq of IPF lungs identifies an aberrant KRT5-/KRT17+ basaloid epithelial population co-expressing senescence markers (CDKN1A, CDKN2A) and SASP factors localized to the fibroblastic focus, providing a cellular substrate for senolytic action that was undefined when NCT02874989 was designed.",
+      "lab": "Adams TS / Kaminski (Yale)",
+      "independence": "independent"
+    },
+    {
+      "citation": "PMID 33450224",
+      "year": 2021,
+      "claim": "Mendelian randomization across UK Biobank and IPF GWAS cohorts shows genetically determined short telomere length is causally associated with IPF risk and progression, validating the telomere-short subset as a mechanistically distinct, biologically enriched stratum within IPF.",
+      "lab": "Duckworth A / Scotton (Exeter / Nottingham)",
+      "independence": "independent"
+    },
+    {
+      "citation": "PMID 31542391",
+      "year": 2019,
+      "claim": "Senolytic D+Q administered to humans (diabetic kidney disease cohort) reduced adipose tissue senescent cell burden (p16INK4a+, SA-\u03b2-gal+) and circulating SASP factors within 11 days of dosing \u2014 first human pharmacodynamic confirmation that the D+Q regimen actually clears senescent cells in vivo.",
+      "lab": "Hickson LJ / Kirkland (Mayo Clinic)",
+      "independence": "originating"
+    },
+    {
+      "citation": "PMID 35135571",
+      "year": 2022,
+      "claim": "In a longitudinal IPF cohort, peripheral blood leukocyte telomere length below the 10th age-adjusted percentile identifies patients with markedly accelerated FVC decline and shorter transplant-free survival, supporting telomere-short status as both a prognostic enrichment marker and a tractable trial-screening assay.",
+      "lab": "Newton CA / Garcia (UT Southwestern)",
+      "independence": "independent"
+    },
+    {
+      "citation": "PMID 36006768",
+      "year": 2022,
+      "claim": "Telomere dysfunction in alveolar epithelium induces a SASP-driven profibrotic niche; pharmacologic senolysis (including D+Q-class agents) in telomere-defective mouse lung reduces collagen deposition and improves compliance, providing telomere-short-specific preclinical model match absent from the 2019 pilot rationale.",
+      "lab": "Liu T / Phan (multi-center, telomere/lung fibrosis consortium)",
+      "independence": "unverified"
+    }
+  ],
+  "mechanism_concordance": {
+    "original_failure_diagnosis": "NCT02874989 was an n=14 open-label feasibility/safety pilot with no senescence-burden stratification, no placebo arm, and no FVC powering. Justice 2019 reported tolerability and a 6MWD/physical-function signal but the trial was structurally incapable of detecting an FVC effect, and unselected senolytic follow-on trials inherited the same dilution problem: SASP-low IPF patients have little substrate for D+Q to act on.",
+    "post_rejection_mechanism": "Between 2020-2025, three convergent advances reframed the senolytic-IPF hypothesis: (i) AT2-cell senescence was promoted from correlation to causation in genetic mouse models (Yao 2021); (ii) scRNA-seq atlases localized a senescent KRT5-/KRT17+ basaloid epithelial cell at the fibroblastic focus (Adams 2020); (iii) Mendelian randomization established short telomere length as causal for IPF (Duckworth 2021), and longitudinal cohorts (Newton 2022) confirmed telomere-short patients are the fastest-progressing, highest-senescence-burden ~15-20% subset.",
+    "stratifier_rationale": "Telomere-short IPF (germline TERT/TERC/RTEL1/PARN carriers plus sporadic lymphocyte-qPCR-defined short-telomere phenotype) is the IPF substratum with the highest a priori senescent-cell burden in alveolar epithelium and the steepest natural-history FVC slope. This combination maximizes both the pharmacodynamic substrate (more senescent cells to kill) and the statistical signal-to-noise (steeper untreated slope \u2192 larger detectable delta), exactly the two parameters that doomed the unstratified pilot."
+  },
+  "strongest_three_arguments": [
+    "The post-2019 mechanistic case is qualitatively stronger than the case at trial design: AT2 senescence is now causally established (Yao 2021), localized at single-cell resolution to the fibroblastic focus (Adams 2020), and genetically anchored to telomere biology (Duckworth 2021) \u2014 three independent lines of evidence converging on the exact subset the rescue proposes to enroll.",
+    "D+Q has documented in-human pharmacodynamic senolytic activity (Hickson 2019: reduced p16+ cells and circulating SASP within 11 days), so the rescue is not betting on a new molecule \u2014 it is betting on matching a PD-validated regimen to the patient subset where the PD target is most abundant. Failure of unselected senolytic trials does not falsify this; it is the predicted consequence of substrate dilution.",
+    "Telomere-short IPF (~15-20% of IPF) has natural-history FVC decline substantially faster than telomere-normal IPF (Newton 2022), giving a stratified Phase 2 of n=80 markedly more power than an unstratified n=80 \u2014 the rescue design exploits both biological enrichment and statistical enrichment simultaneously, and is feasible with existing lymphocyte qPCR assays."
+  ],
+  "expected_responder_fraction": 0.18,
+  "kill_or_confirm_proposal": {
+    "experiment": "Investigator-initiated, placebo-controlled Phase 2 of intermittent D+Q (D 100 mg + Q 1000 mg, 3 consecutive days/week \u00d7 52 weeks) in telomere-short IPF defined as lymphocyte qPCR telomere length \u226410th age-adjusted percentile OR pathogenic germline TERT/TERC/RTEL1/PARN variant; n=40 per arm; primary endpoint annualized FVC-slope delta at 52 weeks; key secondary: 26-week change in circulating SASP panel (IL-6, GDF15, MMP-7, CXCL13) and p16INK4a expression in peripheral T cells.",
+    "cost_usd": 9000000,
+    "wall_weeks": 130,
+    "go_criterion": "FVC-slope delta \u2265 +60 mL/yr (D+Q vs placebo) with bootstrap 95% CI lower bound > 0 at 52 weeks AND \u226530% reduction in circulating SASP composite at 26 weeks",
+    "nogo_criterion": "FVC-slope delta 95% CI lower bound \u2264 0 at the pre-specified 26-week interim OR no detectable SASP reduction (<10% change in composite) at 26 weeks despite documented PK exposure"
+  }
+}

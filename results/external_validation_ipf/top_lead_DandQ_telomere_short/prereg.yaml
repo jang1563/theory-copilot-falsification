@@ -1,0 +1,115 @@
+schema_version: 1.0
+disease: Idiopathic pulmonary fibrosis (IPF)
+disease_code: IPF
+hypothesis_name: Dasatinib + quercetin senolytic combination in telomere-short / SASP-high
+  IPF rescues the underpowered Mayo Clinic 2017 pilot
+prereg_utc: '2026-04-25T04:16:59Z'
+operator_id: principal-operator   # scrubbed for public mirror; original pre-reg in sibling dipg_rescue repo (lock SHA 88eaca34)
+rejected_trial:
+  nct: NCT02874989
+  drug: dasatinib + quercetin (D+Q)
+  mechanism_class: BCR-ABL/SRC TKI plus quercetin flavonoid (senolytic combination)
+  phase: '1'
+  n_enrolled: 14
+  primary_endpoint: Feasibility, safety, intermittent dosing tolerability
+  reported_result: Neg-Mixed
+  year_reported: 2019
+  status_ct_gov: COMPLETED
+  why_stopped: Mayo Clinic open-label pilot (Justice et al. EBioMedicine 2019) demonstrated
+    D+Q feasibility and modest physical-function signal in 14 IPF patients but was
+    not powered for FVC. No senescence-burden stratification was applied. Subsequent
+    unselected senolytic Phase 2 trials in IPF have read out null or remain ongoing.
+  citation: PMID 30616998 (Justice et al. EBioMedicine 2019)
+hypothesis:
+  rescue_claim: Cellular senescence is mechanistically central in IPF alveolar epithelial
+    dysfunction, but unselected senolytic trials are diluted by patients without a
+    high senescence burden. The telomere-short IPF subset (TERT, TERC, RTEL1, PARN
+    germline carriers + sporadic short-telomere phenotype, ~15-20% of IPF) carries
+    a defensible senescence-burden enrichment in which D+Q's alveolar-epithelial senescent-cell
+    killing should yield a measurable FVC effect.
+  proposed_stratifier:
+    type: molecular
+    variable: telomere_short (peripheral lymphocyte qPCR <= 10th age-adjusted percentile)
+      OR rare germline TERT/TERC/RTEL1/PARN carrier
+    expected_responder_fraction: 0.18
+  mechanism_rationale: Alveolar type 2 cell senescence drives a SASP-rich profibrotic
+    microenvironment. Telomere-short IPF is the genetically and phenotypically clearest
+    senescence-burden subset. D+Q kills senescent cells via SRC/BCR-ABL inhibition
+    (dasatinib) plus PI3K/AKT inhibition (quercetin), with documented in-vivo efficacy
+    in murine bleomycin and aged-mouse lung. Justice 2019 provided proof of feasibility
+    but not stratified efficacy.
+falsification_gate:
+  perrin_replication_risk_score: 2
+  evidence_quality_axes:
+    preclinical_model_match: 3
+    mechanism_concordance: 2
+    clinical_plausibility: 2
+    dose_pk_adequacy: 2
+  statistical_thresholds:
+    retrospective_subgroup_p: 0.01
+    required_effect_size: FVC-slope delta >= 80 mL/yr in telomere-short arm vs placebo
+      at 52 weeks
+    minimum_evaluable_n_per_arm: 30
+    bootstrap_ci_lower_bound: '> 0'
+    permutation_null_p: < 0.01 (10000 perms)
+    decoy_stratifier_p: '> 0.2'
+    confound_incremental_delta: '> 0 relative to age + smoking + baseline FVC + GAP
+      score + telomere length covariate'
+engine_tier:
+  tier: 2
+  tier_rationale: Tier-2 LLM-adjudication. Asks whether (a) the open senolytic Phase
+    2 trials (CLEARANCE etc.) have reported any unselected null that would still leave
+    a stratified rescue alive, (b) telomere-short IPF natural history is well enough
+    characterized to power a stratified design, (c) UBX1325 or other newer senolytics
+    have superseded D+Q in the IPF translational pipeline.
+kill_or_confirm:
+  proposed_experiment: Investigator-initiated Phase 2 in telomere-short IPF (lymphocyte
+    qPCR-defined), n=80 (D+Q vs placebo, 52 weeks), FVC slope primary
+  cost_estimate_usd: 9000000
+  wall_clock_weeks: 130
+  go_nogo_criterion: FVC-slope delta >= 60 mL/yr lower CI bound > 0; kill if delta
+    lower CI bound <= 0 at 26-week interim
+registered_at_commit: 88eaca342b5f7fcf9dd9210a7a6e4721053826c4
+post_registration_edits:
+  - utc: '2026-04-25T05:00:00Z'
+    type: skeptic_omission_review
+    triggering_finding: 'Skeptic adversarial review (5/5 candidates run, aggregate
+      score 12/15 RESCUE_SUPPORTED) flagged that the Advocate omitted Nambiar et
+      al. 2023 (PMID 36857968), which is the placebo-controlled n=12 second-stage
+      of the same NCT02874989. Skeptic characterized this as a falsification-gate
+      failure.'
+    user_directed_paper_review: 'WebFetch of PMID 36857968 verified by user direction
+      2026-04-25. Verified facts: (a) study design Phase 1 placebo-controlled
+      pilot, n=12 (6 D+Q vs 6 placebo), 3 weeks total, 9 dosing days, primary
+      endpoint adverse events / feasibility (NOT efficacy); (b) authors explicitly
+      acknowledge functional/PFT measures underpowered at n=6/arm × 3 weeks;
+      (c) AE imbalance real (65 vs 22 total non-serious AEs; sleep 4/6 vs 0/6;
+      anxiety 4/6 vs 0/6) and is consistent with documented dasatinib-class
+      kinase-inhibitor off-target PD; (d) trial enrolled mild-to-moderate IPF
+      with NO senescence-burden / telomere-length / p16 stratification; (e) authors
+      conclude feasibility established and recommend larger RCT.'
+    impact_on_rescue_claim: 'Rescue claim NOT falsified. Nambiar 2023 (i) was not
+      designed or powered to test efficacy; (ii) did not test the telomere-short
+      stratifier this rescue is built on; (iii) authors themselves recommend the
+      larger stratified RCT this rescue proposes. The outcome is to TIGHTEN the
+      stratifier requirement and trial design, not to kill the hypothesis.'
+    design_changes_required:
+      - 'Trial duration must be >= 52 weeks (Nambiar 3-week protocol cannot detect
+        FVC slope change).'
+      - 'Telomere-short stratifier MUST be applied at enrollment (Nambiar
+        unselected enrollment is the central design gap the rescue addresses).'
+      - 'AE monitoring protocol must explicitly capture sleep / anxiety / glucose
+        / LDL with frequency comparable to Nambiar (consistent with dasatinib-
+        class label).'
+      - 'Quercetin dose: harmonize across pilot (Justice 1250 mg/d) and Hickson
+        2019 PD validation (1000 mg/d). The Skeptic-flagged dose inconsistency
+        is unresolved; recommend matching Nambiar 2023 dose (1250 mg/d) since
+        that is the placebo-controlled-validated tolerability point.'
+    impact_on_falsification_gate: 'Aggregate score (12/15) and RESCUE_SUPPORTED
+      verdict UNCHANGED. The Skeptic-flagged advocate hygiene failure (omission)
+      is a process-discipline issue logged in this post-registration edit, not
+      a substantive falsification of the rescue claim.'
+    next_step_unchanged: 'Ex-vivo IPF lung explant validation (telomere-short
+      vs telomere-normal donor explants, D+Q dose-response on AT2/basaloid p16+
+      burden and SASP secretome) remains the recommended pre-prospective-trial
+      step.'

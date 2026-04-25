@@ -1,9 +1,13 @@
 # Loom visual cue map — segment ↔ asset
 
-Companion to `docs/loom_narration_final_90s.md`. For each of the 7
+Companion to `docs/loom_narration_final_90s.md`. For each of the 8
 narration segments, this file lists the **primary on-screen asset** to
 display, the **fallback** if the primary isn't ready, and the **exact
 file path** to keep open in the recording window.
+
+(Updated 2026-04-25: 8th IPF dual-fabrication-catch segment added
+post-IPF-Run-#1; total cut now ~2:23-2:47 at 140-120 WPM, well under
+3-min hard cap.)
 
 Loom multi-pane setup (recommended): three side-by-side windows —
 **Pane A** (editor), **Pane B** (image viewer / browser), **Pane C**
@@ -84,7 +88,7 @@ browser tab visible. **Last 2 s**: terminal `OK` flash.
 
 ---
 
-## 1:30 – 2:00 — DIPG generalization (60 words)
+## 1:30 – 2:05 — DIPG generalization (71 words)
 
 | Slot | Asset | Path | Fallback |
 |---|---|---|---|
@@ -93,6 +97,25 @@ browser tab visible. **Last 2 s**: terminal `OK` flash.
 
 **Cut at**: "Top lead: CED-delivered MTX110 panobinostat" — JSON shown
 with score 13/15 visible.
+
+---
+
+## 2:05 – 2:35 — IPF dual-fabrication catch (68 words)
+
+| Slot | Asset | Path | Fallback |
+|---|---|---|---|
+| Pane G (verdict distribution) | `results/external_validation_ipf/RESULTS.md` with the 1-0-4 verdict distribution row highlighted (1 SUPPORTED + 4 INSUFFICIENT_EVIDENCE) | `results/external_validation_ipf/RESULTS.md` | `docs/judge_faq.md` IPF paragraph |
+| Pane H (Skeptic kill-attempt JSON) | Skeptic JSON for the top lead with `confounds_flagged` field showing "Nambiar 2023 (PMID 36857968) … OMITTED by advocate" — verifies that the engine self-flags omissions even inside the SUPPORTED verdict | `results/external_validation_ipf/top_lead_DandQ_telomere_short/05_DandQ_telomere_short_IPF.skeptic.json` | `results/external_validation_ipf/top_lead_DandQ_telomere_short/one_pager.md` (Skeptic critical-caveats section) |
+
+**Cut at**: "the Skeptic role caught two Advocate claims" — Skeptic
+JSON shown with `confounds_flagged` field visible. The verbal claim
+references the parallel candidates 03 (simtuzumab Raghu 2017
+fabrication) and 04 (tralokinumab RAINIER fabrication); the on-screen
+asset is candidate 05 because (a) it is the public-mirror top-lead,
+(b) the same engine pattern (Skeptic catches Advocate omission) is
+visible in its `confounds_flagged` field. The full per-candidate
+Skeptic JSONs for 03 and 04 live in the private sibling repo
+`dipg_rescue/runs/2026-04-25_ipf_run01/` and are not mirrored.
 
 ---
 
@@ -114,6 +137,14 @@ with score 13/15 visible.
    pressed.
 6. Trim 1 s leading silence; trim trailing silence aggressively;
    1080p / 30 fps single take preferred.
+7. **NEW for IPF segment (2026-04-25): Pane G editor** has
+   `results/external_validation_ipf/RESULTS.md` open with the 1-0-4
+   verdict distribution row visible.
+8. **NEW for IPF segment: Pane H editor** has
+   `results/external_validation_ipf/top_lead_DandQ_telomere_short/05_DandQ_telomere_short_IPF.skeptic.json`
+   open with the `confounds_flagged` field scrolled into view (the
+   Nambiar 2023 omission entry is the on-screen evidence that the
+   Skeptic catches Advocate omissions even inside the SUPPORTED verdict).
 
 ## What is NOT shown (intentional omissions)
 

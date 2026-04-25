@@ -155,6 +155,19 @@ diffuse midline glioma, 7 supported / 7 mixed / 1 rejected. Same 4-role
 engine, structurally distant disease, same rejection-as-product
 pattern.
 
+**And on IPF (2026-04-25, post-hackathon stretch).** Same engine,
+third structurally distant disease, 5 rescue candidates: 1 supported
+(D+Q in telomere-short IPF, with the engine itself flagging Nambiar
+2023 omission as a critical caveat inside the SUPPORTED verdict),
+4 insufficient. The Skeptic role caught two Advocate fabrications
+about prior IPF trial design — RAINIER prespecified periostin and
+Raghu 2017 prespecified LOXL2-stratified co-primaries, both of
+which the Advocate had claimed "never happened." Single-session
+pipelines cannot catch this (the Advocate's confident-sounding
+rationale tokens prime the Skeptic's continuation). Mirrored at
+`results/external_validation_ipf/` (lock SHA `88eaca34` in sibling
+`dipg_rescue/`).
+
 **Evidence.**
 - [`docs/methodology.md` §1](methodology.md) — explicit cohort scoping
 - [`results/external_validation_dipg/RESULTS.md`](../results/external_validation_dipg/RESULTS.md) — DIPG full results

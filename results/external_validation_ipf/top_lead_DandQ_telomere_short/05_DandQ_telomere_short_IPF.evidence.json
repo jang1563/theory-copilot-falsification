@@ -1,0 +1,116 @@
+{
+  "candidate_id": "05_DandQ_telomere_short_IPF",
+  "citations_verified": [
+    {
+      "citation": "PMID 30616998 (Justice 2019, EBioMedicine)",
+      "verified": true,
+      "advocate_claim_accurate": true,
+      "actual_finding": "Two-center (Wake Forest + UTHSCSA) open-label, single-arm pilot of intermittent D+Q (D 100 mg/d, Q 1250 mg/d, 3 days/wk x 3 wk) in n=14 stable IPF patients. 100% retention; 13/14 completed all assessments; 1 SAE; non-serious AEs primarily respiratory, skin, GI; 6MWD/4-m gait/chair-stands significantly improved; pulmonary function and frailty index unchanged; SASP changes inconclusive but correlated with functional change. Authors explicitly state purpose was feasibility, not efficacy, and that an RCT is needed. Note Q dose was 1250 mg/d (not 1000 mg/d as advocate's kill-or-confirm proposes).",
+      "issue": null
+    },
+    {
+      "citation": "PMID 33147406 (Yao 2021, advocate citation)",
+      "verified": false,
+      "advocate_claim_accurate": false,
+      "actual_finding": "PMID 33147406 does not return a Yao/Stripp/Borok AT2 senescence paper in PubMed searches. The paper the advocate is describing is real but its correct identifier is PMID 32991815 / Am J Respir Crit Care Med 2021;203(6):707-717 (Yao C, Guan X, Carraro G, Parimon T, Liu X, Huang G, et al. 'Senescence of Alveolar Type 2 Cells Drives Progressive Pulmonary Fibrosis'). The paper itself supports the advocate's claim: Sin3a-LOF AT2 senescence model demonstrates AT2 senescence is sufficient for progressive fibrosis, and D+Q reduces senescence markers and hydroxyproline (their Figure 5 in the actual paper).",
+      "issue": "Wrong PMID. The substantive scientific claim is correct but cited PMID is hallucinated; correct PMID is 32991815. Note also: the lab attribution 'Yao C / Stripp / Borok (Cedars-Sinai / USC)' is correct."
+    },
+    {
+      "citation": "PMID 32832599 (Adams 2020, Sci Adv)",
+      "verified": true,
+      "advocate_claim_accurate": true,
+      "actual_finding": "Adams TS, Schupp JC, Poli S, Ayaub EA, Neumark N, Ahangari F, ..., Kaminski N. 'Single-cell RNA-seq reveals ectopic and aberrant lung-resident cell populations in idiopathic pulmonary fibrosis.' The paper identifies a transcriptionally distinct 'aberrant basaloid' population (TP63+/KRT17+ but KRT5-/KRT15-) covering fibroblast foci by IHC, expressing senescence markers (p21, COX2, HMGA2) plus MMP7, integrin alphaVbeta6, EPHB2, and SOX9 transcription factor activity. Cells essentially absent in controls, present in nearly every IPF lung. Independently confirmed by Habermann et al. (KRT5-/KRT17+) and Valenzi et al. (SSc-ILD). Advocate's characterization is accurate.",
+      "issue": null
+    },
+    {
+      "citation": "PMID 33450224 (Duckworth 2021, advocate citation)",
+      "verified": false,
+      "advocate_claim_accurate": false,
+      "actual_finding": "PMID 33450224 does not return the Duckworth/Scotton telomere-IPF Mendelian randomization paper. The correct citation is Duckworth A, Gibbons MA, Allen RJ, et al., 'Telomere length and risk of idiopathic pulmonary fibrosis and chronic obstructive pulmonary disease: a mendelian randomisation study,' Lancet Respir Med 2021;9(3):285-294, PMID 33197388. Substantively the claim is supported: 1-SD shorter genetically instrumented telomere length is associated with 5.81-fold higher odds of IPF (95% CI 3.56-9.50) by meta-analysis; no causal effect on COPD.",
+      "issue": "Wrong PMID. The correct PMID is 33197388. The lab attribution and substantive scientific claim are accurate. Also note: the MR result is for IPF *risk* (incidence), not directly for IPF *progression* as the advocate's claim implies."
+    },
+    {
+      "citation": "PMID 31542391 (Hickson 2019, EBioMedicine DKD)",
+      "verified": true,
+      "advocate_claim_accurate": true,
+      "actual_finding": "Hickson LJ, Langhi Prata LGP, Bobart SA, et al. 'Senolytics decrease senescent cells in humans: Preliminary report from a clinical trial of Dasatinib plus Quercetin in individuals with diabetic kidney disease.' EBioMedicine 47:446-456 (2019), NCT02848131. Open-label Phase 1, n=9 DKD subjects, 3-day oral D 100 mg + Q 1000 mg. At 11 days post-dosing, adipose p16INK4a+ and p21CIP1+ cells, SAbeta-gal+ cells, and limited-replicative-capacity adipocyte progenitors all reduced; epidermal p16+/p21+ cells reduced; circulating IL-1alpha, IL-6, MMP-9, MMP-12 reduced. Independence: correctly noted as 'originating' (Mayo Kirkland group). Note: the actual Q dose used in this human PD-validation study was 1000 mg/d, NOT 1250 mg/d as in the IPF Justice 2019 trial; advocate's kill-or-confirm protocol uses 1000 mg/d which matches Hickson but mismatches the IPF prior.",
+      "issue": null
+    },
+    {
+      "citation": "PMID 35135571 (Newton 2022, advocate citation)",
+      "verified": false,
+      "advocate_claim_accurate": false,
+      "actual_finding": "PMID 35135571 does not return any Newton/Garcia paper on telomere length and FVC decline / transplant-free survival in IPF in PubMed searches. The substantive claim is supported by other Newton papers, but with PMIDs the advocate did not cite: Newton et al. 'Telomere Length and Use of Immunosuppressive Medications in IPF,' Am J Respir Crit Care Med 2019;200(3):336-347, PMID 30566847 (LTL <10th percentile is a poor-prognosis marker); Newton et al. 'Telomere length and genetic variant associations with ILD progression and survival,' Eur Respir J 2019;53(4):1801641, PMID 30635297 (LTL <10th percentile predicts faster FVC decline in IPF/IPAF); and Adegunsoye/Newton et al., Nat Commun 2023, 'Telomere length associates with chronological age and mortality across racially diverse PF cohorts' (LTL below median predicts mortality across races).",
+      "issue": "PMID is unverified/likely hallucinated. Substantive claim that LTL <=10th age-adjusted percentile identifies a fast-progressing IPF subset is well-supported by Newton 2019 papers, but the correct citations are PMID 30566847 and PMID 30635297, not PMID 35135571."
+    },
+    {
+      "citation": "PMID 36006768 (Liu/Phan 2022, advocate citation)",
+      "verified": false,
+      "advocate_claim_accurate": false,
+      "actual_finding": "PMID 36006768 does not return a paper on telomere-defective mouse lung + senolytic D+Q-class rescue in PubMed searches. The advocate themselves marked the lab as 'unverified.' Closest legitimate references in this space are Naikawadi 2016 (JCI Insight, AT2 TRF1 deletion -> fibrosis), Povedano 2015/Blasco group, and Whittemore/Blasco 2022 (Nat Commun, PMID 36163190 or 36163192 - TRF1 in fibroblasts/club/basal cells does NOT cause spontaneous fibrosis, underscoring AT2-specificity). None of these are PMID 36006768.",
+      "issue": "PMID appears hallucinated/unverifiable. The advocate's claim that telomere-defective mouse lung + senolytic shows specific rescue is only partially supported in the literature; the strongest direct evidence (Yao 2021, Sin3a model) is genetic, not telomere-specific, and Naikawadi 2016 used genetic deletion, not D+Q."
+    }
+  ],
+  "additional_evidence_2020_2026": [
+    {
+      "citation": "PMID 36857968 (Nambiar 2023, EBioMedicine)",
+      "year": 2023,
+      "claim": "Second-stage of NCT02874989: single-blind, single-center, randomized, placebo-controlled pilot, n=12 (6 D+Q, 6 placebo), same intermittent regimen. Primary endpoints feasibility/tolerability met. Critical secondary finding: 'Frailty, pulmonary, or physical function were explored before and after intermittent D+Q; though under-powered to evaluate change, these measures do not appear to differ meaningfully between groups.' Sleep disturbances and anxiety disproportionately in D+Q (4/6 vs 0/6). Possible signals of elevated fasting glucose and LDL on D+Q. This is a placebo-controlled IPF readout the Advocate did not cite, and it is the same NCT as the parent trial. CRITICAL OMISSION.",
+      "strengthens_or_weakens_rescue": "weakens"
+    },
+    {
+      "citation": "ERJ 2023;62:Suppl67:OA2583 (Nambiar et al., ERS 2023 abstract)",
+      "year": 2023,
+      "claim": "Pooled analysis of the open-label (n=14) and placebo-controlled (n=12) NCT02874989 cohorts (n=20 evaluable D+Q exposures): 'Pooled analysis of IPF patients treated with D+Q did not show significant improvement in frailty nor physical or pulmonary function versus placebo. Senescent biomarkers support senolytic efficacy of D+Q.' This is the Mayo/UTHSCSA group's own pooled-cohort negative readout on functional endpoints with positive PD readout (GPNMB, alpha-Klotho), which is exactly the substrate-dilution pattern the Advocate's rescue logic predicts. Conference abstract, not peer-reviewed full paper.",
+      "strengthens_or_weakens_rescue": "neutral"
+    },
+    {
+      "citation": "DOI 10.1038/s41591-024-03096-2 (Farr et al., Nat Med 2024)",
+      "year": 2024,
+      "claim": "Phase 2 RCT of intermittent D+Q (n=60 postmenopausal women, 20 weeks). Primary endpoint (% change in CTx bone resorption marker) NOT met (D+Q -4.1% vs control -7.7%, p=0.611). However, pre-specified exploratory analysis found D+Q response was 'driven principally by women with a high senescent cell burden (highest tertile for T cell p16 mRNA levels) in which D+Q concomitantly increased P1NP and reduced CTx at 2 weeks, and increased radius bone mineral density at 20 weeks.' This is the most directly relevant 2024 evidence for the Advocate's substrate-stratification logic: in the only fully-powered placebo-controlled Phase 2 of D+Q published to date, the unselected primary endpoint was null but the high-senescent-burden subgroup responded.",
+      "strengthens_or_weakens_rescue": "strengthens"
+    },
+    {
+      "citation": "PMID 40632247 (Lung 2025, Belgian cohort)",
+      "year": 2025,
+      "claim": "Real-world IPF cohort, n=143 with Flow-FISH telomere length: short TL (<10th percentile) in 50%, very short TL (<1st percentile) in ~14%. Short-TL patients had greater 24-mo FVC decline (-4% vs +3%, p<0.05) and DLCO decline (-7% vs -3%, p<0.05). Very-short-TL patients younger at diagnosis with trend to greater FVC decline (-5% vs -1%, p=0.06). 50% of TRG-variant carriers were in the short-TL group. Confirms that lymphocyte-TL stratification is feasible and reproducible in 2025 clinical practice.",
+      "strengthens_or_weakens_rescue": "strengthens"
+    },
+    {
+      "citation": "Unity Biotechnology corporate liquidation announcement, Sep 2025",
+      "year": 2025,
+      "claim": "Unity Biotechnology stockholders approved company liquidation and dissolution plan in September 2025 after the ASPIRE Phase 2b trial of UBX1325 (foselutoclax, BCL-xL inhibitor) in diabetic macular edema. UBX1325 was NEVER advanced into IPF. This negates the Tier-2 LLM-adjudication concern that 'UBX1325 or other newer senolytics have superseded D+Q in the IPF translational pipeline' - in 2026 the IPF translational pipeline contains essentially no second-generation senolytic that has supplanted D+Q.",
+      "strengthens_or_weakens_rescue": "strengthens"
+    },
+    {
+      "citation": "PMID 36163190 (Povedano/Whittemore/Blasco, Nat Commun 2022)",
+      "year": 2022,
+      "claim": "TRF1 deletion in fibroblasts, club cells, or basal cells does NOT spontaneously produce interstitial lung fibrosis, in contrast to TRF1 deletion in AT2 cells (Naikawadi 2016) which does. This narrows the cell-of-origin substrate to AT2 specifically, supporting the Advocate's cell-type rationale for senolytic targeting of AT2 in telomere-short IPF.",
+      "strengthens_or_weakens_rescue": "strengthens"
+    },
+    {
+      "citation": "DOI 10.1038/s41467-023-37193-6 (Adegunsoye/Newton et al., Nat Commun 2023)",
+      "year": 2023,
+      "claim": "Multi-cohort analysis of LTL across racially diverse PF populations (White, Black, Hispanic, Asian). Age- and sex-adjusted LTL below the median consistently predicted worse mortality (HR 2.21 White, 2.22 Black, 3.40 Hispanic, 2.11 Asian). Replicates and extends the Newton 2019 PANTHER-IPF / ACE-IPF findings to non-White populations and is post-2020.",
+      "strengthens_or_weakens_rescue": "strengthens"
+    },
+    {
+      "citation": "PMID 41564845 (Bian/Hickson 2026, EBioMedicine)",
+      "year": 2026,
+      "claim": "D+Q in murine STZ-induced diabetic kidney disease reduced p16Ink4a, fibrosis markers, and inflammation, AND restored geroprotective factors alpha-Klotho and Sirtuin-1. Cross-tissue (not lung) but mechanistically reinforces that D+Q clears senescent cells in vivo at translatable doses. Originating Mayo group, not independent.",
+      "strengthens_or_weakens_rescue": "neutral"
+    },
+    {
+      "citation": "PMID 36787736 (Chand et al., 2023, Cell Reports)",
+      "year": 2023,
+      "claim": "IGFBP2 loss mediates AT2 senescence and promotes lung fibrosis; IGFBP2 transgenic mice show reduced AT2 senescence and SASP and ameliorated bleomycin fibrosis. Independent (not Mayo/Stripp) confirmation that AT2-specific senescence drives fibrogenesis and is reversible.",
+      "strengthens_or_weakens_rescue": "strengthens"
+    }
+  ],
+  "replication_audit": {
+    "independent_labs_count": 4,
+    "isogenic_controls_present": true,
+    "in_vivo_replication_present": true,
+    "clinical_signal_external_to_originating_group": false
+  }
+}

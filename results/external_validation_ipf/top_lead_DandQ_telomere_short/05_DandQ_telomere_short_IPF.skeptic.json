@@ -1,0 +1,57 @@
+{
+  "candidate_id": "05_DandQ_telomere_short_IPF",
+  "axis_scores": {
+    "perrin_replication_score": 2,
+    "mechanism_concordance": 2,
+    "stratifier_specificity": 3,
+    "clinical_plausibility": 3,
+    "kill_or_confirm_feasibility": 2
+  },
+  "aggregate_score": 12,
+  "verdict_preliminary": "RESCUE_SUPPORTED",
+  "weakest_axis": "perrin_replication_score",
+  "kill_attempts": [
+    {
+      "attempt": "CRITICAL OMISSION: The advocate failed to cite Nambiar 2023 (PMID 36857968), which is the placebo-controlled second-stage of the very NCT (NCT02874989) the rescue is built on. n=12 (6 D+Q vs 6 placebo) on the same intermittent regimen showed no meaningful difference in pulmonary, frailty, or physical function, AND showed AE imbalance (sleep disturbance/anxiety 4/6 vs 0/6, plus fasting glucose/LDL trends on D+Q). The Mayo group's own ERS 2023 pooled n=20 readout was also functionally null. An advocate omitting the placebo-controlled negative readout from the same NCT is a falsification-gate failure; the rescue must explicitly explain why a placebo-controlled IPF cohort, however small, gave nothing \u2014 substrate-dilution at n=12 is plausible but invokes special pleading.",
+      "advocate_response_quality": "absent"
+    },
+    {
+      "attempt": "The single strongest pillar of the substrate-stratification logic is Farr 2024 Nat Med (D+Q osteoporosis Phase 2). But (a) it is in postmenopausal bone, not lung; (b) the high-senescent-burden tertile finding was a pre-specified EXPLORATORY analysis on a NULL primary endpoint, not a confirmatory result; (c) it has not been prospectively replicated. Treating this as cross-disease validation of senescence-burden-stratified D+Q response is overreach \u2014 at best it is hypothesis-generating, and a stratified IPF Phase 2 would be the FIRST prospective test of this principle in any disease.",
+      "advocate_response_quality": "weak"
+    },
+    {
+      "attempt": "Citation hygiene problem: the Evidence Retriever found 4 of 7 advocate PMIDs were wrong/hallucinated (Yao 2021, Duckworth 2021, Newton 2022, Liu/Phan 2022). Substantive scientific claims are mostly correct against re-identified PMIDs, but this failure mode signals the advocate may not have read the primary literature. The Duckworth MR result in particular is for IPF *risk/incidence*, not progression \u2014 yet the rescue claim invokes it for progression.",
+      "advocate_response_quality": "absent"
+    },
+    {
+      "attempt": "Feasibility breach: 130 weeks = 30 months exceeds the \u226424-month falsification-gate threshold. A 60 mL/yr FVC-slope delta at n=40/arm in a telomere-short cohort is borderline powered even with the steeper natural-history slope (Newton/Adegunsoye, Belgian 2025). The 26-week interim go/no-go on FVC slope is aggressive given known FVC measurement noise and the small n.",
+      "advocate_response_quality": "adequate"
+    },
+    {
+      "attempt": "Quercetin dose inconsistency: Justice 2019 used Q 1250 mg/d, Hickson 2019 (the human PD validation) used Q 1000 mg/d, and the advocate's protocol proposes 1000 mg/d. The advocate is implicitly claiming the lower-dose regimen will retain IPF tolerability AND produce the senolytic PD effect, but neither has been demonstrated in IPF specifically. Any AE imbalance seen in Nambiar 2023 was at the higher dose; PD effect was demonstrated at the lower dose in a different tissue (adipose/skin) in DKD.",
+      "advocate_response_quality": "absent"
+    },
+    {
+      "attempt": "All clinical D+Q work in IPF is Mayo/UTHSCSA-originating (Justice, Nambiar, Hickson, Farr \u2014 all Kirkland-network). There is no clinical replication external to the originating group. This is structurally similar to a single-center program risk and Perrin-flag-worthy on its own.",
+      "advocate_response_quality": "absent"
+    }
+  ],
+  "confounds_flagged": [
+    "Nambiar 2023 EBioMedicine (PMID 36857968) placebo-controlled extension of NCT02874989 was OMITTED by advocate; functionally null with AE imbalance (sleep/anxiety 4/6 vs 0/6, glucose/LDL trends).",
+    "Mayo/UTHSCSA pooled n=20 (ERS 2023 Nambiar abstract) was negative for functional and pulmonary endpoints \u2014 substrate-dilution explanation is post-hoc.",
+    "Farr 2024 Nat Med high-senescent-burden subgroup response is pre-specified EXPLORATORY on a null primary endpoint, in osteoporosis not IPF \u2014 single non-replicated subgroup signal supporting the rescue's central premise.",
+    "Duckworth MR (correct PMID 33197388) demonstrates short LTL \u2192 IPF *incidence*, not directly *treatment-responsive progression* under D+Q; advocate's framing conflates risk with progression-modifiability.",
+    "All clinical D+Q evidence is Kirkland-network originating; no external clinical replication.",
+    "Q-dose inconsistency: 1250 mg in IPF prior, 1000 mg in advocate protocol; tolerability and PD not co-demonstrated in IPF at proposed dose.",
+    "Telomere-short IPF has faster progression (Newton, Belgian 2025) but also higher event/dropout rates and mortality \u2014 may compromise FVC-slope endpoint integrity at 52 weeks.",
+    "AE flag from Nambiar 2023 (sleep/anxiety) requires explicit safety monitoring in protocol; not addressed in advocate's kill-or-confirm."
+  ],
+  "perrin_flags": [
+    "4/7 advocate-cited PMIDs hallucinated (Yao, Duckworth, Newton, Liu/Phan); substantive claims are mostly correct under re-identified PMIDs but the citation failure signals review-process degradation.",
+    "Liu/Phan 2022 (PMID 36006768) appears genuinely unverifiable per Evidence Retriever \u2014 advocate self-flagged 'unverified' yet still scored it as supporting evidence.",
+    "Naikawadi 2016 telomere-AT2 model is genetic deletion, not a D+Q rescue study; advocate implies but does not establish that D+Q specifically rescues telomere-defective AT2 lung in vivo.",
+    "Substrate-stratification logic for D+Q is single-source (Farr 2024) and has not been prospectively replicated in any disease.",
+    "Clinical signal external to originating Mayo/Kirkland network: ABSENT for D+Q in IPF.",
+    "Nambiar 2023 (placebo-controlled n=12, same NCT, functionally null + AE imbalance) functions as a small-n in-disease falsification signal that the advocate elected not to engage."
+  ]
+}
