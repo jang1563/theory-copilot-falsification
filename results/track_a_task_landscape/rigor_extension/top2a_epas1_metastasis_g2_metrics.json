@@ -1,0 +1,37 @@
+{
+  "law": "TOP2A - EPAS1",
+  "task": "metastasis_M0_vs_M1",
+  "panel": "metastasis_expanded_45gene",
+  "n_samples": 505,
+  "prevalence_M1": 0.15643564356435644,
+  "passes_5test_gate": true,
+  "auroc": 0.7275212456171628,
+  "delta_baseline": 0.07193795685505433,
+  "perm_p": 0.0,
+  "ci_lower": 0.6686201052013636,
+  "decoy_p": 0.0,
+  "rigor_extension": {
+    "auprc": 0.32057315216971494,
+    "auprc_baseline_prevalence": 0.15643564356435644,
+    "auprc_lift_over_baseline": 2.0492334410848865,
+    "brier": 0.12195831910014654,
+    "brier_uninformative_reference": 0.13196353298696206,
+    "calibration_slope": 0.5401972514813235,
+    "calibration_intercept": -1.848291061435296,
+    "cal_curve_predicted": [
+      0.06409054915893173,
+      0.0945042314027023,
+      0.1261684494252596,
+      0.17568861550420883,
+      0.321779022124198
+    ],
+    "cal_curve_observed": [
+      0.0297029702970297,
+      0.0891089108910891,
+      0.15841584158415842,
+      0.15841584158415842,
+      0.3465346534653465
+    ],
+    "seed": 0
+  }
+}

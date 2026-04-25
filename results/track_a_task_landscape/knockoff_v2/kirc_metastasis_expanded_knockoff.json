@@ -1,0 +1,125 @@
+{
+  "dataset": "kirc_metastasis_expanded",
+  "n_samples": 505,
+  "n_genes": 45,
+  "m1_prevalence": 0.15643564356435644,
+  "fdr_target": 0.1,
+  "n_replicates": 25,
+  "seed": 0,
+  "sigma_condition_number": 157.4588953552876,
+  "selected_genes": [],
+  "top_selection_rates": {},
+  "hypotheses": {
+    "H1_top2a_epas1_selected": {
+      "pass": false,
+      "top2a_rate": 0.0,
+      "epas1_rate": 0.0
+    },
+    "H2_survivor_concordance": {
+      "pass": false,
+      "concordant_n": 0,
+      "total_survivors": 3
+    },
+    "H3_reject_concordance": {
+      "pass": true,
+      "concordant_n": 2,
+      "total_rejects": 2
+    }
+  },
+  "survivor_law_checks": [
+    {
+      "equation": "TOP2A - EPAS1",
+      "genes": [
+        "TOP2A",
+        "EPAS1"
+      ],
+      "auroc": 0.726,
+      "law_genes_selected": false,
+      "per_gene_rates": {
+        "TOP2A": 0.0,
+        "EPAS1": 0.0
+      },
+      "min_rate": 0.0,
+      "bottleneck_gene": "TOP2A",
+      "conjunction_threshold": 0.5,
+      "v1_verdict": "pass",
+      "concordance": "DISCORDANT"
+    },
+    {
+      "equation": "MKI67 - EPAS1",
+      "genes": [
+        "MKI67",
+        "EPAS1"
+      ],
+      "auroc": 0.708,
+      "law_genes_selected": false,
+      "per_gene_rates": {
+        "MKI67": 0.0,
+        "EPAS1": 0.0
+      },
+      "min_rate": 0.0,
+      "bottleneck_gene": "MKI67",
+      "conjunction_threshold": 0.5,
+      "v1_verdict": "pass",
+      "concordance": "DISCORDANT"
+    },
+    {
+      "equation": "0.099*(TOP2A-EPAS1)+0.161",
+      "genes": [
+        "TOP2A",
+        "EPAS1"
+      ],
+      "auroc": 0.726,
+      "law_genes_selected": false,
+      "per_gene_rates": {
+        "TOP2A": 0.0,
+        "EPAS1": 0.0
+      },
+      "min_rate": 0.0,
+      "bottleneck_gene": "TOP2A",
+      "conjunction_threshold": 0.5,
+      "v1_verdict": "pass",
+      "concordance": "DISCORDANT"
+    }
+  ],
+  "reject_law_checks": [
+    {
+      "equation": "log1p(CA9)+log1p(VEGFA)-log1p(AGXT)",
+      "genes": [
+        "CA9",
+        "VEGFA",
+        "AGXT"
+      ],
+      "auroc": 0.521,
+      "law_genes_selected": false,
+      "per_gene_rates": {
+        "CA9": 0.0,
+        "VEGFA": 0.0,
+        "AGXT": 0.0
+      },
+      "min_rate": 0.0,
+      "bottleneck_gene": "CA9",
+      "conjunction_threshold": 0.5,
+      "v1_verdict": "fail",
+      "concordance": "CONCORDANT_NEG"
+    },
+    {
+      "equation": "log1p(ACTB)-log1p(GAPDH)",
+      "genes": [
+        "ACTB",
+        "GAPDH"
+      ],
+      "auroc": 0.505,
+      "law_genes_selected": false,
+      "per_gene_rates": {
+        "ACTB": 0.0,
+        "GAPDH": 0.0
+      },
+      "min_rate": 0.0,
+      "bottleneck_gene": "ACTB",
+      "conjunction_threshold": 0.5,
+      "v1_verdict": "fail",
+      "concordance": "CONCORDANT_NEG"
+    }
+  ]
+}

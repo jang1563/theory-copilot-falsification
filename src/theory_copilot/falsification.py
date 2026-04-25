@@ -178,7 +178,13 @@ def passes_falsification(
 
 
 def run_falsification_suite(
-    equation_fn, X, y, X_covariates=None, include_decoy=True, seed: int | None = None
+    equation_fn,
+    X,
+    y,
+    X_covariates=None,
+    include_decoy=True,
+    seed: int | None = None,
+    include_rigor_extension: bool = True,
 ) -> dict:
     """Run the full 5-test falsification suite.
 
@@ -186,6 +192,11 @@ def run_falsification_suite(
     nulls. The decoy test always uses its own internal seed (default 0)
     when no top-level seed is supplied; the permutation and bootstrap
     legs use the supplied seed for both reproducibility and testing.
+
+    `include_rigor_extension` (default True) attaches the G2 reporting
+    metrics — AUPRC, Brier, calibration slope/intercept — under the
+    `rigor` key. These are REPORTING-ONLY (gate logic unchanged); see
+    `preregistrations/20260425T164840Z_g2_rigor_extension.yaml`.
     """
     perm_p, original_auc = label_shuffle_null(X, y, equation_fn, seed=seed)
     ci_width, ci_lower, mean_auc = bootstrap_stability(X, y, equation_fn, seed=seed)
@@ -202,7 +213,7 @@ def run_falsification_suite(
         decoy_seed = seed if seed is not None else 0
         decoy_p, decoy_q95, law_auc = decoy_feature_test(X, y, equation_fn, seed=decoy_seed)
 
-    return {
+    output = {
         "passes": passes_falsification(
             perm_p, ci_lower, law_auc, baseline_auc, confound_delta, decoy_p
         ),
@@ -220,3 +231,15 @@ def run_falsification_suite(
         "decoy_q95": decoy_q95,
         "seed": seed,
     }
+
+    if include_rigor_extension:
+        from theory_copilot.rigor_metrics import rigor_metrics
+
+        X_arr = np.asarray(X)
+        if X_arr.ndim == 1:
+            X_arr = X_arr[:, np.newaxis]
+        scores = np.asarray(equation_fn(X_arr)).reshape(-1)
+        rigor_seed = seed if seed is not None else 0
+        output["rigor"] = rigor_metrics(scores, np.asarray(y), seed=rigor_seed)
+
+    return output

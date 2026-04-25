@@ -1,0 +1,85 @@
+# Pre-registration artifact — Theory Copilot Phase G
+#
+# Committed once and never modified. Any subsequent edit of this file
+# invalidates the pre-registration (verifiable via `git log -p <file>`).
+# This file documents the G2 rigor-extension addition: AUPRC + Brier +
+# calibration slope/intercept added as REPORTING-ONLY metrics. The
+# original 5-test gate thresholds in src/theory_copilot/falsification.py
+# remain unchanged. This is consistent with TRIPOD+AI 2024 reporting
+# standards (Collins et al., BMJ 385:e078378) which mandate calibration
+# alongside discrimination — adding standard reporting metrics does not
+# constitute a protocol amendment per Steyerberg & Vergouwe 2014
+# (Eur. Heart J. 35:1925-1931).
+
+hypothesis_id: g2_rigor_extension_2026-04-25
+emitted_at_utc: 2026-04-25T16:48:40Z
+emitted_git_sha: af6289e
+retroactive: false
+analyst: theory-copilot-team
+data_cutoff_date: 2026-04-25
+dataset_context: tcga_kirc_metastasis_expanded
+
+extension_type: reporting_only
+gate_logic_changed: false
+pass_fail_thresholds_changed: false
+
+scope: |
+  Add three reporting metrics to every falsification suite output:
+    1. AUPRC (Average Precision) via sklearn.metrics.average_precision_score
+    2. Brier score via sklearn.metrics.brier_score_loss on out-of-fold
+       Platt-scaled probabilities (5-fold StratifiedKFold, deterministic seed)
+    3. Calibration slope and intercept via logistic regression
+       logit(y) ~ a + b * score on full data
+  Plus calibration curve (mean predicted vs observed event rate per
+  quantile bin, n_bins=5) for plotting.
+
+  These metrics are REPORTING-ONLY. They do not:
+    - Change passes_falsification() pass/fail decisions
+    - Change any pre-registered threshold in falsification.py
+    - Change the BH-FDR correction across the candidate family
+    - Trigger re-running of historical falsification reports' pass/fail
+
+interpretation_targets:
+  - metric: AUPRC
+    baseline_at_16pct_prevalence: 0.16
+    expected_for_top2a_epas1: "0.30 to 0.42 (lift ~2x over random)"
+    threshold_for_meaningful: ">= 0.40"
+    citation: "Saito & Rehmsmeier 2015 PLoS ONE 10(3):e0118432; arXiv:2401.06091"
+  - metric: Brier
+    uninformative_reference_at_16pct: 0.134
+    threshold_for_meaningful: "< 0.115"
+    citation: "Brier 1950 Mon. Weather Rev. 78:1-3; Assel et al. 2017 Diagnostic Prognostic Res. 1:19"
+  - metric: calibration_slope
+    well_calibrated_range: "[0.85, 1.15]"
+    interpretation: "b<1 = overfitting; b>1 = under-extreme; for a 2-gene linear contrast slope characterises score-to-probability transform, not biological model fit"
+    citation: "Steyerberg 2019 Clinical Prediction Models 2nd ed. Ch.15; Van Calster et al. 2019 J. Clin. Epidemiol. 110:12-22"
+
+honest_caveat: |
+  TOP2A - EPAS1 is a two-gene linear contrast, not a probabilistic model.
+  Calibration metrics characterise the score-to-probability mapping
+  (logistic-regression-on-score), not biological model fit. Both raw-logit
+  and 5-fold Platt-scaled versions are reported for transparency. AUPRC
+  remains a valid discrimination metric independent of probability
+  calibration.
+
+deterministic_seed: 0  # for the 5-fold StratifiedKFold Platt scaling
+
+multiple_testing_correction: not_applicable  # no new pass/fail decisions
+alpha: not_applicable
+
+stopping_rule: |
+  These metrics are reported alongside the pre-registered gate output for
+  every candidate evaluation. No threshold-driven stopping. No post-hoc
+  threshold adjustment will be applied to elevate any metric to gate-level.
+
+# Tamper-evidence pointers.
+references:
+  rigor_metrics_impl: src/theory_copilot/rigor_metrics.py
+  falsification_gate_impl: src/theory_copilot/falsification.py
+  methodology_doc: docs/methodology.md
+
+# Regulatory + reporting-standard context.
+regulatory_references:
+  - https://www.bmj.com/content/385/bmj-2023-078378  # TRIPOD+AI 2024
+  - https://www.ema.europa.eu/en/news/ema-fda-set-common-principles-ai-medicine-development-0
+  - https://artificialintelligenceact.eu/

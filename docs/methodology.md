@@ -354,6 +354,72 @@ disease, not M0→M1 prediction generalization.
 
 **Prior art and rigor-benchmark references.** ccA/ccB ccRCC subtype axis: Brannon 2010 ([PMID 20871783](https://pubmed.ncbi.nlm.nih.gov/20871783/)); ClearCode34 ([DOI 10.1016/j.eururo.2014.02.035](https://doi.org/10.1016/j.eururo.2014.02.035)); TOP2A in ccRCC 2024 ([PMID 38730293](https://pubmed.ncbi.nlm.nih.gov/38730293/)). Contemporary AI-for-Science rigor benchmarks this pipeline tracks: POPPER ([arXiv 2502.09858](https://arxiv.org/abs/2502.09858)); Sakana AI Scientist v2 ([arXiv 2504.08066](https://arxiv.org/abs/2504.08066)); SPOT ([arXiv 2505.11855](https://arxiv.org/abs/2505.11855)); FIRE-Bench ([arXiv 2602.02905](https://arxiv.org/abs/2602.02905)) — formalises rediscovery of established findings as the evaluation paradigm and reports SOTA agents at <50 F1, the paradigm our ccA/ccB rediscovery instantiates.
 
+### G2 rigor extension — AUPRC, Brier, calibration (reporting-only)
+
+Pre-registered in `preregistrations/20260425T164840Z_g2_rigor_extension.yaml`
+(`gate_logic_changed: false`). The 5-test gate uses AUROC, which is
+prevalence-invariant — useful when comparing tasks but blind to the
+imbalance regime (16% M1 on `kirc_metastasis_expanded`). G2 attaches
+three reporting metrics to every gate output, computed by
+`src/theory_copilot/rigor_metrics.py` and exposed under the `rigor`
+key of `run_falsification_suite()`:
+
+- **AUPRC (sign-invariant).** Mirrors the gate's AUROC sign convention.
+  On `TOP2A − EPAS1` × metastasis: **0.321** vs prevalence baseline
+  0.156 → 2.05× lift.
+- **Brier score** on 5-fold out-of-fold Platt-scaled probabilities
+  (Niculescu-Mizil & Caruana 2005, ICML). On the same survivor:
+  **0.122** vs uninformative reference `p(1−p)` = 0.132 (7.6%
+  reduction).
+- **Calibration slope / intercept** from a logistic fit on full data.
+  Slope **0.540** (well-calibrated range [0.85, 1.15]), intercept
+  **−1.85**. The low slope is itself an honest signal: the raw
+  `TOP2A − EPAS1` value is more discriminative than its scale
+  suggests, and Platt-scaled probabilities are required before
+  the score is interpretable as a probability.
+
+This addition follows TRIPOD+AI 2024 (BMJ; PMID 38719247) and
+Steyerberg, *Clinical Prediction Models* (2nd ed., 2019) which
+recommend AUPRC + calibration alongside AUROC for low-prevalence
+binary outcomes. The gate logic is unchanged; G2 outputs are written
+under `results/track_a_task_landscape/rigor_extension/` and discussed
+in `results/track_a_task_landscape/rigor_extension/SUMMARY.md`.
+
+### G1 knockoff v2 — Model-X individual-feature FDR (parallel reporting gate)
+
+Pre-registered in `preregistrations/20260425T170647Z_g1_knockoff_v2.yaml`
+(`gate_logic_changed: true`, `extension_type: parallel_v2_gate`). The
+v1 5-test gate decision surface is unchanged; v2 runs alongside.
+
+`src/theory_copilot/knockoff_gate.py` implements a Model-X knockoff
+filter (Barber & Candès 2015; arXiv 1404.5609) with LedoitWolf
+shrinkage Sigma, MVR construction (Spector & Janson 2022), `lcd`
+feature statistic, FDR target q=0.10, and 25 derandomized replicates
+(Ren & Candès 2020; arXiv 2012.11286). The conjunction rule for a
+compound law `f(g₁, g₂, …)` is **all** constituent genes must be
+individually selected in ≥ 50% of replicates.
+
+Result on `kirc_metastasis_expanded` (n=505, p=45,
+[`results/track_a_task_landscape/knockoff_v2/`](../results/track_a_task_landscape/knockoff_v2/SUMMARY.md)):
+**0/45 genes selected** at q=0.10. TOP2A and EPAS1 individual
+selection rates both 0/25. Pre-registered hypothesis verdicts:
+H1 FAIL (individual selection), H2 FAIL (compound concordance),
+H3 PASS (negative concordance — both gates agree on rejected laws).
+
+**Honest reading.** The v1 gate evaluates the compound contrast
+`TOP2A − EPAS1` and the v2 gate evaluates each gene individually
+under FDR control — these are **different selection objects**.
+The discordance says the signal is *genuinely compound*; it cannot
+be decomposed into individual-feature FDR-significant terms (the
+prior single-run experiment in
+`results/track_a_task_landscape/g1_knockoffs/` records the same
+pattern with TOP2A and EPAS1 ranked #1 and #2 by W statistic but
+not crossing threshold). This is consistent with the ccA/ccB
+axis being a *contrast*, not two independent markers. The Mardia
+normality test fails on this 45-gene panel, so Model-X FDR control
+is approximate rather than guaranteed; the practical effect is
+reduced power, not inflated Type I error.
+
 ## 7. Novelty accounting
 
 Each surviving equation is scored for novelty against the Opus `initial_guess`

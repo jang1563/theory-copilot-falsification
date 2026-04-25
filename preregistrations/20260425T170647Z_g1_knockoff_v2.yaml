@@ -1,0 +1,112 @@
+hypothesis_id: g1_knockoff_v2_2026-04-25
+emitted_at_utc: 2026-04-25T17:06:47Z
+emitted_git_sha: 2645569
+retroactive: false
+gate_logic_changed: true
+extension_type: parallel_v2_gate
+
+title: >
+  G1 — Model-X Knockoffs as a parallel v2 gate alongside the existing
+  decoy-feature test (gate_logic_changed = true; v1 5-test gate is unchanged
+  and remains canonical; v2 replaces the decoy leg only when called explicitly)
+
+motivation: >
+  The current decoy_feature_test (100 random features, p < 0.05) provides
+  Type I error control at an approximate level — the 100-decoy distribution
+  is a Monte-Carlo approximation with no formal FDR guarantee under gene
+  co-expression correlation structure. Model-X Knockoffs (Barber & Candès 2015,
+  JRSS-B arXiv:1404.5609) provide exact finite-sample FDR control at a
+  pre-specified target (q = 0.10) by generating exchangeable nulls that
+  preserve the joint gene-expression distribution (Sigma). This pre-registration
+  commits the implementation and GO/NO-GO criteria before any data interaction.
+
+pre_registered_implementation:
+  library: knockpy>=1.3.5
+  covariance_estimator: sklearn.covariance.LedoitWolf (shrinkage, avoids
+    degenerate Sigma for n<p scenarios common in gene-panel regression)
+  knockoff_construction: MVR (minimum variance reconstructability — recommended
+    in Bates et al. 2020 for dense correlation structure)
+  feature_statistic: lcd (signed log-feature-importance contrast;
+    appropriate for binary outcome y, outperforms coef_diff on imbalanced data)
+  fdr_target: 0.10
+  n_replicates: 25 (seed range 0-24; resampling knockoff realizations to
+    stabilize the randomized selection — recommended by Ren & Candès 2020)
+  compound_feature_rule: >
+    For a compound law f(X) = g(TOP2A, EPAS1, ...), consider the law
+    "selected" if the intersection set of individual gene selections
+    Ŝ_{replicate_r} contains ALL genes referenced in f(X) in >= 50%
+    of the 25 replicates. This is the conservative conjunction rule —
+    the compound law needs every constituent gene to be individually
+    selected to be declared as having FDR-controlled support.
+
+pre_registered_hypotheses:
+  h1:
+    description: >
+      On kirc_metastasis_expanded (n=505, 16% M1 prevalence), the knockoff
+      gate selects TOP2A and EPAS1 as significant features (conjunction rule
+      in >= 50% of 25 replicates) at FDR q=0.10 — consistent with the v1
+      decoy gate result (decoy_p < 0.001).
+    direction: TOP2A and EPAS1 both selected
+    pre_registered_outcome: SELECTED in >=50% of replicates
+    falsification_criterion: >
+      If either TOP2A or EPAS1 is selected in < 50% of replicates,
+      this hypothesis FAILS. Report the actual selection rates and
+      declare a discordance between v1 (decoy) and v2 (knockoff) gates.
+
+  h2:
+    description: >
+      The v1 5-test gate survivors (9/30) largely overlap with the knockoff-
+      selected features: at least 6 of the 9 surviving laws have ALL their
+      constituent genes knockoff-selected in >= 50% of replicates.
+    direction: high overlap between decoy gate and knockoff gate
+    pre_registered_outcome: >=6/9 survivors concordant
+    falsification_criterion: >
+      If < 6 survivors have fully-selected genes, interpret this as evidence
+      that the v1 decoy gate is over-liberal (false positives) or the
+      knockoff gate is over-conservative (FDR target too strict). Report
+      both explanations.
+
+  h3:
+    description: >
+      Clean rejections (laws with decoy_p >= 0.05 in the v1 gate) have
+      zero constituent genes selected by the knockoff gate in >= 80% of
+      replicates — knockoff and decoy gates agree on negatives.
+    direction: v1 rejects -> knockoff non-selected
+    pre_registered_outcome: >=80% concordance on negatives
+    falsification_criterion: >
+      If the knockoff gate selects constituent genes from v1-rejected
+      laws in >= 20% of replicates, this is evidence of either Type I
+      error in the knockoff gate (miscalibrated Sigma) or genuine
+      power difference — investigate Sigma condition number.
+
+go_no_go_criteria:
+  go_criterion: >
+    Any of the three hypotheses above produces a concordant result with the
+    v1 gate. Even discordance is GO if the failure reason is documented
+    (Sigma mis-specification, power difference, FDR level mismatch).
+    NO-GO only if knockpy install fails or Sigma is degenerate (rank-deficient)
+    and no shrinkage fixes it.
+  no_go_fallback: >
+    If knockpy cannot be installed or Sigma is degenerate, document the
+    attempt, report the error, and recommend using the v1 decoy gate as
+    the canonical test. Do NOT modify the v1 gate.
+
+output_files:
+  - src/theory_copilot/knockoff_gate.py (new, ~100 LOC)
+  - results/track_a_task_landscape/knockoff_v2/kirc_metastasis_expanded_knockoff.json
+  - results/track_a_task_landscape/knockoff_v2/SUMMARY.md
+  - docs/methodology.md §3 caveat paragraph (edit, <=10 lines)
+
+gate_v1_unchanged: true
+gate_v2_relationship: >
+  The v2 knockoff gate runs ALONGSIDE the v1 5-test gate for reporting purposes
+  only. No existing pass/fail decision is changed. A law that passes v1 but
+  fails v2 is still a v1 survivor — the discordance is documented. A law that
+  passes both is described as "v1 + v2 concordant" in SUMMARY.md.
+  The canonical falsification claim for the hackathon submission rests on v1.
+
+citations:
+  - "Barber & Candès 2015. Controlling the False Discovery Rate via Knockoffs. Ann. Stat. arXiv:1404.5609"
+  - "Bates et al. 2020. Metropolised Knockoffs. arXiv:2006.14342"
+  - "Ren & Candès 2020. Derandomizing Knockoffs. arXiv:2012.11286"
+  - "Chen & Candès 2019. Innovated Interaction Screening for High-Dimensional Nonlinear Classification. arXiv:1901.04907"
