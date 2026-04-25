@@ -1,5 +1,20 @@
 # Managed Agents / Routines — Judge Evidence Card
 
+> Boris Cherny (Claude Code, kickoff 2026-04-21):
+> *"Loops running on the server. Laptop closed, they continue ...
+> Agent SDK on steroids ... no one has cracked yet at all."*
+>
+> Michael Cohen (Managed Agents, live session 2026-04-23):
+> *"Building agents is difficult and is only getting more difficult
+> over time."* / *"Effectively a self-verification loop ... in order
+> for you to think of this task as done, these things have to be true."*
+>
+> This card lists every committed artefact that turns those two
+> framings into running code in a single pipeline — Managed Agents
+> for the durable Proposer / Searcher / Skeptic chain, Claude Code
+> Routines for the laptop-closed nightly audit, both products
+> composed in one repo.
+
 *One-page navigation of every committed artefact that exercises
 Anthropic's Managed Agents public beta (`managed-agents-2026-04-01`,
 shipped 2026-04-08), Memory public beta (shipped 2026-04-23), and

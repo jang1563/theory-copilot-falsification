@@ -69,6 +69,23 @@ Live transcripts of all four roles at `results/live_evidence/`.
 
 ## Claude Managed Agents Usage
 
+At the 2026-04-21 hackathon kickoff, Boris Cherny (Claude Code
+creator) named Claude Code Routines as the un-cracked primitive of
+the 4.7 release: *"loops running on the server ... laptop closed,
+they continue ... Agent SDK on steroids ... no one has cracked yet
+at all."* The next session, Michael Cohen (Managed Agents technical
+staff) opened with the complementary framing for why the platform
+exists at all: *"building agents is difficult and is only getting
+more difficult over time"* — Anthropic taking on the harness,
+sandbox, retries, credentials, and event streaming so developers
+can focus on product logic. Theory Copilot composes both products
+in one pipeline: Managed Agents (`platform.claude.com`) for the
+durable Proposer / Searcher / Skeptic chain, Claude Code Routines
+(`code.claude.com`) for the laptop-closed nightly audit. That
+composition — not a single-product implementation — is what this
+section evidences. Full artefact table at
+[`docs/managed_agents_evidence_card.md`](managed_agents_evidence_card.md).
+
 - **Three-agent architecture:** `Proposer` (Opus 4.7, extended
   thinking), `Searcher` (local PySR, no API), `Falsifier` (Opus 4.7,
   extended thinking). Clean role separation, structured
@@ -131,6 +148,18 @@ At the 2026-04-22 *Built with Opus 4.7* live session, Tharik (Cloud Code team) n
   (Claude Code Routine `/fire` HTTP 200 live — PhL-8). Research-
   preview `callable_agents` retained as architectural reference code
   only, per 2026-04-23 hackathon fairness ruling.
+  **Concrete substrate-level numbers** (full table in
+  [`managed_agents_evidence_card.md`](managed_agents_evidence_card.md)):
+  16 server-side sessions, 1 environment shared across 3 sequential
+  Path-A runs, 8 memory-store lessons accumulated across cancer
+  types (KIRC → LUAD → PRAD ceiling-effect rule generalization),
+  1 live Routine session URL (`claude.ai/code/session_01NyS541…`)
+  inspectable in a browser, 706 s longest end-to-end Path-A chain
+  (PhL-9), 300 s real-data replication (PhL-9v2). Every session /
+  agent / environment / file / memory id is server-side-retained
+  and dereferenceable via the workspace's API key — *"something
+  you'd actually ship"* at the substrate level, not the slideware
+  level.
 
 ## What We Built
 
