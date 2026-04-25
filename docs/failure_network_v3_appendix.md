@@ -17,7 +17,7 @@ not the same pipeline.
 **Why include it here.** The answers to the v3 meta-validation are the same
 kind of honest output that Theory Copilot's gate produces: the framework IS
 non-trivially discriminative (null sampling, below); it does NOT predict trial
-failure (GLMM v0.6, below); and the initial claim that it did (v3.2.1's 4.6×
+failure (GEE model, below); and the initial claim that it did (v3.2.1's 4.6×
 enrichment) was a selection-bias artifact that the framework then self-corrected
 via proper stratification. Rejection-as-product applied to the tool's own
 claims.
@@ -35,7 +35,7 @@ target panels:
 | DIPG (diffuse intrinsic pontine glioma) | 27 pairs | 54 rows |
 | IPF (idiopathic pulmonary fibrosis) | 26 pairs | 52 rows |
 
-Each pair is assigned one of 7 observable verdict classes (spanning 10 priority
+Each pair is assigned one of 8 observable verdict classes (spanning 10 priority
 branches in the v0.5 verdict function) based on the availability and strength
 of functional evidence in LINCS L1000 CGS perturbation data, DepMap, and
 cross-species ortholog mapping:
@@ -64,7 +64,10 @@ random panels; Tier 2: class-matched random panels preserving target-class
 composition) = 6,000 null panels total. Each null panel is processed through
 the full v0.5 verdict function. Across 7 verdict classes × 6 arms = 42 tests,
 corrected with BY-FDR (Benjamini-Yekutieli, dependency-aware — the correct
-correction when verdict-space tests are not independent).
+correction when verdict-space tests are not independent). `readout_only_by_design`
+is excluded from the 42-test family: it is assigned by panel construction (a target
+is a readout marker by design), so it has no informative null distribution under
+gene permutation.
 
 **Result: 16/42 tests significant at q < 0.10** (all 16 shown below).
 
@@ -95,9 +98,14 @@ correction when verdict-space tests are not independent).
   verdict function is operating correctly.
 - `admitted_null_coupling` enrichment is the key signal: designed panels test
   targets whose biology v3 can evaluate as *null-coupled* at 10–24× higher
-  rates than chance (DIPG reaches 41 designed vs 1.7–2.5 null mean ≈ 24×). This is the framework operating as intended — catching
-  the systematic absence of coupling evidence in panels assembled by clinical
-  judgment.
+  rates than chance (DIPG reaches 41 designed vs 1.7–2.5 null mean ≈ 24×).
+  This is the framework operating as intended — catching the systematic absence
+  of coupling evidence in panels assembled by clinical judgment.
+
+- `untestable_context_uninformative` in DIPG (Tier 1 and Tier 2, q ≈ 0 both): represents
+  a single designed pair. The null distribution is identically zero across all 1,000
+  random DIPG panels, so any designed occurrence achieves formal significance — but
+  the finding is a single-case signal, not a pattern, and should be read accordingly.
 
 See [`results/failure_network_appendix/figures/fig2_per_disease_verdict_stacked.svg`](../results/failure_network_appendix/figures/fig2_per_disease_verdict_stacked.svg)
 for per-disease verdict distributions (designed vs null).
@@ -171,7 +179,7 @@ Five coupling encodings were tested with Bonferroni × 5 correction:
 
 The best signal (`mean_null_fraction_avg`, OR = 2.75, p = 0.092) is
 directionally consistent with Track 1's enrichment, but does not survive
-multiple-testing correction across the 5-encoding family. The GLMM result
+multiple-testing correction across the 5-encoding family. The GEE result
 is convergent with v3.4's combined-arm permutation null (OR = 2.19, p_perm
 = 0.469) — both independently confirm that no robust association exists
 between v3 coupling and trial outcome at the trial level.
@@ -186,7 +194,7 @@ for the permutation null overlay.
 | Question | Answer |
 |---|---|
 | Does v3 discriminate curated panels from random? | **YES** — 16/42 tests BY-FDR significant at q < 0.10 |
-| Does v3 coupling predict trial failure? | **NO** — trial-level GLMM NULL after Bonferroni × 5 |
+| Does v3 coupling predict trial failure? | **NO** — trial-level GEE NULL after Bonferroni × 5 |
 | Is there case-mix heterogeneity between failure modes? | **YES** — Woolf Z = 19.97, p ≪ 10⁻⁸⁷ |
 | Was the initial 4.6× claim (v3.2.1) a real predictor? | **NO** — Track-1 selection-bias artifact |
 | What is v3 useful for? | **Scope-of-evidence audit**: catches `untestable_no_kd`, `untestable_secreted_drug_target`, `absent_from_v3` systematically across diseases |
@@ -210,7 +218,7 @@ targets, GPCRs, and post-translational regulators — three drug classes that
 are systematically `untestable` under the current v3 framework and should not
 be interpreted as "lacking evidence" in a clinical sense.
 
-The GLMM result is an honest null, not a failure. The same pre-registered
+The GEE result is an honest null, not a failure. The same pre-registered
 falsification posture that makes Theory Copilot's discovery loop credible
 makes this meta-validation credible: the null is informative precisely because
 it was sought under conditions designed to find a signal if one existed.
@@ -223,6 +231,9 @@ it was sought under conditions designed to find a signal if one existed.
 - Primary submission narrative: [`docs/methodology.md`](methodology.md),
   [`results/external_validation_dipg/RESULTS.md`](../results/external_validation_dipg/RESULTS.md),
   [`results/external_validation_ipf/RESULTS.md`](../results/external_validation_ipf/RESULTS.md)
-- Cross-disease rejection patterns: `admitted_null_coupling`, `untestable_no_kd`,
-  `untestable_secreted_drug_target` are the three systematic scope-gap classes
-  the v3 framework identifies across ccRCC, DIPG, and IPF.
+- Cross-disease scope gaps: `untestable_no_kd`, `untestable_secreted_drug_target`,
+  and `absent_from_v3` are the systematic scope-gap classes the v3 framework
+  identifies across ccRCC, DIPG, and IPF. `admitted_null_coupling` is a positive
+  evidence verdict (target was perturbed and coupling evidence is null or weakly
+  negative) — not a scope gap. The distinction matters: scope-gap targets are
+  untestable by design; admitted-null targets were tested and found non-coupled.
