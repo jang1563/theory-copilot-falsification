@@ -80,7 +80,7 @@ signal.
 
 **Evidence.**
 - [`results/track_a_task_landscape/external_replay/immotion150_pfs/`](../results/track_a_task_landscape/external_replay/immotion150_pfs/) — full replay
-- [`preregistrations/phf3_immotion150_pfs.yaml`](../preregistrations/) — pre-reg YAML, SHA-bound
+- [`preregistrations/20260423T044446Z_phf3_immotion150_pfs_replay.yaml`](../preregistrations/) — pre-reg YAML, SHA-bound
 
 ---
 
@@ -152,7 +152,7 @@ recoverable from Opus's pre-training memory; it is recoverable only by
 running PySR symbolic search on the data with the gate adjudicating.
 
 **Evidence.**
-- `results/live_evidence/phl13_memorization/` — full transcript
+- `results/live_evidence/phl13_memorization_audit/` — full transcript
 - [`docs/submission_form_draft.md`](submission_form_draft.md) Opus 4.7 usage section — PhL-13 line
 
 ---

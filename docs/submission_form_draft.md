@@ -100,15 +100,16 @@ a different session — any reviewer can replay the run end-to-end.
 
 ## Prize category justification (100 words, 95 counted)
 
-**Best Claude Managed Agents.** Public-beta-only. Three paths: B
-(live), A (PhL-9 sequential 3-session + PhL-9v2 on real TCGA-KIRC),
-C (PhL-8 `/fire` HTTP 200). Plus **Memory public beta (integrated
-2026-04-23 day-of)**: Skeptic writes rejection lessons; fresh
-sessions read, quote, and refine them. PhL-10 + PhL-12 grow the chain
-to 8 entries with the ceiling-effect rule generalizing KIRC→LUAD→PRAD.
-Server-side persistence verified via raw `/v1/memory_stores/*` API.
-Our own H1 LLM-SR extension was killed by the separately pre-registered
-IMmotion150 survival replay (PhL-1, not the TCGA classification gate).
+**Agentic / Managed Agents special-prize track.** Public-beta-only,
+verification-isolated Managed Agents orchestration: three live paths —
+B (single-agent `agent_toolset_20260401`), A (PhL-9 sequential
+three-session chain on real TCGA-KIRC, structured-JSON handoff),
+C (PhL-8 Routine `/fire` HTTP 200). Plus Memory public beta
+(integrated 2026-04-23 day-of): Skeptic writes rejection lessons;
+fresh sessions read, quote, refine them; server-side persistence
+verified via raw `/v1/memory_stores/*` API. Our own H1 LLM-SR
+extension was killed by the separately pre-registered IMmotion150
+survival replay (PhL-1, distinct from the TCGA classification gate).
 Verification as working code.
 
 ---
