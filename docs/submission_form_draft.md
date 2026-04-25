@@ -69,7 +69,7 @@ AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws,
 
 The official rules require **one written description / summary
 (100–200 words)**. Use this version if the live form has only a
-single summary box. (Word count: 178; cap 200.)
+single summary box. (Word count: 196; cap 200.)
 
 ```
 AI-for-Science tools accelerate hypothesis generation — not rejection.
@@ -88,7 +88,9 @@ was killed by that same survival gate. The same engine on H3 K27M
 DIPG yielded 7/15 supported rescue hypotheses (top lead:
 panobinostat-CED-MTX110, Souweidane deployment pathway). Three
 Managed Agents paths (sequential / single / Routine) live;
-pre-registrations are git-tracked YAMLs.
+pre-registrations are git-tracked YAMLs. The frame is Kepler-style
+induction — data → compact law — constrained by a falsification gate
+the LLM cannot renegotiate.
 ```
 
 ---
@@ -202,10 +204,10 @@ shot list, 6 cuts, single terminal + browser, no overlays).
 
 Opus 4.7 proof-of-concept of a larger program (NegBioDB + failure
 network + rescue engine for prematurely-rejected clinical hypotheses).
-Same 4-role engine re-run on 15 pre-registered H3 K27M diffuse midline
-glioma rescue hypotheses (git SHA 8a4ecc5, locked before engine output):
-7 supported, 7 mixed, 1 insufficient. Top lead: CED-delivered MTX110
-panobinostat in H3 K27M+ DIPG — the pharmacokinetic-not-pharmacodynamic
-rescue of PBTC-047 failure — aggregate score 13/15, delivery class.
-Deployment pathway with Dr. Mark Souweidane, pioneer of convection-enhanced delivery for pediatric brain tumors. Research-
-grade hypotheses; prospective validation required.
+Same 4-role engine re-run on 15 H3 K27M DMG rescue hypotheses (git
+SHA 8a4ecc5, locked before engine output): 7 supported, 7 mixed, 1
+insufficient; top lead CED-delivered MTX110 panobinostat (13/15
+delivery class). Tier-1 statistical substrate gate then re-tested 4
+of those candidates on PBTA v15 (n=237, 192 survival-evaluable):
+0 PASS, 2 FAIL, 2 UNDERPOWERED — engine's intended falsifier output.
+Research-grade hypotheses; prospective validation required.

@@ -6,12 +6,68 @@ load-bearing somewhere else in the repo; this file just routes a
 reviewer to the right artifact in one click.
 
 Reading order if you have 5 minutes:
+- [Q0 — why does this approach work now?](#q0)
 - [Q1 — discovery vs rediscovery](#q1)
 - [Q2 — AUROC ceiling +0.004](#q2)
 - [Q3 — clinical magnitude HR=1.36](#q3)
 - [Q4 — cohort independence](#q4)
 - [Q5 — Sonnet drop-in](#q5)
 - [Q6 — memorization risk](#q6)
+
+---
+
+## Q0 — "Why does this approach work now, and not 18 months ago?" <a id="q0"></a>
+
+**Frame.** Biological discovery is a search problem: the hypothesis
+space (compact gene-expression laws across N genes and elementary
+operators) is too large for human serial enumeration, and prior
+attempts at autonomous AI-for-science systems have repeatedly
+collapsed into confirmation bias because the proposer and the judge
+are the same model. The lineage that operationalises this framing —
+**POPPER** ([arXiv 2502.09858](https://arxiv.org/abs/2502.09858),
+sequential falsification agents at human-comparable accuracy with
+10× speedup), **LLM-SR** ([arXiv 2404.18400](https://arxiv.org/abs/2404.18400),
+ICLR 2025 Oral, equation discovery as evolutionary search), and
+**BioDiscoveryAgent** ([OpenReview HAwZGLcye3](https://openreview.net/forum?id=HAwZGLcye3),
+LLMs as search operators over hypothesis space) — has matured in the
+last 12 months. Theory Copilot ships the missing piece: a
+deterministic Python gate the proposer cannot renegotiate.
+
+**The frame in one phrase.** *Kepler-style induction* (data →
+compact law) constrained by a pre-registered falsification gate.
+This is the inversion of the dominant LLM-as-Scientist pattern
+where one model both proposes and adjudicates.
+
+**What's load-bearing about Opus 4.7 specifically.** The Skeptic
+turn requires holding a review stance against the model's own
+prior output. Our 180-call cross-model ablation
+([results/ablation/SUMMARY.md](../results/ablation/SUMMARY.md))
+measures this directly: Sonnet 4.6 dissents on 100% of gate-PASS
+candidates (full collapse); Opus 4.7 dissents calibratedly on 66.7%
+(PASS when the gate output warrants it). This is a base-calibration
+finding, not a thinking-budget finding (PhL-15 isolates the
+mechanism in
+[`results/live_evidence/phl15_adaptive_thinking/SUMMARY.md`](../results/live_evidence/phl15_adaptive_thinking/SUMMARY.md)).
+
+**The broader thesis we sit inside.** Dario Amodei's
+[*Machines of Loving Grace*](https://darioamodei.com/machines-of-loving-grace)
+argues for *"compressing the progress that human biologists would
+have achieved over the next 50–100 years into 5–10 years"* and
+flags coordination — *"hundreds of these discoveries waiting to be
+made if scientists were smarter and better at making connections"* —
+as a binding constraint, not capability per se. Theory Copilot
+ships the verification primitive that lets such compression remain
+auditable: every law family is paired with a kill-test before any
+fit, every gate-rejected candidate is published alongside the
+survivors, and every pre-registration is bound by SHA to the
+analysis state at emission time. Acceleration without falsification
+is just confirmation bias at higher throughput; Theory Copilot is
+the falsification half.
+
+**What we explicitly do NOT claim.** That Opus 4.7 contains
+PhD-level expertise in oncology, biostatistics, or clinical
+translation. The LLM roles are competent scaffolding around the
+gate; the gate is the load-bearing artifact (see also Q1, Q5).
 
 ---
 

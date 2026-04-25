@@ -156,6 +156,32 @@ does not trust any specific model. Opus 4.7's calibration makes the
 are independently load-bearing — and the 0-vs-10 Sonnet-vs-Opus PASS
 gap is the measurable case for why the model swap cannot be made.
 
+### Where this sits in the broader thesis
+
+Dario Amodei's
+[*Machines of Loving Grace*](https://darioamodei.com/machines-of-loving-grace)
+argues for *"compressing the progress that human biologists would
+have achieved over the next 50–100 years into 5–10 years"* and
+explicitly identifies coordination — *"hundreds of these
+discoveries waiting to be made if scientists were smarter and
+better at making connections"* — as a binding constraint, not raw
+capability. Theory Copilot is consistent with that thesis without
+restating it: acceleration without falsification is just
+confirmation bias at higher throughput, and the verification
+primitive that prevents the regression has to be *outside the
+model* to be trustworthy. **Kepler-style induction (data → compact
+law) constrained by a deterministic gate is the search-problem
+operationalisation of that thesis** — the same lineage that
+[POPPER (arXiv 2502.09858)](https://arxiv.org/abs/2502.09858),
+[LLM-SR (arXiv 2404.18400)](https://arxiv.org/abs/2404.18400) and
+[BioDiscoveryAgent](https://openreview.net/forum?id=HAwZGLcye3)
+have been building toward over the last 12 months. **What we do
+NOT claim**: that Opus 4.7 contains PhD-level expertise across
+oncology, biostatistics, and clinical translation. The LLM roles
+are competent scaffolding; the gate is the load-bearing artifact.
+That distinction is honest and is what makes the rigor claim
+credible.
+
 ## 1. The problem: confirmation bias is automated now
 
 > *A loop that cannot reject is not a loop — it is a pipeline.*
