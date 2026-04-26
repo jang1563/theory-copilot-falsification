@@ -67,7 +67,7 @@ Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/
 ## 🛠 Code health
 
 - 118/118 local tests pass (`.venv/bin/python -m pytest`, 4:14 full local suite after G1/G2 additions).
-- 2026-04-26 `make smoke` OK after final packaging review; the smoke target now runs a fast 4-test critical subset plus deterministic gate import and audit.
+- 2026-04-26 `make smoke` OK after final packaging review; the smoke target now runs critical imports, a tiny deterministic gate sanity check, compliance audit, and artefact-presence checks.
 - `make audit` OK — institutional-identifier scan + API-key-shape regex (`sk-ant-api{2}-{6}`) clean.
 - `make all` (no API key) reproduces: tests + audit + prereg-audit + rejection-log + paper PDF.
 - Falsification gate verified sign-symmetric (`fn` and `-fn` produce identical verdicts post-2026-04-23 P1 fix) and deterministic (same seed → identical perm_p / ci_lower / decoy_p).
