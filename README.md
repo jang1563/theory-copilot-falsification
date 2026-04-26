@@ -15,6 +15,8 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 |---|---|---|---|
 | 5-test gate · TCGA-KIRC n=505 | 45-gene panel · M0/M1 metastasis | PFS · n=263 · p=0.0003 | Best of all C(45,2) 2-gene pairs |
 
+> **Explore:** [Interactive discovery story →](dashboard/story_v6.html) · [Demo companion page](dashboard/loom_demo_v3.html)
+
 ---
 
 ## Key Numbers at a Glance
@@ -41,7 +43,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 |---|---|---|
 | **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS (calibrated) · Haiku 14/60 (over-accepts) · Sonnet 0/60 (collapses) |
 | **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58 · 32 min) · 3 diseases (ccRCC · DIPG · IPF) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
-| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min after install) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) |
+| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min after install) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [Interactive story](dashboard/story_v6.html) |
 | **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
 
 ---
