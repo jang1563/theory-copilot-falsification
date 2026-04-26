@@ -1,9 +1,9 @@
-# Loom Narration v3 — FINAL (Lacuna)
+# Loom Narration v4 — OPTION A FINAL (Lacuna)
 
-**Adopted from:** `plans/HANDOFF_loom_narration_v3_2026_04_25.md`  
+**Adopted from:** v3 + Option A IPF-fabrication addition (2026-04-26)  
+**Change from v3:** External+own-kill beat expanded to include IPF context-isolation audit  
 **Change from v2:** Personal opening + collective dedication + Lacuna branding  
-**Change from HANDOFF draft:** "Theory Copilot" → "Lacuna" everywhere  
-**Length:** ~291 words · ~2:04 @ 140 WPM · ~2:27 @ 120 WPM · hard cap 3:00  
+**Length:** ~304 words · ~2:10 @ 140 WPM · ~2:32 @ 120 WPM · hard cap 3:00  
 **Voice:** Bioinformatics postdoc, English, single take. **No face. No AI voiceover.**
 
 ---
@@ -30,9 +30,9 @@
 
 > *"Expand the panel. Same gate. Nine survivors on metastasis. The simplest — top-two-A minus EE-pass-one — says proliferation running ahead of HIF-two-alpha predicts metastasis. That is the published see-see-A vs see-see-B ccRCC subtype axis. We did not plant it. The gate cleared the path."*
 
-### 1:30–1:45 — External + own-output kill
+### 1:30–1:50 — External + own-output kill + IPF fabrication audit
 
-> *"Cross-cohort survival on Im-motion one-fifty. Hazard ratio one point three-six, p equals zero point zero-zero-zero-three. Then our own H-one loop's three-gene extension — same survival gate. Killed it. Our best guess, refused by our own data."*
+> *"Cross-cohort survival on Im-motion one-fifty. Hazard ratio one point three-six. Then our own three-gene extension — same survival gate. Killed it. And in I-P-F: fifty-eight dollars, thirty-two minutes — the Skeptic, running in a separate context window, caught two fabricated prior-trial claims the Advocate had stated as fact. That is context isolation as a live audit layer."*
 
 ### 1:45–2:05 — Trajectory: DIPG active
 
@@ -53,10 +53,10 @@
 | Architecture | 22 | 9 s | 11 s |
 | Rejection | 33 | 14 s | 17 s |
 | Survivor | 43 | 18 s | 22 s |
-| External + own-kill | 32 | 14 s | 16 s |
+| External + own-kill + IPF | 48 | 21 s | 24 s |
 | DIPG trajectory | 54 | 23 s | 27 s |
 | Close | 28 | 12 s | 14 s |
-| **TOTAL** | **291** | **~2:04** | **~2:27** |
+| **TOTAL** | **307** | **~2:12** | **~2:33** |
 
 If pace slips past 2:50: drop DIPG trajectory beat. New total ~101 s @ 140 WPM.
 
@@ -76,6 +76,8 @@ If pace slips past 2:50: drop DIPG trajectory beat. New total ~101 s @ 140 WPM.
 - "0.726" = "zero point seven-two-six"
 - "1.36" = "one point three-six"
 - "0.0003" = "zero point zero-zero-zero-three"
+- "IPF" = "I-P-F" (idiopathic pulmonary fibrosis — spell out the acronym)
+- "context window" = natural English, no spelling needed
 
 ---
 
@@ -87,6 +89,9 @@ If pace slips past 2:50: drop DIPG trajectory beat. New total ~101 s @ 140 WPM.
 - ✅ "194 of 203" — never 194/204
 - ✅ "Currently in the pre-registered queue" — never "DIPG cured"
 - ✅ "Itself a ten-year graveyard rescue" — Dordaviprone, Aug 2025 approval
+- ✅ "Fabricated prior-trial claims" — verified: RAINIER + Raghu 2017 both false per IPF Run #1 SHA 88eaca3
+- ✅ "Separate context window" — accurate; Skeptic session never received Advocate reasoning tokens
+- ✅ "Fifty-eight dollars, thirty-two minutes" — exact IPF Run #1 cost/time; do NOT round
 
 ---
 
@@ -99,7 +104,7 @@ If pace slips past 2:50: drop DIPG trajectory beat. New total ~101 s @ 140 WPM.
 | Editor B | `results/track_a_task_landscape/SUMMARY.md` (rejection beat) |
 | Image A | `docs/figures/rejection_landscape.png` |
 | Image B | IMmotion150 KM curve |
-| Editor C | PhL-1 `verdict.json` (own-kill beat) |
+| Editor C | PhL-1 `verdict.json` (own-kill) + `results/external_validation_ipf/SUMMARY.md` (IPF fabrication, open to fabrication lines) |
 | Browser tab | `claude.ai/code/session_01NyS...` (Routine) |
 | Terminal | `make audit` typed, not pressed |
 

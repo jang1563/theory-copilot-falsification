@@ -211,6 +211,36 @@ Three properties matter:
 
 **Citations.** Published ccA/ccB ccRCC subtype axis: Brannon 2010 ([PMID 20871783](https://pubmed.ncbi.nlm.nih.gov/20871783/)); Brooks 2014 ClearCode34 ([DOI 10.1016/j.eururo.2014.02.035](https://doi.org/10.1016/j.eururo.2014.02.035)); TOP2A prognostic in ccRCC 2024 ([PMID 38730293](https://pubmed.ncbi.nlm.nih.gov/38730293/)). Contemporary falsification-oriented AI-for-Science benchmarks: POPPER ([arXiv 2502.09858](https://arxiv.org/abs/2502.09858)); Sakana AI Scientist v2 ([arXiv 2504.08066](https://arxiv.org/abs/2504.08066)); SPOT ([arXiv 2505.11855](https://arxiv.org/abs/2505.11855)); FIRE-Bench ([arXiv 2602.02905](https://arxiv.org/abs/2602.02905)) — formalises agent evaluation by rediscovery of published findings (SOTA <50 F1), the paradigm under which our 2-gene ccA/ccB axis re-derivation is the positive result.
 
+## Meta-calibration: the Proposer predicts its own rejections
+
+**PhI-1 (2026-04-25).** After the 9 survivors were accepted, Opus 4.7 was
+asked to generate 4 new law-family skeletons — *without seeing whether those
+skeletons would pass the gate* — and to write ex-ante kill tests for each one.
+The gate then ran. Result: **0 / 4 passed**. The Proposer predicted failure
+on every skeleton where failure occurred. Specific examples:
+
+- Skeleton #1 (VEGFA-centric Warburg extension): Opus flagged "VEGFA likely
+  redundant given CA9 and EPAS1 already in panel — delta_baseline may not
+  clear 0.05." Gate verdict: FAIL (delta_baseline). ✓
+- Skeleton #4 (CCNB1 proliferation single-anchor): Opus flagged "CCNB1 alone
+  probably insufficient; MKI67 already dominates the proliferation-marker
+  hierarchy." Gate verdict: FAIL (delta_baseline). ✓
+
+This is the pre-registration loop applied to itself: Opus 4.7 wrote the
+conditions under which it expected to be wrong, and those conditions were
+correct. This is not a form of self-congratulation — 0 / 4 survivors means
+the Proposer generated four hypotheses it knew would fail, and the gate
+confirmed the knowledge. The interesting reading is that the model's failure
+model is accurate, which is a prerequisite for trusting the Proposer's
+*confidence* assignments on survivors.
+
+**Honest scoping note.** PhI-1 was a post-hoc experiment on 4 skeletons
+chosen by the same Proposer session — it is not an independent evaluation.
+The result is consistent with the model having a calibrated internal failure
+model, but cannot distinguish genuine calibration from cherry-picking of
+"safe to predict failure" hypotheses. An independent evaluator submitting
+novel skeletons would be the proper follow-on.
+
 ## What would make this claim stronger
 
 1. **Independent-cohort replay** on a ccRCC dataset with TOP2A +
