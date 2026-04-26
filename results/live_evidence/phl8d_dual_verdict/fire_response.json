@@ -1,0 +1,29 @@
+{
+  "hypothesis_id": "phl8d_dual_verdict",
+  "fire_timestamp_utc": "2026-04-26T16:21:48Z",
+  "routine_name": "lacuna-scientific-oracle",
+  "routine_trig_id_prefix": "trig_01S2NA3...",
+  "routine_trig_id_length": 29,
+  "trigger_type": "api",
+  "trigger_text": "eq1: task=tumor_vs_normal, data=kirc_tumor_normal.csv, equation=CA9 - AGXT\neq2: task=metastasis_expanded, data=kirc_metastasis_expanded.csv, equation=CDK1 - EPAS1",
+  "http_status": 200,
+  "claude_code_session_id": "session_01CgsJYAPdvhJJwTuBt7QZLZ",
+  "claude_code_session_url": "https://claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ",
+  "normalized_status": "completed",
+  "fire_elapsed_seconds": 3.314,
+  "eq1": {
+    "task": "tumor_vs_normal",
+    "data": "kirc_tumor_normal.csv",
+    "equation": "CA9 - AGXT",
+    "expected_gate": "FAIL",
+    "expected_fail_reason": "delta_baseline (CA9 alone = AUROC 0.965; delta \u2248 +0.019 < 0.05)"
+  },
+  "eq2": {
+    "task": "metastasis_expanded",
+    "data": "kirc_metastasis_expanded.csv",
+    "equation": "CDK1 - EPAS1",
+    "expected_gate": "PASS",
+    "expected_metrics": "perm_p\u22480.0, ci_lower\u22480.664, delta_baseline\u2248+0.062"
+  },
+  "narrative": "Dual-verdict API fire of lacuna-scientific-oracle routine. Eq1 (textbook HIF-axis) expected FAIL on tumor_vs_normal (CA9 saturates delta_baseline). Eq2 (CDK1-EPAS1, Rashomon rank 2) expected PASS on metastasis_expanded. One session URL = the entire Lacuna narrative: pre-registered gate rejects textbook law AND accepts proliferation contrast, same thresholds."
+}

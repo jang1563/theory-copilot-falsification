@@ -1,0 +1,61 @@
+{
+  "hypothesis_id": "phl10_multi_disease_oracle",
+  "fire_timestamp_utc": "2026-04-26T17:21:37Z",
+  "routine_name": "lacuna-stage-oracle",
+  "routine_trig_id_prefix": "trig_01D7jDc...",
+  "routine_trig_id_length": 29,
+  "trigger_type": "api",
+  "trigger_text": "eq1: task=stage_expanded, data=kirc_stage_expanded.csv, equation=CCNB1 / PGK1\neq2: task=stage_expanded, data=kirc_stage_expanded.csv, equation=CXCR4 / EPAS1",
+  "http_status": 200,
+  "claude_code_session_id": "session_01XGse8XYFtv3C1aKLZeMH9t",
+  "claude_code_session_url": "https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t",
+  "normalized_status": "completed",
+  "fire_elapsed_seconds": 0.72,
+  "architecture_note": "This is a SECOND Routine, not an update to the PhL-8d Routine. The PhL-8d Routine Instructions are frozen as the provenance record. One disease = one Routine. Skills (falsification-gate, pre-register-claim) are shared across all Routines. Only trig_id + token are disease-specific.",
+  "eq1": {
+    "task": "stage_expanded",
+    "data": "kirc_stage_expanded.csv",
+    "equation": "CCNB1 / PGK1",
+    "expected_gate": "FAIL",
+    "expected_fail_reason": "delta_baseline (+0.007 < 0.05 threshold)"
+  },
+  "eq2": {
+    "task": "stage_expanded",
+    "data": "kirc_stage_expanded.csv",
+    "equation": "CXCR4 / EPAS1",
+    "expected_gate": "PASS",
+    "expected_metrics": "auroc=0.689, delta_baseline=+0.051, perm_p\u22480.0"
+  },
+  "multi_cancer_evidence_offline": {
+    "kirc_stage": {
+      "disease": "ccRCC",
+      "task": "stage_expanded (Stage I-II vs III-IV)",
+      "n_samples": 512,
+      "n_pass": 23,
+      "n_total": 28,
+      "top_law": "CXCR4 / EPAS1",
+      "top_auroc": 0.6887,
+      "top_delta_baseline": 0.0513,
+      "results_dir": "results/track_a_task_landscape/stage_expanded/"
+    },
+    "coad_msi": {
+      "disease": "Colon (MSI-high)",
+      "task": "MSI-high vs MSS",
+      "n_pass": 15,
+      "n_total": 22,
+      "top_law": "SLC2A1 + (PDCD1LG2 + VIM \u2212 MYC)",
+      "top_auroc": 0.6584,
+      "top_delta_baseline": 0.1001,
+      "results_dir": "results/track_a_task_landscape/coad_msi/"
+    },
+    "lihc": {
+      "disease": "Liver (HCC)",
+      "task": "tumor_vs_normal",
+      "n_pass": 0,
+      "n_total": 26,
+      "top_law": "TTR \u2014 saturates single-gene baseline",
+      "note": "designed negative \u2014 gate correctly refuses",
+      "results_dir": "results/track_a_task_landscape/lihc/"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kirc_stage": {
+    "disease": "ccRCC",
+    "task": "stage_expanded (Stage I-II vs III-IV)",
+    "n_samples": 512,
+    "n_pass": 23,
+    "n_total": 28,
+    "top_law": "CXCR4 / EPAS1",
+    "top_auroc": 0.6887,
+    "top_delta_baseline": 0.0513,
+    "results_dir": "results/track_a_task_landscape/stage_expanded/"
+  },
+  "coad_msi": {
+    "disease": "Colon (MSI-high)",
+    "task": "MSI-high vs MSS",
+    "n_pass": 15,
+    "n_total": 22,
+    "top_law": "SLC2A1 + (PDCD1LG2 + VIM \u2212 MYC)",
+    "top_auroc": 0.6584,
+    "top_delta_baseline": 0.1001,
+    "results_dir": "results/track_a_task_landscape/coad_msi/"
+  },
+  "lihc": {
+    "disease": "Liver (HCC)",
+    "task": "tumor_vs_normal",
+    "n_pass": 0,
+    "n_total": 26,
+    "top_law": "TTR \u2014 saturates single-gene baseline",
+    "note": "designed negative \u2014 gate correctly refuses",
+    "results_dir": "results/track_a_task_landscape/lihc/"
+  }
+}

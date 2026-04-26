@@ -15,7 +15,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 |---|---|---|---|
 | 5-test gate · TCGA-KIRC n=505 | 45-gene panel · M0/M1 metastasis | PFS · n=263 · p=0.0003 | Best of all C(45,2) 2-gene pairs |
 
-> **Explore:** [Interactive discovery story →](dashboard/story_v6.html) · [Demo companion page](dashboard/loom_demo_v3.html)
+> **Explore:** [60-second artefact index →](docs/ARTIFACT_INDEX.md) · [Demo walkthrough](docs/demo_walkthrough.md)
 
 ---
 
@@ -23,7 +23,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 
 | Metric | Value |
 |---|---|
-| Candidate evaluations (classification gate) | [**203** across 7 task × panel configs](results/track_a_task_landscape/SUMMARY.md) (194 reject · 9 pass on metastasis_expanded) |
+| Candidate evaluations (classification gate) | [**304** across 11 task × panel configs](results/track_a_task_landscape/SUMMARY.md) (KIRC: 194/203 reject · platform expansion: 61/101 reject · 40 cross-disease survivors) |
 | 5-verdict replication chain | **3 PASS · 2 expected FAIL** · 4 cohorts · 2 platforms |
 | Rashomon rank within all C(45,2) = 990 two-gene pairs | **1 / 990** |
 | Memorization check: zero-shot TOP2A−EPAS1 retrieval rate | **0 / 10** probes |
@@ -42,8 +42,8 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 | Axis | Weight | Entry point |
 |---|---|---|
 | **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS (calibrated) · Haiku 14/60 (over-accepts) · Sonnet 0/60 (collapses) |
-| **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58 · 32 min) · 3 diseases (ccRCC · DIPG · IPF) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
-| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min after install) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [Interactive story](dashboard/story_v6.html) |
+| **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58 · 32 min) · **6 cancer types** (ccRCC · COAD · LGG · LIHC · DIPG · IPF) · platform generalization: [COAD 15/22](results/track_a_task_landscape/coad_msi/) · [LGG 2/25 AUROC 0.840](results/track_a_task_landscape/gbm_idh/) · [LIHC 0/26 negative](results/track_a_task_landscape/lihc/) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
+| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min after install) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
 | **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
 
 ---
@@ -70,7 +70,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - `make test` — 118 local-runnable tests (no API key); `make audit` — compliance grep, passes on every commit
 
 **Real-world impact (Ado, Jason)**
-- 3 diseases with the same gate and thresholds: ccRCC (flagship) · DIPG ([`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF ([`results/external_validation_ipf/`](results/external_validation_ipf/))
+- **6 cancer types** with the same gate and thresholds: ccRCC (flagship) · COAD ([`coad_msi/`](results/track_a_task_landscape/coad_msi/)) · LGG ([`gbm_idh/`](results/track_a_task_landscape/gbm_idh/)) · LIHC ([`lihc/`](results/track_a_task_landscape/lihc/)) · DIPG ([`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF ([`results/external_validation_ipf/`](results/external_validation_ipf/))
 - Plug-in workflow: drop any disease CSV → `lacuna compare --dataset-card <card>.json` → pass/fail table in ~30 min; see [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md)
 - IPF Run #1: Skeptic caught 2 fabricated claims about prior trial design (RAINIER, Raghu 2017). $58.28 · 32 min. See [`results/external_validation_ipf/`](results/external_validation_ipf/)
 
@@ -347,7 +347,25 @@ neglected half of scientific inference — on real cancer-genomics data. The
 public NegBioDB repository will be linked here at release.
 
 **Platform validation across diseases.** The same gate, same thresholds, same
-architecture:
+architecture — 11 task × panel configurations, 304 total candidate evaluations:
+
+*Positive survivors (gate accepts when the feature landscape is distributed):*
+- **TCGA-KIRC Stage I-II vs III-IV** (45-gene, n=512): **23 / 28 survivors**.
+  Top law `CXCR4 / EPAS1`, AUROC 0.689, Δbase +0.051. Migration-over-HIF axis
+  ([results/track_a_task_landscape/stage_expanded/SUMMARY.md](results/track_a_task_landscape/stage_expanded/SUMMARY.md)).
+- **TCGA-COAD Stage I-II vs III-IV** (31-gene, n=484): **15 / 22 survivors**.
+  Top law `SLC2A1 + PDCD1LG2 + VIM − MYC`, AUROC 0.658, **Δbase +0.107** (highest of any run).
+  Warburg + immune-checkpoint + EMT compound
+  ([results/track_a_task_landscape/coad_msi/SUMMARY.md](results/track_a_task_landscape/coad_msi/SUMMARY.md)).
+- **TCGA-LGG Grade II vs III** (30-gene, n=384): **2 / 25 survivors**.
+  Top law `log1p(TWIST1×MKI67+VIM) − CDH2/NES`, **AUROC 0.840** (highest of any new run),
+  Δbase +0.051. EMT-plasticity × proliferation interaction term
+  ([results/track_a_task_landscape/gbm_idh/SUMMARY.md](results/track_a_task_landscape/gbm_idh/SUMMARY.md)).
+
+*Designed negatives (gate refuses when one gene saturates — same pattern as KIRC CA9):*
+- **TCGA-LIHC tumor-vs-normal** (31-gene, n=424): **0 / 26**. ALB/TTR saturate
+  at AUROC ~0.985. Gate correctly identifies single-gene-dominant task
+  ([results/track_a_task_landscape/lihc/SUMMARY.md](results/track_a_task_landscape/lihc/SUMMARY.md)).
 - **TCGA-LUAD tumor-vs-normal** (`data/build_tcga_luad.py`): SFTPC
   saturates at AUROC 0.998 — identical structure to CA9 in KIRC. Zero
   survivors from 4 candidates. Confirms the pipeline correctly identifies
