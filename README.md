@@ -73,7 +73,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 
 **Real-world impact (Ado, Jason)**
 - **6 disease contexts** under the same falsification-first discipline: ccRCC / COAD / LGG / LIHC use the 5-test expression gate; DIPG and IPF use the same role-separated Advocate/Skeptic review engine. Entry points: ccRCC (flagship) · COAD ([`coad_msi/`](results/track_a_task_landscape/coad_msi/)) · LGG ([`gbm_idh/`](results/track_a_task_landscape/gbm_idh/)) · LIHC ([`lihc/`](results/track_a_task_landscape/lihc/)) · DIPG ([`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF ([`results/external_validation_ipf/`](results/external_validation_ipf/))
-- Plug-in workflow: drop any disease CSV → `lacuna compare --dataset-card <card>.json` → pass/fail table in ~30 min; see [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md)
+- Plug-in workflow: drop any disease CSV → `lacuna plug-in-dataset` → `lacuna compare --dataset-card <card>.json`; the handoff prints exact PySR + falsification commands with the gene list pinned; see [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md)
 - IPF Run #1: Skeptic caught 2 fabricated claims about prior trial design (RAINIER, Raghu 2017). $58.28 · 32 min. See [`results/external_validation_ipf/`](results/external_validation_ipf/)
 
 **Scientific depth (domain expert)**

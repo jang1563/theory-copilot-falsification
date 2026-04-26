@@ -522,8 +522,8 @@ skeptic tests for that discipline to have bite.
 
 Code: `https://github.com/jang1563/lacuna-falsification`
 (flipped public at submission). Primary entry points:
-`make venv && make test && make demo-kirc`. Re-running the full
-flagship flow: `lacuna compare --dataset-card
+`make venv && make test && make smoke`. Re-running the full
+flagship flow starts with: `lacuna compare --dataset-card
 config/dataset_cards/kirc_metastasis_expanded.json --proposals
 config/law_proposals.json --output-root artifacts/`, then the PySR +
 falsification commands the CLI prints.

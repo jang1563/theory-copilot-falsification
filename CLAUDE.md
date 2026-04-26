@@ -62,8 +62,8 @@ for the individual prompts.
 | `make install` | Editable install into `.venv` (Python 3.10-3.13, Julia 1.10 for PySR). |
 | `make test` | pytest with pre-hackathon scaffold tests ignored. Current local-runnable suite: 105/105. |
 | `make audit` | Compliance grep. Must print `OK`. |
-| `make demo` | Full synthetic-data end-to-end. |
-| `make demo-kirc` | KIRC-flavoured synthetic demo. |
+| `make demo` | Guided synthetic proposer handoff; requires API key and prints PySR/gate commands. |
+| `make demo-kirc` | KIRC-flavoured guided handoff. |
 | `make paper` | Build `docs/paper/paper.pdf` via pandoc (E9). |
 | `make status` | Branch + last 5 commits + cost-ledger tail. |
 

@@ -272,6 +272,56 @@ def test_replay_missing_csv_returns_one(tmp_path, monkeypatch):
     assert result == 1
 
 
+def test_replay_excludes_outcome_metadata_columns(tmp_path, monkeypatch):
+    flagship_dir = _make_flagship_report(tmp_path)
+    csv_path = _make_transfer_csv(tmp_path, "paad_like")
+    df = pd.read_csv(csv_path)
+    df["os_months"] = np.where(df["label"].astype(int) == 1, 30.0, 3.0)
+    df["event"] = df["label"].astype(int)
+    df.to_csv(csv_path, index=False)
+
+    captured = {}
+
+    def fake_gate(fn, X, y, X_covariates=None):
+        captured["shape"] = X.shape
+        return {
+            "passes": False,
+            "law_auc": 0.5,
+            "ci_lower": 0.4,
+            "ci_width": 0.2,
+            "perm_p": 1.0,
+            "delta_baseline": 0.0,
+            "baseline_auc": 0.5,
+            "delta_confound": None,
+            "confound_auc": None,
+            "decoy_p": 1.0,
+            "decoy_q95": 0.5,
+            "rigor": {},
+        }
+
+    mock_client = _mock_opus_client()
+    monkeypatch.chdir(tmp_path)
+    with (
+        patch("lacuna.cli.run_falsification_suite", side_effect=fake_gate),
+        patch("lacuna.cli.OpusClient", return_value=mock_client),
+    ):
+        monkeypatch.setattr(
+            sys,
+            "argv",
+            [
+                "lacuna",
+                "replay",
+                "--flagship-artifacts", str(flagship_dir),
+                "--transfer-dataset", "paad_like",
+                "--output-root", str(tmp_path / "output"),
+            ],
+        )
+        result = main()
+
+    assert result == 0
+    assert captured["shape"] == (80, 2)
+
+
 # ---- DatasetCard / plug-in-dataset tests (E4) ----
 
 def _make_mini_csv(tmp_path):
@@ -283,6 +333,8 @@ def _make_mini_csv(tmp_path):
         "label": ["disease"] * half + ["control"] * half,
         "age": rng.integers(40, 80, size=n),
         "batch_index": rng.integers(0, 3, size=n),
+        "os_months": np.concatenate([np.full(half, 24.0), np.full(half, 6.0)]),
+        "event": np.concatenate([np.zeros(half), np.ones(half)]),
         "GENE_A": np.concatenate([rng.normal(1.0, 1, half), rng.normal(-1.0, 1, half)]),
         "GENE_B": np.concatenate([rng.normal(-0.5, 1, half), rng.normal(0.5, 1, half)]),
         "GENE_C": rng.normal(0, 1, size=n),
@@ -317,6 +369,22 @@ def test_plug_in_dataset_emits_valid_card(tmp_path, monkeypatch, capsys):
     assert set(card["gene_columns"]) == {"GENE_A", "GENE_B", "GENE_C"}
     assert card["covariate_columns"] == ["age", "batch_index"]
     assert card["label_column"] == "label"
+
+
+def test_dataset_card_missing_covariate_raises(tmp_path):
+    from lacuna.data_loader import DatasetCard
+
+    csv = _make_mini_csv(tmp_path)
+    card = DatasetCard(
+        dataset_id="mini",
+        csv_path=str(csv),
+        label_column="label",
+        gene_columns=["GENE_A", "GENE_B"],
+        covariate_columns=["missing_cov"],
+    )
+
+    with pytest.raises(ValueError, match="declares covariates"):
+        card.load()
 
 
 def test_compare_accepts_dataset_card(tmp_path, monkeypatch, capsys):
@@ -359,6 +427,8 @@ def test_compare_accepts_dataset_card(tmp_path, monkeypatch, capsys):
     assert result == 0
     assert "python3 src/pysr_sweep.py" in out
     assert "GENE_A,GENE_B,GENE_C" in out  # dataset-card gene list flowed into handoff
+    assert "src/falsification_sweep.py" in out
+    assert "--genes GENE_A,GENE_B,GENE_C" in out
 
 
 def test_compare_requires_card_or_legacy_config(tmp_path, monkeypatch, capsys):

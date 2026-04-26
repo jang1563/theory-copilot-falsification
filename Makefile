@@ -27,8 +27,8 @@ help:
 	@echo "  make test          Run the local-runnable test suite (no API calls)"
 	@echo "  make smoke         Fast judge-visible smoke check (~1 min, no API key)"
 	@echo "  make audit         Run compliance grep (no sensitive strings)"
-	@echo "  make demo          End-to-end demo on synthetic data (requires API key)"
-	@echo "  make demo-kirc     KIRC-flavoured demo (flagship_kirc_demo.csv)"
+	@echo "  make demo          Guided proposer handoff on synthetic data (requires API key)"
+	@echo "  make demo-kirc     KIRC-flavoured guided handoff (requires API key)"
 	@echo "  make paper         Build docs/paper/paper.pdf via pandoc (xelatex > typst > html)"
 	@echo "  make rejection-log Re-render the static rejection-log HTML"
 	@echo "  make prereg-audit  Tamper-evidence chain audit on preregistrations/*.yaml"
@@ -126,41 +126,32 @@ print(f'  gate OK — null AUC={auc:.3f} (expected ~0.5), perm_p={perm_p:.3f}')"
 	@echo ">>> SMOKE OK — repo is self-consistent. For full test suite: make test"
 
 # --- Demo (synthetic flagship + transfer) ---
-# NOTE: This target runs `compare` then `replay`, but `compare` only writes
-# `proposer_output.json` and prints the next `python src/pysr_sweep.py` and
-# `python src/falsification_sweep.py` commands — it does NOT generate
-# `falsification_report.json` itself. `replay` will then fail because the
-# report doesn't exist. Treat `make demo` as the GUIDED first step that
-# tells you what to run next, not a one-shot end-to-end target. For a
-# fast sanity check, prefer `make smoke` (no API key needed).
+# Guided proposer handoff: `compare` writes `proposer_output.json` and
+# prints exact `python src/pysr_sweep.py` + `python src/falsification_sweep.py`
+# commands, including the gene/covariate contract. It does not run the
+# heavier PySR/gate/replay steps itself. For a fast no-API sanity check,
+# prefer `make smoke`.
 # Reviewer-facing happy path is `make venv && make smoke`. See README.
 demo:
-	@echo ">>> Running end-to-end demo on synthetic data..."
+	@echo ">>> Running guided proposer handoff on synthetic data..."
 	@mkdir -p $(DEMO_OUT) $(TRANSFER_OUT)
 	$(PYTHONPATH_SRC) $(PYTHON) -m lacuna.cli compare \
 		--config config/datasets.json \
 		--proposals config/law_proposals.json \
 		--flagship-dataset flagship_demo \
 		--output-root artifacts
-	$(PYTHONPATH_SRC) $(PYTHON) -m lacuna.cli replay \
-		--flagship-artifacts $(DEMO_OUT) \
-		--transfer-dataset transfer_demo \
-		--output-root artifacts
-	@echo ">>> Demo complete. See $(DEMO_OUT)/ and $(TRANSFER_OUT)/"
+	@echo ">>> Handoff complete. Run the printed PySR/falsification commands next."
 
-# --- KIRC-flavoured demo (uses flagship_kirc_demo.csv + transfer_kirc_demo.csv) ---
+# --- KIRC-flavoured guided handoff (uses flagship_kirc_demo.csv) ---
 demo-kirc:
-	@echo ">>> Running KIRC-flavoured demo..."
+	@echo ">>> Running KIRC-flavoured guided proposer handoff..."
 	@mkdir -p $(DEMO_OUT) $(TRANSFER_OUT)
 	$(PYTHONPATH_SRC) $(PYTHON) -m lacuna.cli compare \
 		--config config/datasets.json \
 		--proposals config/law_proposals.json \
 		--flagship-dataset flagship_kirc_demo \
 		--output-root artifacts
-	$(PYTHONPATH_SRC) $(PYTHON) -m lacuna.cli replay \
-		--flagship-artifacts $(DEMO_OUT) \
-		--transfer-dataset transfer_kirc_demo \
-		--output-root artifacts
+	@echo ">>> Handoff complete. Run the printed PySR/falsification commands next."
 
 # --- Status snapshot ---
 status:

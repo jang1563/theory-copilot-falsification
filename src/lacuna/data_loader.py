@@ -35,6 +35,44 @@ _DEFAULT_DISEASE_TOKENS = frozenset(
     {"disease", "tumor", "case", "cancer", "m1", "1", "true", "yes"}
 )
 
+DEFAULT_NON_GENE_COLUMNS = frozenset(
+    {
+        "sample_id",
+        "patient_id",
+        "label",
+        "age",
+        "batch_index",
+        "sex",
+        "gender",
+        "stage",
+        "m_stage",
+        "tumor_stage",
+        "grade",
+        "tissue_type",
+        "time",
+        "event",
+        "os_time",
+        "os_event",
+        "os_days",
+        "os_months",
+        "days_to_death",
+        "days_to_last_fu",
+        "survival_days",
+        "survival_months",
+        "overall_survival",
+        "overall_survival_days",
+        "overall_survival_months",
+        "pfs",
+        "pfs_days",
+        "pfs_months",
+        "pfs_event",
+        "progression_free_survival",
+        "vital_status",
+        "disease_type",
+        "fvc_decline",
+    }
+)
+
 
 @dataclass
 class DatasetCard:
@@ -93,9 +131,14 @@ class DatasetCard:
         X = _zscore(X_raw) if self.standardize else X_raw
         X_cov = None
         if self.covariate_columns:
-            present_cov = [c for c in self.covariate_columns if c in df.columns]
-            if present_cov:
-                X_cov = df[present_cov].fillna(0).values.astype(float)
+            missing_cov = [c for c in self.covariate_columns if c not in df.columns]
+            if missing_cov:
+                raise ValueError(
+                    f"DatasetCard '{self.dataset_id}' declares covariates not in CSV: "
+                    f"{missing_cov[:5]}"
+                    + (f" (+{len(missing_cov)-5} more)" if len(missing_cov) > 5 else "")
+                )
+            X_cov = df[self.covariate_columns].fillna(0).values.astype(float)
         return X_raw, X, y, list(self.gene_columns), X_cov
 
     # --- Inference from raw CSV -------------------------------------------
@@ -121,7 +164,7 @@ class DatasetCard:
             raise ValueError(f"label_column '{label_column}' not in {csv_path}")
 
         cov = list(covariate_columns or [])
-        exclude = set(exclude_columns or []) | {"sample_id", "patient_id", label_column} | set(cov)
+        exclude = DEFAULT_NON_GENE_COLUMNS | set(exclude_columns or []) | {label_column} | set(cov)
         numeric_cols = [
             c for c in df.select_dtypes(include=[np.number]).columns if c not in exclude
         ]

@@ -42,6 +42,8 @@ def tmp_workspace(tmp_path):
             "gene_3": gene_3,
             "age": age,
             "batch_index": batch_index,
+            "os_months": np.where(y == 1, 24.0, 3.0),
+            "event": y,
             "label": y,
         }
     )

@@ -25,14 +25,14 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from .data_loader import DatasetCard
+from .data_loader import DEFAULT_NON_GENE_COLUMNS, DatasetCard
+from .equations import make_equation_fn
 from .falsification import run_falsification_suite
 from .opus_client import OpusClient
 
 
 _DISEASE_TOKENS = {"disease", "tumor", "case", "cancer", "1", "true"}
 _CONTROL_TOKENS = {"control", "normal", "healthy", "0", "false"}
-_NUMPY_FUNCS = ["log", "log1p", "exp", "abs", "sqrt", "sin", "cos"]
 
 
 def _write_json(path: Path, payload: dict | list) -> Path:
@@ -77,15 +77,7 @@ def _zscore(X: np.ndarray) -> np.ndarray:
 
 
 def _equation_callable(equation_str: str, col_names: list[str]):
-    ns_funcs = {k: getattr(np, k) for k in _NUMPY_FUNCS}
-
-    def fn(X: np.ndarray) -> np.ndarray:
-        ns = {col_names[i]: X[:, i] for i in range(len(col_names))}
-        ns.update({f"x{i}": X[:, i] for i in range(X.shape[1])})
-        ns.update(ns_funcs)
-        return eval(equation_str, {"__builtins__": {}}, ns)  # noqa: S307
-
-    return fn
+    return make_equation_fn(equation_str, col_names)
 
 
 def _cmd_compare(args: argparse.Namespace) -> int:
@@ -185,7 +177,7 @@ def _cmd_compare(args: argparse.Namespace) -> int:
     print(
         f"  python3 src/falsification_sweep.py "
         f"--candidates {output_root}/flagship_run/candidates.json "
-        f"--data {local_path} --standardize {covariate_arg}"
+        f"--data {local_path} --genes {gene_list_for_handoff} --standardize {covariate_arg}"
         f"--output {output_root}/flagship_run/falsification_report.json"
     )
     print()
@@ -193,6 +185,11 @@ def _cmd_compare(args: argparse.Namespace) -> int:
         f"Then: lacuna replay "
         f"--flagship-artifacts {output_root}/flagship_run/ "
         f"--transfer-dataset <dataset-id> --output-root {output_root}"
+    )
+    print(
+        f"Or:   lacuna replay "
+        f"--flagship-artifacts {output_root}/flagship_run/ "
+        f"--transfer-dataset-card <transfer_card.json> --output-root {output_root}"
     )
     _ = dataset_id_for_handoff  # retained for future extensions
     return 0
@@ -236,30 +233,40 @@ def _cmd_replay(args: argparse.Namespace) -> int:
         print("No surviving laws in flagship report - nothing to replay.", file=sys.stderr)
         return 1
 
-    transfer_id = args.transfer_dataset
-    candidate_paths = [
-        Path("data") / f"{transfer_id}.csv",
-        Path("data") / f"{transfer_id}_kirc.csv",
-        Path("data") / "examples" / f"{transfer_id}.csv",
-    ]
-    transfer_csv = next((p for p in candidate_paths if p.exists()), None)
-    if transfer_csv is None:
-        tried = [str(p) for p in candidate_paths]
-        print(f"Transfer dataset CSV not found for '{transfer_id}'. Tried: {tried}", file=sys.stderr)
-        return 1
+    if getattr(args, "transfer_dataset_card", None):
+        card = DatasetCard.from_json(args.transfer_dataset_card)
+        transfer_id = card.dataset_id
+        _, X, y, gene_cols, X_cov = card.load()
+    else:
+        transfer_id = args.transfer_dataset
+        if not transfer_id:
+            print(
+                "replay requires either --transfer-dataset or --transfer-dataset-card.",
+                file=sys.stderr,
+            )
+            return 2
+        candidate_paths = [
+            Path("data") / f"{transfer_id}.csv",
+            Path("data") / f"{transfer_id}_kirc.csv",
+            Path("data") / "examples" / f"{transfer_id}.csv",
+        ]
+        transfer_csv = next((p for p in candidate_paths if p.exists()), None)
+        if transfer_csv is None:
+            tried = [str(p) for p in candidate_paths]
+            print(f"Transfer dataset CSV not found for '{transfer_id}'. Tried: {tried}", file=sys.stderr)
+            return 1
 
-    df = pd.read_csv(transfer_csv)
-    label_col = "label"
-    exclude = {label_col, "sample_id", "patient_id"}
-    covariate_cols = [c for c in ("age", "batch_index") if c in df.columns]
-    exclude |= set(covariate_cols)
-    gene_cols = [
-        c for c in df.select_dtypes(include=[np.number]).columns if c not in exclude
-    ]
-    X_raw = df[gene_cols].fillna(0).values.astype(float)
-    X = _zscore(X_raw)
-    y = _parse_labels(df[label_col])
-    X_cov = df[covariate_cols].values.astype(float) if covariate_cols else None
+        df = pd.read_csv(transfer_csv)
+        label_col = "label"
+        covariate_cols = [c for c in ("age", "batch_index") if c in df.columns]
+        exclude = DEFAULT_NON_GENE_COLUMNS | {label_col} | set(covariate_cols)
+        gene_cols = [
+            c for c in df.select_dtypes(include=[np.number]).columns if c not in exclude
+        ]
+        X_raw = df[gene_cols].fillna(0).values.astype(float)
+        X = _zscore(X_raw)
+        y = _parse_labels(df[label_col])
+        X_cov = df[covariate_cols].values.astype(float) if covariate_cols else None
 
     # Prefer the falsification gate's `law_auc` (gate-time, sign-invariant)
     # over the candidate-search `auroc` (PySR search-time). They can differ
@@ -429,7 +436,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Directory containing falsification_report.json.",
     )
     p_replay.add_argument(
-        "--transfer-dataset", required=True, help="Transfer dataset ID."
+        "--transfer-dataset", required=False, help="Transfer dataset ID."
+    )
+    p_replay.add_argument(
+        "--transfer-dataset-card",
+        required=False,
+        help="DatasetCard JSON for the transfer cohort (preferred for arbitrary CSVs).",
     )
     p_replay.add_argument("--output-root", required=True, help="Root for artifacts.")
     p_replay.set_defaults(func=_cmd_replay)
