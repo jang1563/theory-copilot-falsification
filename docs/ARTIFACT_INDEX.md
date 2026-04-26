@@ -71,7 +71,7 @@ the submission.
 | **Platform** | TCGA-LIHC Tumor vs Normal (31-gene, n=424): **0 / 26 survivors** (designed negative — ALB saturates ~0.985) | `results/track_a_task_landscape/lihc/SUMMARY.md` |
 | PhI-1 | Opus's own H2 proposals fail gate per Opus's own ex-ante skeptic tests | `results/overhang/phi1_h2_prospective/SUMMARY.md` |
 | PhI-2 | Auditable thinking trace — 4.7 display="omitted" → "summarized" change | `src/phi2_thinking_artefact.py`, `results/overhang/phi2_auditable_thinking/VERIFY.md` |
-| PhI-3 | LAB-Bench LitQA2 reproduction on 4.6 vs 4.7 (honest reversal: -10.5pp) | `src/phi3_labbench_reproduce.py`, `results/overhang/phi3_labbench/SUMMARY.md` |
+| PhI-3 | LAB-Bench LitQA2 reproduction on 4.6 vs 4.7 (honest reversal: -10.5pp on closed-book recall — narrower task than the gate's output surface; intentionally excluded from main narrative with rationale in SUMMARY.md; included here for transparency) | `src/phi3_labbench_reproduce.py`, `results/overhang/phi3_labbench/SUMMARY.md` |
 | PhK | `events.list` thinking-content preservation probe — content NOT preserved | `src/phk_events_list_thinking_probe.py`, `results/overhang/phk_events_list_probe/SUMMARY.md` |
 
 ## Architecture / engineering surfaces
@@ -80,7 +80,7 @@ the submission.
 |---|---|---|
 | **Path B (single agent + agent_toolset_20260401)** | `src/lacuna/managed_agent_runner.py::run_path_b` | Public-beta Managed Agents single-agent driver; live trace `results/live_evidence/04_managed_agents_e2e.log` |
 | **Path A (sequential chain — public-beta only)** | `src/lacuna/managed_agent_runner.py::_run_path_a_sequential_fallback` | 3 Managed Agents sessions chained with structured-JSON handoff; the `_run_path_a_callable_agents` branch is reference code only (research-preview Agent Teams disabled for hackathon participants per 2026-04-23 fairness rule) |
-| **Path C (Claude Code Routines)** | `src/lacuna/routines_client.py`, `src/lacuna/managed_agent_runner.py::run_path_c_routine` | `POST /v1/claude_code/routines/{trig_id}/fire`; local watch-dir loop fallback when no token configured. PhL-8 is the live evidence. |
+| **Path C (Claude Code Routines)** | `src/lacuna/routines_client.py`, `src/lacuna/managed_agent_runner.py::run_path_c_routine` | `POST /v1/claude_code/routines/{trig_id}/fire`; local watch-dir loop fallback when no token configured. **PhL-8d** (dual-verdict oracle) + **PhL-10 oracle** (stage task) are the primary live evidence; PhL-8 is the first proof-of-life fire. |
 | **Memory primitives** | `src/lacuna/managed_agent_runner.py::persist_session_events`, `replay_session_from_log` | Brain/body decouple primitives — pages `events.list` to JSONL; re-injects user-origin events into a different session. PhL-4 is the live evidence. |
 | **5-test falsification gate** | `src/lacuna/falsification.py` | Deterministic Python; pre-registered thresholds; sign-invariant + seed-controllable since 2026-04-23 P1 fix |
 | **Pre-registration framework** | `preregistrations/*.yaml` (28 files), `src/preregistration.py` | Tamper-evidence — every YAML is committed once, bound to a `emitted_git_sha`; `make prereg-audit` machine-verifies the chain |
@@ -88,7 +88,7 @@ the submission.
 | **Console script** | `pyproject.toml [project.scripts]`, `src/lacuna/cli.py` | `lacuna` CLI with `compare` / `replay` / `loop` / `persist-events` / `replay-events` / `plug-in-dataset` subcommands |
 | **`make` targets** | `Makefile` | `make venv`, `make smoke` (~1 min fast judge-visible confidence check on this laptop), `make test` (101 local-runnable tests in the current target), `make audit`, `make h1`, `make h2`, `make paper`, `make prereg-audit`, `make rejection-log`, `make skeptic-review` |
 | **Data provenance** | `data/SHA256SUMS` + `docs/public_data_provenance.md` | 13 CSVs hashed; every CSV's upstream source / access tier / builder script / submission role listed in the provenance doc; reviewer can `shasum -c data/SHA256SUMS` offline |
-| **Managed Agents observability** | `docs/managed_agents_evidence_card.md` | Per-artefact event + wall-clock table: 16 sessions, 8-lesson shared memory_store, 706 s Path-A chain (PhL-9) + 300 s real-data Path-A (PhL-9v2), 21-event compound orchestrator (PhL-7), Routine session URL (PhL-8) |
+| **Managed Agents observability** | `docs/managed_agents_evidence_card.md` | Per-artefact event + wall-clock table: 17 sessions, 8-lesson shared memory_store, 706 s Path-A chain (PhL-9) + 300 s real-data Path-A (PhL-9v2), 21-event compound orchestrator (PhL-7), **2 live Routine sessions** (PhL-8d dual-verdict + PhL-10 stage oracle) |
 | **Compliance** | `.audit-patterns`, `make audit` | Catches institutional identifiers + API key shapes (`sk-ant-api{2}-{6+}`); blocks commits that introduce leaks |
 
 ## Doc reading order for technical reviewers
@@ -110,5 +110,5 @@ the submission.
 
 1. `README.md` opening paragraph
 2. `docs/headline_findings.md` Finding 1 (the survivor story)
-3. PhL-8 SUMMARY.md (live Routine session URL — open + watch)
+3. PhL-8d SUMMARY.md (live dual-verdict Routine oracle — open + watch; `results/live_evidence/phl8d_dual_verdict/SUMMARY.md`)
 4. `docs/loom_script.md` (90-second video transcript)

@@ -3,7 +3,7 @@
 diseases as possible in one continuous session. Each experiment completes and
 immediately seeds the next. This session should run until explicitly stopped.
 
-**Repo:** `theory_copilot_discovery/`  
+**Repo:** `lacuna-falsification/`  
 **Commit prefix:** `[F]` for all commits in this session  
 **Gate:** pre-registered, do NOT modify `src/lacuna/falsification.py`
 
@@ -48,7 +48,7 @@ The cross-task matrix is the deliverable.
 ## Setup (run once at session start)
 
 ```bash
-cd /path/to/theory_copilot_discovery   # adjust to your HPC path
+cd /path/to/lacuna-falsification   # adjust to your HPC path
 source .venv/bin/activate
 
 # Verify gate

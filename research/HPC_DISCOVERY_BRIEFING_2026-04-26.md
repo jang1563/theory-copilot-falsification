@@ -158,7 +158,7 @@ sbatch scripts/hpc_new_diseases.sbatch
 ### 3. Monitor
 ```bash
 squeue -u $USER
-tail -f logs/lacuna_discovery_<JOBID>.out
+tail -f logs/lacuna_falsification_<JOBID>.out
 ```
 
 ### 4. Sync results back

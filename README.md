@@ -1,6 +1,6 @@
 # Lacuna
 
-> *Rejects 194 of 203 candidate laws — including its own.*
+> *Rejects 194 of 203 candidate laws on KIRC — including its own. (304 total across 11 task × panel configs; see Key Numbers.)*
 
 <img src="https://img.shields.io/badge/Python-3.10--3.13-1E3A8A?style=flat-square" alt="Python 3.10-3.13" />
 <img src="https://img.shields.io/badge/Built_with-Claude_Opus_4.7-1E3A8A?style=flat-square" alt="Built with Claude Opus 4.7" />
@@ -31,6 +31,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 | Cross-model Skeptic ablation (180 calls): Opus / Haiku / Sonnet PASS | **10 / 60 · 14 / 60 · 0 / 60** — Haiku over-accepts; Opus calibrated |
 | Interpreter ablation: Opus caveat rate / prediction rate | **100% / 100%** vs Sonnet 0% / Haiku 0% |
 | LLM-SR 10-iteration loop: post-seed proposals killed by gate | **18 / 18** |
+| Cross-model Proposer quality (PhL-16): LLM-proposed laws killed by gate | **48 / 48** (Opus 0/30, Sonnet 0/18) — Proposer guides the symbolic search space; gate is the binding constraint |
 | Total API cost (all sweeps + ablation runs) | **< $65** |
 
 > *Ablation honest null: 2/3 pre-registered citation-specificity predictions were falsified — all three models cite ≥2 metrics in 100% of critiques. The meaningful signal is verdict distribution (PASS 10 vs 14 vs 0 / 60). Full prediction verification in [`results/ablation/SUMMARY.md`](results/ablation/SUMMARY.md).*
@@ -43,7 +44,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 |---|---|---|
 | **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS (calibrated) · Haiku 14/60 (over-accepts) · Sonnet 0/60 (collapses) |
 | **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58 · 32 min) · **6 disease contexts** (ccRCC · COAD · LGG · LIHC · DIPG · IPF) · platform generalization: [COAD 15/22](results/track_a_task_landscape/coad_msi/) · [LGG 2/25 AUROC 0.840](results/track_a_task_landscape/gbm_idh/) · [LIHC 0/26 negative](results/track_a_task_landscape/lihc/) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
-| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min after install) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
+| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min once Julia is available; first-time Julia install adds 5–15 min) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
 | **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
 
 ---
@@ -154,7 +155,7 @@ Use Python **3.10-3.13**. Lacuna intentionally excludes Python 3.14 for the subm
 > **Python 3.10-3.13 required.** `pyproject.toml` enforces this range so unsupported 3.14 environments fail fast instead of hanging during dependency installs. `make venv` creates the project-local virtualenv with `VENV_PYTHON` (default `python3`).
 
 ```bash
-# Full test suite (118 tests, no API key, several minutes)
+# Full local-runnable test suite (101 tests, no API key, several minutes)
 make test
 
 # Generate synthetic KIRC-compatible demo data

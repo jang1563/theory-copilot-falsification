@@ -1,6 +1,6 @@
 [
   {
-    "equation": "3.4574623 / TGFB1",
+    "equation": "SPP1 - CCL20",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -10,7 +10,7 @@
     "novelty": 1.0
   },
   {
-    "equation": "1.2021233 / sqrt(KRT17)",
+    "equation": "SPP1 + CCL18",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -20,7 +20,7 @@
     "novelty": 1.0
   },
   {
-    "equation": "sqrt(log1p(2.0472186 / KRT17))",
+    "equation": "MMP7 - AGER",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -30,47 +30,7 @@
     "novelty": 1.0
   },
   {
-    "equation": "log1p(5.855998 / (KRT17 + 1.4958136))",
-    "auroc": 0.5,
-    "train_auroc": 0.5,
-    "test_auroc": 0.5,
-    "complexity": 5,
-    "seed": 1,
-    "law_family": null,
-    "novelty": 1.0
-  },
-  {
-    "equation": "23.37329 / ((KRT17 + SMAD4) * 4.1957555)",
-    "auroc": 0.5,
-    "train_auroc": 0.5,
-    "test_auroc": 0.5,
-    "complexity": 7,
-    "seed": 1,
-    "law_family": null,
-    "novelty": 1.0
-  },
-  {
-    "equation": "log1p(23.37329 / (exp(2.2280767) + (SMAD4 * KRT17)))",
-    "auroc": 0.5,
-    "train_auroc": 0.5,
-    "test_auroc": 0.5,
-    "complexity": 7,
-    "seed": 1,
-    "law_family": null,
-    "novelty": 1.0
-  },
-  {
-    "equation": "(1.3911046 / log1p(SMAD4 + exp(KRT17 - 2.7258184))) + 0.21026962",
-    "auroc": 0.5,
-    "train_auroc": 0.5,
-    "test_auroc": 0.5,
-    "complexity": 9,
-    "seed": 1,
-    "law_family": null,
-    "novelty": 1.0
-  },
-  {
-    "equation": "GATA6 - VIM",
+    "equation": "KRT17 - SFTPC",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -80,7 +40,7 @@
     "novelty": 1.0
   },
   {
-    "equation": "GATA6 + CDK1",
+    "equation": "COL1A1 + MMP7",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -90,7 +50,7 @@
     "novelty": 1.0
   },
   {
-    "equation": "SMAD4 - KRT17",
+    "equation": "MMP7 * SPP1",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -100,7 +60,7 @@
     "novelty": 1.0
   },
   {
-    "equation": "MKI67 - SMAD4",
+    "equation": "TGFB1 + SPP1",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -110,7 +70,7 @@
     "novelty": 1.0
   },
   {
-    "equation": "CDK1 * GATA6",
+    "equation": "CTHRC1 + COL1A1",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,
@@ -120,7 +80,37 @@
     "novelty": 1.0
   },
   {
-    "equation": "TOP2A - SMAD4",
+    "equation": "KRT5 - AGER",
+    "auroc": 0.5,
+    "train_auroc": 0.5,
+    "test_auroc": 0.5,
+    "complexity": 3,
+    "seed": 1,
+    "law_family": null,
+    "novelty": 1.0
+  },
+  {
+    "equation": "CXCL12 - SFTPC",
+    "auroc": 0.5,
+    "train_auroc": 0.5,
+    "test_auroc": 0.5,
+    "complexity": 3,
+    "seed": 1,
+    "law_family": null,
+    "novelty": 1.0
+  },
+  {
+    "equation": "IL6 + SPP1",
+    "auroc": 0.5,
+    "train_auroc": 0.5,
+    "test_auroc": 0.5,
+    "complexity": 3,
+    "seed": 1,
+    "law_family": null,
+    "novelty": 1.0
+  },
+  {
+    "equation": "ACTA2 + TGFB1",
     "auroc": 0.5,
     "train_auroc": 0.5,
     "test_auroc": 0.5,

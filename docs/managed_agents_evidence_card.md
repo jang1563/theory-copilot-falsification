@@ -140,7 +140,7 @@ environment and re-read across three sequential sessions. The longest
 single Path-A chain is **706 s** end-to-end (PhL-9); the real-data
 replication is **300 s** (PhL-9v2, smaller cohort, sharper prompts).
 
-**Durability check (auditable).** Each of the 16 `sesn_…` / `agent_…`
+**Durability check (auditable).** Each of the 17 `sesn_…` / `agent_…`
 / `env_…` / `file_…` / `mem_…` ids listed above is server-side-retained
 by Managed Agents and dereferenceable via `beta.sessions.events.list` /
 `beta.environments.retrieve` / `beta.files.download` / raw
@@ -178,7 +178,8 @@ note in the opening block.
 │  POST /v1/claude_code/routines/{trig_id}/fire                                 │
 │      └─▶  HTTP 200 + {claude_code_session_id, claude_code_session_url}        │
 │                                                                               │
-│  [PhL-8: Routine fired live; browser-openable session URL committed]          │
+│  [PhL-8d: dual-verdict FAIL+PASS, session_01CgsJYAPdvhJJwTuBt7QZLZ]           │
+│  [PhL-10 oracle: stage FAIL+PASS, session_01XGse8XYFtv3C1aKLZeMH9t]           │
 │                                                                               │
 └───────────────────────────────────────────────────────────────────────────────┘
 ```

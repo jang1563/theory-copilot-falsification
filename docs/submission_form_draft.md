@@ -97,19 +97,21 @@ optimize for hypothesis generation, not rejection. The result:
 automated confirmation bias.
 
 A deterministic 5-test Python gate rejected 194 of 203 candidates
-on TCGA kidney cancer (n=505). The simplest survivor —
-TOP2A − EPAS1 — is the published ccA/ccB subtype axis, rediscovered
-by symbolic regression unprompted. This is not a new biological
-discovery: it is a methodology proof. The survivor then passed a
-separately pre-registered survival gate on IMmotion150 (HR=1.36,
-p=0.0003). Our own 3-gene extension? Killed by the same survival gate.
+on TCGA kidney cancer data (n=505). The simplest survivor —
+TOP2A − EPAS1 (a proliferation-vs-hypoxia gene pair) — maps to the
+known kidney-cancer growth-program axis, found by symbolic regression
+unprompted. This is not a new discovery: it is a methodology proof.
+The survivor passed a separately pre-registered survival gate on
+IMmotion150 (a kidney cancer clinical trial; HR=1.36, p=0.0003). Our
+own 3-gene extension? Killed by that same gate.
 
 Claude Code Managed Agents hold the Skeptic stance without collapse
-— Opus 4.7 10/60 PASS where Sonnet 4.6 = 0/60. IPF Run #1 ($58,
-32 min): Skeptic caught two Advocate fabrications about prior trial
-design. Any researcher with a disease CSV can run the same gate;
-**6 disease contexts** tested (ccRCC, COAD, LGG, LIHC, DIPG, IPF) —
-LGG AUROC 0.840 is the most striking new survivor.
+— Opus 4.7 10/60 PASS where Sonnet 4.6 = 0/60. Lung-fibrosis (IPF)
+Run #1 ($58, 32 min): Skeptic caught two Advocate fabrications about
+prior trial design. Any researcher with a disease CSV can run the same
+gate; **6 disease types tested** — kidney cancer, colon, brain glioma,
+liver, pediatric glioma, lung fibrosis — LGG (brain glioma) AUROC
+0.840 is the most striking new survivor.
 ```
 
 ---
