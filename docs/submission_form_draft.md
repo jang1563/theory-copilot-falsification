@@ -77,7 +77,7 @@ Discord update; Top 6 advance to final panel review on **2026-04-28
 ```
 Lacuna: Falsification-First Biological Law Discovery
 ```
-(60 chars exactly.)
+(52 chars)
 
 ---
 
@@ -153,14 +153,14 @@ Routines run this discipline on every commit — pre-registration without being 
 
 ## Claude Opus 4.7 usage (~210 words — trim at form open if field has 150-word hard cap)
 
-Four Opus 4.7 calls per loop with
+Three Opus 4.7 calls per loop with
 `thinking={"type":"adaptive","display":"summarized"}` and
 `output_config={"effort":"high"}`. (1) Proposer emits 3-5 compact law
-families and the ex-ante skeptic test for each, before any fit. (2)
-The test is executed by plain Python, not Opus. (3) Skeptic reviews
+families and the ex-ante skeptic test for each, before any fit.
+[Gate step: plain Python, not Opus.] (2) Skeptic reviews
 the specific metric pattern (`perm_p=0.049` is weaker than `0.001`;
 `ci_lower=0.61` is marginal) and emits PASS / FAIL / NEEDS_MORE_TESTS.
-(4) Interpreter writes the mechanism hypothesis and the "what this is
+(3) Interpreter writes the mechanism hypothesis and the "what this is
 not" paragraph. **180-call cross-model ablation: Sonnet 4.6 = 0/60 PASS on gate-PASS candidates (full dissent collapse); Opus 4.7 = 10/60. Confound-resolved: Opus ran WITHOUT extended thinking (HTTP 400 on `enabled` type; retried base) vs Sonnet WITH extended thinking — Opus wins anyway. Gap is pre-training calibration, not thinking budget.**. **Memorization audit (PhL-13): 0/10 zero-shot retrieval of TOP2A−EPAS1 — rebuts
 memorization concern.** **IPF Run #1 (2026-04-25): Skeptic caught
 two Advocate fabrications about prior trial design — RAINIER + Raghu

@@ -116,8 +116,8 @@ entries appended across sessions), then cut to `make audit` → `OK`.
 
 ## Total
 
-- Narration: ~ 210 spoken words / 90 seconds at ~140 WPM
-- Screens: 6 cuts, all local files, no browser sign-in required
+- Narration: ~333 words / ~143–167 s (2:23–2:47) at 120–140 WPM (full cut with DIPG + IPF tags); see word-count ledger in `loom_narration_final_90s.md`
+- Screens: 8 segments (panes A–H as documented in `loom_narration_final_90s.md §Pre-flight`), all local files, no browser sign-in required
 - No patient data, no institutional identifiers (`make audit`
   confirms the repo is clean before recording)
 
@@ -162,4 +162,4 @@ present on disk; all reshoot gotchas listed below.
 - [ ] Narration cleared for institutional references (only "TCGA-KIRC",
       "GSE40435", "PySR", "Opus 4.7", "Managed Agents", "ccA",
       "ccB")
-- [ ] Clock check: script rehearsed under 90 s without cutting
+- [ ] Clock check: full cut rehearsed under 180 s (hard cap); Tier-3 fallback (drop DIPG+IPF) ≤90 s

@@ -86,7 +86,7 @@ claim: a more complex function of (TOP2A, EPAS1) could recover
 roughly 2–8% more bivariate MI on average, but the simple
 1-line difference is near-optimal.
 
-**Clinical-language translation (I3).** AUROC 0.728 in clinician
+**Clinical-language translation (I3).** AUROC 0.726 (gate value; full-cohort Rashomon enumeration: 0.7275) in clinician
 terms
 ([`results/track_a_task_landscape/clinical_utility/`](../results/track_a_task_landscape/clinical_utility/SUMMARY.md)):
 **Cohen's d = 0.856** (medium-large effect by Cohen 1988; P1 PASS);
