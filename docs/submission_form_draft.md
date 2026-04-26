@@ -150,40 +150,27 @@ isolation working at runtime.** **1M-context synthesis + PhL-17 adversarial abla
 
 ---
 
-## Claude Managed Agents usage (150 words, 149 counted)
+## Claude Managed Agents usage (150 words, 119 counted)
 
-**Verification-isolated Managed Agents orchestration.** Three separate
-public-beta sessions (Proposer / Skeptic / Interpreter = Opus 4.7;
-Searcher = local PySR) with separate context windows and structured-
-JSON handoff — the Skeptic never sees the Proposer's reasoning tokens,
-so it cannot rationalise its own proposal into passing. Public-beta
-compliant per the 2026-04-23 hackathon fairness rule; research-preview
-`callable_agents` disabled.
-
-- **Path B (live).** Single-agent `agent_toolset_20260401`; end-to-end
-  `agents.create → environments.create → sessions.create → stream →
-  send → status_idle` at `04_managed_agents_e2e.log`.
-- **Path A (live, PhL-9 + PhL-9v2 on real TCGA-KIRC).** Sequential
-  three-session chain, structured-JSON handoff,
-  `delegation_mode=sequential_fallback`, 706 s wall.
-- **Path C (live, PhL-8 + PhL-8b).** API trigger: `/fire` HTTP 200 +
-  https://claude.ai/code/session_01NyS541H3qZfJgqFVgWDcoM (PhL-8).
-  Schedule trigger: autonomous fire 2026-04-26T00:39Z (19-min stagger),
-  session created server-side with no client action — mechanism layer
-  evidenced; output blocked by quota at first turn (PhL-8b, see
-  `results/live_evidence/phl8b_routine_schedule/SUMMARY.md`).
-
-**Durability.** `persist_session_events` pages `sessions.events.list`
-to JSONL; `replay_session_from_log` re-injects user-origin events into
-a different session — any reviewer can replay the run end-to-end.
-
-**IPF Run #1 (2026-04-25).** Skeptic caught two Advocate fabrications
-about prior trial design (RAINIER + Raghu 2017) — context isolation
-working at runtime. See `results/external_validation_ipf/`.
+**Verification-isolated Managed Agents orchestration.** Lacuna uses
+three public-beta sessions (Proposer, Skeptic, Interpreter) with
+structured-JSON handoff. The Skeptic never sees the Proposer's
+reasoning tokens; it reviews only gate output, so it cannot
+rationalize its own law into passing. Path B proves single-agent
+`agent_toolset_20260401` end-to-end. Path A proves a sequential
+three-session chain on real TCGA-KIRC (PhL-9v2: file mounts; Skeptic
+quotes `delta_baseline=+0.0587`). Path C proves Claude Code Routines:
+`/fire` HTTP 200 plus scheduled autonomous fire (PhL-8/8b). Durability:
+`persist_session_events` pages `sessions.events.list` to JSONL;
+`replay_session_from_log` replays user-origin events into a fresh
+session. Memory stores accumulate rejection lessons across sessions.
+IPF Run #1: the isolated Skeptic caught two Advocate fabrications about
+RAINIER and Raghu 2017; role separation caught what a single-context
+harness would likely rationalize.
 
 ---
 
-## Prize category justification (100 words, 96 counted)
+## Prize category justification (100 words, 99 counted)
 
 **Best use of Claude Managed Agents ($5K).** Public-beta-only Managed
 Agents orchestration with isolated sessions: three live paths — B

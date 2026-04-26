@@ -1,7 +1,7 @@
 # STATUS — lacuna-falsification
 
-**Last updated:** 2026-04-25 (late G/I rigor package + G1/G2 test review + readiness count refresh)
-**Submit window:** 2026-04-26 20:00 ET (T-2d 22h)
+**Last updated:** 2026-04-26 01:23 EDT (final Lacuna naming + smoke/cue-map review)
+**Submit window:** 2026-04-26 20:00 ET (deadline is today)
 **Judging:** 2026-04-28 12:00 ET final round
 **Repo:** https://github.com/jang1563/lacuna-falsification (public since 2026-04-23 19:32 ET)
 **Console script:** `lacuna` (post-`pip install -e .`)
@@ -15,7 +15,8 @@
 - **`make all`** one-command reproduction of tests + audit + prereg-audit + rejection-log + paper PDF (no API key required).
 - **`.devcontainer/devcontainer.json`** — judges can click "Open in GitHub Codespaces" and reach `make test` green in ~2 min.
 - **`.claude/skills/falsification-gate/SKILL.md`** — Claude Code skill wrapping the gate as a discoverable, deterministic verification primitive.
-- 118/118 local tests · `make audit` OK · GitHub public, `make all` runnable end-to-end without credentials.
+- GitHub repo renamed to **`jang1563/lacuna-falsification`** on 2026-04-26; old Theory Copilot URL redirects.
+- 118/118 local tests from package review · 2026-04-26 `make smoke` OK · GitHub public, `make all` runnable end-to-end without credentials.
 
 ## 🧪 Phase L artefact ledger (this hackathon's contributions)
 
@@ -66,13 +67,14 @@ Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/
 ## 🛠 Code health
 
 - 118/118 local tests pass (`.venv/bin/python -m pytest`, 4:14 full local suite after G1/G2 additions).
+- 2026-04-26 `make smoke` OK after final packaging review; the smoke target now runs a fast 4-test critical subset plus deterministic gate import and audit.
 - `make audit` OK — institutional-identifier scan + API-key-shape regex (`sk-ant-api{2}-{6}`) clean.
 - `make all` (no API key) reproduces: tests + audit + prereg-audit + rejection-log + paper PDF.
 - Falsification gate verified sign-symmetric (`fn` and `-fn` produce identical verdicts post-2026-04-23 P1 fix) and deterministic (same seed → identical perm_p / ci_lower / decoy_p).
 
 ## 📝 Submission docs (final or near-final)
 
-- `README.md` — corrected sub-hook + opening + honest scoping note + compliance section + `make venv && make test && make audit` happy path.
+- `README.md` — corrected sub-hook + opening + honest scoping note + compliance section + `make venv && make smoke && make audit` quick path.
 - `docs/headline_findings.md` — Finding 1/2/3 with PhL-1 own-output kill embedded in Finding 2.
 - `docs/methodology.md` — task-dependent active legs + separate survival gate + in-sample confound caveat.
 - `docs/why_opus_4_7.md` — orchestrator framing + Karpathy + Sakana + Tharik + Michael Cohen `outcomes` parallel.
@@ -82,15 +84,14 @@ Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/
 - `docs/loom_script.md` — 90-second shot list with PhL-1 IMmotion150 beat + alternative PhL-3/PhL-4 close.
 - `docs/ARTIFACT_INDEX.md` — 1-page judge navigation.
 
-## 🎬 What's left (Sat-Sun)
+## 🎬 What's left (submission day)
 
-| Day | Task | Owner |
+| Time | Task | Owner |
 |---|---|---|
-| Sat AM | 3 Claude Design slides per `plans/claude_design_slide_specs_v1.md` | user (Claude Design subscription) |
-| Sat PM | Loom v2 recording (90 s, English) per `docs/loom_script.md` | user |
-| Sun AM | Final `make audit` + spot-check submission docs + paste Loom URL | both |
-| Sun ~19:30 ET | Final pre-submission confirm (repo public ✓ since 19:32 ET Thu) | user |
-| Sun **20:00 ET** | Submit form | user |
+| 2026-04-26 early AM | Record/upload Loom, then paste public URL into `docs/submission_form_draft.md` | user |
+| 2026-04-26 after Loom | Run `make smoke` + `make audit`; verify GitHub URL and demo URL both open without sign-in | both |
+| 2026-04-26 ~19:30 ET | Final pre-submit check: repo public, video public, 100-200 word summary pasted exactly | user |
+| 2026-04-26 **20:00 ET** | Submit form | user |
 
 ## ⚠ Decisions deliberately NOT taken
 

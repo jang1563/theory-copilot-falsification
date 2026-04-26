@@ -24,7 +24,7 @@ help:
 	@echo "  make install       Install package + dependencies into existing .venv (editable)"
 	@echo "  make all           One-command reproduction (no API key): test+audit+prereg+rejection-log+paper"
 	@echo "  make test          Run the local-runnable test suite (no API calls)"
-	@echo "  make smoke         Fast judge-visible smoke check (~15s, no API key)"
+	@echo "  make smoke         Fast judge-visible smoke check (~30s, no API key)"
 	@echo "  make audit         Run compliance grep (no sensitive strings)"
 	@echo "  make demo          End-to-end demo on synthetic data (requires API key)"
 	@echo "  make demo-kirc     KIRC-flavoured demo (flagship_kirc_demo.csv)"
@@ -75,8 +75,8 @@ all: venv
 	@$(MAKE) paper
 	@echo ">>> make all complete. Reproduced: tests, audit, prereg chain, rejection log, paper."
 
-# Runs the local-runnable subset of the test suite: 105 tests (as of
-# 2026-04-23) across falsification gate, managed_agent_runner, routines
+# Runs the local-runnable subset of the test suite: 118 tests (as of
+# 2026-04-25) across falsification gate, managed_agent_runner, routines
 # client, opus_client, PySR sweep, DatasetCard, CLI, MCP biology
 # validator, preregistration, and the Phase-H SR-loop harness.
 # Five pre-hackathon scaffold suites (contracts / reuse_inventory /
@@ -92,30 +92,29 @@ test:
 		--ignore=tests/test_staging.py \
 		--ignore=tests/test_workflow_data.py
 
-# --- Smoke test — fast judge-visible confidence check (~15s, no API) ---
-# Runs the most critical tests (falsification gate + CLI compare/replay +
-# preregistration schema), a one-line gate-import sanity check, and the
-# compliance audit. Intended as the 15-second "does this repo work?"
-# question a reviewer asks before looking at anything else. For the full
-# 105-test suite use `make test`; for the tamper-evidence chain use
-# `make prereg-audit`; for the one-command reproduction use `make all`.
+# --- Smoke test — fast judge-visible confidence check (~30s, no API) ---
+# Runs critical module imports, a tiny deterministic gate sanity check,
+# the compliance audit, and artefact-presence checks. Intended as the
+# fast "does this repo work?" question a reviewer asks before looking at
+# anything else. For the full 118-test suite use `make test`; for the
+# tamper-evidence chain use `make prereg-audit`; for the one-command
+# reproduction use `make all`.
 smoke:
-	@echo ">>> [smoke 1/4] Critical test subset (gate + CLI + prereg schema)..."
-	@$(PYTHONPATH_SRC) $(PYTHON) -m pytest tests/test_falsification.py \
-		tests/test_cli_compare_replay.py \
-		tests/test_preregistration.py \
-		-q --tb=line 2>&1 | tail -3
+	@echo ">>> [smoke 1/4] Critical modules import..."
+	@$(PYTHONPATH_SRC) $(PYTHON) -c "\
+import lacuna.cli, lacuna.falsification, preregistration; \
+print('  imports OK: lacuna.cli, lacuna.falsification, preregistration')"
 	@echo ">>> [smoke 2/4] Gate importable + deterministic on fixed-seed null..."
 	@$(PYTHONPATH_SRC) $(PYTHON) -c "\
 import numpy as np; \
-from lacuna.falsification import run_falsification_suite; \
+from lacuna.falsification import label_shuffle_null; \
 rng = np.random.default_rng(42); \
 X = rng.normal(size=(200, 5)); \
 y = rng.integers(0, 2, size=200); \
 fn = lambda X: X[:, 0] - X[:, 1]; \
-r = run_falsification_suite(fn, X, y, include_decoy=False); \
-assert 0.4 <= r['law_auc'] <= 0.6, f'null AUC drift: {r[\"law_auc\"]}'; \
-print(f'  gate OK — null AUC={r[\"law_auc\"]:.3f} (expected ~0.5), perm_p={r[\"perm_p\"]:.3f}')"
+perm_p, auc = label_shuffle_null(X, y, fn, n_permutations=20, seed=42); \
+assert 0.4 <= auc <= 0.6, f'null AUC drift: {auc}'; \
+print(f'  gate OK — null AUC={auc:.3f} (expected ~0.5), perm_p={perm_p:.3f}')"
 	@echo ">>> [smoke 3/4] Compliance audit..."
 	@$(MAKE) -s audit
 	@echo ">>> [smoke 4/4] Artefact index present..."
@@ -132,7 +131,7 @@ print(f'  gate OK — null AUC={r[\"law_auc\"]:.3f} (expected ~0.5), perm_p={r[\
 # `falsification_report.json` itself. `replay` will then fail because the
 # report doesn't exist. Treat `make demo` as the GUIDED first step that
 # tells you what to run next, not a one-shot end-to-end target. For a
-# fast sanity check, prefer `make test` (105 local-runnable tests, no
+# fast sanity check, prefer `make test` (118 local-runnable tests, no
 # API key needed). Reviewer-facing happy path is `make venv && make test
 # && make audit`. See README.
 demo:

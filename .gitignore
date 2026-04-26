@@ -63,3 +63,11 @@ HANDOFF_to_*.md
 research/IPF_*.md
 research/ipf_*.md
 research/SESSION_HANDOFF_ipf*.md
+
+# Internal session-coordination and authoring docs (not judge-facing)
+SESSION_COORDINATION.md
+docs/loom_*.md
+docs/loom_recording_guide.md
+docs/narrative_candidates_*.md
+docs/judging_criteria_audit.md
+docs/stage1_self_audit.md
