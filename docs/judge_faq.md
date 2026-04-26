@@ -173,8 +173,11 @@ rationale tokens prime the Skeptic's continuation). Mirrored at
 `results/external_validation_ipf/` (lock SHA `88eaca34` in sibling
 `dipg_rescue/`).
 
+**CPTAC-3 honest FAIL (2026-04-26).** The gate was also run on CPTAC-3 ccRCC proteogenomic data (n=155, M1=20). Direction is preserved (perm_p=0.006) but `ci_lower=0.542 < 0.60` and `Δbase=−0.007` (TOP2A alone reaches 0.691 vs compound 0.683). Gate refuses. This is the gate correctly identifying that cross-platform replication is not confirmed, even for same-disease data. The honest FAIL is reported, not hidden.
+
 **Evidence.**
 - [`docs/methodology.md` §1](methodology.md) — explicit cohort scoping
+- [`results/track_a_task_landscape/external_replay/SUMMARY.md`](../results/track_a_task_landscape/external_replay/SUMMARY.md) — full 6-verdict chain including CPTAC-3
 - [`results/external_validation_dipg/RESULTS.md`](../results/external_validation_dipg/RESULTS.md) — DIPG full results
 - Anchor regression cross-cohort stability: `methodology.md` § "Anchor regression"
 
