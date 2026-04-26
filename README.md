@@ -32,7 +32,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 | Metric | Value |
 |---|---|
 | Candidate evaluations (classification gate) | [**385** across 14 task × panel configs](results/track_a_task_landscape/SUMMARY.md) (KIRC: 194/203 reject · platform expansion: 61/101 reject · new disease tracks: 20/81 accept · 60 cross-disease survivors) |
-| 6-verdict replication chain | **3 PASS · 2 pre-registered FAIL · 1 honest FAIL** · 5 cohorts · 2 platforms |
+| 6-verdict replication chain | **3 PASS · 2 pre-registered FAIL · 1 honest FAIL** · 5 cohorts · 3 platforms |
 | Rashomon rank within all C(45,2) = 990 two-gene pairs | **1 / 990** |
 | Memorization check: zero-shot TOP2A−EPAS1 retrieval rate | **0 / 10** probes |
 | G + I pre-registered analysis predictions passing | **12 / 13** |

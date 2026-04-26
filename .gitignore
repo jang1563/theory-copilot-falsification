@@ -82,3 +82,11 @@ docs/capability_overhang_measurements.md
 docs/capability_overhang_summary.md
 docs/hpc_session_prompt_platform_generalization.md
 docs/clinical_utility.md
+
+# Post-hackathon paper drafts (WIP, contain local paths / harness refs)
+docs/paper/paper_v2_*.md
+docs/paper/research/
+docs/paper/review/
+
+# Local browser test screenshots
+output/
