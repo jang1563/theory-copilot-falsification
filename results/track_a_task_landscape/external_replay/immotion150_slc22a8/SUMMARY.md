@@ -11,7 +11,7 @@ to surface.
 
 ## Question
 
-The H1 LLM-SR loop (HPC job 2810338, commit e5b96e5) converged on
+The H1 LLM-SR loop (commit e5b96e5) converged on
 iteration 1 with 5 TOP2A − EPAS1 variants. The highest-AUC member
 added SLC22A8 inside the subtraction, reaching AUC 0.739 on TCGA-KIRC
 metastasis vs 0.726 for the 2-gene linear form — a +0.013 Δ-lift

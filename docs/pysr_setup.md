@@ -103,4 +103,4 @@ If this runs without error, the Julia backend is wired up correctly.
 - PySR CHANGELOG (stable v1.5.9 confirmed): https://github.com/MilesCranmer/PySR/blob/master/CHANGELOG.md
 - juliaup (official Julia version manager): https://github.com/JuliaLang/juliaup
 - Julia macOS install guide: https://julialang.org/downloads/platform/
-- Contact your institution's HPC support team to request Julia if unavailable as a module.
+- Contact your institution's compute support team to request Julia if unavailable as a module.
