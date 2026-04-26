@@ -131,8 +131,9 @@ published ccA/ccB subtype axis (Brannon 2010), re-derived from
 unconstrained symbolic regression. **This is not a new discovery:
 it is a methodology proof.** A methodology that finds known truth
 under a gate it cannot rationalize past proves it can find unknown
-truth. Our own 3-gene extension? Killed by the same gate on
-IMmotion150 (HR=1.36, p=0.0003). Claude Code Routines run this
+truth. The survivor passed a separately pre-registered survival gate
+on IMmotion150 (HR=1.36, p=0.0003); our own 3-gene extension?
+Killed by that same survival gate. Claude Code Routines run this
 discipline on every commit — pre-registration without being asked.
 
 ---
