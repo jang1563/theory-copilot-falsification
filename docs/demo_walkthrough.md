@@ -54,7 +54,7 @@ templates via `guesses=` and `fraction_replaced_guesses=0.3`.
 
 ```bash
 python -m lacuna.pysr_sweep \
-    --data data/examples/flagship_demo.csv \
+    --data data/examples/flagship_kirc_demo.csv \
     --label-col label \
     --feature-cols CA9 VEGFA LDHA AGXT ALB \
     --proposals config/law_proposals.json \
@@ -80,7 +80,7 @@ here; it reviews the metric pattern afterward.
 ```bash
 python -m lacuna.falsification_sweep \
     --candidates artifacts/kirc_candidates.jsonl \
-    --data data/examples/flagship_demo.csv \
+    --data data/examples/flagship_kirc_demo.csv \
     --label-col label \
     --fdr 0.05 \
     --out artifacts/kirc_survivors.jsonl
@@ -97,7 +97,7 @@ Expected output:
 [FAIL] log1p(VEGFA) - log1p(ALB)
        ci_lower = 0.52  (< 0.60 threshold)
        reason: bootstrap lower bound below stability threshold
-Survivors after BH-FDR(0.10): 1 / 3
+Survivors after BH-FDR(0.05): 1 / 3
 ```
 
 ## Step 4 — Interpret (Opus 4.7, Interpreter role)
@@ -127,13 +127,13 @@ to angiogenesis + hypoxic survival. Research use only.
 ## Step 5 — Replay (independent cohort)
 
 Replay the top surviving law on an independent cohort. For the synthetic
-example below, the dataset id is `transfer_demo`. In the real judged
+example below, the dataset id is `transfer_kirc_demo`. In the real judged
 path, replace it with `gse40435`.
 
 ```bash
 lacuna replay \
     --flagship-artifacts artifacts/flagship_run \
-    --transfer-dataset transfer_demo \
+    --transfer-dataset transfer_kirc_demo \
     --output-root artifacts
 ```
 
@@ -146,7 +146,7 @@ Replay summary (example run):
   "law_auc": 0.88,
   "passes": true,
   "status": "PASS",
-  "transfer_dataset": "transfer_demo"
+  "transfer_dataset": "transfer_kirc_demo"
 }
 ```
 
@@ -173,7 +173,7 @@ pipeline through a single agent with `agent_toolset_20260401`.
 from lacuna.managed_agent_runner import run_path_b
 
 result = run_path_b(
-    dataset_csv="data/examples/flagship_demo.csv",
+    dataset_csv="data/examples/flagship_kirc_demo.csv",
     proposals_json="config/law_proposals.json",
     out_dir="artifacts/managed_agents_run/",
 )

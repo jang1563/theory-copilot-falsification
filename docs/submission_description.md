@@ -166,8 +166,8 @@ At the 2026-04-22 *Built with Opus 4.7* live session, Tharik (Cloud Code team) n
 ## Prize Category Justification
 
 - **Keep Thinking ($5K).** The load-bearing cognitive work is the
-  ex-ante skeptic test written before any fit, the four-role review
-  loop, and the post-hoc metric-pattern interpretation. All three
+  ex-ante skeptic test written before any fit, the three-role review
+  loop (Proposer / Skeptic / Interpreter), and the post-hoc metric-pattern interpretation. All three
   require the Skeptic stance to survive dual-role context. Our
   180-call cross-model ablation (`results/ablation/SUMMARY.md`)
   measured the distinguishing behaviour: Sonnet 4.6 emits **0 PASS

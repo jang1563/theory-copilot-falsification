@@ -198,7 +198,7 @@ Cross-cohort comparison: C-index **dropped** from 0.601 (2-gene) to
 [`results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md`](../results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md).
 
 This is the dynamic Boris Cherny calls *"never mark a task complete
-without proving it works"* and Thariq Shihipar called out at the
+without proving it works"* and Tharik (Cloud Code team) called out at the
 2026-04-22 live session as an open problem — a verification script
 that forces the agent to test its own outputs against hard constraints.
 Our downstream H1 proposal got killed by the same deterministic Python
@@ -353,6 +353,6 @@ shows the pattern holds on additional diseases.
 2. [`docs/paper/benchmark_vs_related.md`](paper/benchmark_vs_related.md) — positioning vs SPOT, Sakana v2, POPPER.
 3. [`results/rejection_log.html`](../results/rejection_log.html) — the 203-candidate KIRC classification log (open in a browser).
 4. [`results/track_a_task_landscape/external_replay/immotion150_pfs/SUMMARY.md`](../results/track_a_task_landscape/external_replay/immotion150_pfs/SUMMARY.md) — IMmotion150 replay write-up.
-5. [`preregistrations/`](../preregistrations/) — the 17 YAMLs; run `make prereg-audit` to see SHA + content hash per file.
+5. [`preregistrations/`](../preregistrations/) — the 28 YAMLs; run `make prereg-audit` to see SHA + content hash per file.
 6. [`docs/methodology.md`](methodology.md) — full methods.
 7. [`docs/survivor_narrative.md`](survivor_narrative.md) — the single-paragraph "what is this and what it isn't" on TOP2A − EPAS1.

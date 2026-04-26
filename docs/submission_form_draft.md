@@ -237,7 +237,7 @@ Canonical narration: `docs/loom_narration_final_90s.md` (333 words,
 ~143 s at 140 WPM / ~167 s at 120 WPM, **eight segments** incl. DIPG
 + IPF generalization tags, opens with problem-first "AI-for-science...
 built to say no" hook and closes with the IPF dual-fabrication-catch
-demonstration of 4-role context isolation). Shot-list / rehearsal
+demonstration of three-role context isolation). Shot-list / rehearsal
 assets: `docs/loom_script.md` (pre-narration shot list) +
 `docs/loom_visual_cue_map.md` (8-segment asset cue map).
 
@@ -247,7 +247,7 @@ assets: `docs/loom_script.md` (pre-narration shot list) +
 
 Opus 4.7 proof-of-concept of a larger program (NegBioDB + failure
 network + rescue engine for prematurely-rejected clinical hypotheses).
-Same 4-role engine re-run on 15 H3 K27M DMG (pediatric brainstem cancer) rescue hypotheses
+Same three-role engine re-run on 15 H3 K27M DMG (pediatric brainstem cancer) rescue hypotheses
 (locked-before-output git SHA 8a4ecc5): 7 supported, 7 mixed, 1
 insufficient; top lead: panobinostat via CED (direct brain tumor drug delivery, 13/15
 delivery class). Tier-1 prognostic-substrate gate then re-tested 4
