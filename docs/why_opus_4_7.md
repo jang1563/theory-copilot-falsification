@@ -206,8 +206,8 @@ measures a 31% false-conclusion rate across 13M machine-generated labels
 used as downstream evidence.
 
 The remedy biology keeps pointing back to is pre-registration: write down
-what would falsify the claim *before* seeing whether it passes. Theory
-Copilot takes that seriously. Every law family is paired with skeptic
+what would falsify the claim *before* seeing whether it passes. Lacuna
+takes that seriously. Every law family is paired with skeptic
 tests that Opus 4.7 writes **before any fit is attempted**; the law must
 survive those tests as a condition for being called a survivor; the tests
 are executed by plain Python against held-out data, not by another LLM
@@ -309,8 +309,7 @@ The researcher's role has shifted from *implementer* (writing code to test
 hypotheses) to *orchestrator* (specifying judgment criteria and letting
 agents iterate). In that framing, the single most important design
 decision is not the architecture of the agent but the specification of
-the judgment function: **what counts as better?** Opus 4.7 is Theory
-Copilot's orchestrator — it proposes law families, writes the kill-tests
+the judgment function: **what counts as better?** Opus 4.7 is Lacuna's orchestrator — it proposes law families, writes the kill-tests
 that would falsify each, and interprets survivors — but it does not
 decide pass/fail. The deterministic gate decides. This is the direct
 counter to the class of failure mode where an LLM-as-judge, trained on

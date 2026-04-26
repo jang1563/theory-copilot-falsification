@@ -189,8 +189,7 @@ note in the opening block.
 Managed Agents live on `platform.claude.com`; Routines live on
 `code.claude.com`. Bridging them requires a Routine bearer token,
 a distinct beta header, and a separate session-event surface. Most
-implementations we've seen pick one and ignore the other. Theory
-Copilot uses both in the same pipeline: the Skeptic runs in Managed
+implementations we've seen pick one and ignore the other. Lacuna uses both in the same pipeline: the Skeptic runs in Managed
 Agents sessions (durable event log + memory); the nightly audit
 runs in a Routine (`make audit` + rejection-log regen server-side).
 `invoke_fn=make_routine_invoke_fn(...)` in `managed_agent_runner.py`
