@@ -166,8 +166,12 @@ compliant per the 2026-04-23 hackathon fairness rule; research-preview
 - **Path A (live, PhL-9 + PhL-9v2 on real TCGA-KIRC).** Sequential
   three-session chain, structured-JSON handoff,
   `delegation_mode=sequential_fallback`, 706 s wall.
-- **Path C (live, PhL-8).** `/fire` HTTP 200 +
-  https://claude.ai/code/session_01NyS541H3qZfJgqFVgWDcoM
+- **Path C (live, PhL-8 + PhL-8b).** API trigger: `/fire` HTTP 200 +
+  https://claude.ai/code/session_01NyS541H3qZfJgqFVgWDcoM (PhL-8).
+  Schedule trigger: autonomous fire 2026-04-26T00:39Z (19-min stagger),
+  session created server-side with no client action — mechanism layer
+  evidenced; output blocked by quota at first turn (PhL-8b, see
+  `results/live_evidence/phl8b_routine_schedule/SUMMARY.md`).
 
 **Durability.** `persist_session_events` pages `sessions.events.list`
 to JSONL; `replay_session_from_log` re-injects user-origin events into
