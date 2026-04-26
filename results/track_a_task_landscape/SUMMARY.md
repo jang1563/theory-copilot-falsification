@@ -235,4 +235,24 @@ scaling perturbations before we over-commit to the narrative.
 - `results/track_a_task_landscape/plots/task_auroc_comparison.png` — 11-gene panel cross-task AUROC scatter
 - `results/track_a_task_landscape/plots/delta_baseline_by_task.png` — 11-gene panel Δbaseline histogram
 
+---
+
+## Platform generalization (2026-04-26 HPC expansion)
+
+Same pre-registered gate extended to 3 additional cancer types. All runs use conda env `lacuna-pysr`
+on Cayuga HPC (20 CPUs, SLURM job 2812758): 20 populations × 50 pop_size × 1000 iterations × 3 seeds.
+
+| Cancer | Task | Panel | n | Top law | AUROC | Δbase | Survivors |
+|---|---|---|---|---|---|---|---|
+| KIRC | Stage I-II vs III-IV | 45-gene | 512 | `CXCR4/EPAS1` | 0.689 | +0.051 | **23/28** ✅ |
+| LIHC | Tumor vs Normal | 31-gene | 424 | — (ALB/TTR ~0.985) | — | +0.015 | **0/26** |
+| COAD | Stage I-II vs III-IV | 31-gene | 484 | `SLC2A1+PDCD1LG2+VIM−MYC` | 0.658 | +0.107 | **15/22** ✅ |
+| LGG | Grade II vs III | 30-gene | 384 | `log1p(TWIST1×MKI67+VIM)−CDH2/NES` | 0.840 | +0.051 | **2/25** ✅ |
+
+**Pattern:** Gate accepts survivors when the feature landscape is distributed (moderate single-gene ceiling).
+Gate refuses when one gene saturates (LIHC: hepatic function marker, same as ccRCC CA9 pattern).
+Gate finds sparse survivors when ceiling is high but not absolute (LGG: MKI67 ~0.789 est.).
+
+Subdirectories: `stage_expanded/`, `lihc/`, `coad_msi/`, `gbm_idh/` — each with `SUMMARY.md`.
+
 (An expanded-panel cross-comparison plot is a natural next addition.)
