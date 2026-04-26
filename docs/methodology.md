@@ -371,12 +371,17 @@ key of `run_falsification_suite()`:
   (Niculescu-Mizil & Caruana 2005, ICML). On the same survivor:
   **0.122** vs uninformative reference `p(1−p)` = 0.132 (7.6%
   reduction).
-- **Calibration slope / intercept** from a logistic fit on full data.
-  Slope **0.540** (well-calibrated range [0.85, 1.15]), intercept
-  **−1.85**. The low slope is itself an honest signal: the raw
-  `TOP2A − EPAS1` value is more discriminative than its scale
-  suggests, and Platt-scaled probabilities are required before
-  the score is interpretable as a probability.
+- **Calibration slope / intercept** (Steyerberg 2019 / TRIPOD+AI 2024
+  convention): fit `logit(y) ~ a + b · logit(p_oof_platt)` on the
+  5-fold OOF Platt-scaled probabilities. On the same survivor:
+  slope **0.979** (well inside the conventional well-calibrated
+  range [0.85, 1.15]), intercept **−0.032** (≈0). The OOF
+  Platt-scaled probabilities are **well-calibrated** as
+  probability claims; no further re-calibration step is required.
+  The `rigor_metrics` output also exposes
+  `logistic_score_coefficient` = 0.540 (the in-sample logistic
+  coefficient of `y` on the raw oriented score) for descriptive
+  completeness — not a calibration diagnostic.
 
 This addition follows TRIPOD+AI 2024 (BMJ; PMID 38719247) and
 Steyerberg, *Clinical Prediction Models* (2nd ed., 2019) which

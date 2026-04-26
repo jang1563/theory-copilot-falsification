@@ -60,31 +60,30 @@ a 16% prevalence task. The G2 reporting layer
 ([`results/track_a_task_landscape/rigor_extension/`](../results/track_a_task_landscape/rigor_extension/SUMMARY.md))
 adds: **AUPRC 0.321** (2.05× over the 0.156 prevalence baseline);
 **Brier 0.122** (7.6% reduction vs the uninformative reference 0.132,
-on 5-fold OOF Platt-scaled probabilities); **calibration slope 0.540**
-with intercept −1.85. The slope being below the well-calibrated
-range [0.85, 1.15] is itself an honest signal: the raw `TOP2A − EPAS1`
-score is more discriminative than its scale, and the Platt-scaled
-probability — not the raw difference — is the right object for any
-downstream probability claim. The reliability curve's top quintile
-predicts 32% M1 and observes 35% — well-calibrated at the high
-(screening-relevant) end. This adds a probabilistic-correctness
-dimension to the AUROC discrimination claim without changing any
-gate decision.
+on 5-fold OOF Platt-scaled probabilities); **calibration slope 0.979
+with intercept −0.032** (Steyerberg-style: `logit(y) ~ a + b · logit(p_oof)`),
+both well inside the conventional well-calibrated band
+(slope ∈ [0.85, 1.15], intercept ≈ 0). The 5-fold Platt-scaled
+probabilities track observed M1 risk almost exactly; no further
+re-calibration is required at this n. This adds a
+probabilistic-correctness dimension to the AUROC discrimination
+claim without changing any gate decision.
 
 **Information-theoretic compactness (I4).** A pre-registered
 histogram-based mutual-information analysis with Miller-Madow
-bias correction
+bias correction and 1000-resample bootstrap CIs
 ([`results/track_a_task_landscape/information_theory/`](../results/track_a_task_landscape/information_theory/SUMMARY.md))
 finds: I(joint; y) is **1.82×** larger than max individual MI
-(P1 PASS — genes work together, not separately); **synergy is
-positive** (+0.0014 nats; P2 PASS — genes are not redundant);
-and the linear `TOP2A − EPAS1` form captures **98.1%** of the
-bivariate joint information (P3 PASS — the difference is
-essentially lossless relative to any function of the pair).
+(P1 PASS — genes work together, not separately); **point-positive
+synergy** (+0.0014 nats; P2 PASS at point but **bootstrap 95% CI
+(−0.0055, +0.0271) includes zero**, P(syn>0)=0.842 — small
+relative to sampling noise; honest caveat); and the linear
+`TOP2A − EPAS1` form captures **0.92–0.98 of the bivariate
+joint information** (P3 PASS, depending on whether the compound is
+binned at 8 quantiles or 16 to match the joint cell count).
 This is the information-theoretic version of the compactness
-claim: out of every possible quadratic, log-ratio, neural-net,
-or kernel function of (TOP2A, EPAS1), the best one could
-recover at most an additional 0.0006 nats — the simple
+claim: a more complex function of (TOP2A, EPAS1) could recover
+roughly 2–8% more bivariate MI on average, but the simple
 1-line difference is near-optimal.
 
 **Clinical-language translation (I3).** AUROC 0.728 in clinician
@@ -122,17 +121,20 @@ knockoff filter
 ([`results/track_a_task_landscape/knockoff_v2/`](../results/track_a_task_landscape/knockoff_v2/SUMMARY.md);
 LedoitWolf Sigma, MVR construction, q=0.10, 25 derandomized
 replicates per Ren & Candès 2020) applied to the 45-gene panel
-selects **0 / 45 genes** individually. TOP2A and EPAS1 are ranked
-#1 and #2 by W statistic but neither crosses threshold at the
-pre-registered q=0.10. Read honestly, this is **not** a contradiction
-of the v1 5-test gate's compound finding — it confirms the signal in
-`TOP2A − EPAS1` is *genuinely compound*. The v1 gate evaluates the
-contrast directly; the v2 knockoff gate evaluates each gene under a
-univariate-FDR procedure that has no compound-aware test surface.
-Both gates agree on negatives (rejected laws have no constituent
-genes selected). The compound-vs-individual disagreement is the
-same pattern that makes the published ccA/ccB axis a *contrast*,
-not two independent markers.
+selects **0 / 45 genes** individually. The mean W statistic across
+25 replicates ranks **EPAS1 rank 1 / 45** (W = +0.0452) and
+**TOP2A rank 2 / 45** (W = +0.0223) — independently reproducing the
+prior `g1_knockoffs/` single-run result. Neither crosses threshold
+at q=0.10 — a power limitation reproducible across two distinct
+knockoff implementations, not a method-specific artefact. Read
+honestly, this is **not** a contradiction of the v1 5-test gate's
+compound finding — it confirms the signal in `TOP2A − EPAS1` is
+*genuinely compound*. The v1 gate evaluates the contrast directly;
+the v2 knockoff gate evaluates each gene under a univariate-FDR
+procedure that has no compound-aware test surface. Both gates agree
+on negatives (rejected laws have no constituent genes selected). The
+compound-vs-individual disagreement is the same pattern that makes
+the published ccA/ccB axis a *contrast*, not two independent markers.
 
 **Cross-cohort causal stability (anchor regression).** Anchor
 regression ([Rothenhäusler et al., JRSS-B 2021](https://arxiv.org/abs/1801.06229))

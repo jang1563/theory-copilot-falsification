@@ -9,16 +9,25 @@
     "I_TOP2A_y_nats": 0.017657758212779776,
     "I_EPAS1_y_nats": 0.013045997022835536,
     "I_joint_y_nats": 0.03210981556491779,
-    "I_compound_y_nats": 0.031500323620176365,
-    "raw_uncorrected": {
-      "I_TOP2A_y": 0.024588451282086705,
-      "I_EPAS1_y": 0.019976690092142466,
-      "I_joint_y": 0.060822686852046504,
-      "I_compound_y": 0.046351808768691216
-    }
+    "I_compound_y_nats_8bin": 0.031500323620176365,
+    "I_compound_y_nats_16bin_same_as_joint": 0.029549998900954975
   },
   "synergy_nats": 0.0014060603293024818,
-  "compactness_ratio": 0.9810185161758656,
+  "synergy_bootstrap_ci_95": [
+    -0.005466252521189773,
+    0.027126702378439067
+  ],
+  "synergy_bootstrap_p_positive": 0.842,
+  "compactness_ratio_8bin": 0.9810185161758656,
+  "compactness_ratio_8bin_ci_95": [
+    0.4439458855166331,
+    1.8721744403652383
+  ],
+  "compactness_ratio_same_binning_16bin": 0.920279309646375,
+  "compactness_ratio_same_binning_ci_95": [
+    0.49825287804370655,
+    2.1825951504860814
+  ],
   "predictions": {
     "p1_joint_gt_1p25x_max_individual": {
       "pass": true,
@@ -29,11 +38,26 @@
     },
     "p2_synergy_positive": {
       "pass": true,
-      "synergy_nats": 0.0014060603293024818
+      "synergy_nats": 0.0014060603293024818,
+      "bootstrap_ci_95": [
+        -0.005466252521189773,
+        0.027126702378439067
+      ],
+      "bootstrap_p_positive": 0.842,
+      "honest_caveat": "Synergy point estimate is positive but small relative to sampling noise; bootstrap 95% CI may include zero. P(syn>0) in the bootstrap distribution quantifies confidence."
     },
     "p3_compactness_ge_0p70": {
       "pass": true,
-      "compactness": 0.9810185161758656,
+      "compactness_8bin": 0.9810185161758656,
+      "compactness_8bin_ci_95": [
+        0.4439458855166331,
+        1.8721744403652383
+      ],
+      "compactness_same_binning_16bin": 0.920279309646375,
+      "compactness_same_binning_ci_95": [
+        0.49825287804370655,
+        2.1825951504860814
+      ],
       "threshold": 0.7
     }
   }

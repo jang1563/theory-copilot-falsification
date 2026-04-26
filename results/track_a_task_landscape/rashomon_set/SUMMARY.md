@@ -31,14 +31,20 @@ direct measure of how unique the headline survivor is.
 
 ### Tight Rashomon set (the only laws within 0.02 of the survivor)
 
-| Rank | Pair | Sign-inv AUROC |
-|---|---|---|
-| 1 | **EPAS1 − TOP2A** | **0.7275** |
-| 2 | CDK1 − EPAS1 | 0.7192 |
-| 3 | EPAS1 − MKI67 | 0.7100 |
+The enumeration is over **unordered** pairs `{g_i, g_j}`; AUROC is
+computed sign-invariantly (`max(AUROC, 1 − AUROC)`), so each row below
+is sign-equivalent to its swap (e.g., `EPAS1 − TOP2A` ≡ `TOP2A − EPAS1`).
+Below the rows are presented in **biological orientation**
+(proliferation marker − EPAS1) for narrative consistency:
 
-All three pairs are **`proliferation marker − EPAS1`** — TOP2A, CDK1, and
-MKI67 are all canonical proliferation drivers; EPAS1 is HIF-2α. The
+| Rank | Pair (biological orientation) | Pair (CSV row order) | Sign-inv AUROC |
+|---|---|---|---|
+| 1 | **TOP2A − EPAS1** | EPAS1 − TOP2A | **0.7275** |
+| 2 | CDK1 − EPAS1 | CDK1 − EPAS1 | 0.7192 |
+| 3 | MKI67 − EPAS1 | EPAS1 − MKI67 | 0.7100 |
+
+All three pairs are **`proliferation marker − EPAS1`** — TOP2A, CDK1,
+and MKI67 are canonical proliferation drivers; EPAS1 is HIF-2α. The
 ccA/ccB axis is the same biology in three slightly different gene
 proxies; parsimony preference picks `TOP2A − EPAS1`.
 

@@ -28,6 +28,8 @@ def test_returns_expected_keys(synthetic_classification):
         "brier_uninformative_ref",
         "calibration_slope",
         "calibration_intercept",
+        "logistic_score_coefficient",
+        "logistic_score_intercept",
         "cal_curve_predicted",
         "cal_curve_observed",
         "prevalence",
@@ -52,12 +54,23 @@ def test_brier_below_uninformative_reference(synthetic_classification):
     assert out["brier"] < out["brier_uninformative_ref"]
 
 
-def test_calibration_slope_positive_for_signal(synthetic_classification):
+def test_logistic_score_coefficient_positive_for_signal(synthetic_classification):
     score, y = synthetic_classification
     out = rigor_metrics(score, y, seed=0)
-    # On a positively-correlated score, slope b in logit(y) ~ a + b·score
-    # must be > 0; an honest discrimination metric.
-    assert out["calibration_slope"] > 0.0
+    # On a positively-correlated score, the logistic coefficient b in
+    # logit(y) ~ a + b·score must be > 0; an honest discrimination metric.
+    assert out["logistic_score_coefficient"] > 0.0
+
+
+def test_calibration_slope_near_one_for_oof_platt(synthetic_classification):
+    score, y = synthetic_classification
+    out = rigor_metrics(score, y, seed=0)
+    # For OOF Platt-scaled probabilities the proper calibration slope
+    # (logit(y) ~ a + b · logit(p_oof)) should land near 1.0 — Platt
+    # scaling is by construction self-calibrating on the training fold,
+    # so on out-of-fold data the slope is close to 1 modulo small-fold
+    # noise. We require [0.5, 1.5] as a generous synthetic-data band.
+    assert 0.5 < out["calibration_slope"] < 1.5
 
 
 def test_sign_invariant_auprc():

@@ -51,7 +51,17 @@ def rigor_metrics(
     dict with keys:
       - auprc, auprc_baseline, auprc_lift
       - brier, brier_uninformative_ref
-      - calibration_slope, calibration_intercept (raw-logit fit on full data)
+      - calibration_slope, calibration_intercept — Steyerberg-style
+        calibration diagnostic on the 5-fold OOF Platt-scaled
+        probabilities: fit logit(y) ~ a + b · logit(p_oof). Slope ≈ 1
+        means well-calibrated; the conventional "well-calibrated" range
+        is roughly [0.85, 1.15] (Austin & Steyerberg 2019).
+      - logistic_score_coefficient, logistic_score_intercept — the
+        coefficient of a 1-feature logistic regression of y on the raw
+        oriented score. NOT a calibration diagnostic; provided for
+        descriptive completeness (it is the in-sample log-OR per unit
+        score). Equivalent to the OR per 1 unit of (TOP2A − EPAS1)
+        z-difference reported in I3 clinical_utility.
       - cal_curve_predicted, cal_curve_observed (lists for plotting)
       - prevalence
       - seed (for reproducibility)
@@ -86,14 +96,30 @@ def rigor_metrics(
     brier = float(brier_score_loss(y, prob))
     brier_uninformative_ref = prevalence * (1.0 - prevalence)
 
-    # ── Calibration slope/intercept on full-data logistic fit ────────────
+    # ── Logistic regression coefficient on raw score (NOT a calibration
+    #    slope diagnostic; this is the in-sample log-OR per unit score).
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", ConvergenceWarning)
         full = LogisticRegression(max_iter=1000).fit(
             score_oriented.reshape(-1, 1), y
         )
-    slope = float(full.coef_[0, 0])
-    intercept = float(full.intercept_[0])
+    logistic_score_coefficient = float(full.coef_[0, 0])
+    logistic_score_intercept = float(full.intercept_[0])
+
+    # ── Calibration slope/intercept (Steyerberg 2019, TRIPOD+AI 2024) ────
+    # Fit logit(y) ~ a + b · logit(p_oof) on the OOF Platt-scaled probs.
+    # Slope b ≈ 1 means well-calibrated; b < 1 means OOF probs are too
+    # extreme; b > 1 means too pulled to the mean.
+    eps = 1e-6
+    prob_clipped = np.clip(prob, eps, 1.0 - eps)
+    logit_p = np.log(prob_clipped / (1.0 - prob_clipped))
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", ConvergenceWarning)
+        cal_fit = LogisticRegression(max_iter=1000).fit(
+            logit_p.reshape(-1, 1), y
+        )
+    calibration_slope = float(cal_fit.coef_[0, 0])
+    calibration_intercept = float(cal_fit.intercept_[0])
 
     # ── Reliability curve for plotting ───────────────────────────────────
     # `calibration_curve` requires probabilities in [0, 1]; we pass the
@@ -115,8 +141,12 @@ def rigor_metrics(
         "auprc_lift": auprc_lift,
         "brier": brier,
         "brier_uninformative_ref": brier_uninformative_ref,
-        "calibration_slope": slope,
-        "calibration_intercept": intercept,
+        # Proper calibration diagnostic on OOF Platt-scaled probabilities
+        "calibration_slope": calibration_slope,
+        "calibration_intercept": calibration_intercept,
+        # Score-to-logit logistic coefficient (NOT a calibration diagnostic)
+        "logistic_score_coefficient": logistic_score_coefficient,
+        "logistic_score_intercept": logistic_score_intercept,
         "cal_curve_predicted": cal_curve_predicted,
         "cal_curve_observed": cal_curve_observed,
         "prevalence": prevalence,

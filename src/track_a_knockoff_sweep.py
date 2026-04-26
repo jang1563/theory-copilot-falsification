@@ -67,8 +67,8 @@ def main():
 
     selected = knockoff_result["selected_genes"]
     rates = knockoff_result["selection_rates"]
+    mean_W = knockoff_result["mean_W_statistic"]
     print(f"\n=== Knockoff selected genes (rate >= 50%) ===")
-    # Sort by rate descending
     top_genes = sorted(rates.items(), key=lambda kv: kv[1], reverse=True)
     for gene, rate in top_genes:
         if rate > 0:
@@ -76,6 +76,24 @@ def main():
 
     print(f"\nTotal selected: {len(selected)}")
     print(f"Sigma condition number: {knockoff_result['sigma_condition_number']:.1f}")
+
+    # W-statistic ranking — verifies the filter ranks signal genes correctly
+    # even when none cross the q=0.10 threshold.
+    print(f"\n=== Top 10 genes by mean W statistic (across {knockoff_result['n_replicates']} replicates) ===")
+    for entry in knockoff_result["top_genes_by_W"][:10]:
+        print(f"  {entry['gene']:8s}  mean_W={entry['mean_W']:+.4f}")
+    top2a_w = mean_W.get("TOP2A", float("nan"))
+    epas1_w = mean_W.get("EPAS1", float("nan"))
+    top2a_rank = next(
+        (i + 1 for i, e in enumerate(knockoff_result["top_genes_by_W"])
+         if e["gene"] == "TOP2A"), None,
+    )
+    epas1_rank = next(
+        (i + 1 for i, e in enumerate(knockoff_result["top_genes_by_W"])
+         if e["gene"] == "EPAS1"), None,
+    )
+    print(f"\n  TOP2A mean_W = {top2a_w:+.4f}  rank = {top2a_rank}/{len(mean_W)}")
+    print(f"  EPAS1 mean_W = {epas1_w:+.4f}  rank = {epas1_rank}/{len(mean_W)}")
 
     # Check v1 survivors
     print("\n=== V1 survivor concordance (conjunction rule) ===")
@@ -122,6 +140,10 @@ def main():
         "sigma_condition_number": knockoff_result["sigma_condition_number"],
         "selected_genes": knockoff_result["selected_genes"],
         "top_selection_rates": {g: r for g, r in top_genes if r >= 0.20},
+        "mean_W_statistic": knockoff_result["mean_W_statistic"],
+        "top_genes_by_W": knockoff_result["top_genes_by_W"],
+        "top2a_W_rank": top2a_rank,
+        "epas1_W_rank": epas1_rank,
         "hypotheses": {
             "H1_top2a_epas1_selected": {
                 "pass": h1_pass,

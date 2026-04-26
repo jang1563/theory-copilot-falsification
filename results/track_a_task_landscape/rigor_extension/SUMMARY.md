@@ -37,18 +37,38 @@ Numbers reproduced from `top2a_epas1_metastasis_g2_metrics.json`
 
 | Metric | Value | Reference | Interpretation |
 |---|---|---|---|
-| AUROC (sign-inv) | **0.728** | random=0.5 | v1 gate output (matches +0.001 of the prior 0.726 reported in `survivor_narrative.md` — bootstrap-seed level noise) |
+| AUROC (sign-inv) | **0.728** | random=0.5 | v1 gate output (matches +0.001 of the prior 0.726 reported in `survivor_narrative.md`) |
 | AUPRC | **0.321** | prevalence=0.156 | **2.05× the random baseline** at this prevalence |
 | AUPRC lift | **2.05×** | 1.00× | substantial lift in the imbalance-sensitive metric AUROC alone hides |
 | Brier | **0.122** | uninformative=0.132 | 7.6% reduction in MSE-on-probability vs. predicting prevalence everywhere |
-| Calibration slope | **0.540** | well-cal ∈ [0.85, 1.15] | **slope < 1 → score is more discriminative than its raw scale suggests**; an honest signal of room for re-calibration before clinical use |
-| Calibration intercept | **−1.85** | well-cal ≈ 0 | combined with the low slope, indicates the raw `TOP2A − EPAS1` value is not a probability — Platt scaling is required (and is what the Brier above already uses) |
+| **Calibration slope** (Steyerberg, on OOF Platt-scaled probs) | **0.979** | well-cal ∈ [0.85, 1.15] | **well-calibrated** — the OOF Platt-scaled probabilities track observed risk almost exactly |
+| **Calibration intercept** | **−0.032** | well-cal ≈ 0 | essentially zero — no systematic over- or under-prediction |
 
-The `cal_curve_predicted` / `cal_curve_observed` lists give the
-quantile-binned reliability diagram (5 bins). The top quintile
-predicts 32% M1 and observes 35% — well-calibrated at the high end,
-which is the bin most relevant for screening. The slope penalty is
-dominated by the low-score tail.
+Reliability diagram (5 quantile bins; observed vs predicted) — top
+quintile predicts 32% M1 and observes 35%, which is what the slope
+≈ 1 + intercept ≈ 0 imply across all bins. Platt-scaled probabilities
+are usable as probabilities directly; no further re-calibration is
+required at this n.
+
+### Honest correction (2026-04-25)
+
+An earlier version of this SUMMARY reported `calibration_slope = 0.540`
+and `intercept = −1.85` and described the survivor as **not**
+well-calibrated. That was a methodological mislabel: the original code
+fit `logit(y) ~ a + b · score` (i.e., the **logistic-regression
+coefficient on the raw score**), which is the in-sample log-OR per
+unit of `TOP2A − EPAS1` — a meaningful descriptive quantity, but not
+the calibration-slope diagnostic. The proper calibration-slope
+diagnostic (Steyerberg 2019; TRIPOD+AI 2024) fits
+`logit(y) ~ a + b · logit(p_predicted)` on the held-out predicted
+probabilities — that is what the values above (0.979 / −0.032)
+report. The previous quantity is now retained under the keys
+`logistic_score_coefficient` (= 0.540) and `logistic_score_intercept`
+(= −1.848) for descriptive completeness.
+
+The corrected story is **strictly stronger than the original
+narrative**: the OOF Platt-scaled probabilities are well-calibrated
+on this cohort, with no need for ad-hoc re-calibration.
 
 ## Why this matters for the submission narrative
 

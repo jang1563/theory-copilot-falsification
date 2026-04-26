@@ -37,7 +37,8 @@ def test_returns_expected_keys(synthetic_with_signal):
     result = run_knockoff_gate(X, y, gene_names=gene_names, n_replicates=3, seed=0)
     expected = {"selected_genes", "selection_rates", "fdr_target", "n_replicates",
                 "seed", "sigma_condition_number", "replicate_selections",
-                "successful_replicates", "failed_replicates", "replicate_errors"}
+                "successful_replicates", "failed_replicates", "replicate_errors",
+                "mean_W_statistic", "top_genes_by_W"}
     assert expected.issubset(result.keys())
     assert result["failed_replicates"] == 0
     assert result["successful_replicates"] == 3

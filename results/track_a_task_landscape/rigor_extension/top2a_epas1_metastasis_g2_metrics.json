@@ -16,8 +16,11 @@
     "auprc_lift_over_baseline": 2.0492334410848865,
     "brier": 0.12195831910014654,
     "brier_uninformative_reference": 0.13196353298696206,
-    "calibration_slope": 0.5401972514813235,
-    "calibration_intercept": -1.848291061435296,
+    "calibration_slope": 0.979495390001063,
+    "calibration_intercept": -0.03222690950819811,
+    "calibration_slope_method": "Steyerberg: logit(y) ~ a + b \u00b7 logit(p_oof_platt)",
+    "logistic_score_coefficient": 0.5401972514813235,
+    "logistic_score_intercept": -1.848291061435296,
     "cal_curve_predicted": [
       0.06409054915893173,
       0.0945042314027023,

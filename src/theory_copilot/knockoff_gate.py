@@ -64,6 +64,8 @@ def run_knockoff_gate(
       - fdr_target, n_replicates, seed
       - sigma_condition_number: diagnostic for Sigma quality
       - replicate_selections: list of sets (one per replicate)
+      - mean_W_statistic: dict {gene: mean W across replicates}
+      - top_genes_by_W: list of {gene, mean_W} sorted descending
     """
     try:
         import knockpy
@@ -89,6 +91,10 @@ def run_knockoff_gate(
     replicate_selections: list[set[str]] = []
     replicate_errors: list[dict] = []
     selection_counts = np.zeros(p, dtype=int)
+    # Per-replicate W statistics — needed to verify the knockoff filter
+    # ranks signal genes correctly even when none cross the q-threshold
+    # (Barber & Candès 2015; relevant when selection rate is 0).
+    W_per_replicate: list[np.ndarray] = []
 
     for rep in range(n_replicates):
         rep_seed = seed + rep
@@ -114,11 +120,18 @@ def run_knockoff_gate(
             finally:
                 np.random.set_state(np_state)
             selected_idx = set(np.where(np.asarray(rejections).astype(bool))[0])
+            # Capture W statistics for this replicate (knockpy exposes
+            # `kf.W` after forward(); fall back gracefully if missing).
+            W_arr = np.asarray(getattr(kf, "W", np.full(p, np.nan)), dtype=float)
+            if W_arr.shape != (p,):
+                W_arr = np.full(p, np.nan)
+            W_per_replicate.append(W_arr)
         except Exception as exc:
             if verbose:
                 print(f"  Replicate {rep} failed: {exc}")
             replicate_errors.append({"replicate": rep, "error": repr(exc)})
             replicate_selections.append(set())
+            W_per_replicate.append(np.full(p, np.nan))
             continue
 
         selected_names = {gene_names[i] for i in selected_idx}
@@ -133,6 +146,15 @@ def run_knockoff_gate(
         gene_names[i]: float(selection_counts[i]) / n_replicates
         for i in range(p)
     }
+
+    # Aggregate W statistics across replicates (mean over non-NaN replicates).
+    W_matrix = np.vstack(W_per_replicate) if W_per_replicate else np.zeros((0, p))
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        W_mean = np.nanmean(W_matrix, axis=0) if W_matrix.size else np.full(p, np.nan)
+    mean_W = {gene_names[i]: float(W_mean[i]) for i in range(p)}
+    # Rank by mean W (descending). NaN treated as -inf for ranking.
+    ranked_genes = sorted(mean_W.items(), key=lambda kv: -kv[1] if not np.isnan(kv[1]) else float("inf"))
 
     threshold = 0.50
     selected_genes = sorted(
@@ -150,6 +172,11 @@ def run_knockoff_gate(
         "successful_replicates": n_replicates - len(replicate_errors),
         "failed_replicates": len(replicate_errors),
         "replicate_errors": replicate_errors,
+        "mean_W_statistic": mean_W,
+        "top_genes_by_W": [
+            {"gene": g, "mean_W": w} for g, w in ranked_genes
+            if not np.isnan(w)
+        ][:15],
     }
 
 

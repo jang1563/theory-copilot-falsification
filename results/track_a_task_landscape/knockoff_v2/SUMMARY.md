@@ -27,6 +27,32 @@ compound `TOP2A − EPAS1`. The honest finding is documented below.
 - TOP2A selection rate: **0.00** (0/25).
 - EPAS1 selection rate: **0.00** (0/25).
 
+### W-statistic ranking (added 2026-04-25)
+
+Although no gene clears the q=0.10 data-driven threshold, the mean W
+statistic across 25 replicates ranks the constituents of the
+flagship survivor at the top of the panel:
+
+| Rank | Gene | Mean W (across 25 replicates) |
+|---|---|---|
+| **1** | **EPAS1** | **+0.0452** |
+| **2** | **TOP2A** | **+0.0223** |
+
+This **independently reproduces** the prior single-run knockoffs
+result (`results/track_a_task_landscape/g1_knockoffs/`), which used
+equicorrelated knockoffs and ranked EPAS1 (W=0.056) and TOP2A
+(W=0.047) as #1 and #2. Two methodologically distinct knockoff
+implementations (equicorrelated vs MVR; single-run vs 25-replicate
+derandomized; non-`lcd` vs `lcd`) agree on the ranking, even as both
+fall short of the q=0.10 selection threshold. The pattern is therefore
+a **consistent power limitation** at this n / p / q combination, not
+a method-specific artefact.
+
+Treating "rank 1 and 2 by W out of 45 genes" as a continuous-strength
+measurement (rather than the binary FDR-controlled selection): the
+v2 gate's underlying signal aligns with the v1 compound-feature
+finding. The discordance is at the binary-selection level only.
+
 ### Pre-registered hypothesis verdicts
 
 | Hypothesis | Pre-registered prediction | Outcome | Verdict |

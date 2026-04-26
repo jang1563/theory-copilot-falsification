@@ -67,17 +67,24 @@ clinical translation: a pre-registered claim can fail and the
 correct response is to reframe accuracy of phrasing, not to move
 the threshold.
 
-## Comparison to published ccRCC signatures
+## Comparison to published ccRCC signatures (qualitative)
 
-For context, ClearCode34 (Brooks et al. 2014, DOI
-10.1016/j.eururo.2014.02.035) — the published 34-gene ccA/ccB
-classifier — reaches comparable AUROC (~0.72-0.75) on overlapping
-cohort definitions but uses 34 genes. The 2-gene `TOP2A − EPAS1`
-form trades a small-margin AUROC parity for **dramatic
-operational simplicity**: two RT-qPCR assays vs a 34-probe
-NanoString panel. That is the specific clinical-translation
-contribution of the survivor: same axis, far smaller marker
-panel, identical pre-registered statistical guarantees.
+ClearCode34 (Brooks et al. 2014, DOI
+10.1016/j.eururo.2014.02.035) is the published 34-gene ccA/ccB
+classifier; the underlying biological axis is the same as
+`TOP2A − EPAS1`. Brooks 2014 reports survival stratification (HR,
+log-rank) on multiple cohorts rather than a head-to-head AUROC for
+M0-vs-M1 prediction on TCGA-KIRC, so a direct AUROC comparison is
+**out of scope** for this SUMMARY. What we can claim with confidence
+is **operational**: the 2-gene form requires two RT-qPCR assays
+versus a 34-probe NanoString panel for ClearCode34 — a 17×
+reduction in marker count for a representation of the same ccA/ccB
+axis (substantiated by I4 information-theoretic compactness:
+the 2-gene difference captures ~92–98% of the bivariate joint MI).
+Whether the AUROC of `TOP2A − EPAS1` is comparable to ClearCode34
+on a *common* cohort + endpoint definition is an open empirical
+question that would require running both classifiers on the same
+held-out data — flagged as a natural follow-on.
 
 ## Reproducibility
 
