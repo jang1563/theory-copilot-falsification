@@ -80,10 +80,10 @@ AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws,
 
 The official rules require **one written description / summary
 (100–200 words)**. Use this version if the live form has only a
-single summary box. (Word count: ~195 space-split; cap 200. Technical
+single summary box. (Word count: ~189 space-split; cap 200. Technical
 notation like `n=505` counts as 1 word in form counters, so the
 space-split total is the authoritative count.)
-**4-beat structure (what / problem / how-built / how-Claude) — Stage 3-5 restructure 2026-04-25.**
+**4-beat structure (what / problem / how-built / how-Claude) — trimmed 2026-04-26 to fit 200-word cap.**
 
 ```
 Lacuna is a pre-registered falsification gate for biological law
@@ -98,20 +98,17 @@ automated confirmation bias.
 
 A deterministic 5-test Python gate rejected 194 of 203 candidates
 on TCGA kidney cancer data (n=505). The simplest survivor —
-TOP2A − EPAS1 (a proliferation-vs-hypoxia gene pair) — maps to the
-known kidney-cancer growth-program axis, found by symbolic regression
-unprompted. This is not a new discovery: it is a methodology proof.
-The survivor passed a separately pre-registered survival gate on
-IMmotion150 (a kidney cancer clinical trial; HR=1.36, p=0.0003). Our
-own 3-gene extension? Killed by that same gate.
+TOP2A − EPAS1 (proliferation vs hypoxia) — maps to the known
+kidney-cancer growth-program axis. This is not a new discovery: it is
+a methodology proof. The survivor passed a separately pre-registered
+survival gate on IMmotion150 (a kidney cancer clinical trial;
+HR=1.36, p=0.0003). Our own 3-gene extension? Killed by that same gate.
 
 Claude Code Managed Agents hold the Skeptic stance without collapse
-— Opus 4.7 10/60 PASS where Sonnet 4.6 = 0/60. Lung-fibrosis (IPF)
-Run #1 ($58, 32 min): Skeptic caught two Advocate fabrications about
-prior trial design. Any researcher with a disease CSV can run the same
-gate; **6 disease types tested** — kidney cancer, colon, brain glioma,
-liver, pediatric glioma, lung fibrosis — LGG (brain glioma) AUROC
-0.840 is the most striking new survivor.
+— Opus 4.7 10/60 PASS where Sonnet 4.6 = 0/60. IPF Run #1
+(lung fibrosis, $58, 32 min): Skeptic caught two Advocate fabrications
+about prior trial design. Same engine, 6 disease contexts: kidney
+cancer, colon, brain glioma, liver, pediatric glioma, lung fibrosis.
 ```
 
 ---

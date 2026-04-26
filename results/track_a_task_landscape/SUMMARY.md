@@ -272,16 +272,18 @@ Three new datasets built and falsification-tested. Sweep completed (16 CPUs × 5
 
 | Cancer | Task | Panel | n | Best survivor law | Best AUROC | Δbase | Survivors | Notes |
 |---|---|---|---|---|---|---|---|---|
-| PAAD | OS ≤15mo vs >15mo | 19-gene | 183 | — | — | −0.293 | **0/27** ❌ | KRT17 ceiling 0.629; gate correctly rejects |
+| PAAD | OS ≤15mo vs >15mo | 19-gene | 183 | `sqrt((7.41/KRT17)/(CDH2×((1.41/CDKN2A+CD8A)/FOXP3)))` | 0.707 | +0.078 | **8/27** ✅ | Basal/EMT burden with immune context |
 | LIHC | MVI Micro vs None | 19-gene | 144 | `(TOP2A/CDH2/SOX9)/sqrt(SNAI1)` | 0.702 | +0.076 | **6/29** ✅ | Proliferation÷EMT ratio axis |
 | IPF | CEP (death/FVC>10%) | 17-gene | 57 | `SPP1×(CXCL12−PDGFRA)/MUC5B` | 0.757 | +0.096 | **6/25** ✅ | Fibrosis amplification axis; MUC5B GWAS-consistent |
 | DIPG | H3K27M vs WT | — | — | — | — | — | **NOT RUN** | Data acquisition failed (OpenPedCan S3 404) |
 
 **Pre-reg predictions all fail** — PySR finds richer compound families than the pre-specified
-gene pairs. LIHC and IPF produce 6 survivors each, all biologically interpretable.
+gene pairs. PAAD, LIHC, and IPF all produce biologically interpretable survivor families.
 
-**PAAD** is the designed negative for this expansion set — gate correctly detects KRT17
-single-gene ceiling and refuses compound credit. Consistent with the ccRCC CA9 pattern.
+**PAAD survivors**: KRT17/CDH2-denominator family with FOXP3, CD8A, CDKN2A, and
+cell-cycle context. The earlier interim `0/27` readout was invalid because `os_months`
+leaked into inferred numeric baseline features; corrected explicit-gene falsification is
+8/27 with KRT17 single-gene ceiling 0.629.
 
 **LIHC MVI survivors**: `TOP2A/CDH2/SOX9/sqrt(SNAI1)` — proliferation (TOP2A) relative
 to mesenchymal (CDH2) and EMT-driver (SNAI1) context, with stemness marker (SOX9). All 6
