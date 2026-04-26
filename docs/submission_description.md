@@ -142,13 +142,14 @@ section evidences. Full artefact table at
   every GitHub `pull_request` / `release` event — without any human
   deciding to run it. This is what makes the falsification discipline
   permanent rather than occasional.
-  Live evidence: **PhL-8c** — `lacuna-scientific-oracle` routine
-  receives `"equation: CDK1 - EPAS1"` via API trigger, autonomously
-  runs `make venv + make audit + falsification_sweep.py` (1000
-  perm/bootstrap/decoys, n=505 TCGA-KIRC), emits structured
-  `gate: PASS, perm_p=0.0, ci_lower=0.664, Δbase=+0.062` — no human
-  action after the fire call. Session URL:
-  `claude.ai/code/session_015ot5hkJgSiBoWNA51fjZ1k`. Local
+  Live evidence: **PhL-8d** (dual verdict, metastasis) — oracle fires
+  two equations: Eq1 `CA9−AGXT` FAIL (delta_baseline=0.015, gate
+  refuses textbook HIF law) + Eq2 `CDK1−EPAS1` PASS (ci_lower=0.662,
+  Δbase=+0.062) in one session. **PhL-10** (stage oracle, new
+  Routine per disease) — `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS
+  (AUROC 0.696, Δbase=+0.051, n=512). Same gate, same thresholds,
+  different task. Session URLs: `claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ`
+  (PhL-8d) · `claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t` (PhL-10). Local
   watch-dir / cadence loop runs when no token is configured, so the
   falsification watchdog ships regardless of whether the Routines
   research preview is available to the reviewer's account.
@@ -182,21 +183,22 @@ At the 2026-04-22 *Built with Opus 4.7* live session, Tharik (Cloud Code team) n
   (public-beta-compliant sequential 3-session chain — PhL-9
   architecture smoke, PhL-9v2 on real TCGA-KIRC CSV mounted via
   `files.upload()` + `resources=[{"type":"file",...}]`), Path C
-  (Claude Code Routine `/fire` HTTP 200 live — PhL-8). Research-
-  preview `callable_agents` retained as architectural reference code
-  only, per 2026-04-23 hackathon fairness ruling.
+  (Claude Code Routine `/fire` HTTP 200 live — PhL-8d dual verdict +
+  PhL-10 stage oracle). Research-preview `callable_agents` retained
+  as architectural reference code only, per 2026-04-23 hackathon
+  fairness ruling.
   **Concrete substrate-level numbers** (full table in
   [`managed_agents_evidence_card.md`](managed_agents_evidence_card.md)):
-  16 server-side sessions, 1 environment shared across 3 sequential
+  17 server-side sessions, 1 environment shared across 3 sequential
   Path-A runs, 8 memory-store lessons accumulated across cancer
   types (KIRC → LUAD → PRAD ceiling-effect rule generalization),
-  1 live Routine session URL (`claude.ai/code/session_01NyS541…`)
-  inspectable in a browser, 706 s longest end-to-end Path-A chain
-  (PhL-9), 300 s real-data replication (PhL-9v2). Every session /
-  agent / environment / file / memory id is server-side-retained
-  and dereferenceable via the workspace's API key — *"something
-  you'd actually ship"* at the substrate level, not the slideware
-  level.
+  **2 live Routine session URLs** (PhL-8d `session_01CgsJYAP…` +
+  PhL-10 `session_01XGse8X…`) inspectable in a browser, 706 s
+  longest end-to-end Path-A chain (PhL-9), 300 s real-data
+  replication (PhL-9v2). Every session / agent / environment /
+  file / memory id is server-side-retained and dereferenceable
+  via the workspace's API key — *"something you'd actually ship"*
+  at the substrate level, not the slideware level.
 
 ## What We Built
 

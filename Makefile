@@ -99,7 +99,7 @@ test:
 # Runs critical module imports, a tiny deterministic gate sanity check,
 # the compliance audit, and artefact-presence checks. Intended as the
 # fast "does this repo work?" question a reviewer asks before looking at
-# anything else. For the full 118-test suite use `make test`; for the
+# anything else. For the full local-runnable suite use `make test`; for the
 # tamper-evidence chain use `make prereg-audit`; for the one-command
 # reproduction use `make all`.
 smoke:

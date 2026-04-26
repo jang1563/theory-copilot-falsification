@@ -171,7 +171,7 @@ Triggered by `rg` in P0.1:
 | `5-session` (Path A) | PhL-9 = 3 sessions, not 5 | `sequential 3-session chain` |
 | `one flag-flip away` (Path A) | PhL-9 is LIVE | `live sequential Path A` |
 | `smaller models collapse to rubber-stamp` | strong form falsified by ablation | `Sonnet 4.6 dissents on 100% of gate-PASS candidates (0/60 PASS) while Opus 4.7 draws the gate's line (10/60 PASS)` |
-| `47/47` / `90/90` / `105/105` tests | current package-time suite is 118/118 | `118/118 local tests` |
+| `47/47` / `90/90` / `105/105` / `118/118` tests | current `make test` target collects 101 local-runnable tests | `101/101 local tests` |
 | `ci_width` as gate metric | replaced by `ci_lower > 0.6` | `ci_lower` |
 | `open-source data` | publicly available but not always open-source licensed | `public/no-login data` or `publicly accessible data` |
 | `diagnostic tool` | research-use only | `research-use-only compact law` |

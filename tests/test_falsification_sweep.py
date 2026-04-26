@@ -12,6 +12,9 @@ import pandas as pd
 import pytest
 
 PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
+
+from falsification_sweep import _infer_gene_columns
 
 
 @pytest.fixture
@@ -118,6 +121,18 @@ def test_falsification_sweep_no_covariates(tmp_workspace):
     for entry in report:
         assert "passes" in entry
         assert entry["delta_confound"] is None
+
+
+def test_falsification_sweep_infers_genes_without_metadata(tmp_workspace):
+    data_path, _, _ = tmp_workspace
+    df = pd.read_csv(data_path)
+
+    assert _infer_gene_columns(df, covariate_cols=[]) == [
+        "gene_0",
+        "gene_1",
+        "gene_2",
+        "gene_3",
+    ]
 
 
 def test_falsification_sweep_summary_line(tmp_workspace):

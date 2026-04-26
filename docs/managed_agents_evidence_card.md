@@ -80,6 +80,7 @@ together they make human inspection (`make audit`, `make smoke`,
 | **Path C — Schedule trigger (PhL-8b)** | Same routine binding fired autonomously by Schedule trigger — no client action at fire time; laptop closed; session created server-side 2026-04-26T00:39Z (19-min stagger). Session failed at first turn (workspace extra-usage quota); mechanism layer evidenced, output deferred. | `trig_id: trig_01CjZ8f…`; fire confirmed in routine Runs page: "today at 8:39 PM SCHEDULED Failed" | [`results/live_evidence/phl8b_routine_schedule/SUMMARY.md`](../results/live_evidence/phl8b_routine_schedule/SUMMARY.md) |
 | **Path C — Scientific Oracle (PhL-8c)** | Upgraded routine `lacuna-scientific-oracle` receives equation via API trigger text, autonomously runs `make venv` + `make audit` + `falsification_sweep.py` (1000 perm + 1000 bootstrap + 100 decoys, n=505), emits structured PASS/FAIL verdict. **First autonomous scientific falsification by a Claude Code Routine.** | `gate: PASS`, `perm_p=0.0`, `ci_lower=0.664`, `delta_baseline=+0.062`, `decoy_p=0.0` on `CDK1 − EPAS1` | [`results/live_evidence/phl8c_scientific_oracle/SUMMARY.md`](../results/live_evidence/phl8c_scientific_oracle/SUMMARY.md) |
 | **Path C — Dual Verdict Oracle (PhL-8d)** | Same oracle fires with **two equations** in one trigger: Eq1 (`CA9 − AGXT` on tumor_vs_normal, FAIL) + Eq2 (`CDK1 − EPAS1` on metastasis_expanded, PASS). One session URL = full Lacuna narrative: pre-registered gate rejects AND accepts, same thresholds, same autonomous run. | Eq1: **FAIL**, delta_baseline=0.0145 < 0.05 (CA9 alone AUROC 0.965); Eq2: **PASS**, delta_baseline=0.0622, ci_lower=0.662, perm_p=0.0 | [`results/live_evidence/phl8d_dual_verdict/SUMMARY.md`](../results/live_evidence/phl8d_dual_verdict/SUMMARY.md) |
+| **Path C — Stage Oracle (PhL-10 oracle)** | **Second autonomous Routine session.** New Routine per disease (provenance principle — existing Instructions are the PhL-8d audit record). New task: Stage I-II vs III-IV, n=512. Eq1 `CCNB1/PGK1` FAIL (delta_baseline=0.007, <0.05) + Eq2 `CXCR4/EPAS1` PASS (AUROC 0.696, ci_lower=0.649, Δbase=+0.051). | `session_01XGse8XYFtv3C1aKLZeMH9t` · FAIL + PASS · same gate · same Skills · different Routine | [`results/live_evidence/phl10_stage_oracle/SUMMARY.md`](../results/live_evidence/phl10_stage_oracle/SUMMARY.md) |
 | **Event log persist + replay (PhL-4)** | `sessions.events.list` paged to JSONL; `replay_session_from_log` re-injects user-origin events into a fresh session | `session1_events.jsonl` + verbatim quote of replayed user.message by fresh Session 2 | [`results/live_evidence/phl4_persist_replay/SUMMARY.md`](../results/live_evidence/phl4_persist_replay/SUMMARY.md) |
 | **Memory store (PhL-3)** | Memory public-beta integrated same day (2026-04-23). Skeptic writes rejection lessons; fresh sessions read + quote verbatim. | 2 sessions, 2 lessons, server-side verified via raw `/v1/memory_stores/*` | [`results/live_evidence/phl3_memory_smoke/SUMMARY.md`](../results/live_evidence/phl3_memory_smoke/SUMMARY.md) |
 | **Compound orchestrator (PhL-7)** | Single Managed Agents session composes MCP biology validator + Memory load/write + 5-test gate rubric with cross-substrate reasoning | Agent read prior ceiling-effect lesson, correctly distinguished current metastasis task, appended refined lesson | [`results/live_evidence/phl7_compound_orchestrator/SUMMARY.md`](../results/live_evidence/phl7_compound_orchestrator/SUMMARY.md) |
@@ -92,12 +93,17 @@ together they make human inspection (`make audit`, `make smoke`,
 1. This card.
 2. PhL-9v2 SUMMARY — Path A on real TCGA-KIRC, Skeptic quotes real
    delta_baseline numbers.
-3. PhL-8c SUMMARY — Open the clickable `session_015ot5hkJgSiBoWNA51fjZ1k`
-   URL in a browser. Watch the oracle autonomously run the 5-test gate and
-   emit a structured PASS verdict on `CDK1 − EPAS1`. PhL-8 (earlier) is the
-   fire-mechanism proof; PhL-8c is the scientific oracle doing actual work.
-   PhL-8d (PENDING): same session shape, two equations — reject + accept.
-4. PhL-10 + PhL-12 combined — Memory chain across 8 lessons with
+3. **PhL-8d** — Open `session_01CgsJYAPdvhJJwTuBt7QZLZ` in a browser.
+   Watch the oracle autonomously run the 5-test gate on TWO equations:
+   Eq1 `CA9−AGXT` FAIL (gate refuses textbook HIF law) + Eq2
+   `CDK1−EPAS1` PASS — the full Lacuna narrative in one session.
+   PhL-8c (`session_015ot5hkJgSiBoWNA51fjZ1k`) remains as prior
+   step: single-equation PASS, simpler to follow.
+4. **PhL-10 stage oracle** — `session_01XGse8XYFtv3C1aKLZeMH9t`.
+   Second autonomous Routine session, new task (Stage I-II vs III-IV),
+   new Routine (provenance principle — editing existing Instructions
+   breaks audit chain). CCNB1/PGK1 FAIL + CXCR4/EPAS1 PASS.
+5. PhL-10 + PhL-12 combined — Memory chain across 8 lessons with
    cross-cancer rule transfer.
 5. (Optional) PhL-7 compound orchestrator — the single strongest
    "multi-product composition in one session" artefact.
@@ -117,17 +123,19 @@ turns "we used agents" into measured observability.
 | **PhL-8** | 2026-04-23 ~23:10 | 1 Routine `/fire` (API trigger) | `session_01NyS541…` | HTTP 200 + clickable `claude.ai/code/session_01NyS541H3qZfJgqFVgWDcoM` | fire + fork, no wait | 200 OK |
 | **PhL-8b** | 2026-04-26 00:39 Z | 1 Routine Schedule trigger (autonomous) | NOT_RECORDED (failed at turn 1) | Schedule trigger fired server-side with no client action; session created; blocked by workspace extra-usage quota before any tool call. Mechanism layer evidenced. | n/a (quota-blocked) | PARTIAL (mechanism ✓ / output ✗) |
 | **PhL-8c** | 2026-04-26 15:05 Z | 1 Routine API trigger (scientific oracle) | `session_015ot5hkJgSiBoWNA51fjZ1k` | make venv + make audit + falsification_sweep.py (1000/1000/100, n=505) → GATE VERDICT block | ~4 min | **PASS — CDK1−EPAS1: perm_p=0.0, ci_lower=0.664, Δbase=+0.062** |
-| **PhL-8d** | 2026-04-26 | 1 Routine API trigger (dual verdict oracle) | `session_01CgsJYAPdvhJJwTuBt7QZLZ` | 2 equations in 1 trigger: Eq1 CA9−AGXT (FAIL, delta_baseline=0.0145) + Eq2 CDK1−EPAS1 (PASS, delta_baseline=0.0622); same gate, same thresholds | ~8 min | **FAIL + PASS** — methodology proof in one session |
+| **PhL-8d** | 2026-04-26 16:21 Z | 1 Routine API trigger (dual verdict oracle) | `session_01CgsJYAPdvhJJwTuBt7QZLZ` | 2 equations in 1 trigger: Eq1 CA9−AGXT (FAIL, delta_baseline=0.0145) + Eq2 CDK1−EPAS1 (PASS, delta_baseline=0.0622); same gate, same thresholds | ~8 min | **FAIL + PASS** — methodology proof in one session |
 | **PhL-9** | 2026-04-24 02:20 Z | 3 sessions (sequential Path A) | `sesn_…CaMnnL4…` last | sequential_fallback mode · structured-JSON handoff | **706.1 s** | OK |
 | **PhL-9v2** | 2026-04-24 04:32 Z | 3 sessions (sequential Path A on real TCGA-KIRC) | `sesn_…CaMxrYQ…` proposer, `CaMy52X` searcher, `CaMyCzw` skeptic | 1 environment · 3 agents · 2 `files.upload()` mounts (`file_…CaMxrPd…` CSV, `file_…CaMxrSN…` law_proposals.json) | **300.4 s** | OK — Skeptic quoted `delta_baseline=+0.0587` on real data |
-| **PhL-10** | 2026-04-24 02:17 Z | 2 sessions (sessions 4-5 extending PhL-3 chain) | `agent_…CaMLDBC…` | Memory chain **3 → 5 lessons** server-side verified | n/a | PASS |
+| **PhL-10 (mem)** | 2026-04-24 02:17 Z | 2 sessions (sessions 4-5 extending PhL-3 chain) | `agent_…CaMLDBC…` | Memory chain **3 → 5 lessons** server-side verified | n/a | PASS |
+| **PhL-10 (oracle)** | 2026-04-26 (stage oracle) | 1 Routine API trigger (stage oracle, new Routine) | `session_01XGse8XYFtv3C1aKLZeMH9t` | 2 equations: CCNB1/PGK1 (FAIL, delta_baseline=0.007) + CXCR4/EPAS1 (PASS, AUROC 0.696, ci_lower=0.649, Δbase=+0.051); n=512 Stage I-II vs III-IV | ~6 min | **FAIL + PASS** — second live oracle session |
 | **PhL-12** | 2026-04-24 04:36 Z | 3 sessions (sessions 6-8 deepening PhL-10 chain) | same `store_id` | Memory chain **5 → 8 lessons** server-side verified | n/a | PASS |
 
-**Cumulative across the Managed Agents evidence set:** 16 sessions
+**Cumulative across the Managed Agents evidence set:** 17 sessions
 observed, 1 memory_store shared across 5 artefacts (PhL-3 → PhL-7 →
-PhL-10 → PhL-12), 1 environment shared across 3 Path-A sequential runs
-(PhL-9 + PhL-9v2), 1 Routine `/fire` server-side session still
-inspectable via browser, 2 public TCGA-KIRC files uploaded into an MA
+PhL-10 mem → PhL-12), 1 environment shared across 3 Path-A sequential
+runs (PhL-9 + PhL-9v2), **2 Routine `/fire` sessions** inspectable
+via browser (PhL-8d `session_01CgsJYAP…` + PhL-10 oracle
+`session_01XGse8X…`), 2 public TCGA-KIRC files uploaded into an MA
 environment and re-read across three sequential sessions. The longest
 single Path-A chain is **706 s** end-to-end (PhL-9); the real-data
 replication is **300 s** (PhL-9v2, smaller cohort, sharper prompts).

@@ -42,7 +42,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 | Axis | Weight | Entry point |
 |---|---|---|
 | **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS (calibrated) · Haiku 14/60 (over-accepts) · Sonnet 0/60 (collapses) |
-| **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58 · 32 min) · **6 cancer types** (ccRCC · COAD · LGG · LIHC · DIPG · IPF) · platform generalization: [COAD 15/22](results/track_a_task_landscape/coad_msi/) · [LGG 2/25 AUROC 0.840](results/track_a_task_landscape/gbm_idh/) · [LIHC 0/26 negative](results/track_a_task_landscape/lihc/) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
+| **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58 · 32 min) · **6 disease contexts** (ccRCC · COAD · LGG · LIHC · DIPG · IPF) · platform generalization: [COAD 15/22](results/track_a_task_landscape/coad_msi/) · [LGG 2/25 AUROC 0.840](results/track_a_task_landscape/gbm_idh/) · [LIHC 0/26 negative](results/track_a_task_landscape/lihc/) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
 | **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min after install) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
 | **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
 
@@ -57,7 +57,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A (sequential 3-session chain) · Path B (single agent, `agent_toolset_20260401`) · Path C (Routines `/fire` HTTP client)
 - [`results/live_evidence/04_managed_agents_e2e.log`](results/live_evidence/04_managed_agents_e2e.log) — live agent/environment/session/stream trace
 - Two Skills: [`falsification-gate`](.claude/skills/falsification-gate/SKILL.md) (gate a candidate) + [`pre-register-claim`](.claude/skills/pre-register-claim/SKILL.md) (lock kill-tests before fit); compose in sequence
-- **Path C live runs:** PhL-8c ([`session_015ot5hkJgSiBoWNA51fjZ1k`](https://claude.ai/code/session_015ot5hkJgSiBoWNA51fjZ1k)) — oracle ran `make venv + make audit + falsification_sweep.py`, emitted `gate: PASS, perm_p=0.0, ci_lower=0.664, Δbase=+0.062` on `CDK1 − EPAS1`, no human action post-fire · PhL-8d (pending): dual-verdict, FAIL + PASS in one session
+- **Path C live runs:** PhL-8d ([`session_01CgsJYAPdvhJJwTuBt7QZLZ`](https://claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ)) — dual-verdict oracle, FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS) · PhL-10 stage oracle ([`session_01XGse8XYFtv3C1aKLZeMH9t`](https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t)) — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051) · PhL-8c ([`session_015ot5hkJgSiBoWNA51fjZ1k`](https://claude.ai/code/session_015ot5hkJgSiBoWNA51fjZ1k)): single-equation PASS
 - Brain/body decoupling: `lacuna persist-events` → `replay-events` — session event log survives harness crashes; re-injects client-originated events into a fresh session
 - [`docs/managed_agents_evidence_card.md`](docs/managed_agents_evidence_card.md) — 20 PhL experiments with per-session event counts, wall-clock times, and cost; cross-reference table for all 3 paths
 - **Context isolation in practice:** IPF Run #1 [`results/external_validation_ipf/`](results/external_validation_ipf/) — Skeptic (separate context, never sees Advocate tokens) caught 2 fabricated trial-design claims. $58.28 · 32 min.
@@ -67,10 +67,10 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - `make venv && make smoke` — smoke passes in ~1 min after install, no API key needed
 - [`src/README.md`](src/README.md) — map of all 60+ `src/` scripts organized by track
 - [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) — one-click Codespaces
-- `make test` — 118 local-runnable tests (no API key); `make audit` — compliance grep, passes on every commit
+- `make test` — 115+ local-runnable tests (no API key); `make audit` — compliance grep, passes on every commit
 
 **Real-world impact (Ado, Jason)**
-- **6 cancer types** with the same gate and thresholds: ccRCC (flagship) · COAD ([`coad_msi/`](results/track_a_task_landscape/coad_msi/)) · LGG ([`gbm_idh/`](results/track_a_task_landscape/gbm_idh/)) · LIHC ([`lihc/`](results/track_a_task_landscape/lihc/)) · DIPG ([`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF ([`results/external_validation_ipf/`](results/external_validation_ipf/))
+- **6 disease contexts** under the same falsification-first discipline: ccRCC / COAD / LGG / LIHC use the 5-test expression gate; DIPG and IPF use the same role-separated Advocate/Skeptic review engine. Entry points: ccRCC (flagship) · COAD ([`coad_msi/`](results/track_a_task_landscape/coad_msi/)) · LGG ([`gbm_idh/`](results/track_a_task_landscape/gbm_idh/)) · LIHC ([`lihc/`](results/track_a_task_landscape/lihc/)) · DIPG ([`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF ([`results/external_validation_ipf/`](results/external_validation_ipf/))
 - Plug-in workflow: drop any disease CSV → `lacuna compare --dataset-card <card>.json` → pass/fail table in ~30 min; see [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md)
 - IPF Run #1: Skeptic caught 2 fabricated claims about prior trial design (RAINIER, Raghu 2017). $58.28 · 32 min. See [`results/external_validation_ipf/`](results/external_validation_ipf/)
 
@@ -275,16 +275,20 @@ One API fire call → one autonomous session → the full falsification story:
 
 | Run | Equation | Task | Gate | Decisive metric |
 |---|---|---|---|---|
-| PhL-8c (live) | `CDK1 − EPAS1` | metastasis M0 vs M1 | ✅ **PASS** | delta_baseline = +0.062 (> 0.05 threshold) |
 | PhL-8d Eq1 | `CA9 − AGXT` | tumor vs normal | ❌ **FAIL** | delta_baseline = +0.0145 (< 0.05; CA9 alone AUROC 0.9646) |
 | PhL-8d Eq2 | `CDK1 − EPAS1` | metastasis M0 vs M1 | ✅ **PASS** | delta_baseline = +0.0622, ci_lower = 0.662, perm_p = 0.0 |
+| PhL-10 Eq1 | `CCNB1 / PGK1` | stage I-II vs III-IV | ❌ **FAIL** | delta_baseline = +0.007 (< 0.05) |
+| PhL-10 Eq2 | `CXCR4 / EPAS1` | stage I-II vs III-IV | ✅ **PASS** | AUROC 0.696, ci_lower = 0.649, delta_baseline = +0.051 |
 
 PhL-8d fires both equations in **one trigger text**, one session, ~6 min.
+PhL-10 is a **second Routine** (new Routine per disease/task — existing Instructions
+are the provenance record for PhL-8d; editing them breaks the audit chain).
 The Routine clones the repo, runs `make venv && make audit`, then runs
 `falsification_sweep.py` independently on each task/dataset pair, and emits
 structured verdict blocks + a dual summary — no human action after the fire call.
 
-Live session (PhL-8c): [`session_015ot5hkJgSiBoWNA51fjZ1k`](https://claude.ai/code/session_015ot5hkJgSiBoWNA51fjZ1k)
+Live session PhL-8d: [`session_01CgsJYAPdvhJJwTuBt7QZLZ`](https://claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ)
+Live session PhL-10: [`session_01XGse8XYFtv3C1aKLZeMH9t`](https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t)
 Fire script: [`src/phl8d_dual_verdict_fire.py`](src/phl8d_dual_verdict_fire.py)
 
 a replication-watchdog driver that re-runs the Managed Agent on a cadence or
