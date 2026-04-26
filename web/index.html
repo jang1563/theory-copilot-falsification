@@ -327,6 +327,47 @@ tr:last-child td { border-bottom: none; }
   font-family: var(--f-mono); font-size: 18px; color: #fff;
   cursor: pointer; border: none; background: none;
 }
+
+@media (max-width: 760px) {
+  html, body { overflow-x: hidden; }
+  .rail {
+    position: relative; width: 100%; height: auto;
+    padding: 18px 18px 14px;
+    border-right: none; border-bottom: 1px solid var(--grid);
+    overflow: visible;
+  }
+  .rail__logo { margin-bottom: 8px; }
+  .rail__logo img { width: 26px; height: 26px; }
+  .rail__tagline { line-height: 1.4; }
+  .rail__tagline br { display: block; }
+  .rail ol, .rail__meta { display: none; }
+
+  .content {
+    margin-left: 0; max-width: none;
+    padding: 30px 18px 88px;
+  }
+  .section { margin-bottom: 72px; }
+  .hero-rule {
+    font-size: 34px; line-height: 1.15;
+    letter-spacing: 0; max-width: 100%;
+  }
+  .hero-rule code { font-size: 0.82em; }
+  .hero-sub { font-size: var(--t-base); margin-bottom: 28px; }
+  .metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 32px; }
+  .metric { padding: 16px 14px; border-right: none; border-bottom: 1px solid var(--grid); }
+  .metric:nth-child(odd) { border-right: 1px solid var(--grid); }
+  .metric:nth-last-child(-n+2) { border-bottom: none; }
+  .metric__num { font-size: 24px; letter-spacing: 0; }
+  .callout { padding: 14px 16px; }
+  .eq-box { padding: 22px 18px; }
+  .eq-box__law { font-size: 22px; letter-spacing: 0; }
+  .stat-grid, .slide-grid { grid-template-columns: 1fr; }
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+  th, td { padding: 9px 11px; }
+  .link-item { align-items: flex-start; gap: 12px; padding: 13px 14px; }
+  .link-item__arrow { display: none; }
+  .demo-mark { display: none; }
+}
 </style>
 </head>
 <body>
