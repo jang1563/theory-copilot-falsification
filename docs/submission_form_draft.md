@@ -69,7 +69,9 @@ AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws,
 
 The official rules require **one written description / summary
 (100–200 words)**. Use this version if the live form has only a
-single summary box. (Word count: 184; cap 200.)
+single summary box. (Word count: ~185 space-split; cap 200. Technical
+notation like `n=505` counts as 1 word in form counters, so the
+space-split total is the authoritative count.)
 **4-beat structure (what / problem / how-built / how-Claude) — Stage 3-5 restructure 2026-04-25.**
 
 ```
@@ -89,15 +91,14 @@ on TCGA-KIRC (n=505). The simplest survivor — TOP2A − EPAS1 — is
 the published ccA/ccB ccRCC subtype axis, rediscovered by symbolic
 regression unprompted, then replicated on IMmotion150 (HR=1.36,
 p=0.0003) under a separately pre-registered survival gate. Our own
-LLM-SR 3-gene extension? Killed by that same gate. Same engine on
-pediatric brainstem cancer (DIPG): 7/15 hypotheses supported.
+LLM-SR 3-gene extension? Killed by that same gate.
 
 Opus 4.7 (adaptive thinking, isolated Managed Agents sessions)
 holds the Skeptic stance without collapse — 10/60 PASS where
 Sonnet 4.6 = 0/60. IPF Run #1 ($58, 32 min): Skeptic caught two
 Advocate fabrications about prior trial design — context isolation
 working at runtime. Pre-registrations are git-tracked YAMLs; 3
-diseases evaluated.
+diseases (KIRC, DIPG, IPF) evaluated.
 ```
 
 ---
@@ -140,14 +141,12 @@ the specific metric pattern (`perm_p=0.049` is weaker than `0.001`;
 (4) Interpreter writes the mechanism hypothesis and the "what this is
 not" paragraph. **180-call cross-model ablation: Sonnet 4.6 = 0/60
 PASS on gate-PASS candidates (full dissent collapse); Opus 4.7 =
-10/60 — RLHF calibration gap, not thinking-mode**. **PhL-13: Opus 4.7
-zero-shot retrieval of TOP2A−EPAS1 = 0/10 (rebuts LLM-SRBench
-memorization concern).** **IPF Run #1 (2026-04-25): Skeptic caught
+10/60 — RLHF calibration gap, not thinking-mode**. **PhL-13: 0/10 zero-shot retrieval of TOP2A−EPAS1 — rebuts
+memorization concern.** **IPF Run #1 (2026-04-25): Skeptic caught
 two Advocate fabrications about prior trial design — RAINIER + Raghu
 2017 prespecified stratifiers Advocate claimed "never tested". Context
-isolation working at runtime.** **1M-context failure synthesis + PhL-17
-210-turn adversarial ablation — Most Creative + Keep Thinking secondary
-prize candidates.**
+isolation working at runtime.** **1M-context synthesis + PhL-17 adversarial ablation — Most Creative
++ Keep Thinking secondary prize candidates.**
 
 ---
 
