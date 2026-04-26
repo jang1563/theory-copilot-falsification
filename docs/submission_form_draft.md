@@ -2,24 +2,34 @@
 
 ## ⚡ Final submission checklist (fill at form open time)
 
-- [ ] Paste final Loom URL into the submission form's "Demo video" field; README currently links the interactive demo companion and story.
+- [ ] Paste final Loom / YouTube / Google Drive URL into the submission form's "Demo video" field; hard cap is **3:00**, and shorter is allowed.
 - [ ] Select problem statement: **"Build From What You Know"**
 - [ ] Select prize category (if field exists): **"Best Use of Claude Managed Agents"**
 - [ ] Copy unified 200-word summary below into the description field
-- [ ] Verify repo is public: `https://github.com/jang1563/lacuna-falsification`
-- [ ] Submit before 20:00 ET
+- [ ] Verify repo is public for review: `https://github.com/jang1563/lacuna-falsification` (can be made private after the event)
+- [ ] Verify click-through demo does not require judges to enter their own Anthropic API key
+- [ ] If the video uses free/stock assets, mention the source/license in README when linking the video; avoid unlicensed copyrighted assets/fonts
+- [ ] Submit before **2026-04-26 20:00 ET**
 
 ---
 
 **Verified 2026-04-24** against the official Cerebral Valley × Anthropic
 [Built with Opus 4.7 participant resources page](https://cerebralvalley.ai/e/built-with-4-7-hackathon/details).
+**Updated 2026-04-26 from Discord announcements / mod answers.**
 Per official rules, the actual submission requires **only three items**:
 
 | Required item | Cap |
 |---|---|
-| Demo video link (YouTube / Loom / similar) | **3 minute maximum** |
-| GitHub repository or code link | URL |
+| Demo video link (YouTube / Loom / Google Drive) | **3 minute maximum; shorter is fine** |
+| Public GitHub repository | URL; public for review, may be private after event |
 | Written description / summary | **100–200 words** |
+
+Latest Discord clarifications:
+- Submissions are due **2026-04-26 20:00 ET**.
+- Demo video should show what was built and must not exceed 3 minutes.
+- Judges should not need to enter their own Anthropic API key to test a click-through demo; set up a capped/limited demo environment if needed.
+- Non-copyrighted / properly licensed stock or free assets are fine in the demo video. If the README includes the video link, mention the asset source/license there.
+- Commercial fonts/assets should only be used when licensed / permitted; do not include copyrighted content without rights.
 
 The actual submission form may include additional sub-fields (e.g.
 prize-category select, problem-statement select, project name, team
@@ -47,7 +57,8 @@ about confirmation bias in AI-for-Science → a verification harness
 that any researcher can re-run on any disease CSV in 30 minutes.
 
 **Judging criteria mapping** (Stage 1 async, 4/26-27, weights from
-official rules):
+Discord update; Top 6 advance to final panel review on **2026-04-28
+12:00 ET**):
 
 | Criterion | Weight | Our load-bearing evidence |
 |---|---|---|
@@ -202,15 +213,22 @@ Verification as working code.
 https://github.com/jang1563/lacuna-falsification
 ```
 
-Repo has been public since 2026-04-23 19:32 ET.
+Repo has been public since 2026-04-23 19:32 ET. Per Discord update,
+public GitHub is required for review, but the repo may be made private
+after the event.
 
 ---
 
 ## Demo video
 
 ```
-[to be pasted on 4/26 morning after Loom render]
+Paste the final Loom / YouTube / Google Drive URL into the external submission form.
+README links the interactive demo companion and discovery story for reviewers who click through from GitHub.
 ```
+
+Discord constraints: upload to Loom, YouTube, or Google Drive; show
+what was built; keep the video at or under **3:00**. A 1:37 video is
+fine per mod answer as long as it does not exceed 3 minutes.
 
 Canonical narration: `docs/loom_narration_final_90s.md` (333 words,
 ~143 s at 140 WPM / ~167 s at 120 WPM, **eight segments** incl. DIPG
