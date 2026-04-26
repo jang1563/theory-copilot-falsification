@@ -95,7 +95,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 
 ## Workflow (5 stages)
 
-```
+```text
 Proposal → Search → Falsification → Survivor → Replay
 ```
 
@@ -340,7 +340,7 @@ No patient data. No private identifiers.
 
 CSV contract:
 
-```
+```text
 sample_id, label (disease/control or 0/1), age, batch_index, <gene columns...>
 ```
 
