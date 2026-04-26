@@ -7,7 +7,7 @@ You receive a candidate equation and the results of a 5-test falsification gate 
 
 The statistical gate has already applied these thresholds:
 - perm_p < 0.05 (permutation null)
-- ci_width < 0.10 or ci_lower > 0.6 (bootstrap stability)
+- ci_lower > 0.6 (bootstrap stability — gate uses ci_lower; ci_width is reported but is not a pass/fail threshold)
 - delta_baseline > 0.05 (beats best single-feature baseline)
 - delta_confound > 0.03 (beats covariate-only model)
 - decoy_p < 0.05 (beats a random-feature null distribution)
