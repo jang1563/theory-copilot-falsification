@@ -47,7 +47,7 @@ Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/
 
 ## 📊 Numbers (corrected per review handoff)
 
-- **5-test classification gate (TCGA, 11 task × panel combinations):** 194 / 203 rejected; 9 survivors all on metastasis_expanded with `delta_confound = null` (4 active legs + decoy + BH-FDR for that task).
+- **5-test classification gate (TCGA, 7 task × panel configurations):** 194 / 203 rejected; 9 survivors all on metastasis_expanded with `delta_confound = null` (4 active legs + decoy + BH-FDR for that task).
 - **Flagship survivor:** `TOP2A − EPAS1`, AUROC 0.726 on TCGA-KIRC metastasis (n=505).
 - **IMmotion150 Phase-2 external replay (separately pre-registered 3-test survival gate, n=263):** PASS — log-rank p=0.0003, Cox HR=1.36, C-index=0.601, robust to treatment arm + TMB adjustment.
 - **PhL-1 cross-cohort kill of own H1 extension:** the SLC22A8-augmented form failed the same survival replay (C dropped 0.601 → 0.566).

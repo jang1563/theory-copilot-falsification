@@ -37,7 +37,7 @@ XENA_URL = "https://gdc-hub.s3.us-east-1.amazonaws.com/download/TCGA-BRCA.star_t
 LOCAL_TSV = REPO / ".tmp_geo" / "gdc" / "TCGA-BRCA.star_tpm.tsv.gz"
 OUT_CSV = REPO / "data" / "brca_tumor_normal.csv"
 
-# BRCA-anchored 32-gene panel (Ensembl versionless IDs).
+# BRCA-anchored 31-gene panel (Ensembl versionless IDs).
 TARGET_GENES: dict[str, str] = {
     # Proliferation
     "TOP2A":  "ENSG00000131747",

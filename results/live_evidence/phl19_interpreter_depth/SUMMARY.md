@@ -11,6 +11,12 @@ is each model's biological interpretation?
 
 ## Rubric (blind-rated)
 
+> **Note:** The blind human-rating rubric was not completed for this experiment.
+> All values are 0.0 (unfilled). The reported claims (100% caveat rate, 100%
+> prediction rate, 12 citations for Opus; 0% for Sonnet/Haiku) are based
+> exclusively on the programmatic structural-metrics table below, which is
+> rater-independent and fully reproducible.
+
 | Model | Specificity | Caveat | Testability | Prior art | Trust |
 |---|---|---|---|---|---|
 | opus | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |

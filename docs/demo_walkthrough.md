@@ -10,7 +10,7 @@ laptop; the offline test section at the end runs with no API key.
 - `ANTHROPIC_API_KEY` in the environment for Opus 4.7 stages
 
 ```bash
-cd lacuna_discovery
+cd lacuna-falsification
 pip install -e .
 python -c "import pysr"   # first run: 5–15 min Julia compilation
 export ANTHROPIC_API_KEY=sk-ant-...
