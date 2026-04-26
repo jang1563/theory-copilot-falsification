@@ -170,4 +170,4 @@ No human decision after the API fire call.
 | PhL-8 (2026-04-23) | API | `make audit` only | CI pulse |
 | PhL-8b (2026-04-26T00:39Z) | Schedule | N/A | Mechanism attested (quota gate) |
 | PhL-8c (2026-04-26T15:05Z) | API | CDK1-EPAS1 | PASS |
-| **PhL-8d (pending)** | **API** | **HIF-axis (FAIL) + CDK1-EPAS1 (PASS)** | **FAIL + PASS** |
+| **PhL-8d** | **API** | **HIF-axis (FAIL) + CDK1-EPAS1 (PASS)** | ✅ **FAIL + PASS** |

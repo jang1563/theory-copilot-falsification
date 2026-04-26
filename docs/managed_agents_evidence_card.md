@@ -105,7 +105,7 @@ together they make human inspection (`make audit`, `make smoke`,
    breaks audit chain). CCNB1/PGK1 FAIL + CXCR4/EPAS1 PASS.
 5. PhL-10 + PhL-12 combined — Memory chain across 8 lessons with
    cross-cancer rule transfer.
-5. (Optional) PhL-7 compound orchestrator — the single strongest
+6. (Optional) PhL-7 compound orchestrator — the single strongest
    "multi-product composition in one session" artefact.
 
 ## Observability: per-artefact event + wall-clock table

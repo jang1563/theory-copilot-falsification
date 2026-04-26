@@ -29,9 +29,13 @@
 | **PhL-5** | FAIL as predicted — TCGA-BRCA cross-cancer negative control (ccRCC-specificity confirmed) | `results/.../external_replay/brca_cross_cancer/SUMMARY.md` |
 | **PhL-6** | T-vs-N FAIL (platform saturation); stage 1-2 vs 3-4 PASS AUC 0.714 — 4th cohort + 1st platform shift | `results/.../external_replay/gse53757/SUMMARY.md` |
 | **PhL-7** | PASS — compound orchestrator (MCP + Memory + 5-test gate in ONE Managed Agents session, cross-substrate reasoning) | `results/live_evidence/phl7_compound_orchestrator/SUMMARY.md` |
-| **PhL-8** | 200 OK — Claude Code Routines `/fire` LIVE; clickable session URL committed | `results/live_evidence/phl8_routine_fire/SUMMARY.md` |
+| **PhL-8** | 200 OK — Claude Code Routines `/fire` LIVE; clickable session URL committed (first proof-of-life) | `results/live_evidence/phl8_routine_fire/SUMMARY.md` |
+| **PhL-8b** | PARTIAL — Schedule trigger fired autonomously (no client action, laptop closed); blocked by workspace extra-usage quota at turn 1; mechanism layer evidenced | `results/live_evidence/phl8b_routine_schedule/SUMMARY.md` |
+| **PhL-8c** | PASS — Upgraded `lacuna-scientific-oracle` Routine autonomously runs full falsification_sweep (1000/1000/100, n=505); structured PASS/FAIL verdict; `session_015ot5hkJgSiBoWNA51fjZ1k` | `results/live_evidence/phl8c_scientific_oracle/SUMMARY.md` |
+| **PhL-8d** | **FAIL+PASS** — Dual-verdict oracle: Eq1 `CA9−AGXT` FAIL (delta_baseline=0.0145) + Eq2 `CDK1−EPAS1` PASS (delta_baseline=0.0622, ci_lower=0.662) in one session; methodology proof in one URL; `session_01CgsJYAPdvhJJwTuBt7QZLZ` | `results/live_evidence/phl8d_dual_verdict/SUMMARY.md` |
 | **PhL-9** | OK — Path A sequential 3-session chain live (`delegation_mode=sequential_fallback`, 706 s) | `results/live_evidence/phl9_path_a_chain/SUMMARY.md` |
-| **PhL-10** | PASS — Memory chain extended 3 → 5 lessons; ceiling-effect rule generalizes KIRC→LUAD | `results/live_evidence/phl10_memory_chain_extended/SUMMARY.md` |
+| **PhL-10 (mem)** | PASS — Memory chain extended 3 → 5 lessons; ceiling-effect rule generalizes KIRC→LUAD | `results/live_evidence/phl10_memory_chain_extended/SUMMARY.md` |
+| **PhL-10 (oracle)** | **FAIL+PASS** — Stage oracle (second Routine, new per-disease): `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, ci_lower=0.649, Δbase=+0.051, n=512); `session_01XGse8XYFtv3C1aKLZeMH9t` | `results/live_evidence/phl10_stage_oracle/SUMMARY.md` |
 | **PhL-9v2** | OK — Path A on **real TCGA-KIRC** via `files.upload()` mount; Skeptic quotes `delta_baseline=+0.0587` on LF-PROLIF-minus-HIF2A | `results/live_evidence/phl9v2_path_a_real_data/SUMMARY.md` |
 | **PhL-11** | Mixed — Opus 4.7 vs Sonnet 4.6 3-turn adversarial: Opus literal per-attack rule following (5 vs 1 CRISPR KO); both 100% concede (Petri-2.0 consistent) | `results/live_evidence/phl11_adversarial_critique/SUMMARY.md` |
 | **PhL-12** | PASS — Memory chain deepened 5 → **8** lessons; agent quoted + applied prior meta-rules across 3 edge cases | `results/live_evidence/phl12_memory_chain_deepen/SUMMARY.md` |
@@ -74,7 +78,7 @@ Results: `results/track_a_task_landscape/{stage_expanded,lihc,coad_msi,gbm_idh}/
 
 - **Path B — single agent + `agent_toolset_20260401`** (public beta, live).
 - **Path A — sequential 3-session chain** (public-beta only; the `_run_path_a_callable_agents` branch is reference code per 2026-04-23 hackathon-fairness rule on research-preview Agent Teams).
-- **Path C — Claude Code Routines `/fire` LIVE** (PhL-8 200 OK with clickable session URL).
+- **Path C — Claude Code Routines `/fire` LIVE** (PhL-8 first proof-of-life; **PhL-8d dual-verdict oracle** `session_01CgsJYAPdvhJJwTuBt7QZLZ` + **PhL-10 stage oracle** `session_01XGse8XYFtv3C1aKLZeMH9t` — 2 live browser-inspectable sessions).
 - **Memory primitives** — `persist_session_events` + `replay_session_from_log` shipping as working code (PhL-4) and as a same-day Memory-store integration (PhL-3).
 - **MCP biology validator** — PubMed E-utilities + GDC REST tools, exercisable via MCP and direct CLI.
 - **Pre-registration framework** — 28 YAMLs, tamper-evidence via git commit-SHA binding + `data/SHA256SUMS`.
