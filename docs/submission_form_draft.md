@@ -80,7 +80,7 @@ AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws,
 
 The official rules require **one written description / summary
 (100–200 words)**. Use this version if the live form has only a
-single summary box. (Word count: ~185 space-split; cap 200. Technical
+single summary box. (Word count: ~195 space-split; cap 200. Technical
 notation like `n=505` counts as 1 word in form counters, so the
 space-split total is the authoritative count.)
 **4-beat structure (what / problem / how-built / how-Claude) — Stage 3-5 restructure 2026-04-25.**
@@ -88,25 +88,21 @@ space-split total is the authoritative count.)
 ```
 Lacuna is a pre-registered falsification gate for biological law
 discovery, built with Claude Code and Opus 4.7 Managed Agents. Opus
-plays Proposer (emits compact law families and the kill-test for
-each, before any fit), Skeptic (reviews gate output in an isolated
-session — never the Proposer's reasoning), and Interpreter (explains
-only what survived).
+plays Proposer (emits law families + kill-tests before any fit),
+Skeptic (reviews gate output in an isolated session — never the
+Proposer's reasoning), and Interpreter (explains only survivors).
 
 Existing AI-for-Science pipelines (Sakana AI Scientist, POPPER)
 optimize for hypothesis generation, not rejection. The result:
-automated confirmation bias; a high AUROC on one cohort is nearly
-free when you search enough candidates.
+automated confirmation bias.
 
 A deterministic 5-test Python gate rejected 194 of 203 candidates
-on TCGA kidney cancer (n=505 patients). The simplest survivor —
-TOP2A − EPAS1 — is the published ccA/ccB kidney cancer subtype
-axis, rediscovered by symbolic regression unprompted. This is not
-a new biological discovery: it is a methodology proof. A methodology
-that re-derives known truth under a pre-registered gate it cannot
-rationalize past proves it can find unknown truth by the same
-mechanism. The 3-gene extension? Killed by the same gate on an
-independent clinical trial cohort (IMmotion150, HR=1.36, p=0.0003).
+on TCGA kidney cancer (n=505). The simplest survivor —
+TOP2A − EPAS1 — is the published ccA/ccB subtype axis, rediscovered
+by symbolic regression unprompted. This is not a new biological
+discovery: it is a methodology proof. The survivor then passed a
+separately pre-registered survival gate on IMmotion150 (HR=1.36,
+p=0.0003). Our own 3-gene extension? Killed by the same survival gate.
 
 Claude Code Managed Agents hold the Skeptic stance without collapse
 — Opus 4.7 10/60 PASS where Sonnet 4.6 = 0/60. IPF Run #1 ($58,

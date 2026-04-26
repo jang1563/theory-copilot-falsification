@@ -61,6 +61,28 @@ README do not drift from the committed evidence when written in parallel.
 | PhL-14 LLM-SR 10-iter: post-seed skeleton families tested | **18** (9 Opus + 9 Sonnet) | `results/overhang/llm_sr_10iter/SUMMARY.md` |
 | PhL-14 LLM-SR 10-iter: survivors beyond seed | **0** | same |
 
+## Locked platform generalization numbers (added 2026-04-26)
+
+| Claim | Number | Source |
+|---|---|---|
+| Total evaluations (all tasks + all disease panels) | **304** | 203 (original KIRC) + 101 (platform expansion) |
+| Platform expansion evaluations | **101** | KIRC Stage 28 + COAD 22 + LGG 25 + LIHC 26 |
+| Disease types tested (classification gate) | **6** | ccRCC, COAD, LGG (GBM IDH cohort), LIHC, DIPG, IPF |
+| Cross-disease survivors (platform expansion, excl. original KIRC 9) | **40** | KIRC Stage 23 + COAD 15 + LGG 2 + LIHC 0 |
+| KIRC Stage I-II vs III-IV (45-gene): survivors | **23 / 28** | `results/track_a_task_landscape/stage_expanded/SUMMARY.md` |
+| KIRC Stage top AUROC | **0.689** | same (CXCR4/EPAS1) |
+| COAD Stage I-II vs III-IV (45-gene): survivors | **15 / 22** | `results/track_a_task_landscape/coad_msi/SUMMARY.md` |
+| COAD best AUROC | **0.658** | same |
+| COAD Δ-baseline | **+0.107** | same (highest Δbaseline of any run) |
+| LGG Grade II vs III (45-gene): survivors | **2 / 25** | `results/track_a_task_landscape/gbm_idh/SUMMARY.md` |
+| LGG top survivor AUROC | **0.840** | same (TWIST1×MKI67+VIM − CDH2/NES) |
+| LIHC Tumor vs Normal (45-gene): survivors | **0 / 26** | `results/track_a_task_landscape/lihc/SUMMARY.md` |
+| LIHC designed-negative reason | **ALB saturation ~0.985** | same |
+
+**Arithmetic cross-check:** 28 + 22 + 25 + 26 = 101 ✓ | 203 + 101 = 304 ✓ | 23 + 15 + 2 + 0 = 40 ✓
+
+---
+
 ## Locked gate semantics
 
 - **TCGA classification gate** and **IMmotion150 survival replay gate** are
