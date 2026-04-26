@@ -8,6 +8,9 @@ phobos
 cac\.cornell\.edu
 WCM
 scu@med
+scu-cpu
+scu-gpu
+scu-login
 
 # API-key / token shapes — catches Anthropic keys + OAuth tokens
 # in their actual form (require ≥6 digits OR alphanumerics after the

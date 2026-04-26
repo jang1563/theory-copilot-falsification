@@ -267,8 +267,8 @@ Subdirectories: `stage_expanded/`, `lihc/`, `coad_msi/`, `gbm_idh/` — each wit
 
 ## New disease tracks (2026-04-26 discovery session)
 
-Three new datasets built and falsification-tested. HPC sweep 2812793 (16 CPUs × 500 iter ×
-3 seeds × 16 populations per task, scu-cpu) completed. Results below are final.
+Three new datasets built and falsification-tested. Sweep completed (16 CPUs × 500 iter ×
+3 seeds × 16 populations per task). Results below are final.
 
 | Cancer | Task | Panel | n | Best survivor law | Best AUROC | Δbase | Survivors | Notes |
 |---|---|---|---|---|---|---|---|---|
