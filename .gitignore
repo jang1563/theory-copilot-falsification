@@ -59,6 +59,9 @@ results/live_evidence/phl4_persist_replay/phl4_state.json
 *.DS_Store
 HANDOFF_to_*.md
 
+# Playwright CLI session snapshots (local browser test artifacts)
+.playwright-cli/
+
 # IPF research notes (local-only — contain HPC infrastructure references)
 research/IPF_*.md
 research/ipf_*.md
@@ -67,6 +70,7 @@ research/SESSION_HANDOFF_ipf*.md
 # Internal session-coordination and authoring docs (not judge-facing)
 SESSION_COORDINATION.md
 docs/loom_*.md
+!docs/loom_script.md
 docs/loom_recording_guide.md
 docs/narrative_candidates_*.md
 docs/judging_criteria_audit.md
