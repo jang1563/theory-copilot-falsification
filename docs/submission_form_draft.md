@@ -159,8 +159,14 @@ reasoning tokens; it reviews only gate output, so it cannot
 rationalize its own law into passing. Path B proves single-agent
 `agent_toolset_20260401` end-to-end. Path A proves a sequential
 three-session chain on real TCGA-KIRC (PhL-9v2: file mounts; Skeptic
-quotes `delta_baseline=+0.0587`). Path C proves Claude Code Routines:
-`/fire` HTTP 200 plus scheduled autonomous fire (PhL-8/8b). Durability:
+quotes `delta_baseline=+0.0587`). Path C proves Claude Code Routines as a scientific worker, not just a
+CI trigger: `lacuna-scientific-oracle` receives `"equation: CDK1 -
+EPAS1"` via API trigger, autonomously runs `make venv` + `make audit`
++ `falsification_sweep.py` (1000 perm/bootstrap, n=505 TCGA-KIRC),
+and emits `gate: PASS, perm_p=0.0, ci_lower=0.664, Δbase=+0.062` —
+session `https://claude.ai/code/session_015ot5hkJgSiBoWNA51fjZ1k`
+(PhL-8c). Scheduled autonomous fire also evidenced (PhL-8b mechanism
+layer). Original CI-pulse: PhL-8. Durability:
 `persist_session_events` pages `sessions.events.list` to JSONL;
 `replay_session_from_log` replays user-origin events into a fresh
 session. Memory stores accumulate rejection lessons across sessions.
@@ -176,7 +182,7 @@ harness would likely rationalize.
 Agents orchestration with isolated sessions: three live paths — B
 (single-agent `agent_toolset_20260401`), A (PhL-9 sequential
 three-session chain on real TCGA-KIRC, structured-JSON handoff), C
-(PhL-8 Routine `/fire` HTTP 200). Plus Memory public beta (integrated
+(PhL-8c: scientific oracle PASS on CDK1−EPAS1, session URL live). Plus Memory public beta (integrated
 2026-04-23 day-of): Skeptic writes rejection lessons; fresh sessions
 read, quote, refine them; server-side persistence verified via raw
 `/v1/memory_stores/*` API. Our own H1 LLM-SR extension was killed by
