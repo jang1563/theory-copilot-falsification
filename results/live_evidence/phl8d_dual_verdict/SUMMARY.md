@@ -19,14 +19,17 @@ same infrastructure, the same session — one equation rejected, one accepted.
 
 ## Equations submitted
 
-**Eq1 — expected FAIL** (textbook HIF-axis, tumor vs normal):
+**Eq1 — expected FAIL** (HIF-axis linear, tumor vs normal):
 ```
-log1p(CA9) + log1p(VEGFA) - log1p(AGXT)
+CA9 - AGXT
 ```
 Why it should fail: CA9 alone reaches AUROC 0.965 on the tumor_vs_normal task.
 The compound adds only Δ ≈ +0.019 over the best single-gene baseline — below
-the pre-registered +0.05 threshold. This is the Opus 4.7-proposed textbook law
-that the gate rejected in the original ccRCC sweep (0/33 on 11-gene panel).
+the pre-registered +0.05 threshold. This is the same HIF-axis logic as the
+Opus 4.7-proposed textbook law rejected in the original ccRCC sweep.
+Note: `log1p(CA9) + log1p(VEGFA) - log1p(AGXT)` breaks under `--standardize`
+(z-scores go negative → NaN in log1p). `CA9 - AGXT` is the clean linear
+equivalent with identical FAIL reason (delta_baseline, not numeric error).
 
 **Eq2 — expected PASS** (proliferation-minus-HIF2α, metastasis):
 ```

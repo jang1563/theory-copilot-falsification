@@ -2,8 +2,10 @@
 """PhL-8d — Dual Verdict Oracle: FAIL + PASS in one autonomous session.
 
 Fires the `lacuna-scientific-oracle` Routine with two equations:
-  - Eq1 (expected FAIL): log1p(CA9)+log1p(VEGFA)-log1p(AGXT) on tumor_vs_normal
+  - Eq1 (expected FAIL): CA9 - AGXT on tumor_vs_normal
     CA9 alone = AUROC 0.965; delta_baseline ≈ +0.019 < 0.05 threshold.
+    Note: log1p form breaks under --standardize (z-scores go negative).
+    CA9 - AGXT is the clean linear equivalent; FAIL reason is identical.
   - Eq2 (expected PASS): CDK1 - EPAS1 on metastasis_expanded
     Rashomon rank 2 (AUROC 0.719); delta_baseline ≈ +0.062 > 0.05.
 
@@ -39,11 +41,13 @@ from lacuna.routines_client import fire_routine_from_env
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_ROOT / "results" / "live_evidence" / "phl8d_dual_verdict"
 
-# Eq1: textbook HIF-axis (expected FAIL — CA9 saturates delta_baseline)
+# Eq1: HIF-axis linear (expected FAIL — CA9 saturates delta_baseline)
+#   log1p form breaks under --standardize (z-scores go negative → NaN).
+#   CA9 - AGXT is the clean linear equivalent; FAIL reason is unchanged.
 # Eq2: Rashomon rank 2 (expected PASS — proliferation-minus-HIF2a axis)
 DUAL_TRIGGER = (
     "eq1: task=tumor_vs_normal, data=kirc_tumor_normal.csv, "
-    "equation=log1p(CA9) + log1p(VEGFA) - log1p(AGXT)\n"
+    "equation=CA9 - AGXT\n"
     "eq2: task=metastasis_expanded, data=kirc_metastasis_expanded.csv, "
     "equation=CDK1 - EPAS1"
 )
@@ -68,7 +72,7 @@ def main() -> int:
         return 2
 
     print(">>> Firing dual-verdict oracle")
-    print(">>> Eq1 (expected FAIL): log1p(CA9)+log1p(VEGFA)-log1p(AGXT)  [tumor_vs_normal]")
+    print(">>> Eq1 (expected FAIL): CA9 - AGXT  [tumor_vs_normal]")
     print(">>> Eq2 (expected PASS): CDK1 - EPAS1  [metastasis_expanded]")
     print()
 
@@ -98,7 +102,7 @@ def main() -> int:
         "eq1": {
             "task": "tumor_vs_normal",
             "data": "kirc_tumor_normal.csv",
-            "equation": "log1p(CA9) + log1p(VEGFA) - log1p(AGXT)",
+            "equation": "CA9 - AGXT",
             "expected_gate": "FAIL",
             "expected_fail_reason": "delta_baseline (CA9 alone = AUROC 0.965; delta ≈ +0.019 < 0.05)",
         },

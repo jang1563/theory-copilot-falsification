@@ -274,7 +274,7 @@ One API fire call → one autonomous session → the full falsification story:
 | Run | Equation | Task | Gate | Decisive metric |
 |---|---|---|---|---|
 | PhL-8c (live) | `CDK1 − EPAS1` | metastasis M0 vs M1 | ✅ **PASS** | delta_baseline = +0.062 (> 0.05 threshold) |
-| PhL-8d Eq1 (pending) | `log1p(CA9)+log1p(VEGFA)−log1p(AGXT)` | tumor vs normal | ❌ **FAIL** | delta_baseline ≈ +0.019 (< 0.05; CA9 alone = AUROC 0.965) |
+| PhL-8d Eq1 (pending) | `CA9 − AGXT` | tumor vs normal | ❌ **FAIL** | delta_baseline ≈ +0.019 (< 0.05; CA9 alone = AUROC 0.965) |
 | PhL-8d Eq2 (pending) | `CDK1 − EPAS1` | metastasis M0 vs M1 | ✅ **PASS** | delta_baseline = +0.062 |
 
 PhL-8d fires both equations in **one trigger text**, one session, ~6 min.
