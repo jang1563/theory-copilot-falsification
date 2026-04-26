@@ -1,6 +1,6 @@
 # Track A — KIRC Stage I-II vs III-IV (45-gene panel)
 
-**Run date:** 2026-04-26 (HPC, SLURM job 2812758)
+**Run date:** 2026-04-26 (fixed PySR sweep)
 **Data:** `data/kirc_stage_expanded.csv` (n=512; control=309 Stage I-II, disease=203 Stage III-IV)
 **Panel:** 45-gene HIF/Warburg/tubule/proliferation/metastasis/ccRCC-lineage/housekeeping
 **PySR:** 20 populations × 50 pop_size × 1000 iterations × 3 seeds (1, 7, 42), 20 CPUs

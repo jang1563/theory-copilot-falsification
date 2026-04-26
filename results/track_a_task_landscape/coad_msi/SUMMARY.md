@@ -1,6 +1,6 @@
 # Track E — COAD Stage I-II vs III-IV
 
-**Run date:** 2026-04-26 (HPC, SLURM job 2812758)
+**Run date:** 2026-04-26 (fixed PySR sweep)
 **Data:** `data/coad_stage.csv` (n=484; control=279 Stage I-II, disease=205 Stage III-IV)
 **Panel:** 31-gene (EMT, immune checkpoint, Warburg, oncogene, MMR markers)
 **PySR:** 20 populations × 50 pop_size × 1000 iterations × 3 seeds, 20 CPUs

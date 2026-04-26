@@ -75,7 +75,7 @@ falsification, not an AUROC ceiling that nothing else reaches.
   candidates for a follow-on.
 - Expanding the panel further (200+ genes) to check whether a
   3-gene compound can clear the stricter pair-with-interaction
-  baseline. This would require an HPC run with PySR's `niterations`
+  baseline. This would require a longer PySR run with `niterations`
   scaled up; outside the current time budget.
 
 ---

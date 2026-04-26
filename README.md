@@ -21,9 +21,9 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 |---|---|---|---|
 | 5-test gate · TCGA-KIRC (kidney cancer, n=505) | 45-gene panel · M0/M1 (no/yes metastasis) | PFS · n=263 · p=0.0003 | Rank 1 of all C(45,2) combinations |
 
-> **Explore:** [60-second artefact index →](docs/ARTIFACT_INDEX.md) · [Demo walkthrough](docs/demo_walkthrough.md)
+> **Judge path:** [1. Watch demo companion →](https://jang1563.github.io/lacuna-falsification/demo.html) · [2. Read discovery story](https://jang1563.github.io/lacuna-falsification/story.html) · [3. Verify evidence](docs/ARTIFACT_INDEX.md) · [4. Run smoke](#quick-start)
 >
-> **Live web pages:** [🔬 Dashboard](https://jang1563.github.io/lacuna-falsification/) · [🎬 Demo companion](https://jang1563.github.io/lacuna-falsification/demo.html) · [📖 Discovery story](https://jang1563.github.io/lacuna-falsification/story.html) · [📊 Full rejection log](https://jang1563.github.io/lacuna-falsification/rejection-log.html)
+> **Evidence surfaces:** [Dashboard](https://jang1563.github.io/lacuna-falsification/) · [Full rejection log](https://jang1563.github.io/lacuna-falsification/rejection-log.html) · [Paper PDF](docs/paper/paper.pdf) · [Demo walkthrough](docs/demo_walkthrough.md)
 
 ---
 
@@ -191,7 +191,7 @@ python src/falsification_sweep.py \
 export ANTHROPIC_API_KEY=sk-ant-...
 lacuna compare --config config/datasets.json \
   --proposals config/law_proposals.json \
-  --flagship-dataset kirc --output-root artifacts/
+  --flagship-dataset flagship_kirc_demo --output-root artifacts/
 # → prints PySR + falsification_sweep commands to run next
 ```
 

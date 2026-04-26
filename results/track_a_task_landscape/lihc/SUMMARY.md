@@ -1,6 +1,6 @@
 # Track D — LIHC Tumor vs Normal
 
-**Run date:** 2026-04-26 (HPC, SLURM job 2812758)
+**Run date:** 2026-04-26 (fixed PySR sweep)
 **Data:** `data/lihc_tumor_normal.csv` (n=424; disease=374 tumor, control=50 normal)
 **Panel:** 31-gene (hepatic function + oncofetal + proliferation)
 **PySR:** 20 populations × 50 pop_size × 1000 iterations × 3 seeds, 20 CPUs

@@ -1,6 +1,6 @@
 # Track I — LGG Grade II vs III
 
-**Run date:** 2026-04-26 (HPC, SLURM job 2812758)
+**Run date:** 2026-04-26 (fixed PySR sweep)
 **Data:** `data/lgg_grade.csv` (n=384; control=176 Grade II, disease=208 Grade III)
 **Panel:** 30-gene (EMT, proliferation, stem cell, Warburg, HIF markers)
 **PySR:** 20 populations × 50 pop_size × 1000 iterations × 3 seeds, 20 CPUs

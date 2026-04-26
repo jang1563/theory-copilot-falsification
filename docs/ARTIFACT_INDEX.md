@@ -66,7 +66,7 @@ the submission.
 | G3 | Adjusted Cox — TOP2A−EPAS1 HR robust to treatment + TMB | `src/g3_adjusted_cox.py`, `results/.../g3_adjusted_cox/` |
 | G4 | Anchor regression cross-cohort stability (Rothenhäusler 2021) | `src/g4_anchor_regression.py`, `results/.../g4_anchor_regression/` |
 | G6 | Opus 4.6 vs 4.7 calibration ablation (60 calls each) | `src/g6_calibration_4_6_vs_4_7.py`, `results/ablation/opus_46_vs_47/` |
-| H1 | Falsification-Guided SR Loop on HPC (5 iter, Opus-steered, 5 survivors at iter 1) | `src/falsification_sr_loop.py`, `results/overhang/sr_loop_run.json` |
+| H1 | Falsification-Guided SR Loop (5 iter, Opus-steered, 5 survivors at iter 1) | `src/falsification_sr_loop.py`, `results/overhang/sr_loop_run.json` |
 | H2 | Opus 4.7 adaptive-thinking synthesis over 74 rejections + 9 survivors (14k-char prompt; 1M context available but not exercised — honest scoping at `docs/headline_findings.md`) | `src/opus_1m_synthesis.py`, `results/overhang/synthesis_1m.json` |
 | I2 | Rashomon set analysis — TOP2A−EPAS1 is rank 1 / 990 pairs | `src/rashomon_analysis.py`, `results/track_a_task_landscape/rashomon_set/SUMMARY.md` |
 | I3 | Clinical utility translation (Cohen's d, NNS, OR) | `src/track_a_clinical_utility.py`, `results/track_a_task_landscape/clinical_utility/SUMMARY.md` |

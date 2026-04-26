@@ -35,7 +35,7 @@ mesenchymal/stemness context (CDH2, SOX9) and suppressed by EMT driver (SNAI1)**
 
 | Pre-reg | AUROC | Δbase | perm_p | Verdict |
 |---|---|---|---|---|
-| `EPCAM + CDK1` | — | — | — | **FAIL** (not in HPC hall of fame) |
+| `EPCAM + CDK1` | — | — | — | **FAIL** (not in PySR hall of fame) |
 
 EpCAM-centric families did not emerge from unconstrained PySR — the search converged
 instead on the TOP2A/CDH2/SOX9/SNAI1 family. EPCAM's MVI signal in the literature

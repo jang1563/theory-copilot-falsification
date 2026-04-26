@@ -36,7 +36,7 @@ contrast) amplified by SPP1 and suppressed by MUC5B**.
 
 | Pre-reg | AUROC | Δbase | perm_p | Verdict |
 |---|---|---|---|---|
-| `SPP1 − CCL20` | — | — | — | **FAIL** (not in HPC hall of fame top tier) |
+| `SPP1 − CCL20` | — | — | — | **FAIL** (not in PySR hall of fame top tier) |
 
 SPP1 appears in *all* survivors as a multiplicative amplifier — consistent with SPP1 being
 a validated IPF biomarker — but the pre-registered `SPP1 − CCL20` additive form does not

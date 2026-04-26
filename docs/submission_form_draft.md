@@ -2,7 +2,7 @@
 
 ## ⚡ Final submission checklist (fill at form open time)
 
-- [ ] Paste Loom URL into "Demo video" field — also update `README.md` line 12 (`Loom URL pending` → real URL)
+- [ ] Paste final Loom URL into the submission form's "Demo video" field; README currently links the interactive demo companion and story.
 - [ ] Select problem statement: **"Build From What You Know"**
 - [ ] Select prize category (if field exists): **"Best Use of Claude Managed Agents"**
 - [ ] Copy unified 200-word summary below into the description field
