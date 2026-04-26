@@ -5,7 +5,7 @@ laptop; the offline test section at the end runs with no API key.
 
 ## Prerequisites
 
-- Python 3.10+
+- Python 3.10-3.13
 - Julia 1.10.0 (PySR installs a compatible Julia on first run)
 - `ANTHROPIC_API_KEY` in the environment for Opus 4.7 stages
 

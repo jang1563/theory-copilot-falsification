@@ -3,7 +3,7 @@ name = "lacuna-discovery"
 version = "0.1.0"
 description = "Workflow-first discovery artifact scaffold for compact biological law discovery"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.14"
 dependencies = [
     "numpy>=1.26",
     "pandas>=2.2",

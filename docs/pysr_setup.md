@@ -6,7 +6,7 @@
 |----------|-------|
 | OS | macOS Darwin 25.2.0 |
 | Architecture | **arm64 (Apple Silicon)** |
-| Python | 3.14.3 |
+| Python | 3.10-3.13 required for the submission package |
 | Julia | **Not installed** |
 | PySR | **Not installed** |
 
@@ -61,7 +61,7 @@ This only runs once per environment. Subsequent imports are fast (~5 s).
    ```bash
    export LD_LIBRARY_PATH="$(julia -e 'print(Sys.BINDIR)')/../lib:$LD_LIBRARY_PATH"
    ```
-3. **Python ≥ 3.9 required.** This machine has 3.14.3 — compatible.
+3. **Use Python 3.10-3.13 for the submission package.** Python 3.14 can outrun scientific dependency wheels and should be avoided for judge-facing quickstart installs.
 
 ---
 

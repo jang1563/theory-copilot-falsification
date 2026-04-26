@@ -2,7 +2,7 @@
 
 > *Rejects 194 of 203 candidate laws — including its own.*
 
-<img src="https://img.shields.io/badge/Python-3.10+-1E3A8A?style=flat-square" alt="Python 3.10+" />
+<img src="https://img.shields.io/badge/Python-3.10--3.13-1E3A8A?style=flat-square" alt="Python 3.10-3.13" />
 <img src="https://img.shields.io/badge/Built_with-Claude_Opus_4.7-1E3A8A?style=flat-square" alt="Built with Claude Opus 4.7" />
 <img src="https://img.shields.io/badge/Hackathon-Cerebral_Valley_2026-faf9f5?labelColor=141413&style=flat-square" alt="Cerebral Valley Hackathon 2026" />
 
@@ -38,7 +38,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 |---|---|---|
 | **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS vs Sonnet 0/60 |
 | **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58 · 32 min) · 3 diseases (ccRCC · DIPG · IPF) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
-| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key, < 60 s) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) |
+| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; smoke ~1 min after install) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) |
 | **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
 
 ---
@@ -58,7 +58,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - **Memorization control** [`phl13_memorization_audit`](results/live_evidence/phl13_memorization_audit/SUMMARY.md): 0 / 10 zero-shot retrievals returned `TOP2A−EPAS1`. PySR found it; Opus did not recall it.
 
 **DX and reproducibility (Lydia, Ado)**
-- `make venv && make smoke` — passes in < 60 s, no API key needed
+- `make venv && make smoke` — smoke passes in ~1 min after install, no API key needed
 - [`src/README.md`](src/README.md) — map of all 60+ `src/` scripts organized by track
 - [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) — one-click Codespaces
 - `make test` — 118 local-runnable tests (no API key); `make audit` — compliance grep, passes on every commit
@@ -137,13 +137,15 @@ flowchart TB
 ## Quick Start
 
 ```bash
-# Fastest confidence check — no API key, < 60 seconds
+# Fastest confidence check — no API key, ~1 minute after install
 make venv && make smoke
 ```
 
 This creates `.venv/`, installs the package, runs critical module imports, fires a deterministic gate sanity check, runs the compliance audit, and verifies all judge-facing artefact indices are present. Expected output: `SMOKE OK`.
 
-> **Python ≥ 3.10 required.** `pyproject.toml` uses `X | Y` union syntax; macOS default `/usr/bin/python3` is 3.9.x. `make venv` handles this via the project-local virtualenv.
+Use Python **3.10-3.13**. Lacuna intentionally excludes Python 3.14 for the submission package because scientific dependency wheels can lag new CPython releases. If your system `python3` is too new, run `make venv VENV_PYTHON=python3.12` (or 3.10/3.11/3.13).
+
+> **Python 3.10-3.13 required.** `pyproject.toml` enforces this range so unsupported 3.14 environments fail fast instead of hanging during dependency installs. `make venv` creates the project-local virtualenv with `VENV_PYTHON` (default `python3`).
 
 ```bash
 # Full test suite (118 tests, no API key, several minutes)

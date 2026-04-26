@@ -7,15 +7,16 @@
 # ============================================================
 
 PYTHON ?= .venv/bin/python
+VENV_PYTHON ?= python3
 PYTHONPATH_SRC := PYTHONPATH=src
 DEMO_OUT := artifacts/flagship_run
 TRANSFER_OUT := artifacts/transfer_run
 
 # Note: PYTHON defaults to the project-local virtualenv to guarantee
-# Python 3.10+ (pyproject.toml requires >=3.10 for modern X | Y type hints).
-# If the venv does not yet exist, run `make install` after
-# `python3 -m venv .venv && . .venv/bin/activate && pip install -e .`, or
-# override with `make test PYTHON=python3.12`.
+# Python 3.10-3.13 (pyproject.toml excludes 3.14 because scientific
+# dependency wheels can lag new CPython releases). If the venv does not
+# yet exist, run `make venv VENV_PYTHON=python3.12` with an installed
+# supported interpreter, or override with `make test PYTHON=python3.12`.
 
 help:
 	@echo "Lacuna Falsification — available targets:"
@@ -45,10 +46,12 @@ help:
 # If .venv already exists this is a no-op for venv creation; pip install -e .
 # still runs to pick up any pyproject edits.
 venv:
-	@test -d .venv || python3 -m venv .venv
+	@$(VENV_PYTHON) -c "import sys; v=sys.version_info; ok=(3,10) <= v[:2] < (3,14); raise SystemExit(0 if ok else 'ERROR: Lacuna requires Python 3.10-3.13 for dependency wheels; found %s. Use make venv VENV_PYTHON=python3.12 (or 3.10/3.11/3.13).' % sys.version.split()[0])"
+	@test -d .venv || $(VENV_PYTHON) -m venv .venv
+	@$(PYTHON) -c "import sys; v=sys.version_info; ok=(3,10) <= v[:2] < (3,14); raise SystemExit(0 if ok else 'ERROR: existing .venv uses unsupported Python %s. Remove .venv and rerun make venv with VENV_PYTHON=python3.12.' % sys.version.split()[0])"
 	@$(PYTHON) -m pip install --quiet --upgrade pip
 	@$(PYTHON) -m pip install --quiet -e .
-	@echo ">>> .venv ready. Try: make test"
+	@echo ">>> .venv ready. Try: make smoke"
 
 install:
 	$(PYTHON) -m pip install -e .
@@ -129,9 +132,8 @@ print(f'  gate OK — null AUC={auc:.3f} (expected ~0.5), perm_p={perm_p:.3f}')"
 # `falsification_report.json` itself. `replay` will then fail because the
 # report doesn't exist. Treat `make demo` as the GUIDED first step that
 # tells you what to run next, not a one-shot end-to-end target. For a
-# fast sanity check, prefer `make test` (118 local-runnable tests, no
-# API key needed). Reviewer-facing happy path is `make venv && make test
-# && make audit`. See README.
+# fast sanity check, prefer `make smoke` (no API key needed).
+# Reviewer-facing happy path is `make venv && make smoke`. See README.
 demo:
 	@echo ">>> Running end-to-end demo on synthetic data..."
 	@mkdir -p $(DEMO_OUT) $(TRANSFER_OUT)
