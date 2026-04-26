@@ -1,0 +1,51 @@
+[
+  {
+    "initial_guess": "log1p(TOP2A) + log1p(MKI67) - 2*log1p(EPAS1)",
+    "template_id": "Proliferation-vs-HIF2 contrast (ccB shift)",
+    "target_features": [
+      "MKI67",
+      "EPAS1",
+      "TOP2A"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(CDK1) + log1p(CCNB1) - log1p(CUBN)",
+    "template_id": "Mitotic balance vs tubule integrity",
+    "target_features": [
+      "CDK1",
+      "CCNB1",
+      "CUBN"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(MMP9) + log1p(PGK1) - log1p(LRP2)",
+    "template_id": "Glycolysis-invasion vs differentiated nephron",
+    "target_features": [
+      "PGK1",
+      "MMP9",
+      "LRP2"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(NDUFA4L2) - log1p(MKI67)",
+    "template_id": "HIF-target ratio (ccA signature stability)",
+    "target_features": [
+      "MKI67",
+      "NDUFA4L2"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(ACTB) - log1p(GAPDH) + log1p(RPL13A)",
+    "template_id": "Housekeeping contrast (negative control)",
+    "target_features": [
+      "GAPDH",
+      "ACTB",
+      "RPL13A"
+    ],
+    "expected_verdict": "FAIL"
+  }
+]

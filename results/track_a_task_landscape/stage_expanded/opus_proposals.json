@@ -1,0 +1,41 @@
+{
+  "families": [
+    {
+      "name": "Proliferation-vs-HIF2 contrast (ccB shift)",
+      "form": "log1p(TOP2A) + log1p(MKI67) - 2*log1p(EPAS1)",
+      "rationale": "Stage III-IV KIRC shifts from HIF-2alpha-driven ccA toward proliferative ccB, so proliferation markers should rise relative to EPAS1.",
+      "skeptic_test": "Reject if delta_baseline < 0.03 AUROC over single TOP2A-EPAS1 contrast or permutation p > 0.05.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Mitotic balance vs tubule integrity",
+      "form": "log1p(CDK1) + log1p(CCNB1) - log1p(CUBN)",
+      "rationale": "Advanced stage couples mitotic spindle activation with tubule dedifferentiation (CUBN loss), so the contrast should separate stages better than CUBN alone.",
+      "skeptic_test": "Reject if AUROC <= 0.610 (CUBN ceiling) or bootstrap CI overlaps CUBN-only baseline.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Glycolysis-invasion vs differentiated nephron",
+      "form": "log1p(MMP9) + log1p(PGK1) - log1p(LRP2)",
+      "rationale": "Sarcomatoid/invasive III-IV tumors upregulate MMP9 and glycolysis while losing megalin (LRP2)-expressing differentiated tubule identity.",
+      "skeptic_test": "Reject if delta_baseline < 0.02 vs LRP2-only or feature-importance for MMP9 is near zero in held-out folds.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "HIF-target ratio (ccA signature stability)",
+      "form": "log1p(NDUFA4L2) - log1p(MKI67)",
+      "rationale": "NDUFA4L2 is a strong HIF-2alpha/ccA target; its ratio against proliferation should be high in Stage I-II and collapse in III-IV.",
+      "skeptic_test": "Reject if direction flips across folds or AUROC < 0.65 with permutation p > 0.05.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Housekeeping contrast (negative control)",
+      "form": "log1p(ACTB) - log1p(GAPDH) + log1p(RPL13A)",
+      "rationale": "Housekeeping genes should be invariant to stage; included as ex-ante null to validate the falsification pipeline.",
+      "skeptic_test": "Reject if AUROC < 0.55 or permutation p > 0.2 (expected outcome).",
+      "expected_verdict": "FAIL"
+    }
+  ],
+  "raw_thinking": "",
+  "raw_response": "{\n  \"families\": [\n    {\n      \"name\": \"Proliferation-vs-HIF2 contrast (ccB shift)\",\n      \"form\": \"log1p(TOP2A) + log1p(MKI67) - 2*log1p(EPAS1)\",\n      \"rationale\": \"Stage III-IV KIRC shifts from HIF-2alpha-driven ccA toward proliferative ccB, so proliferation markers should rise relative to EPAS1.\",\n      \"skeptic_test\": \"Reject if delta_baseline < 0.03 AUROC over single TOP2A-EPAS1 contrast or permutation p > 0.05.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Mitotic balance vs tubule integrity\",\n      \"form\": \"log1p(CDK1) + log1p(CCNB1) - log1p(CUBN)\",\n      \"rationale\": \"Advanced stage couples mitotic spindle activation with tubule dedifferentiation (CUBN loss), so the contrast should separate stages better than CUBN alone.\",\n      \"skeptic_test\": \"Reject if AUROC <= 0.610 (CUBN ceiling) or bootstrap CI overlaps CUBN-only baseline.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Glycolysis-invasion vs differentiated nephron\",\n      \"form\": \"log1p(MMP9) + log1p(PGK1) - log1p(LRP2)\",\n      \"rationale\": \"Sarcomatoid/invasive III-IV tumors upregulate MMP9 and glycolysis while losing megalin (LRP2)-expressing differentiated tubule identity.\",\n      \"skeptic_test\": \"Reject if delta_baseline < 0.02 vs LRP2-only or feature-importance for MMP9 is near zero in held-out folds.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"HIF-target ratio (ccA signature stability)\",\n      \"form\": \"log1p(NDUFA4L2) - log1p(MKI67)\",\n      \"rationale\": \"NDUFA4L2 is a strong HIF-2alpha/ccA target; its ratio against proliferation should be high in Stage I-II and collapse in III-IV.\",\n      \"skeptic_test\": \"Reject if direction flips across folds or AUROC < 0.65 with permutation p > 0.05.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Housekeeping contrast (negative control)\",\n      \"form\": \"log1p(ACTB) - log1p(GAPDH) + log1p(RPL13A)\",\n      \"rationale\": \"Housekeeping genes should be invariant to stage; included as ex-ante null to validate the falsification pipeline.\",\n      \"skeptic_test\": \"Reject if AUROC < 0.55 or permutation p > 0.2 (expected outcome).\",\n      \"expected_verdict\": \"FAIL\"\n    }\n  ]\n}"
+}

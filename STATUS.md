@@ -1,6 +1,6 @@
 # STATUS — lacuna-falsification
 
-**Last updated:** 2026-04-26 01:23 EDT (final Lacuna naming + smoke/cue-map review)
+**Last updated:** 2026-04-26 13:00 EDT (multi-cancer platform expansion: Tracks A/D/E/I running on HPC)
 **Submit window:** 2026-04-26 20:00 ET (deadline is today)
 **Judging:** 2026-04-28 12:00 ET final round
 **Repo:** https://github.com/jang1563/lacuna-falsification (public since 2026-04-23 19:32 ET)
@@ -47,12 +47,24 @@ Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/
 
 ## 📊 Numbers (corrected per review handoff)
 
-- **5-test classification gate (TCGA, 7 task × panel configurations):** 194 / 203 rejected; 9 survivors all on metastasis_expanded with `delta_confound = null` (4 active legs + decoy + BH-FDR for that task).
+- **5-test classification gate (TCGA, 7 task × panel configurations, pre-2026-04-26):** 194 / 203 rejected; 9 survivors all on metastasis_expanded with `delta_confound = null` (4 active legs + decoy + BH-FDR for that task).
 - **Flagship survivor:** `TOP2A − EPAS1`, AUROC 0.726 on TCGA-KIRC metastasis (n=505).
 - **IMmotion150 Phase-2 external replay (separately pre-registered 3-test survival gate, n=263):** PASS — log-rank p=0.0003, Cox HR=1.36, C-index=0.601, robust to treatment arm + TMB adjustment.
 - **PhL-1 cross-cohort kill of own H1 extension:** the SLC22A8-augmented form failed the same survival replay (C dropped 0.601 → 0.566).
 - **PhL-6 third cohort (microarray):** TOP2A − EPAS1 stratifies stage 1-2 vs 3-4 with AUROC 0.714.
 - **Cross-cancer negative control (PhL-5 BRCA):** FAIL on `delta_baseline` as predicted; ccRCC-specificity reinforced.
+
+### 🌐 Platform generalization (2026-04-26 HPC expansion, same gate + thresholds)
+
+| Task | Cancer | Panel | n | Survivors |
+|---|---|---|---|---|
+| Stage I-II vs III-IV | KIRC | 11-gene | 534 | 0 / 34 |
+| Stage I-II vs III-IV | KIRC | **45-gene** | 512 | **23 / 28 ✅** (top: `CXCR4/EPAS1`, AUROC 0.689) |
+| Tumor vs Normal | LIHC | 31-gene | 424 | 🔄 running |
+| Stage I-II vs III-IV | COAD | 31-gene | 484 | 🔄 running |
+| Grade II vs III | LGG | 30-gene | 384 | 🔄 running |
+
+Same pre-registered +0.05 delta_baseline threshold across all diseases. `results/track_a_task_landscape/{stage_expanded,lihc,coad_msi,gbm_idh}/`
 
 ## 🔧 Architecture surfaces (judge-facing)
 
