@@ -36,7 +36,7 @@
 
 ## Reproduce
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl17_stance_decay_7turn.py run
 PYTHONPATH=src .venv/bin/python src/phl17_stance_decay_7turn.py analyze
 ```

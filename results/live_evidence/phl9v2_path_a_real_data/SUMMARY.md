@@ -83,7 +83,7 @@ because its AUC~0.5 is "intended behavior" — it still fails
 ## Reproduce
 
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl9v2_path_a_real_data.py
 ```
 

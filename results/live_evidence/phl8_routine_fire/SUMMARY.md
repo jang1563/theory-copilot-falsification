@@ -81,7 +81,7 @@ Requires:
   store immediately or regenerate).
 
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl8_routine_fire_live.py
 ```
 

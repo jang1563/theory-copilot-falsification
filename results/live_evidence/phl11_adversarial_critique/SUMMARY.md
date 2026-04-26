@@ -92,7 +92,7 @@ Opus 4.7 wins cleanly (5 vs 1 CRISPR KO).
 ## Reproduce
 
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl11_adversarial_critique.py
 ```
 

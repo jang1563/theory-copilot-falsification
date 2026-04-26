@@ -780,6 +780,195 @@ body {
 .mem-strip-xfer em { color:var(--amber); font-style:normal; font-weight:600; }
 
 @media (max-width:700px) { .surv-fam-cards { grid-template-columns:1fr; } .mem-strip-sessions { gap:4px; } }
+
+/* Mobile companion mode: keep the Loom story readable instead of preserving
+   the desktop recording's wide, split-screen composition. */
+@media (max-width: 760px) {
+  html, body { overflow-x: hidden; }
+  .dots-nav, .tp, .demo-mark { display: none; }
+
+  .scene {
+    display: block;
+    min-height: auto;
+    overflow: visible;
+    padding: 56px 28px;
+  }
+  .scene--center {
+    display: block;
+    place-items: initial;
+  }
+  #s1, #s2, #s8 {
+    display: grid;
+    min-height: 100svh;
+    place-items: center;
+  }
+  .scene--split { grid-template-columns: 1fr; }
+  .scene__text,
+  .scene__visual {
+    padding: 0 !important;
+    border-right: 0;
+    min-width: 0;
+  }
+  .scene__visual { margin-top: 32px; }
+
+  .display { font-size: clamp(30px, 10vw, 40px); }
+  .display--xl { font-size: clamp(42px, 14vw, 64px); }
+  .body-p { max-width: none; font-size: 14px; line-height: 1.65; }
+  .eyebrow { margin-bottom: 14px; }
+  .origin-inner, .thesis-inner, .close-inner { max-width: 100%; padding: 0; }
+  .origin-logo { width: 72px; height: 72px; margin-bottom: 26px; }
+  .origin-title { font-size: clamp(50px, 15vw, 66px); }
+  .origin-tagline { font-size: 11px; line-height: 1.8; }
+  .origin-url, .close-url { overflow-wrap: anywhere; font-size: 11px; }
+  .origin-dedication br { display: none; }
+  .thesis-q { font-size: clamp(30px, 9.5vw, 42px); }
+  .thesis-sub { font-size: 20px; }
+
+  #s3 { padding: 56px 20px; }
+  .arch-inner { max-width: 100%; padding: 0; }
+  .arch-title {
+    text-align: left;
+    font-size: clamp(29px, 9.2vw, 38px);
+    margin-bottom: 24px;
+  }
+  .arch-flow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .arch-box,
+  .arch-box--gate {
+    width: 100%;
+    min-width: 0;
+  }
+  .arch-box-name,
+  .arch-box-sub { white-space: normal; }
+  .arch-conn {
+    align-self: center;
+    transform: rotate(90deg);
+    line-height: 1;
+  }
+  .arch-gate-note {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-top: 18px;
+  }
+  .arch-caption {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .arch-cap-item { line-height: 1.35; }
+  .arch-live-row { justify-content: stretch; }
+  .arch-live-url {
+    width: 100%;
+    border-radius: 8px;
+    justify-content: flex-start;
+    line-height: 1.5;
+  }
+  .mem-strip-sessions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .mem-strip-arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+
+  .rej-stats {
+    flex-direction: row;
+    align-items: flex-end;
+    padding-left: 0;
+    min-width: 0;
+    gap: 26px;
+  }
+  .rej-num--refused { font-size: 56px; }
+  .rej-num--pass { font-size: 38px; }
+  .rej-note { max-width: none; }
+
+  .equation-box {
+    padding: 28px 22px;
+    font-size: 24px;
+  }
+  .equation-meta { margin-bottom: 22px; }
+  .gate-box { overflow-x: auto !important; }
+  .task-tbl { min-width: 620px; }
+  .task-tbl thead th,
+  .task-row td { padding: 9px 10px; }
+  .surv-fam-cards { grid-template-columns: 1fr; }
+
+  .km-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .km-stat {
+    min-width: 0;
+    padding: 12px;
+  }
+  .km-stat__val {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  .dipg-num { font-size: clamp(72px, 22vw, 96px); }
+  .dipg-label { margin-bottom: 28px; }
+  .dipg-timeline { padding-left: 20px; }
+  .tl-item { padding-left: 18px; }
+
+  .close-logo { margin-bottom: 28px; }
+  .close-q1, .close-q2 { font-size: clamp(28px, 8.5vw, 40px); }
+  .close-q2 { margin-bottom: 38px; }
+
+  .ipf-meta { gap: 8px; }
+  .fab-card__claim { padding-left: 10px; }
+  .fab-verdict {
+    flex-wrap: wrap;
+    line-height: 1.35;
+  }
+
+  .ablation-hero {
+    flex-wrap: wrap;
+    gap: 16px 22px;
+    align-items: center;
+  }
+  .ablation-num--zero,
+  .ablation-num--ten { font-size: 64px; }
+  .ablation-arrow { padding-bottom: 6px; }
+  .model-tbl { min-width: 560px; }
+  .verdict-bar-wrap { width: 100px; }
+  .metacal-row { grid-template-columns: 1fr; }
+  .metacal-row__match { white-space: normal; }
+}
+
+@media (max-width: 430px) {
+  .scene { padding: 48px 24px; }
+  #s3 { padding: 48px 20px; }
+  .km-stats { grid-template-columns: 1fr; }
+  .task-tbl,
+  .model-tbl {
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 10px;
+  }
+  .task-tbl thead th,
+  .task-row td,
+  .model-tbl thead th,
+  .model-row td {
+    padding: 8px 6px;
+  }
+  .task-tbl thead th,
+  .model-tbl thead th {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+  .task-gene,
+  .task-result,
+  .task-delta,
+  .model-name,
+  .verdict-count,
+  .dissent-pct { font-size: 10px; }
+  .verdict-bar-wrap { width: 64px; }
+}
 </style>
 </head>
 <body>

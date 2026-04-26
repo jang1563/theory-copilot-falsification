@@ -63,7 +63,7 @@ agent demonstrably reads, quotes, and refines across sessions**.
 ## Reproduce
 
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl12_memory_chain_deepen.py
 ```
 

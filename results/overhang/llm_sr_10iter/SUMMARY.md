@@ -155,7 +155,7 @@ this experiment.
 ## Reproduce
 
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl14_llm_sr_10iter.py \
   --max-iterations 10 \
   --models claude-opus-4-7 claude-sonnet-4-6 \

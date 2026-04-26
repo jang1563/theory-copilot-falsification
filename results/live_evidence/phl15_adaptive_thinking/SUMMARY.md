@@ -66,7 +66,7 @@ This final v2 design compares Opus 4.7 WITH vs WITHOUT thinking to isolate the m
 
 **Reproduce**:
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl15_adaptive_thinking_ablation.py run
 PYTHONPATH=src .venv/bin/python src/phl15_adaptive_thinking_ablation.py analyze
 ```

@@ -60,7 +60,7 @@ seeding** (the H1 loop), not pure LLM proposing.
 
 ## Reproduce
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl16_proposer_quality.py propose
 PYTHONPATH=src .venv/bin/python src/phl16_proposer_quality.py gate
 PYTHONPATH=src .venv/bin/python src/phl16_proposer_quality.py analyze

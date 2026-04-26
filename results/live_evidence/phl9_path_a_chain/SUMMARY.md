@@ -58,7 +58,7 @@ research-preview Agent Teams shape, env-flag-guarded behind
 ## Reproduce
 
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl9_path_a_live_chain.py
 ```
 

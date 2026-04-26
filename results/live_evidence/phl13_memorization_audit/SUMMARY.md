@@ -95,7 +95,7 @@ in 5+/10 repeats. Our claim passes.
 ## Reproduce
 
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl13_memorization_audit.py
 ```
 

@@ -43,7 +43,7 @@ alongside as rater-independent signal.
 
 ## Reproduce
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl18_prereg_writing_quality.py write
 PYTHONPATH=src .venv/bin/python src/phl18_prereg_writing_quality.py rate
 PYTHONPATH=src .venv/bin/python src/phl18_prereg_writing_quality.py analyze

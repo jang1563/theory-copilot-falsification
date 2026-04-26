@@ -33,7 +33,7 @@ is each model's biological interpretation?
 
 ## Reproduce
 ```bash
-source ~/.api_keys
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl19_interpreter_depth.py interp
 PYTHONPATH=src .venv/bin/python src/phl19_interpreter_depth.py rate
 PYTHONPATH=src .venv/bin/python src/phl19_interpreter_depth.py analyze

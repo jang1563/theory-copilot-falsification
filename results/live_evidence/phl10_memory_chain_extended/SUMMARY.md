@@ -78,7 +78,7 @@ Content file: `/lessons.md` (4 601 chars) — visible in
 ## Reproduce
 
 ```bash
-source ~/.api_keys  # must have ANTHROPIC_API_KEY
+export ANTHROPIC_API_KEY=<your-key>
 PYTHONPATH=src .venv/bin/python src/phl10_memory_chain_extended.py
 ```
 
