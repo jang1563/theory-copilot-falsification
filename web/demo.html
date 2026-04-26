@@ -1030,7 +1030,7 @@ body {
     <div id="intro-divider"  aria-hidden="true"></div>
 
     <div id="intro-counter-row">
-      <span id="intro-counter-num" aria-label="one hundred ninety four">0</span>
+      <span id="intro-counter-num" aria-label="two hundred twenty four">0</span>
       <span id="intro-counter-desc">falsified<br>hypotheses logged</span>
     </div>
   </div>
@@ -1161,7 +1161,7 @@ body {
     </div>
 
     <div class="arch-gate-note rv rv-d3">
-      <span><span class="arch-gate-note--fail">↓ 194 FAIL</span> → rejection log committed</span>
+      <span><span class="arch-gate-note--fail">↓ 224 FAIL</span> → rejection log committed</span>
       <span><span class="arch-gate-note--pass">↑ 9 PASS</span> → Skeptic review</span>
     </div>
 
@@ -1181,7 +1181,7 @@ body {
     </div>
 
     <div class="arch-live-row rv rv-d5">
-      <a class="arch-live-url" href="https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t" target="_blank" rel="noopener">
+      <div class="arch-live-url">
         <span class="arch-live-fail">FAIL</span>
         <span>CA9−AGXT Δ=0.015</span>
         <span style="color:rgba(255,255,255,0.15);">·</span>
@@ -1197,8 +1197,8 @@ body {
         <span class="arch-live-pass">2/25</span>
         <span>LGG Grade II/III · <strong style="color:rgba(120,140,93,0.9);">AUROC 0.840</strong></span>
         <span style="color:rgba(255,255,255,0.15);">·</span>
-        <span class="arch-live-cta">↗ 2 live sessions</span>
-      </a>
+        <span class="arch-live-cta">static evidence in results/live_evidence/</span>
+      </div>
     </div>
 
     <!-- Memory strip -->
@@ -1235,25 +1235,25 @@ body {
      SCENE 4 — Rejection (0:45–1:05)
 ═══════════════════════════════════════════ -->
 <section class="scene scene--split" id="s4"
-  data-narration="On a public kidney-cancer dataset, the gate rejects 194 of 203 candidate evaluations across four tasks. Even the textbook oxygen-sensing pathway equation Opus itself proposed fails — because one gene alone already scores 0.965 on our accuracy metric. Making any compound redundant.">
+  data-narration="On a public kidney-cancer dataset, the original gate rejects 203 of 203 initial evaluations. Even a CA9-dominated oxygen-sensing contrast fails because one gene alone already scores 0.965 on our accuracy metric. After panel repair, 9 of 30 metastasis candidates pass.">
 
   <div class="scene__text">
     <p class="eyebrow rv">Rejection</p>
     <h2 class="display rv rv-d1">The gate refused.</h2>
     <p class="body-p rv rv-d2">
-      203 candidate evaluations on TCGA-KIRC (kidney cancer) across four tasks and two gene panels.
-      The textbook HIF-axis compound — Opus 4.7's own top proposal — refused.
-      CA9 alone saturates AUROC at 0.965.
+      The original TCGA-KIRC layer rejected 203 initial evaluations. After panel repair,
+      9 of 30 expanded-panel metastasis candidates passed. CA9 alone saturates
+      tumor-normal AUROC at 0.965, so CA9-dominated compounds are refused.
     </p>
     <div style="margin-top:28px;" class="rv rv-d3">
       <div class="rej-stats">
         <div>
-          <div class="rej-num rej-num--refused" id="count-refused">194</div>
+          <div class="rej-num rej-num--refused" id="count-refused">224</div>
           <div class="rej-num-label">refused</div>
         </div>
         <div>
           <div class="rej-num rej-num--pass" id="count-pass">9</div>
-          <div class="rej-num-label">survived</div>
+          <div class="rej-num-label">repair pass</div>
         </div>
       </div>
     </div>
@@ -1264,7 +1264,7 @@ body {
 
   <div class="scene__visual" style="align-items:flex-start;padding-top:64px;">
     <div style="width:100%;">
-      <div class="mono-label rv rv-d1" style="margin-bottom:12px;">203 candidate evaluations · TCGA-KIRC · 5-test BH-FDR gate</div>
+      <div class="mono-label rv rv-d1" style="margin-bottom:12px;">233 internal evaluations · 203 initial rejects + 9/30 repair pass</div>
       <div class="rej-grid" id="rej-grid"></div>
       <div style="margin-top:12px;display:flex;align-items:center;gap:16px;" class="rv rv-d5">
         <div style="display:flex;align-items:center;gap:6px;">
@@ -1450,7 +1450,7 @@ body {
     <p class="body-p rv rv-d3">
       H3 K27M diffuse midline glioma — a pediatric brainstem cancer.
       Universally fatal<span style="color:var(--sage-dk);font-weight:600"> — until August 2025.</span>
-      The same gate that rejected 194 of 203 on kidney cancer is now pointed at brainstem.
+      The same failure-first architecture that rejected the initial kidney-cancer layer is now pointed at brainstem.
     </p>
     <div style="margin-top:20px;" class="rv rv-d4">
       <span class="badge badge--sage" style="font-size:13px;padding:7px 14px;">15 candidates · pre-registered queue</span>
@@ -1590,7 +1590,7 @@ body {
      SCENE 10 — Capability Overhang / Ablation (bonus) — dark
 ═══════════════════════════════════════════ -->
 <section class="scene scene--split scene--dark" id="s10"
-  data-narration="Swap the Skeptic model. Sonnet 4.6 with extended thinking: zero of sixty gate agreements. Permanent rejection — the stance breaks. Opus 4.7 base calibration, no thinking: ten of sixty PASS. And there's one more thing: Opus 4.7 wrote the kill tests for four new skeletons before seeing any gate results. All four failed as predicted. The model knows when it's wrong before testing. That is the swap you cannot make.">
+  data-narration="Swap the Skeptic model. Sonnet 4.6 with extended thinking: zero of sixty gate agreements. Permanent rejection — the stance breaks. Opus 4.7 under its available inference mode: ten of sixty PASS. And there's one more thing: Opus 4.7 wrote the kill tests for four new skeletons before seeing any gate results. All four failed as predicted. The model knows when it's wrong before testing. That is the swap you cannot make.">
 
   <div class="scene__text">
     <p class="eyebrow rv">Capability Overhang · E2 Ablation</p>
@@ -1739,7 +1739,7 @@ body {
   function startCounter() {
     var el = document.getElementById('intro-counter-num');
     var startTime = performance.now();
-    var DURATION = 900, TARGET = 194;
+    var DURATION = 900, TARGET = 224;
     function step(ts) {
       var t = Math.min((ts - startTime) / DURATION, 1);
       var eased = 1 - Math.pow(1 - t, 3);
@@ -1792,9 +1792,9 @@ requestAnimationFrame(raf);
 /* ── Rejection grid build ── */
 (function buildGrid() {
   const grid = document.getElementById('rej-grid');
-  const TOTAL = 203, COLS = 14;
+  const TOTAL = 233, COLS = 14;
   const survivorSet = new Set();
-  for (let i = 194; i < 203; i++) survivorSet.add(i);
+  for (let i = 224; i < 233; i++) survivorSet.add(i);
   for (let i = 0; i < TOTAL; i++) {
     const cell = document.createElement('div');
     cell.className = 'rej-cell';
@@ -1851,7 +1851,7 @@ const sceneObserver = new IntersectionObserver((entries) => {
         cells.forEach(cell => { if (cell.dataset.survivor) cell.classList.add('survivor'); });
       }, totalDelay);
       if (window.countUp) {
-        const cu = new window.countUp.CountUp('count-refused', 194, { duration: 1.2, startVal: 0 });
+        const cu = new window.countUp.CountUp('count-refused', 224, { duration: 1.2, startVal: 0 });
         cu.start();
       }
     }

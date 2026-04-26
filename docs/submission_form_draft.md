@@ -66,7 +66,7 @@ Discord update; Top 6 advance to final panel review on **2026-04-28
 | Criterion | Weight | Our load-bearing evidence |
 |---|---|---|
 | Impact (problem-statement fit, real-world potential) | 30% | **Platform generalization (2026-04-26, same gate + thresholds):** COAD (colon) 15/22 survivors (Δ+0.107 — highest of any run); LGG (brain glioma) 2/25 survivors (**AUROC 0.840** — TWIST1×MKI67 interaction term); LIHC (liver) 0/26 (designed negative, gate refuses correctly); KIRC (kidney) Stage 23/28 survivors. 7 disease contexts total. DIPG (pediatric brain cancer) generalization (7/15 Tier-2 supported, panobinostat-CED-MTX110 lead); Tier-1 prognostic-substrate gate on PBTA v15 (pediatric brain tumor atlas, n=192, 182 events) refuses to mint substrate-PASS on 0/4 — cross-disease falsification consistent with KIRC's 194/203 reject pattern; **IPF (lung fibrosis) Run #1 (2026-04-25): same engine, 1/5 SUPPORTED + 4 INSUFFICIENT, Skeptic caught two Advocate fabrications about prior trial design (RAINIER + Raghu 2017) — runtime demonstration of dual-role context isolation; $58.28, 32 min**; DatasetCard CLI = 30-min plug-in for any disease cohort |
-| Demo (working, holds up live, cool to watch) | 25% | 3-minute Loom (current 2:23-2:47 cut with KIRC + DIPG + IPF tags), 24 reproducible plots, `make smoke` no-API health check + `make demo` guided Opus handoff, **2 live Routine session URLs** (PhL-8d `session_01CgsJYAP…` + PhL-10 `session_01XGse8X…`) |
+| Demo (working, holds up live, cool to watch) | 25% | 3-minute Loom (current 2:23-2:47 cut with KIRC + DIPG + IPF tags), 24 reproducible plots, `make smoke` no-API health check + `make demo` guided Opus handoff, **2 Routine sessions with FAIL+PASS dual verdict** (static evidence in `results/live_evidence/`) |
 | Opus 4.7 use (creative, beyond basic, surprises) | 25% | 180-call cross-model ablation (10/60 vs 0/60 PASS gap); **Opus 4.6 vs 4.7: 53.3%→66.7% (+13.3pp)** — 4.7 PASS 10/10 clean survivors, NEEDS_MORE_TESTS 10/10 stress-test, zero over-commitment; **prospective meta-calibration (PhI-1): Opus wrote kill-tests for 4 skeletons before gate; 0/4 survived; all 4 predicted failures confirmed**; PhL-15 thinking-mode confound resolution; PhL-13 memorization audit (0/10 zero-shot retrieval); 1M-context cross-reasoning synthesis on full failure history |
 | Depth & execution (push past first idea, real craft) | 20% | Self-killed our own H1 3-gene extension (PhL-1) on a separately pre-registered survival gate; ICP causal-invariance + anchor regression + Knockoffs + Westfall-Young + AUPRC stack; 107/107 current `make test` target + audit clean on package review; **IMmotion150 treatment-arm confound control: HR 1.361 (unadjusted) → 1.365 after controlling for immunotherapy vs VEGF-inhibitor arm — signal increases, confirming therapy-independence** |
 
@@ -161,12 +161,12 @@ the specific metric pattern (`perm_p=0.049` is weaker than `0.001`;
 `ci_lower=0.61` is marginal) and emits PASS / FAIL / NEEDS_MORE_TESTS.
 (3) Interpreter writes the mechanism hypothesis and the "what this is
 not" paragraph. **180-call cross-model ablation: Sonnet 4.6 = 0/60 PASS on
-gate-PASS candidates (full dissent collapse); Opus 4.7 = 10/60. Gap is
+gate-PASS candidates (full dissent collapse); Opus 4.7 = 10/60. The gap reflects
 pre-training calibration — Opus wins even without extended thinking.**
 **Memorization audit: 0/10 zero-shot retrieval of TOP2A−EPAS1 — rebuts
 memorization concern.** **IPF Run #1: Skeptic caught two Advocate
 fabrications about prior trial design — claiming clinical precedent that did
-not exist. Context isolation working at runtime.** **Opus 4.6 vs 4.7 (60
+not exist. Context isolation verified at runtime.** **Opus 4.6 vs 4.7 (60
 calls each): abstention-calibration rate 53.3%→66.7% (+13.3pp); 4.7 PASS
 10/10 on clean survivors, NEEDS_MORE_TESTS 10/10 on stress-test (zero
 over-commitment vs 4.6's 20%) — gap is in graded abstention, not binary
@@ -181,16 +181,15 @@ skeletons before gate ran; 0/4 survived; all 4 predicted failures confirmed.**
 three public-beta sessions (Proposer, Skeptic, Interpreter) with
 structured-JSON handoff. The Skeptic never sees the Proposer's
 reasoning tokens — context isolation is the load-bearing design
-choice. Path B proves single-agent with full built-in toolset end-to-end.
+choice. Path B: single-agent with full built-in toolset, end-to-end.
 Path A proves a sequential three-session chain on real kidney cancer data
 (verified live: Skeptic cited the gate's exact delta score). Path C proves
 Claude Code Routines as the **methodology persistence layer**:
 `lacuna-scientific-oracle` receives an equation via API trigger, autonomously
 runs `make venv` + `make audit` + `falsification_sweep.py`
 (1000 perm/bootstrap, n=505), emits structured PASS/FAIL verdict —
-pre-registered kill-tests firing without being asked (live sessions:
-`session_01CgsJYAPdvhJJwTuBt7QZLZ`; `session_01XGse8XYFtv3C1aKLZeMH9t` —
-static evidence in SUMMARY.md if URLs expire). Session events persist
+pre-registered kill-tests firing without being asked (static evidence:
+`results/live_evidence/`). Session events persist
 server-side; sessions can be restored from the event log (brain/body
 decoupling). Memory stores accumulate rejection lessons cross-session.
 IPF Run #1 ($58.28, 32 min): Skeptic caught two fabricated trial-design
@@ -202,15 +201,16 @@ claims — what a single-context harness cannot catch.
 
 **Best use of Claude Managed Agents ($5K).** Public-beta-only Managed
 Agents orchestration with isolated sessions: three live paths — B
-(single-agent `agent_toolset_20260401`), A (PhL-9 sequential
+(single-agent with full built-in toolset), A (sequential
 three-session chain on real kidney cancer data, structured-JSON handoff), C
-(PhL-8d metastasis FAIL+PASS `session_01CgsJYAP…`; PhL-10 stage FAIL+PASS `session_01XGse8X…` — 2 live sessions). Plus Memory public beta (integrated
+(metastasis FAIL+PASS dual verdict + stage FAIL+PASS — static evidence in
+`results/live_evidence/`). Plus Memory public beta (integrated
 2026-04-23 day-of): Skeptic writes rejection lessons; fresh sessions
 read, quote, refine them; server-side persistence verified via raw
-`/v1/memory_stores/*` API. Our own H1 LLM-SR extension was killed by
-the separately pre-registered IMmotion150 survival replay (PhL-1).
-**IPF Run #1: Skeptic caught two Advocate fabrications about RAINIER
-+ Raghu 2017 — single-harness pipelines cannot catch this.**
+`/v1/memory_stores/*` API. Our own 3-gene extension was killed by
+the separately pre-registered IMmotion150 survival replay.
+**IPF Run #1: Skeptic caught two Advocate fabrications about prior
+trial design — single-harness pipelines cannot catch this.**
 Verification as working code.
 
 ---

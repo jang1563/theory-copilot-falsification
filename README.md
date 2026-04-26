@@ -4,26 +4,26 @@
 
 # Lacuna
 
-> *Rejects 194 of 203 candidate laws — including its own.*
+> *Rejects 203 initial candidate evaluations, repairs one named failure class, then kills its own extension.*
 > *(385 total across 14 task × panel configs → [Key Numbers ↓](#key-numbers-at-a-glance))*
 
 <img src="https://img.shields.io/badge/Python-3.10--3.13-1E3A8A?style=flat-square" alt="Python 3.10-3.13" />
 <img src="https://img.shields.io/badge/Built_with-Claude_Opus_4.7-1E3A8A?style=flat-square" alt="Built with Claude Opus 4.7" />
 <img src="https://img.shields.io/badge/Hackathon-Cerebral_Valley_2026-faf9f5?labelColor=141413&style=flat-square" alt="Cerebral Valley Hackathon 2026" />
 
-The gate rejected 194 of 203. What survived is `TOP2A − EPAS1`. A pre-registered deterministic falsification gate running under Opus 4.7 — it cannot be negotiated, rejects its own proposed laws, then interprets what remains. When the system's own best downstream output (a 3-gene extension) was tested on independent data, the independently pre-registered IMmotion150 survival gate also rejected it.
+The original classification campaign rejected 203 of 203 initial candidate evaluations. After the loop diagnosed panel absence and repaired only that cause, the same five-test classification gate accepted 9 of 30 expanded-panel metastasis candidates, led by `TOP2A − EPAS1`. When the system's own best downstream output (a 3-gene extension) was tested on independent data, the independently pre-registered IMmotion150 survival gate also rejected it.
 
-**The rejections are the product working correctly.** A gate that rejects 0% is not falsification — it is a pipeline that reports every answer it generates. 194 rejections on tasks where a single gene already explains the signal (the gate refuses to call one-gene tasks multi-gene discoveries) + 9 acceptances on a harder 45-gene task where the signal is genuinely distributed = a gate that is calibrated, not permissive. Unlike AI-for-Science systems that use an LLM-as-judge (AI Scientist, POPPER, standard eval frameworks), this gate is plain Python — Opus 4.7 cannot renegotiate the threshold mid-run. In practice: on an independent IPF run the Skeptic (separate context, never sees Proposer tokens) caught 2 fabricated trial-design claims in 32 min for $58.28 — output a standard pipeline would have reported as findings.
+**The rejections are the product working correctly.** A gate that rejects 0% is not falsification — it is a pipeline that reports every answer it generates. The initial rejection layer shows the gate refusing to call one-gene-saturated tasks multi-gene discoveries; the repaired layer shows the same classification gate accepting a harder 45-gene task when the named failure cause is fixed. Unlike AI-for-Science systems that use an LLM-as-judge, this gate is plain Python — Opus 4.7 cannot renegotiate the threshold mid-run. In practice: on an independent IPF run the Skeptic (separate context, never sees Proposer tokens) caught 2 fabricated trial-design claims in 32 min for $58.28 — output a standard pipeline would have reported as findings.
 
-Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 2026 · **Demo companion:** [watch](https://jang1563.github.io/lacuna-falsification/demo.html) · **Interactive story:** [explore](https://jang1563.github.io/lacuna-falsification/story.html)
+Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 2026 · **Demo video:** [▶ YouTube](https://youtu.be/ZfFD84JmdQg) · **Demo companion:** [watch](https://jang1563.github.io/lacuna-falsification/demo.html) · **Interactive story:** [explore](https://jang1563.github.io/lacuna-falsification/story.html)
 
-| **194 / 203 rejected** | **AUROC 0.726** | **HR 1.36** on IMmotion150 | **Best of 990 two-gene pairs** |
+| **203 / 203 initial rejected** | **9 / 30 repaired-panel pass** | **HR 1.36** on IMmotion150 | **Best of 990 two-gene pairs** |
 |---|---|---|---|
-| 5-test gate · TCGA-KIRC (kidney cancer, n=505) | 45-gene panel · M0/M1 (no/yes metastasis) | PFS · n=263 · p=0.0003 | Rank 1 of all C(45,2) combinations |
+| Original 11-gene HIF-axis layer | 45-gene panel · M0/M1 · AUROC 0.726 | PFS · n=263 · p=0.0003 | Rank 1 of all C(45,2) combinations |
 
 > **Judge path:** [1. Watch demo companion →](https://jang1563.github.io/lacuna-falsification/demo.html) · [2. Read discovery story](https://jang1563.github.io/lacuna-falsification/story.html) · [3. Verify evidence](docs/ARTIFACT_INDEX.md) · [4. Run smoke](#quick-start)
 >
-> **Evidence surfaces:** [Dashboard](https://jang1563.github.io/lacuna-falsification/) · [Full rejection log](https://jang1563.github.io/lacuna-falsification/rejection-log.html) · [Paper PDF](docs/paper/paper.pdf) · [Demo walkthrough](docs/demo_walkthrough.md)
+> **Evidence surfaces:** [Dashboard](https://jang1563.github.io/lacuna-falsification/) · [Full rejection log](https://jang1563.github.io/lacuna-falsification/rejection-log.html) · [FMAI paper](docs/paper/paper_fmai.md) · [Demo walkthrough](docs/demo_walkthrough.md)
 
 ---
 
@@ -31,7 +31,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 
 | Metric | Value |
 |---|---|
-| Candidate evaluations (classification gate) | [**385** across 14 task × panel configs](results/track_a_task_landscape/SUMMARY.md) (KIRC: 194/203 reject · platform expansion: 61/101 reject · new disease tracks: 20/81 accept; **60 non-KIRC survivors total** = 40 platform + 20 new-disease) |
+| Candidate evaluations (classification gate) | [**385** across 14 task × panel configs](results/track_a_task_landscape/SUMMARY.md) (KIRC original layer: 203/203 rejected; KIRC panel repair: 9/30 accepted; platform expansion: 61/101 reject; new disease tracks: 20/81 accept; **60 non-KIRC survivors total** = 40 platform + 20 new-disease) |
 | 6-verdict replication chain | **3 PASS · 2 pre-registered FAIL · 1 honest FAIL** · 5 cohorts · 3 platforms |
 | Rashomon rank within all C(45,2) = 990 two-gene pairs | **1 / 990** |
 | Memorization check: zero-shot TOP2A−EPAS1 retrieval rate | **0 / 10** probes |
@@ -50,7 +50,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 
 | Axis | Weight | Entry point |
 |---|---|---|
-| **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS · Haiku 14/60 (over-accepts) · Sonnet 0/60 (permanent dissent even with extended thinking) · [PhL-15](results/live_evidence/phl15_adaptive_thinking/SUMMARY.md): gap is Opus base calibration, not thinking budget |
+| **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS · Haiku 14/60 (over-accepts) · Sonnet 0/60 (permanent dissent even with extended thinking) · [PhL-15](results/live_evidence/phl15_adaptive_thinking/SUMMARY.md): model identity changes gate-alignment behavior under available inference modes |
 | **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58.28 · 32 min) · **7 disease contexts** (ccRCC · COAD · LGG · LIHC · DIPG · IPF · PAAD) · platform generalization: [COAD 15/22](results/track_a_task_landscape/coad_msi/) · [LGG 2/25 AUROC 0.840](results/track_a_task_landscape/gbm_idh/) · [LIHC MVI 6/29 AUROC 0.702](results/track_a_task_landscape/lihc_mvi/) · [IPF CEP 6/25 AUROC 0.757](results/track_a_task_landscape/ipf_lgrc/) · [PAAD OS 8/27 AUROC 0.707](results/track_a_task_landscape/paad_survival/) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
 | **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; ~1 min) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
 | **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
@@ -66,7 +66,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A (sequential 3-session chain) · Path B (single agent, `agent_toolset_20260401`) · Path C (Routines `/fire` HTTP client)
 - [`results/live_evidence/04_managed_agents_e2e.log`](results/live_evidence/04_managed_agents_e2e.log) — live agent/environment/session/stream trace
 - Two Skills: [`falsification-gate`](.claude/skills/falsification-gate/SKILL.md) (gate a candidate) + [`pre-register-claim`](.claude/skills/pre-register-claim/SKILL.md) (lock kill-tests before fit); compose in sequence
-- **Path C live runs:** PhL-8d ([`session_01CgsJYAPdvhJJwTuBt7QZLZ`](https://claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ)) — dual-verdict oracle, FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS) · PhL-10 stage oracle ([`session_01XGse8XYFtv3C1aKLZeMH9t`](https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t)) — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run — local PySR stage_expanded: 0.689) · PhL-8c ([`session_015ot5hkJgSiBoWNA51fjZ1k`](https://claude.ai/code/session_015ot5hkJgSiBoWNA51fjZ1k)): single-equation PASS
+- **Path C live runs:** PhL-8d (`session_01CgsJYAPdvhJJwTuBt7QZLZ`, login required) — dual-verdict oracle, FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS); static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/) · PhL-10 stage oracle (`session_01XGse8XYFtv3C1aKLZeMH9t`, login required) — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run — local PySR stage_expanded: 0.689); static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/) · PhL-8c (`session_015ot5hkJgSiBoWNA51fjZ1k`, login required): single-equation PASS
 - Brain/body decoupling: `lacuna persist-events` → `replay-events` — session event log survives harness crashes; re-injects client-originated events into a fresh session
 - [`docs/managed_agents_evidence_card.md`](docs/managed_agents_evidence_card.md) — Managed Agents + Routines live evidence (12 session-level artefacts from the 24-PhL ledger); per-session event counts, wall-clock times, costs; cross-reference table for all 3 paths
 - **Context isolation in practice:** IPF Run #1 [`results/external_validation_ipf/`](results/external_validation_ipf/) — Skeptic (separate context, never sees Advocate tokens; "Advocate" = rescue-engine Proposer in IPF/DIPG context) caught 2 fabricated trial-design claims. $58.28 · 32 min.
@@ -119,15 +119,15 @@ flowchart TB
     P[Proposer · Opus 4.7 · emits 3-5 law families + negative controls]:::opus
     Sr[Searcher · PySR · symbolic regression · local, no API]:::local
     G[Falsification Gate · Python · 5 tests + BH-FDR pre-registered]:::gate
-    F[194 REJECTED · perm-p / ci-lower / delta-baseline / decoy]:::fail
+    F[203 INITIAL REJECTED · perm-p / ci-lower / delta-baseline / decoy]:::fail
     I[Interpreter · Opus 4.7 · mechanism hypothesis + testable prediction]:::opus
 
     Sk -. "kill tests locked in" .-> G
     P -. "writes kill tests" .-> Sk
     P -- "law families" --> Sr
-    Sr -- "203 candidates" --> G
-    G -- "FAIL 194/203" --> F
-    G -- "PASS 9/203" --> I
+    Sr -- "initial layer" --> G
+    G -- "FAIL 203/203" --> F
+    G -- "REPAIR: PASS 9/30" --> I
     I -. "next iteration" .-> Sk
 ```
 
@@ -226,7 +226,7 @@ Benjamini-Hochberg FDR across the family, and **the gate uses the FDR-adjusted p
 > deterministic threshold — this is the empirical answer to
 > "couldn't the model just try harder?"
 
-![Rejection landscape — 194/203 KIRC candidate evaluations rejected across 7 KIRC task × panel configurations (14 total with multi-disease expansion; see Broader Program)](docs/figures/rejection_landscape.png)
+![Rejection landscape — original KIRC layer rejected 203/203 initial evaluations; repaired expanded-panel metastasis layer accepted 9/30](docs/figures/rejection_landscape.png)
 
 > **Interactive version:** [`results/rejection_log.html`](results/rejection_log.html) — filterable by cohort, task, panel, and fail reason; every candidate's full metric bundle.
 
@@ -270,8 +270,9 @@ the feature space "no one has cracked yet." Path C is Lacuna's answer.
 > **Methodology framing.** Lacuna is not a biological discovery tool — it is a
 > *methodology proof*. `TOP2A − EPAS1` is known biology (Brannon 2010 ccA/ccB
 > axis). A methodology that re-derives known truth from unconstrained search
-> under a gate it cannot rationalize past proves it can find unknown truth by
-> the same mechanism. **Routines are the persistence layer for that
+> under a gate it cannot rationalize past supports face validity for future
+> unknown-target searches by the same mechanism. **Routines are the persistence
+> layer for that
 > methodology**: pre-registered kill-tests fire without being asked — on every
 > commit, every scheduled interval, no human needed to remember. A discovery
 > discipline that only runs when researchers remember to run it is not a
@@ -297,8 +298,8 @@ The Routine clones the repo, runs `make venv && make audit`, then runs
 `falsification_sweep.py` independently on each task/dataset pair, and emits
 structured verdict blocks + a dual summary — no human action after the fire call.
 
-Live session PhL-8d: [`session_01CgsJYAPdvhJJwTuBt7QZLZ`](https://claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ)
-Live session PhL-10: [`session_01XGse8XYFtv3C1aKLZeMH9t`](https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t)
+Live session PhL-8d: `session_01CgsJYAPdvhJJwTuBt7QZLZ` (login required — static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/))
+Live session PhL-10: `session_01XGse8XYFtv3C1aKLZeMH9t` (login required — static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/))
 Fire script: [`src/phl8d_dual_verdict_fire.py`](src/phl8d_dual_verdict_fire.py)
 
 ```bash

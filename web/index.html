@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lacuna — Falsification-First Biological Law Discovery</title>
-<meta name="description" content="Lacuna rejects 194 of 203 candidate laws — including its own — before accepting a compact two-gene ccRCC survivor that replicates on independent external cohorts.">
+<meta name="description" content="Lacuna rejects 203 initial candidate evaluations, repairs panel absence, then kills its own extension before reporting a compact two-gene ccRCC survivor.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -397,7 +397,7 @@ tr:last-child td { border-bottom: none; }
   <div class="rail__meta">
     <div>Built with <strong>Opus 4.7</strong></div>
     <div>TCGA-KIRC · n = 505</div>
-    <div>203 candidates · 194 reject</div>
+    <div>203 initial rejects · 9/30 repair pass</div>
     <div style="margin-top:8px"><a href="https://github.com/jang1563/lacuna-falsification" target="_blank">↗ GitHub</a></div>
   </div>
 </nav>
@@ -408,13 +408,13 @@ tr:last-child td { border-bottom: none; }
   <!-- ── Hero ── -->
   <section class="section" id="hero">
     <p class="eyebrow">Built with Claude Opus 4.7 · hackathon submission 2026</p>
-    <div class="hero-rule">The gate rejected 194 of 203.<br>What survived is <code>TOP2A&nbsp;&minus;&nbsp;EPAS1</code>.</div>
+    <div class="hero-rule">The gate rejected 203 initial evaluations.<br>What survived after repair is <code>TOP2A&nbsp;&minus;&nbsp;EPAS1</code>.</div>
     <p class="hero-sub">A pre-registered, deterministic falsification gate running under Opus 4.7. It cannot be negotiated. It rejects its own proposed laws. Then it interprets what remains.</p>
 
     <div class="metrics-grid">
       <div class="metric">
-        <div class="metric__num metric__num--red">194 / 203</div>
-        <div class="metric__label">Candidate laws<br>rejected</div>
+        <div class="metric__num metric__num--red">203 / 203</div>
+        <div class="metric__label">Initial evaluations<br>rejected</div>
       </div>
       <div class="metric">
         <div class="metric__num metric__num--sage">0.726</div>
@@ -604,14 +604,14 @@ tr:last-child td { border-bottom: none; }
   <!-- ── Rejection surface ── -->
   <section class="section" id="rejection">
     <div class="section__head">
-      <span class="eyebrow">The rejection surface · 194 of 203</span>
+      <span class="eyebrow">The rejection surface · 203 initial rejects</span>
       <h2>What the gate killed</h2>
-      <p class="section__sub">Four ccRCC task × panel combinations yielded zero survivors — including every Opus 4.7-proposed textbook HIF-axis law. The gate is not sparing its own side.</p>
+      <p class="section__sub">The original ccRCC task layer yielded zero survivors, including CA9-dominated HIF/tubule-identity contrasts with high AUROC but too little gain over single-gene baselines. The gate is not sparing its own side.</p>
     </div>
 
     <div id="chart-rejection"></div>
     <p style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--slate-text);margin-bottom:24px">
-      203 candidate rows across 7 task × panel groups. 9 pass (45-gene metastasis only). 194 reject.
+      Original layer: 203 initial evaluations rejected. Repaired layer: 9/30 expanded-panel metastasis candidates pass.
     </p>
 
     <table>
@@ -676,7 +676,7 @@ tr:last-child td { border-bottom: none; }
         <span class="link-item__icon">⊗</span>
         <span class="link-item__body">
           <span class="link-item__title">Interactive rejection log</span>
-          <span class="link-item__sub">203 candidates + 1 external replay · filter by verdict</span>
+          <span class="link-item__sub">Initial rejects, repaired survivors, and external replay · filter by verdict</span>
         </span>
         <span class="link-item__arrow">→</span>
       </a>
@@ -731,7 +731,7 @@ tr:last-child td { border-bottom: none; }
     </table>
 
     <div class="callout">
-      <strong>Sonnet 4.6 cannot hold the Skeptic stance.</strong> It dissents on 100% of gate-PASS candidates — rejecting the textbook HIF-axis law and the TOP2A-EPAS1 survivor indistinguishably. Opus 4.7 draws the line where the pre-registered thresholds draw it: PASS when gate metrics warrant it (10 calls), dissent when the margin is thin. This is Opus 4.7 base calibration without extended thinking — making the gap a statement about RLHF / pre-training instruction-following, not about thinking budget.
+      <strong>The Skeptic role is model-sensitive.</strong> In this six-candidate audit, Sonnet 4.6 dissents on 100% of gate-PASS candidates, while Opus 4.7 issues PASS only when gate metrics warrant it (10 calls) and abstains when the margin is thin. This shows model identity changes gate-alignment behavior under the available inference modes; it does not identify a causal mechanism.
     </div>
 
     <div class="section__head" style="margin-top:40px">
@@ -884,15 +884,15 @@ tr:last-child td { border-bottom: none; }
         <span class="link-item__icon">⊗</span>
         <span class="link-item__body">
           <span class="link-item__title">Interactive rejection log</span>
-          <span class="link-item__sub">203 candidate evaluations + 1 external replay · filter by verdict, task, panel · every failed law with its fail reason</span>
+          <span class="link-item__sub">Initial rejects, repaired survivors, and external replay · every failed law with its fail reason</span>
         </span>
         <span class="link-item__arrow">→</span>
       </a>
-      <a href="https://github.com/jang1563/lacuna-falsification/blob/main/docs/paper/paper.pdf" class="link-item">
+      <a href="https://github.com/jang1563/lacuna-falsification/blob/main/docs/paper/paper_fmai.md" class="link-item">
         <span class="link-item__icon">⊞</span>
         <span class="link-item__body">
-          <span class="link-item__title">Methodology paper (PDF)</span>
-          <span class="link-item__sub">6 pages · falsification gate design · results · POPPER / Sakana-v2 / SPOT benchmark context</span>
+          <span class="link-item__title">FMAI paper draft</span>
+          <span class="link-item__sub">Failure taxonomy · trace diagnostics · panel repair · self-kill</span>
         </span>
         <span class="link-item__arrow">→</span>
       </a>

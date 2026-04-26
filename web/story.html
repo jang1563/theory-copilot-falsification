@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lacuna — Discovery Story</title>
-<meta name="description" content="A falsification-first loop rejected 194 of 203 candidate biological laws. Only Opus 4.7 maintains the dual role that makes this possible.">
+<meta name="description" content="A falsification-first loop rejected 203 initial candidate evaluations, repaired panel absence, then accepted 9 of 30 expanded-panel candidates.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -586,7 +586,7 @@ body {
     <span class="nav-panel__num">04</span>
     <span class="nav-panel__info">
       <span class="nav-panel__name">Rejection</span>
-      <span class="nav-panel__desc">194 of 203 refused · hover cells for gate detail</span>
+      <span class="nav-panel__desc">203 initial refused · 9/30 repaired pass · hover cells for gate detail</span>
     </span>
   </button>
   <button class="nav-panel__beat" data-beat="beat-5">
@@ -630,7 +630,7 @@ body {
     <div class="nav-panel__callout-item">E2 confound: thinking mode asymmetry (Beat 03 ▼)</div>
     <div class="nav-panel__callout-item">203 candidate equations — hover any cell (Beat 04 ▼)</div>
     <div class="nav-panel__callout-item">13-test rigor extension: AUPRC, Rashomon, Cohen's d (Beat 05 ▼)</div>
-    <div class="nav-panel__callout-item">Methodology validation: known result found unconstrained → method proven (Beat 05 ▼)</div>
+    <div class="nav-panel__callout-item">Methodology validation: known result found unconstrained -> supports face validity (Beat 05 ▼)</div>
     <div class="nav-panel__callout-item">6-node replication chain — 3 PASS + 1 informative FAIL + 1 pre-reg FAIL + 1 honest FAIL (Beat 06 ▼)</div>
     <div class="nav-panel__callout-item">Live oracle — PhL-8d dual verdict, clickable session URL (Beat 07)</div>
   </div>
@@ -682,8 +682,8 @@ body {
         <div class="de-gate__sub">5 pre-registered tests<br>deterministic · BH-FDR</div>
         <div class="de-gate__tally">
           <div class="de-gate__in">203 enter</div>
-          <div class="de-gate__fail">194 rejected ✗</div>
-          <div class="de-gate__pass">9 survived ✓</div>
+          <div class="de-gate__fail">203 initial rejected ✗</div>
+          <div class="de-gate__pass">9/30 repaired pass ✓</div>
         </div>
         <div class="de-gate__rule">"Cannot be rationalized past."</div>
       </div>
@@ -1004,21 +1004,21 @@ body {
 <section class="beat" id="beat-4">
   <div class="beat__text">
     <div class="eyebrow">04 · Rejection</div>
-    <h2>194 of 203 refused.</h2>
+    <h2>203 initial refused. 9/30 repaired pass.</h2>
     <p>CA9, the go-to kidney cancer gene in every review for two decades, was too dominant — it already reaches AUROC 0.965 as a single gene. The gate's rule: if one gene does it, a compound law isn't a discovery.</p>
     <p>On four tasks — tumor vs. normal, cancer stage, 5-year survival, metastasis (11-gene panel) — <strong>not one of 100+ candidates survived</strong>. The gate was working.</p>
-    <p>One task unlocked when the panel expanded from 11 to 45 genes: <strong>9 of 30 passed</strong>. Same gate. Same thresholds. The bar never moved.</p>
+    <p>One task unlocked when the panel expanded from 11 to 45 genes: <strong>9 of 30 passed</strong>. Same classification gate. Same thresholds. The bar never moved.</p>
     <p style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--slate-text)">Hover any cell below to see the gate detail for that candidate.</p>
     <div class="stat-row">
-      <div class="stat"><div class="stat__num stat__num--red">194</div><div class="stat__label">rejected<br>of 203</div></div>
-      <div class="stat"><div class="stat__num stat__num--sage">9</div><div class="stat__label">survivors<br>on metastasis task</div></div>
+      <div class="stat"><div class="stat__num stat__num--red">203</div><div class="stat__label">initial<br>rejected</div></div>
+      <div class="stat"><div class="stat__num stat__num--sage">9 / 30</div><div class="stat__label">repaired-panel<br>pass</div></div>
     </div>
-    <div class="beat__note">203 candidate evaluations · TCGA-KIRC n=505 · five-test BH-FDR gate, pre-registered.</div>
+    <div class="beat__note">Original layer: 203/203 rejected · Repaired metastasis layer: 9/30 pass · TCGA-KIRC n=505.</div>
   </div>
   <div class="beat__visual">
     <div style="width:100%;">
       <div style="font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.08em;text-transform:uppercase;color:var(--slate-text);margin-bottom:10px;">
-        203 candidate evaluations · TCGA-KIRC · 5-test BH-FDR gate
+        233 internal evaluations · 203 initial reject + 9/30 repair pass
       </div>
       <div class="rej-progress-wrap">
         <div class="rej-progress-track"><div class="rej-progress-fill" id="rej-progress-fill"></div></div>
@@ -1034,11 +1034,11 @@ body {
 
   <!-- Beat 4 evidence drawer -->
   <div class="ev-section">
-    <button class="ev-trigger" data-drawer="ev-drawer-4">Deep dive — task landscape: 203 candidates by task × panel</button>
+    <button class="ev-trigger" data-drawer="ev-drawer-4">Deep dive — task landscape: initial rejects and repair pass</button>
     <div class="ev-drawer" id="ev-drawer-4">
       <div class="ev-body">
         <div class="ev-head">Task Landscape — Why Most Tasks Hit Zero</div>
-        <div class="ev-sub">203 candidates · 7 task groups · same 5-test gate applied uniformly</div>
+        <div class="ev-sub">203 initial rejects + 9/30 repaired-panel pass · five-test classification gate applied uniformly</div>
         <div style="overflow-x:auto;">
           <table class="gate-table" style="margin-bottom:20px;">
             <thead>
@@ -1274,7 +1274,7 @@ body {
     <h2>Then we killed our own extension.</h2>
     <p>The two-gene law replicated on an independent Phase-2 immunotherapy trial cohort (IMmotion150) with the same pre-registered survival gate. HR 1.36, log-rank p=0.0003.</p>
     <p>High-score patients survived 12.88 months median PFS vs 5.35 months for low-score — a 7.53-month gap in an independent cohort we never saw during discovery.</p>
-    <p>Then Opus proposed a three-gene extension: TOP2A − EPAS1 + SLC22A8. We ran the same gate. It failed. p=0.117. The gate reported FAIL on our own best output. That is the point.</p>
+    <p>Then Opus proposed a three-gene extension: TOP2A − (EPAS1 + SLC22A8). We ran the same external survival replay gate. It failed. p=0.117. The gate reported FAIL on our own best output. That is the point.</p>
     <div class="beat__note">
       IMmotion150: McDermott et al. 2018 (PMID 29867230), Phase-2 RCT n=263 ·
       H1-loop extension: separate pre-registered gate, commit 60d3952.
@@ -1292,7 +1292,7 @@ body {
       <div class="km-stat"><div class="km-stat__val km-stat__val--sage">7.53 mo</div><div class="km-stat__label">Median PFS gap</div></div>
     </div>
     <div class="own-kill">
-      ✗ &nbsp; Three-gene extension (TOP2A − EPAS1 + SLC22A8) · same survival gate · <strong>KILLED</strong><br>
+      ✗ &nbsp; Three-gene extension (TOP2A − (EPAS1 + SLC22A8)) · same external survival gate · <strong>KILLED</strong><br>
       <span style="opacity:0.7;font-size:10px;">log-rank p = 0.117 · pre-registered · commit 60d3952</span>
     </div>
     <div style="padding:12px 16px;border-radius:6px;background:var(--bone-2);border-left:3px solid var(--amber);">
@@ -1389,10 +1389,10 @@ body {
                 <span class="repl-node__title">Own-kill · SLC22A8 3-gene extension</span>
                 <span class="repl-node__badge repl-node__badge--expected">pre-reg FAIL ✓</span>
               </div>
-              <div class="repl-node__sub">Opus proposed the extension · same gate · commit 60d3952</div>
+              <div class="repl-node__sub">Opus proposed the extension · same external survival gate · commit 60d3952</div>
               <div class="repl-node__detail">
                 <div class="repl-detail-inner">
-                  Opus 4.7 proposed adding SLC22A8 to TOP2A−EPAS1. Gate ran identically.<br>
+                  Opus 4.7 proposed adding SLC22A8 to TOP2A−EPAS1. The external survival replay gate ran identically.<br>
                   <strong>log-rank p = 0.117</strong> (threshold &lt; 0.05) · Cox HR p = 0.074 · C-index 0.566<br>
                   All 3 survival tests FAIL. Gate reported FAIL on our own best candidate. Pre-registered.
                 </div>
@@ -1506,20 +1506,20 @@ body {
           Same gate · same thresholds · same session — one equation rejected for content, one accepted for content. The gate discriminates; it does not optimise for acceptance.
         </div>
 
-        <a class="oracle-session-link" href="https://claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ" target="_blank" rel="noopener">
-          <span class="oracle-session-link__icon">↗</span>
+        <div class="oracle-session-link">
+          <span class="oracle-session-link__icon">📄</span>
           <span class="oracle-session-link__text">
-            <span class="oracle-session-link__label">PhL-8d · metastasis oracle</span>
-            <span class="oracle-session-link__id">session_01CgsJYAPdvhJJwTuBt7QZLZ</span>
+            <span class="oracle-session-link__label">Metastasis oracle · FAIL+PASS dual verdict</span>
+            <span class="oracle-session-link__id">static evidence: results/live_evidence/phl8d_dual_verdict/</span>
           </span>
-        </a>
-        <a class="oracle-session-link" href="https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t" target="_blank" rel="noopener" style="margin-top:6px;">
-          <span class="oracle-session-link__icon">↗</span>
+        </div>
+        <div class="oracle-session-link" style="margin-top:6px;">
+          <span class="oracle-session-link__icon">📄</span>
           <span class="oracle-session-link__text">
-            <span class="oracle-session-link__label">PhL-10 · stage oracle · CXCR4/EPAS1 PASS</span>
-            <span class="oracle-session-link__id">session_01XGse8XYFtv3C1aKLZeMH9t</span>
+            <span class="oracle-session-link__label">Stage oracle · CXCR4/EPAS1 PASS</span>
+            <span class="oracle-session-link__id">static evidence: results/live_evidence/phl10_stage_dual_verdict/</span>
           </span>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -1528,10 +1528,10 @@ body {
     <div class="mdg-wrap">
       <div class="mdg-hd">Multi-disease expansion · same gate · new Routine per disease</div>
       <div class="mdg-grid">
-        <a class="mdg-row mdg-row--pass" href="https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="mdg-row mdg-row--pass">
           <div class="mdg-left">
             <div class="mdg-disease">ccRCC Staging</div>
-            <div class="mdg-sub">CXCR4 / EPAS1 · stage_expanded (n=512) · ↗ live</div>
+            <div class="mdg-sub">CXCR4 / EPAS1 · stage_expanded (n=512)</div>
           </div>
           <div class="mdg-right">
             <div class="mdg-stat">
@@ -1540,7 +1540,7 @@ body {
             </div>
             <span class="mdg-tag">New Routine</span>
           </div>
-        </a>
+        </div>
         <div class="mdg-row mdg-row--pass">
           <div class="mdg-left">
             <div class="mdg-disease">Colon MSI-high</div>
@@ -1594,7 +1594,7 @@ body {
     <div class="eyebrow">08 · Trajectory</div>
     <h2>DIPG. 250+ failed trials. One approval.</h2>
     <p>Pediatric brainstem glioma. H3 K27M-mutant. Median overall survival ~11 months. No disease-modifying therapy for a decade — then dordaviprone was approved in August 2025 after a 10-year graveyard of failures.</p>
-    <p>The same gate that rejected 194 of 203 on kidney cancer is the loop pointed at brainstem. Fifteen candidates are currently in queue.</p>
+    <p>The same failure-first architecture that rejected the initial kidney-cancer layer is the loop pointed at brainstem. Fifteen candidates are currently in queue.</p>
     <p>The kidney cancer result is the proof of concept. A gate that recovered the published ccA/ccB axis from 45 genes — blind, without being told where to look — has earned the right to run on a disease where no answer has been published yet. The published law is the tip. The graveyard is the artifact.</p>
     <p style="font-family:var(--f-display);font-style:italic;color:var(--ink);margin-top:8px">For every scientist whose null results pushed the field forward but never made it into a paper.</p>
     <div class="traj-points">
@@ -1604,7 +1604,7 @@ body {
       </div>
       <div class="traj-point">
         <span class="traj-point__check">√</span>
-        <div><div class="traj-point__text">Same architecture as the ccRCC discovery</div><div class="traj-point__sub">the loop that rejected 194 of 203 on kidney is the loop pointed at brainstem</div></div>
+        <div><div class="traj-point__text">Same architecture as the ccRCC discovery</div><div class="traj-point__sub">the loop that rejected the initial kidney layer is pointed at brainstem</div></div>
       </div>
       <div class="traj-point">
         <span class="traj-point__check">√</span>
@@ -1764,12 +1764,12 @@ function runCapabilityCounter() {
 }
 
 // ── Beat 4: Rejection grid ──
-const SURVIVOR_IDX = new Set([4, 22, 44, 67, 88, 112, 139, 168, 200]);
+const SURVIVOR_IDX = new Set([224, 225, 226, 227, 228, 229, 230, 231, 232]);
 
 function buildRejGrid() {
   const grid = document.getElementById('rej-grid');
   if (!grid) return;
-  for (let i = 0; i < 203; i++) {
+  for (let i = 0; i < 233; i++) {
     const cell = document.createElement('div');
     cell.className = 'rej-cell' + (SURVIVOR_IDX.has(i) ? ' survivor' : '');
     cell.dataset.cellIdx = i;
@@ -1782,7 +1782,7 @@ function littenGrid() {
   const cells = document.querySelectorAll('#rej-grid .rej-cell');
   const fill  = document.getElementById('rej-progress-fill');
   const txt   = document.getElementById('rej-progress-text');
-  const TOTAL = 203;
+  const TOTAL = 233;
   if (txt) txt.textContent = 'evaluating… 0 / ' + TOTAL;
   cells.forEach((cell, i) => {
     setTimeout(() => {
@@ -1792,7 +1792,7 @@ function littenGrid() {
         if (fill) fill.style.width = pct + '%';
         if (txt) {
           if (i < TOTAL - 1) { txt.textContent = 'evaluating… ' + (i + 1) + ' / ' + TOTAL; }
-          else { txt.textContent = TOTAL + ' evaluated · 194 rejected · 9 survived ✓'; txt.classList.add('done'); }
+          else { txt.textContent = TOTAL + ' evaluated · 224 rejected · 9 repaired-panel pass ✓'; txt.classList.add('done'); }
         }
       }
     }, i * 7);
