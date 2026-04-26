@@ -116,13 +116,14 @@ TOP2A − EPAS1 (proliferation vs hypoxia) — maps to the known
 kidney-cancer growth-program axis. This is not a new discovery: it is
 a methodology proof. The survivor passed a separately pre-registered
 survival gate on IMmotion150 (a kidney cancer clinical trial;
-HR=1.36, p=0.0003). Our own 3-gene extension? Killed by that same gate.
+log-rank p=0.0003, HR=1.36). Our own 3-gene extension? Killed by that same gate.
 
 Claude Code Managed Agents hold the Skeptic stance without collapse
 — Opus 4.7 10/60 PASS where Sonnet 4.6 = 0/60. IPF Run #1
 (lung fibrosis, $58.28, 32 min): Skeptic caught two Advocate fabrications
-about prior trial design. Same engine, 7 disease contexts: kidney
-cancer, colon, brain glioma, liver (2 tasks), pancreatic cancer, pediatric glioma, lung fibrosis.
+about prior trial design. Same Python gate, 6 diseases: kidney (2 tasks),
+colon, brain glioma, liver (2 tasks), pancreatic, lung fibrosis;
+DIPG pediatric brain cancer: Managed Agents session, 7/15 hypotheses supported.
 ```
 
 ---
@@ -145,7 +146,7 @@ unconstrained symbolic regression. **This is not a new discovery:
 it is a methodology proof.** A methodology that finds known truth
 under a gate it cannot rationalize past proves it can find unknown
 truth. The survivor passed a separately pre-registered survival gate
-on IMmotion150 (a kidney cancer clinical trial; HR=1.36, p=0.0003);
+on IMmotion150 (a kidney cancer clinical trial; log-rank p=0.0003, HR=1.36);
 our own 3-gene extension? Killed by that same survival gate. Claude Code
 Routines run this discipline on every commit — pre-registration without being asked.
 
@@ -153,20 +154,24 @@ Routines run this discipline on every commit — pre-registration without being 
 
 ## Claude Opus 4.7 usage (~210 words — trim at form open if field has 150-word hard cap)
 
-Three Opus 4.7 calls per loop with
-`thinking={"type":"adaptive","display":"summarized"}` and
-`output_config={"effort":"high"}`. (1) Proposer emits 3-5 compact law
-families and the ex-ante skeptic test for each, before any fit.
-[Gate step: plain Python, not Opus.] (2) Skeptic reviews
+Three Opus 4.7 calls per loop with extended thinking and high-effort output.
+(1) Proposer emits 3-5 compact law families and the ex-ante skeptic test for
+each, before any fit. [Gate step: plain Python, not Opus.] (2) Skeptic reviews
 the specific metric pattern (`perm_p=0.049` is weaker than `0.001`;
 `ci_lower=0.61` is marginal) and emits PASS / FAIL / NEEDS_MORE_TESTS.
 (3) Interpreter writes the mechanism hypothesis and the "what this is
-not" paragraph. **180-call cross-model ablation: Sonnet 4.6 = 0/60 PASS on gate-PASS candidates (full dissent collapse); Opus 4.7 = 10/60. Confound-resolved: Opus ran WITHOUT extended thinking (HTTP 400 on `enabled` type; retried base) vs Sonnet WITH extended thinking — Opus wins anyway. Gap is pre-training calibration, not thinking budget.**. **Memorization audit (PhL-13): 0/10 zero-shot retrieval of TOP2A−EPAS1 — rebuts
-memorization concern.** **IPF Run #1 (2026-04-25): Skeptic caught
-two Advocate fabrications about prior trial design — RAINIER + Raghu
-2017 prespecified stratifiers Advocate claimed "never tested". Context
-isolation working at runtime.** **Opus 4.6 vs 4.7 (60
-calls each): abstention-calibration rate 53.3%→66.7% (+13.3pp); 4.7 PASS 10/10 on clean survivors, NEEDS_MORE_TESTS 10/10 on 5-gene stress-test (zero over-commitment vs 4.6's 20%) — gap is in graded abstention, not binary correctness. Prospective meta-calibration (PhI-1): Opus wrote kill-tests for 4 new skeletons before gate run; 0/4 survived; all 4 predicted failures confirmed (examples: VEGFA redundancy on #1, CCNB1 insufficiency on #4).**
+not" paragraph. **180-call cross-model ablation: Sonnet 4.6 = 0/60 PASS on
+gate-PASS candidates (full dissent collapse); Opus 4.7 = 10/60. Gap is
+pre-training calibration — Opus wins even without extended thinking.**
+**Memorization audit: 0/10 zero-shot retrieval of TOP2A−EPAS1 — rebuts
+memorization concern.** **IPF Run #1: Skeptic caught two Advocate
+fabrications about prior trial design — claiming clinical precedent that did
+not exist. Context isolation working at runtime.** **Opus 4.6 vs 4.7 (60
+calls each): abstention-calibration rate 53.3%→66.7% (+13.3pp); 4.7 PASS
+10/10 on clean survivors, NEEDS_MORE_TESTS 10/10 on stress-test (zero
+over-commitment vs 4.6's 20%) — gap is in graded abstention, not binary
+correctness. Prospective experiment: Opus wrote kill-tests for 4 new
+skeletons before gate ran; 0/4 survived; all 4 predicted failures confirmed.**
 
 ---
 
@@ -176,16 +181,17 @@ calls each): abstention-calibration rate 53.3%→66.7% (+13.3pp); 4.7 PASS 10/10
 three public-beta sessions (Proposer, Skeptic, Interpreter) with
 structured-JSON handoff. The Skeptic never sees the Proposer's
 reasoning tokens — context isolation is the load-bearing design
-choice. Path B proves single-agent `agent_toolset_20260401`
-end-to-end. Path A proves a sequential three-session chain on real kidney cancer
-data (TCGA-KIRC; PhL-9v2: Skeptic quotes `delta_baseline=+0.0587`). Path
-C proves Claude Code Routines as the **methodology persistence
-layer**: `lacuna-scientific-oracle` receives an equation via API
-trigger, autonomously runs `make venv` + `make audit` +
-`falsification_sweep.py` (1000 perm/bootstrap, n=505), emits
-structured PASS/FAIL verdict — pre-registered kill-tests firing
-without being asked (PhL-8d: `session_01CgsJYAPdvhJJwTuBt7QZLZ`; PhL-10 stage: `session_01XGse8XYFtv3C1aKLZeMH9t` — static evidence in SUMMARY.md if URLs expire). Durability:
-`persist_session_events` → `replay_session_from_log` (brain/body
+choice. Path B proves single-agent with full built-in toolset end-to-end.
+Path A proves a sequential three-session chain on real kidney cancer data
+(verified live: Skeptic cited the gate's exact delta score). Path C proves
+Claude Code Routines as the **methodology persistence layer**:
+`lacuna-scientific-oracle` receives an equation via API trigger, autonomously
+runs `make venv` + `make audit` + `falsification_sweep.py`
+(1000 perm/bootstrap, n=505), emits structured PASS/FAIL verdict —
+pre-registered kill-tests firing without being asked (live sessions:
+`session_01CgsJYAPdvhJJwTuBt7QZLZ`; `session_01XGse8XYFtv3C1aKLZeMH9t` —
+static evidence in SUMMARY.md if URLs expire). Session events persist
+server-side; sessions can be restored from the event log (brain/body
 decoupling). Memory stores accumulate rejection lessons cross-session.
 IPF Run #1 ($58.28, 32 min): Skeptic caught two fabricated trial-design
 claims — what a single-context harness cannot catch.
