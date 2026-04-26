@@ -1,0 +1,49 @@
+[
+  {
+    "initial_guess": "log1p(ZEB1) - log1p(CDX2)",
+    "template_id": "EMT-differentiation axis",
+    "target_features": [
+      "ZEB1",
+      "CDX2"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(TOP2A) - log1p(CDX2)",
+    "template_id": "Proliferation vs differentiation contrast",
+    "target_features": [
+      "CDX2",
+      "TOP2A"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(FN1) + log1p(VIM) - log1p(EPCAM)",
+    "template_id": "Mesenchymal-epithelial balance",
+    "target_features": [
+      "FN1",
+      "EPCAM",
+      "VIM"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(VEGFA) + log1p(SLC2A1) - log1p(CDX2)",
+    "template_id": "Hypoxia-glycolysis stress index",
+    "target_features": [
+      "VEGFA",
+      "CDX2",
+      "SLC2A1"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(ACTB) - log1p(GAPDH)",
+    "template_id": "Housekeeping contrast (negative control)",
+    "target_features": [
+      "GAPDH",
+      "ACTB"
+    ],
+    "expected_verdict": "FAIL"
+  }
+]

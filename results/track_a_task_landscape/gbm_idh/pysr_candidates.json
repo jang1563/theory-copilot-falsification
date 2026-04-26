@@ -1,0 +1,252 @@
+[
+  {
+    "equation": "CDK1 * 0.43882835",
+    "auroc": 0.8152141359688528,
+    "train_auroc": 0.712699747687132,
+    "test_auroc": 0.8152141359688528,
+    "complexity": 3,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.667
+  },
+  {
+    "equation": "log1p(TWIST1)",
+    "auroc": 0.6880802635519617,
+    "train_auroc": 0.6537987104008971,
+    "test_auroc": 0.6880802635519617,
+    "complexity": 2,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.5
+  },
+  {
+    "equation": "log1p(MKI67 * log1p(TWIST1))",
+    "auroc": 0.8328840970350404,
+    "train_auroc": 0.7457246986262966,
+    "test_auroc": 0.8328840970350404,
+    "complexity": 5,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.5
+  },
+  {
+    "equation": "((NES + (log1p(TWIST1) * MKI67)) - CDH2) / IDH1",
+    "auroc": 0.8307876609763403,
+    "train_auroc": 0.7742080179422485,
+    "test_auroc": 0.8307876609763403,
+    "complexity": 10,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.5
+  },
+  {
+    "equation": "(TWIST1 + MGMT) * (TOP2A / 5.5745945)",
+    "auroc": 0.8104222821203952,
+    "train_auroc": 0.7646201289599103,
+    "test_auroc": 0.8104222821203952,
+    "complexity": 7,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.714
+  },
+  {
+    "equation": "(MKI67 * (TWIST1 / (NES + CA9))) + ((NES - CDH2) * (MGMT / EPAS1))",
+    "auroc": 0.8044324648098233,
+    "train_auroc": 0.7954022988505747,
+    "test_auroc": 0.8044324648098233,
+    "complexity": 15,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.545
+  },
+  {
+    "equation": "((MGMT + TWIST1) * TOP2A) / (CA9 + 4.858662)",
+    "auroc": 0.8035339922132375,
+    "train_auroc": 0.7735351836276984,
+    "test_auroc": 0.8035339922132375,
+    "complexity": 9,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.625
+  },
+  {
+    "equation": "((MKI67 * TWIST1) + (VIM * (NES - CDH2))) / 3.2696645",
+    "auroc": 0.8337825696316262,
+    "train_auroc": 0.7828987945051864,
+    "test_auroc": 0.8337825696316262,
+    "complexity": 11,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.5
+  },
+  {
+    "equation": "((NES - CDH2) / IDH1) + ((MKI67 * TWIST1) / (CA9 + NES))",
+    "auroc": 0.8250973345312967,
+    "train_auroc": 0.7819456125595738,
+    "test_auroc": 0.8250973345312967,
+    "complexity": 13,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.5
+  },
+  {
+    "equation": "log1p((PCNA - IDH1) + ((TWIST1 * MKI67) / (CA9 + 1.1175646)))",
+    "auroc": 0.8173105720275531,
+    "train_auroc": 0.7814970563498739,
+    "test_auroc": 0.8173105720275531,
+    "complexity": 12,
+    "seed": 1,
+    "law_family": "",
+    "novelty": 0.545
+  },
+  {
+    "equation": "((NES + (MKI67 * log1p(TWIST1))) - CDH2) / IDH1",
+    "auroc": 0.8307876609763403,
+    "train_auroc": 0.7742080179422485,
+    "test_auroc": 0.8307876609763403,
+    "complexity": 10,
+    "seed": 7,
+    "law_family": "",
+    "novelty": 0.5
+  },
+  {
+    "equation": "((TWIST1 + MGMT) * TOP2A) * 0.1793853",
+    "auroc": 0.8104222821203952,
+    "train_auroc": 0.7646201289599103,
+    "test_auroc": 0.8104222821203952,
+    "complexity": 7,
+    "seed": 7,
+    "law_family": "",
+    "novelty": 0.667
+  },
+  {
+    "equation": "((TWIST1 * 0.26428732) + ((NES - CDH2) / (TOP2A - 0.07197477))) * MKI67",
+    "auroc": 0.7607067984426474,
+    "train_auroc": 0.7767872161480236,
+    "test_auroc": 0.7607067984426474,
+    "complexity": 13,
+    "seed": 7,
+    "law_family": "",
+    "novelty": 0.545
+  },
+  {
+    "equation": "NES + (((TWIST1 * MKI67) * 0.2340773) - CDH2)",
+    "auroc": 0.7999401018268942,
+    "train_auroc": 0.7659097280627979,
+    "test_auroc": 0.7999401018268942,
+    "complexity": 9,
+    "seed": 7,
+    "law_family": "",
+    "novelty": 0.5
+  },
+  {
+    "equation": "(TOP2A * sqrt(TWIST1)) * 0.38895863",
+    "auroc": 0.8595387840670858,
+    "train_auroc": 0.7477432015699468,
+    "test_auroc": 0.8595387840670858,
+    "complexity": 6,
+    "seed": 7,
+    "law_family": "",
+    "novelty": 0.8
+  },
+  {
+    "equation": "MKI67 * ((TWIST1 * 0.30356202) + (((NES + -0.07024369) - CDH2) / (TOP2A + -0.07599018)))",
+    "auroc": 0.7792752321054206,
+    "train_auroc": 0.7814409868236614,
+    "test_auroc": 0.7792752321054206,
+    "complexity": 15,
+    "seed": 7,
+    "law_family": "",
+    "novelty": 0.583
+  },
+  {
+    "equation": "(MKI67 * (TWIST1 * 0.29547092)) + ((NES - CDH2) / sqrt(EPAS1))",
+    "auroc": 0.8259958071278827,
+    "train_auroc": 0.7788617886178861,
+    "test_auroc": 0.8259958071278827,
+    "complexity": 12,
+    "seed": 7,
+    "law_family": "",
+    "novelty": 0.636
+  },
+  {
+    "equation": "CDK1 * 0.4387859",
+    "auroc": 0.8152141359688528,
+    "train_auroc": 0.712699747687132,
+    "test_auroc": 0.8152141359688528,
+    "complexity": 3,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.667
+  },
+  {
+    "equation": "(log1p((MKI67 * TWIST1) + LDHA) * (NES / CDH2)) - (EPAS1 / SLC2A1)",
+    "auroc": 0.8397723869421982,
+    "train_auroc": 0.7964676198486123,
+    "test_auroc": 0.8397723869421982,
+    "complexity": 14,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.583
+  },
+  {
+    "equation": "(TOP2A * (TWIST1 + MGMT)) * 0.17941272",
+    "auroc": 0.8104222821203952,
+    "train_auroc": 0.7646201289599103,
+    "test_auroc": 0.8104222821203952,
+    "complexity": 7,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.667
+  },
+  {
+    "equation": "(NES * (log1p((MKI67 * TWIST1) + LDHA) / CDH2)) - 1.0704433",
+    "auroc": 0.8388739143456124,
+    "train_auroc": 0.7815531258760863,
+    "test_auroc": 0.8388739143456124,
+    "complexity": 12,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.545
+  },
+  {
+    "equation": "log1p((TWIST1 * MKI67) + VIM) - (CDH2 / NES)",
+    "auroc": 0.8400718778077269,
+    "train_auroc": 0.783964115503224,
+    "test_auroc": 0.8400718778077269,
+    "complexity": 10,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.4
+  },
+  {
+    "equation": "(((TWIST1 * MKI67) + MGMT) * 0.111093186) * NES",
+    "auroc": 0.7744833782569631,
+    "train_auroc": 0.7728062797869358,
+    "test_auroc": 0.7744833782569631,
+    "complexity": 9,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.714
+  },
+  {
+    "equation": "(NES * (log1p((MKI67 * TWIST1) + LDHA) / CDH2)) - log1p(IDH1)",
+    "auroc": 0.8241988619347109,
+    "train_auroc": 0.7851976450798991,
+    "test_auroc": 0.8241988619347109,
+    "complexity": 13,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.545
+  },
+  {
+    "equation": "(sqrt(TWIST1) * TOP2A) * 0.38895845",
+    "auroc": 0.8595387840670858,
+    "train_auroc": 0.7477432015699468,
+    "test_auroc": 0.8595387840670858,
+    "complexity": 6,
+    "seed": 42,
+    "law_family": "",
+    "novelty": 0.8
+  }
+]

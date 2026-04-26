@@ -1,0 +1,41 @@
+{
+  "families": [
+    {
+      "name": "EMT-differentiation axis",
+      "form": "log1p(ZEB1) - log1p(CDX2)",
+      "rationale": "Advanced CRC shows EMT activation (ZEB1 up) with loss of epithelial differentiation (CDX2 down), defining an invasion axis.",
+      "skeptic_test": "Reject if delta_baseline < 0.05 or permutation p > 0.05 against label shuffles.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Proliferation vs differentiation contrast",
+      "form": "log1p(TOP2A) - log1p(CDX2)",
+      "rationale": "Stage III-IV tumors typically combine high proliferative drive (TOP2A) with reduced enterocyte differentiation (CDX2).",
+      "skeptic_test": "Reject if AUC < 0.58 or delta_baseline < 0.04 vs single-gene models.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Mesenchymal-epithelial balance",
+      "form": "log1p(FN1) + log1p(VIM) - log1p(EPCAM)",
+      "rationale": "Stromal/mesenchymal program (FN1, VIM) rising relative to epithelial adhesion (EPCAM) tracks invasive progression.",
+      "skeptic_test": "Reject if bootstrap CI for coefficient sign crosses zero or permutation p > 0.05.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Hypoxia-glycolysis stress index",
+      "form": "log1p(VEGFA) + log1p(SLC2A1) - log1p(CDX2)",
+      "rationale": "Advanced tumors upregulate hypoxia/glycolysis (VEGFA, SLC2A1) while losing differentiation, candidate metabolic-stage law.",
+      "skeptic_test": "Reject if delta_baseline < 0.03 or if VEGFA/SLC2A1 coefficients are not concordant in sign.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Housekeeping contrast (negative control)",
+      "form": "log1p(ACTB) - log1p(GAPDH)",
+      "rationale": "Housekeeping genes should not encode stage information; included as ex-ante negative control.",
+      "skeptic_test": "Expected to fail: permutation p > 0.2 and delta_baseline < 0.02; if it passes, suspect normalization artifact.",
+      "expected_verdict": "FAIL"
+    }
+  ],
+  "raw_thinking": "",
+  "raw_response": "{\n  \"families\": [\n    {\n      \"name\": \"EMT-differentiation axis\",\n      \"form\": \"log1p(ZEB1) - log1p(CDX2)\",\n      \"rationale\": \"Advanced CRC shows EMT activation (ZEB1 up) with loss of epithelial differentiation (CDX2 down), defining an invasion axis.\",\n      \"skeptic_test\": \"Reject if delta_baseline < 0.05 or permutation p > 0.05 against label shuffles.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Proliferation vs differentiation contrast\",\n      \"form\": \"log1p(TOP2A) - log1p(CDX2)\",\n      \"rationale\": \"Stage III-IV tumors typically combine high proliferative drive (TOP2A) with reduced enterocyte differentiation (CDX2).\",\n      \"skeptic_test\": \"Reject if AUC < 0.58 or delta_baseline < 0.04 vs single-gene models.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Mesenchymal-epithelial balance\",\n      \"form\": \"log1p(FN1) + log1p(VIM) - log1p(EPCAM)\",\n      \"rationale\": \"Stromal/mesenchymal program (FN1, VIM) rising relative to epithelial adhesion (EPCAM) tracks invasive progression.\",\n      \"skeptic_test\": \"Reject if bootstrap CI for coefficient sign crosses zero or permutation p > 0.05.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Hypoxia-glycolysis stress index\",\n      \"form\": \"log1p(VEGFA) + log1p(SLC2A1) - log1p(CDX2)\",\n      \"rationale\": \"Advanced tumors upregulate hypoxia/glycolysis (VEGFA, SLC2A1) while losing differentiation, candidate metabolic-stage law.\",\n      \"skeptic_test\": \"Reject if delta_baseline < 0.03 or if VEGFA/SLC2A1 coefficients are not concordant in sign.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Housekeeping contrast (negative control)\",\n      \"form\": \"log1p(ACTB) - log1p(GAPDH)\",\n      \"rationale\": \"Housekeeping genes should not encode stage information; included as ex-ante negative control.\",\n      \"skeptic_test\": \"Expected to fail: permutation p > 0.2 and delta_baseline < 0.02; if it passes, suspect normalization artifact.\",\n      \"expected_verdict\": \"FAIL\"\n    }\n  ]\n}"
+}

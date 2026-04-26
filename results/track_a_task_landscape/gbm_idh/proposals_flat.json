@@ -1,0 +1,53 @@
+[
+  {
+    "initial_guess": "log1p(MKI67) + log1p(TOP2A) - log1p(OLIG2) - log1p(SOX2)",
+    "template_id": "proliferation_vs_differentiation",
+    "target_features": [
+      "MKI67",
+      "SOX2",
+      "OLIG2",
+      "TOP2A"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(CDK1) + log1p(CCNB1) - log1p(GFAP)",
+    "template_id": "mitotic_cyclin_contrast",
+    "target_features": [
+      "CDK1",
+      "CCNB1",
+      "GFAP"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(CA9) + log1p(VEGFA) - log1p(MDH2)",
+    "template_id": "hypoxia_glycolysis_balance",
+    "target_features": [
+      "VEGFA",
+      "CA9",
+      "MDH2"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(VIM) + log1p(FN1) - log1p(CDH2)",
+    "template_id": "EMT_invasion_axis",
+    "target_features": [
+      "FN1",
+      "CDH2",
+      "VIM"
+    ],
+    "expected_verdict": "FAIL"
+  },
+  {
+    "initial_guess": "log1p(ACTB) - log1p(GAPDH) + log1p(RPL13A)",
+    "template_id": "housekeeping_negative_control",
+    "target_features": [
+      "GAPDH",
+      "ACTB",
+      "RPL13A"
+    ],
+    "expected_verdict": "FAIL"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "initial_guess": "log1p(AFP) + log1p(GPC3) - log1p(ALB) - log1p(APOA1)",
+    "template_id": "Oncofetal vs hepatic synthetic balance",
+    "target_features": [
+      "ALB",
+      "AFP",
+      "GPC3",
+      "APOA1"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(MKI67) + log1p(TOP2A) - log1p(ALB)",
+    "template_id": "Proliferation-to-hepatic-function contrast",
+    "target_features": [
+      "ALB",
+      "TOP2A",
+      "MKI67"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(LDHA) + log1p(SLC2A1) - log1p(AHSG)",
+    "template_id": "Warburg glycolytic shift ratio",
+    "target_features": [
+      "AHSG",
+      "LDHA",
+      "SLC2A1"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(CA9) + log1p(NDUFA4L2) - log1p(TTR)",
+    "template_id": "HIF/hypoxia axis contrast",
+    "target_features": [
+      "CA9",
+      "TTR",
+      "NDUFA4L2"
+    ],
+    "expected_verdict": "PASS"
+  },
+  {
+    "initial_guess": "log1p(ACTB) - log1p(GAPDH)",
+    "template_id": "Housekeeping-gene contrast (negative control)",
+    "target_features": [
+      "GAPDH",
+      "ACTB"
+    ],
+    "expected_verdict": "FAIL"
+  }
+]

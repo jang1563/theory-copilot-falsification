@@ -1,0 +1,41 @@
+{
+  "families": [
+    {
+      "name": "Oncofetal vs hepatic synthetic balance",
+      "form": "log1p(AFP) + log1p(GPC3) - log1p(ALB) - log1p(APOA1)",
+      "rationale": "HCC re-expresses oncofetal AFP/GPC3 while losing mature hepatocyte synthetic program (ALB/APOA1), giving a high-dynamic-range tumor-vs-normal contrast.",
+      "skeptic_test": "Reject if delta_baseline < 0.10 vs ALB-only logistic baseline or permutation p > 0.01.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Proliferation-to-hepatic-function contrast",
+      "form": "log1p(MKI67) + log1p(TOP2A) - log1p(ALB)",
+      "rationale": "Normal liver is post-mitotic with high ALB; tumors gain MKI67/TOP2A \u2014 a near-orthogonal axis to oncofetal markers.",
+      "skeptic_test": "Reject if AUROC drops below 0.90 on held-out folds or delta over single-gene MKI67 < 0.03.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Warburg glycolytic shift ratio",
+      "form": "log1p(LDHA) + log1p(SLC2A1) - log1p(AHSG)",
+      "rationale": "Tumor metabolic reprogramming raises glycolytic enzymes/transporters while hepatic acute-phase AHSG falls, encoding a metabolism-vs-secretion contrast.",
+      "skeptic_test": "Reject if permutation p > 0.05 or if law is dominated (>90% variance explained) by AHSG alone, indicating no glycolytic signal.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "HIF/hypoxia axis contrast",
+      "form": "log1p(CA9) + log1p(NDUFA4L2) - log1p(TTR)",
+      "rationale": "HIF-driven CA9/NDUFA4L2 mark hypoxic tumor niches absent from well-perfused normal liver expressing TTR.",
+      "skeptic_test": "Reject if delta_baseline < 0.05 vs TTR-only or if CA9/NDUFA4L2 show bimodal-but-non-discriminative behavior (cohen_d < 0.5).",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "Housekeeping-gene contrast (negative control)",
+      "form": "log1p(ACTB) - log1p(GAPDH)",
+      "rationale": "Housekeeping genes are by design invariant across conditions; this contrast should carry minimal class information.",
+      "skeptic_test": "Reject if AUROC > 0.65 or permutation p < 0.05, which would indicate housekeeping normalization assumption is violated in this panel.",
+      "expected_verdict": "FAIL"
+    }
+  ],
+  "raw_thinking": "",
+  "raw_response": "{\n  \"families\": [\n    {\n      \"name\": \"Oncofetal vs hepatic synthetic balance\",\n      \"form\": \"log1p(AFP) + log1p(GPC3) - log1p(ALB) - log1p(APOA1)\",\n      \"rationale\": \"HCC re-expresses oncofetal AFP/GPC3 while losing mature hepatocyte synthetic program (ALB/APOA1), giving a high-dynamic-range tumor-vs-normal contrast.\",\n      \"skeptic_test\": \"Reject if delta_baseline < 0.10 vs ALB-only logistic baseline or permutation p > 0.01.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Proliferation-to-hepatic-function contrast\",\n      \"form\": \"log1p(MKI67) + log1p(TOP2A) - log1p(ALB)\",\n      \"rationale\": \"Normal liver is post-mitotic with high ALB; tumors gain MKI67/TOP2A \u2014 a near-orthogonal axis to oncofetal markers.\",\n      \"skeptic_test\": \"Reject if AUROC drops below 0.90 on held-out folds or delta over single-gene MKI67 < 0.03.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Warburg glycolytic shift ratio\",\n      \"form\": \"log1p(LDHA) + log1p(SLC2A1) - log1p(AHSG)\",\n      \"rationale\": \"Tumor metabolic reprogramming raises glycolytic enzymes/transporters while hepatic acute-phase AHSG falls, encoding a metabolism-vs-secretion contrast.\",\n      \"skeptic_test\": \"Reject if permutation p > 0.05 or if law is dominated (>90% variance explained) by AHSG alone, indicating no glycolytic signal.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"HIF/hypoxia axis contrast\",\n      \"form\": \"log1p(CA9) + log1p(NDUFA4L2) - log1p(TTR)\",\n      \"rationale\": \"HIF-driven CA9/NDUFA4L2 mark hypoxic tumor niches absent from well-perfused normal liver expressing TTR.\",\n      \"skeptic_test\": \"Reject if delta_baseline < 0.05 vs TTR-only or if CA9/NDUFA4L2 show bimodal-but-non-discriminative behavior (cohen_d < 0.5).\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"Housekeeping-gene contrast (negative control)\",\n      \"form\": \"log1p(ACTB) - log1p(GAPDH)\",\n      \"rationale\": \"Housekeeping genes are by design invariant across conditions; this contrast should carry minimal class information.\",\n      \"skeptic_test\": \"Reject if AUROC > 0.65 or permutation p < 0.05, which would indicate housekeeping normalization assumption is violated in this panel.\",\n      \"expected_verdict\": \"FAIL\"\n    }\n  ]\n}"
+}

@@ -56,15 +56,19 @@ Plus pre-Phase-L artefacts (Flagship + Tier 2 + Track A/B + Phase F preregs + G/
 
 ### 🌐 Platform generalization (2026-04-26 HPC expansion, same gate + thresholds)
 
-| Task | Cancer | Panel | n | Survivors |
-|---|---|---|---|---|
-| Stage I-II vs III-IV | KIRC | 11-gene | 534 | 0 / 34 |
-| Stage I-II vs III-IV | KIRC | **45-gene** | 512 | **23 / 28 ✅** (top: `CXCR4/EPAS1`, AUROC 0.689) |
-| Tumor vs Normal | LIHC | 31-gene | 424 | 🔄 running |
-| Stage I-II vs III-IV | COAD | 31-gene | 484 | 🔄 running |
-| Grade II vs III | LGG | 30-gene | 384 | 🔄 running |
+All 4 tracks complete (job 2812758). Same pre-registered +0.05 delta_baseline threshold across all diseases.
 
-Same pre-registered +0.05 delta_baseline threshold across all diseases. `results/track_a_task_landscape/{stage_expanded,lihc,coad_msi,gbm_idh}/`
+| Task | Cancer | Panel | n | Top law | AUROC | Survivors |
+|---|---|---|---|---|---|---|
+| Stage I-II vs III-IV | KIRC | 11-gene (ref) | 534 | — (CUBN ceiling) | — | 0/34 |
+| Stage I-II vs III-IV | KIRC | **45-gene** | 512 | `CXCR4 / EPAS1` | 0.689 | **23/28 ✅** |
+| Tumor vs Normal | LIHC | 31-gene | 424 | — (ALB/TTR ~0.985 saturates) | — | **0/26** |
+| Stage I-II vs III-IV | COAD | 31-gene | 484 | `SLC2A1 + PDCD1LG2 + VIM − MYC` | 0.658 | **15/22 ✅** |
+| Grade II vs III | LGG | 30-gene | 384 | `log1p(TWIST1×MKI67+VIM) − CDH2/NES` | 0.840 | **2/25 ✅** |
+
+Pattern: gate accepts when panel has distributed features (no single-gene saturator, moderate ceiling).
+Gate refuses when one gene dominates (LIHC: hepatic function marker ~0.985, same as KIRC CA9 ~0.965).
+Results: `results/track_a_task_landscape/{stage_expanded,lihc,coad_msi,gbm_idh}/`
 
 ## 🔧 Architecture surfaces (judge-facing)
 

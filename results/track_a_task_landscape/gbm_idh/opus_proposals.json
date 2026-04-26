@@ -1,0 +1,41 @@
+{
+  "families": [
+    {
+      "name": "proliferation_vs_differentiation",
+      "form": "log1p(MKI67) + log1p(TOP2A) - log1p(OLIG2) - log1p(SOX2)",
+      "rationale": "Anaplastic (Grade III) tumors show elevated mitotic markers while losing oligodendroglial/neural progenitor differentiation programs.",
+      "skeptic_test": "Reject if delta_baseline < 0.05 vs MKI67-alone or if permutation p > 0.05.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "mitotic_cyclin_contrast",
+      "form": "log1p(CDK1) + log1p(CCNB1) - log1p(GFAP)",
+      "rationale": "G2/M cell-cycle machinery rises with grade while astrocytic differentiation marker GFAP declines in higher-grade anaplastic tumors.",
+      "skeptic_test": "Reject if AUC gain over CDK1 alone < 0.03 or if bootstrap CI on contrast crosses zero.",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "hypoxia_glycolysis_balance",
+      "form": "log1p(CA9) + log1p(VEGFA) - log1p(MDH2)",
+      "rationale": "Higher-grade gliomas often display hypoxic/glycolytic shift relative to oxidative mitochondrial metabolism.",
+      "skeptic_test": "Reject if permutation p > 0.1 or if delta over LDHA-alone < 0.02 (signal may be too weak within IDH-mutant LGG).",
+      "expected_verdict": "PASS"
+    },
+    {
+      "name": "EMT_invasion_axis",
+      "form": "log1p(VIM) + log1p(FN1) - log1p(CDH2)",
+      "rationale": "Mesenchymal/invasive program may distinguish anaplastic progression, though gliomas use atypical EMT.",
+      "skeptic_test": "Reject if direction flips on cross-validation folds or if permutation p > 0.05.",
+      "expected_verdict": "FAIL"
+    },
+    {
+      "name": "housekeeping_negative_control",
+      "form": "log1p(ACTB) - log1p(GAPDH) + log1p(RPL13A)",
+      "rationale": "Housekeeping genes should not separate grades; included as ex-ante negative control.",
+      "skeptic_test": "Should fail with permutation p > 0.2 and delta_baseline near zero; if it passes, suspect normalization artifact.",
+      "expected_verdict": "FAIL"
+    }
+  ],
+  "raw_thinking": "",
+  "raw_response": "{\n  \"families\": [\n    {\n      \"name\": \"proliferation_vs_differentiation\",\n      \"form\": \"log1p(MKI67) + log1p(TOP2A) - log1p(OLIG2) - log1p(SOX2)\",\n      \"rationale\": \"Anaplastic (Grade III) tumors show elevated mitotic markers while losing oligodendroglial/neural progenitor differentiation programs.\",\n      \"skeptic_test\": \"Reject if delta_baseline < 0.05 vs MKI67-alone or if permutation p > 0.05.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"mitotic_cyclin_contrast\",\n      \"form\": \"log1p(CDK1) + log1p(CCNB1) - log1p(GFAP)\",\n      \"rationale\": \"G2/M cell-cycle machinery rises with grade while astrocytic differentiation marker GFAP declines in higher-grade anaplastic tumors.\",\n      \"skeptic_test\": \"Reject if AUC gain over CDK1 alone < 0.03 or if bootstrap CI on contrast crosses zero.\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"hypoxia_glycolysis_balance\",\n      \"form\": \"log1p(CA9) + log1p(VEGFA) - log1p(MDH2)\",\n      \"rationale\": \"Higher-grade gliomas often display hypoxic/glycolytic shift relative to oxidative mitochondrial metabolism.\",\n      \"skeptic_test\": \"Reject if permutation p > 0.1 or if delta over LDHA-alone < 0.02 (signal may be too weak within IDH-mutant LGG).\",\n      \"expected_verdict\": \"PASS\"\n    },\n    {\n      \"name\": \"EMT_invasion_axis\",\n      \"form\": \"log1p(VIM) + log1p(FN1) - log1p(CDH2)\",\n      \"rationale\": \"Mesenchymal/invasive program may distinguish anaplastic progression, though gliomas use atypical EMT.\",\n      \"skeptic_test\": \"Reject if direction flips on cross-validation folds or if permutation p > 0.05.\",\n      \"expected_verdict\": \"FAIL\"\n    },\n    {\n      \"name\": \"housekeeping_negative_control\",\n      \"form\": \"log1p(ACTB) - log1p(GAPDH) + log1p(RPL13A)\",\n      \"rationale\": \"Housekeeping genes should not separate grades; included as ex-ante negative control.\",\n      \"skeptic_test\": \"Should fail with permutation p > 0.2 and delta_baseline near zero; if it passes, suspect normalization artifact.\",\n      \"expected_verdict\": \"FAIL\"\n    }\n  ]\n}"
+}
