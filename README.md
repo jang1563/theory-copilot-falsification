@@ -15,13 +15,13 @@ The original classification campaign rejected 203 of 203 initial candidate evalu
 
 **The rejections are the product working correctly.** A gate that rejects 0% is not falsification — it is a pipeline that reports every answer it generates. The initial rejection layer shows the gate refusing to call one-gene-saturated tasks multi-gene discoveries; the repaired layer shows the same classification gate accepting a harder 45-gene task when the named failure cause is fixed. Unlike AI-for-Science systems that use an LLM-as-judge, this gate is plain Python — Opus 4.7 cannot renegotiate the threshold mid-run. In practice: on an independent IPF run the Skeptic (separate context, never sees Proposer tokens) caught 2 fabricated trial-design claims in 32 min for $58.28 — output a standard pipeline would have reported as findings.
 
-Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 2026 · **Demo video:** [▶ YouTube](https://youtu.be/ZfFD84JmdQg) · **Demo companion:** [watch](https://jang1563.github.io/lacuna-falsification/demo.html) · **Interactive story:** [explore](https://jang1563.github.io/lacuna-falsification/story.html)
+Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 2026 · **Demo video:** [▶ YouTube](https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV) · **Demo companion:** [watch](https://jang1563.github.io/lacuna-falsification/demo.html) · **Interactive story:** [explore](https://jang1563.github.io/lacuna-falsification/story.html)
 
 | **203 / 203 initial rejected** | **9 / 30 repaired-panel pass** | **HR 1.36** on IMmotion150 | **Best of 990 two-gene pairs** |
 |---|---|---|---|
 | Original 11-gene HIF-axis layer | 45-gene panel · M0/M1 · AUROC 0.726 | PFS · n=263 · p=0.0003 | Rank 1 of all C(45,2) combinations |
 
-> **Judge path:** [1. ▶ Watch demo (YouTube)](https://youtu.be/ZfFD84JmdQg) · [2. Read discovery story](https://jang1563.github.io/lacuna-falsification/story.html) · [3. Verify evidence](docs/ARTIFACT_INDEX.md) · [4. Run smoke](#quick-start)
+> **Judge path:** [1. ▶ Watch demo (YouTube)](https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV) · [2. Read discovery story](https://jang1563.github.io/lacuna-falsification/story.html) · [3. Verify evidence](docs/ARTIFACT_INDEX.md) · [4. Run smoke](#quick-start)
 >
 > **Evidence surfaces:** [Dashboard](https://jang1563.github.io/lacuna-falsification/) · [Full rejection log](https://jang1563.github.io/lacuna-falsification/rejection-log.html) · [FMAI paper](docs/paper/paper_fmai.md) · [Demo walkthrough](docs/demo_walkthrough.md)
 
@@ -52,7 +52,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 |---|---|---|
 | **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS · Haiku 14/60 (over-accepts) · Sonnet 0/60 (permanent dissent even with extended thinking) · [PhL-15](results/live_evidence/phl15_adaptive_thinking/SUMMARY.md): model identity changes gate-alignment behavior under available inference modes |
 | **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58.28 · 32 min) · **7 disease contexts** (ccRCC · COAD · LGG · LIHC · DIPG · IPF · PAAD) · platform generalization: [COAD 15/22](results/track_a_task_landscape/coad_msi/) · [LGG 2/25 AUROC 0.840](results/track_a_task_landscape/gbm_idh/) · [LIHC MVI 6/29 AUROC 0.702](results/track_a_task_landscape/lihc_mvi/) · [IPF CEP 6/25 AUROC 0.757](results/track_a_task_landscape/ipf_lgrc/) · [PAAD OS 8/27 AUROC 0.707](results/track_a_task_landscape/paad_survival/) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
-| **Demo** | 25% | Loom video (≤3 min) · `make venv && make smoke` (no API key; ~1 min) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
+| **Demo** | 25% | YouTube video (≤3 min) · `make venv && make smoke` (no API key; ~1 min) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
 | **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
 
 ---
@@ -66,7 +66,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A (sequential 3-session chain) · Path B (single agent, `agent_toolset_20260401`) · Path C (Routines `/fire` HTTP client)
 - [`results/live_evidence/04_managed_agents_e2e.log`](results/live_evidence/04_managed_agents_e2e.log) — live agent/environment/session/stream trace
 - Two Skills: [`falsification-gate`](.claude/skills/falsification-gate/SKILL.md) (gate a candidate) + [`pre-register-claim`](.claude/skills/pre-register-claim/SKILL.md) (lock kill-tests before fit); compose in sequence
-- **Path C live runs:** PhL-8d (`session_01CgsJYAPdvhJJwTuBt7QZLZ`, login required) — dual-verdict oracle, FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS); static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/) · PhL-10 stage oracle (`session_01XGse8XYFtv3C1aKLZeMH9t`, login required) — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run — local PySR stage_expanded: 0.689); static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/) · PhL-8c (`session_015ot5hkJgSiBoWNA51fjZ1k`, login required): single-equation PASS
+- **Path C live runs:** PhL-8d dual-verdict oracle — FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS); static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/) · PhL-10 stage oracle — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run — local PySR stage_expanded: 0.689); static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/) · PhL-8c: single-equation PASS
 - Brain/body decoupling: `lacuna persist-events` → `replay-events` — session event log survives harness crashes; re-injects client-originated events into a fresh session
 - [`docs/managed_agents_evidence_card.md`](docs/managed_agents_evidence_card.md) — Managed Agents + Routines live evidence (12 session-level artefacts from the 24-PhL ledger); per-session event counts, wall-clock times, costs; cross-reference table for all 3 paths
 - **Context isolation in practice:** IPF Run #1 [`results/external_validation_ipf/`](results/external_validation_ipf/) — Skeptic (separate context, never sees Advocate tokens; "Advocate" = rescue-engine Proposer in IPF/DIPG context) caught 2 fabricated trial-design claims. $58.28 · 32 min.
@@ -84,10 +84,10 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - IPF Run #1: Skeptic caught 2 fabricated claims about prior trial design (RAINIER, Raghu 2017). $58.28 · 32 min. See [`results/external_validation_ipf/`](results/external_validation_ipf/)
 
 **Scientific depth (domain expert)**
-- 6-verdict replication chain: TCGA-KIRC PASS (AUROC 0.726) → IMmotion150 PASS (HR 1.36; **treatment-arm controlled: HR 1.365** — signal increases, confirming therapy-independence) → GSE53757 stage PASS (AUROC 0.714) → GSE53757 T-vs-N informative FAIL (platform-saturation: best single gene 0.995) → TCGA-BRCA T-vs-N pre-registered FAIL ✓ → **CPTAC-3 metastasis honest FAIL** (direction preserved p=0.006; ci_lower=0.542, Δbase=−0.007 — gate correctly refuses cross-platform replication) — 3 platforms, 2 endpoint types · [full chain](results/track_a_task_landscape/external_replay/SUMMARY.md)
+- 6-verdict evidence chain: TCGA-KIRC PASS (AUROC 0.726) → IMmotion150 PASS (HR 1.36; **treatment-arm adjusted: HR 1.365** — prognostic signal persists) → GSE53757 stage PASS (AUROC 0.714) → GSE53757 T-vs-N informative FAIL (platform-saturation: best single gene 0.995) → TCGA-BRCA T-vs-N pre-registered FAIL ✓ → **CPTAC-3 metastasis honest FAIL** (direction preserved p=0.006; ci_lower=0.542, Δbase=−0.007 — endpoint-matched replay fails the gate) — 3 platforms, 2 endpoint types · [full chain](results/track_a_task_landscape/external_replay/SUMMARY.md)
 - G + I rigor package (12 / 13 predictions PASS): [`rigor_extension`](results/track_a_task_landscape/rigor_extension/SUMMARY.md) (G2: AUPRC 0.321, Brier 0.122, calibration slope 0.979) · [`knockoff_v2`](results/track_a_task_landscape/knockoff_v2/SUMMARY.md) (G1: 0/45 genes selected — signal is genuinely compound) · [`rashomon_set`](results/track_a_task_landscape/rashomon_set/SUMMARY.md) (I2: rank 1/990) · [`clinical_utility`](results/track_a_task_landscape/clinical_utility/SUMMARY.md) (I3: Cohen's d 0.856, honest P3 FAIL retained) · [`information_theory`](results/track_a_task_landscape/information_theory/SUMMARY.md) (I4: 98.1% bivariate MI captured)
 - [Interpreter ablation PhL-19](results/live_evidence/phl19_interpreter_depth/SUMMARY.md): Opus 4.7 = 100% caveat rate, 100% prediction rate, avg 12 citations; Sonnet/Haiku = 0% on both (programmatic structural metrics; blind human rubric not completed)
-- Own-output falsification: H1-loop 3-gene extension (`TOP2A − EPAS1 − SLC22A8`) failed IMmotion150 survival replay ([PhL-1](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md))
+- Own-output falsification: H1-loop 3-gene extension (`TOP2A − (EPAS1 + SLC22A8)`) failed IMmotion150 survival replay ([PhL-1](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md))
 
 **5-minute challenge check → [`docs/judge_faq.md`](docs/judge_faq.md)** — 14 reviewer challenges (rediscovery vs discovery, AUROC ceiling, cohort independence, Sonnet drop-in, memorisation audit, `delta_confound` null) with direct evidence links
 
@@ -255,8 +255,8 @@ and one pathway-grounded law (Warburg contrast) is killed because LDHA alone
 is nearly as discriminative.
 ```
 
-This is the "shock moment": the gate is rigorous enough to kill a textbook
-Warburg law when LDHA alone does nearly the same job. The surviving HIF-axis
+This is the "shock moment": the gate is rigorous enough to kill a high-AUROC
+Warburg-style law when LDHA alone does nearly the same job. The surviving HIF-axis
 law earned that survival by genuinely adding 0.11 over any single gene.
 
 ---
@@ -268,7 +268,7 @@ Routines — Claude sessions that wake on a schedule and outlive the laptop — 
 the feature space "no one has cracked yet." Path C is Lacuna's answer.
 
 > **Methodology framing.** Lacuna is not a biological discovery tool — it is a
-> *methodology proof*. `TOP2A − EPAS1` is known biology (Brannon 2010 ccA/ccB
+> *positive-control methodology result*. `TOP2A − EPAS1` is known biology (Brannon 2010 ccA/ccB
 > axis). A methodology that re-derives known truth from unconstrained search
 > under a gate it cannot rationalize past supports face validity for future
 > unknown-target searches by the same mechanism. **Routines are the persistence
@@ -298,8 +298,8 @@ The Routine clones the repo, runs `make venv && make audit`, then runs
 `falsification_sweep.py` independently on each task/dataset pair, and emits
 structured verdict blocks + a dual summary — no human action after the fire call.
 
-Live session PhL-8d: `session_01CgsJYAPdvhJJwTuBt7QZLZ` (login required — static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/))
-Live session PhL-10: `session_01XGse8XYFtv3C1aKLZeMH9t` (login required — static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/))
+PhL-8d static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/)
+PhL-10 static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/)
 Fire script: [`src/phl8d_dual_verdict_fire.py`](src/phl8d_dual_verdict_fire.py)
 
 ```bash
@@ -349,7 +349,7 @@ sample_id, label (disease/control or 0/1), age, batch_index, <gene columns...>
 
 ## Broader Program
 
-This artifact is the Opus 4.7-centered proof-of-concept of a larger research
+This artifact is the Opus 4.7-centered prototype of a larger research
 program — **NegBioDB**, a structured database of ~32.8M confirmed negative
 biomedical results (drug–target inactives, failed clinical trials, protein
 non-interactions, non-essential genes, benign variants) paired with benchmarks
@@ -358,7 +358,7 @@ operationalizes NegBioDB's core thesis — falsification as the expensive,
 neglected half of scientific inference — on real cancer-genomics data. The
 public NegBioDB repository will be linked here at release.
 
-**Platform validation across diseases.** The same gate, same thresholds, same
+**Platform probes across diseases.** The same classification-gate family, same thresholds, same
 architecture — 14 task × panel configurations, 385 total candidate evaluations:
 
 *Positive survivors (gate accepts when the feature landscape is distributed):*

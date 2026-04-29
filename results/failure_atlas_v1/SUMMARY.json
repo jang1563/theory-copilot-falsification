@@ -1,0 +1,59 @@
+{
+  "candidate_count": 30,
+  "failed_count": 21,
+  "survivor_count": 9,
+  "failure_label_counts": {
+    "single_gene_saturation": 14,
+    "decoy_overfit": 13,
+    "bootstrap_unstable": 20,
+    "label_shuffle_fragile": 13,
+    "cohort_shift_fail": 0,
+    "endpoint_mismatch": 0,
+    "confound_only": 0,
+    "underpowered": 20,
+    "known_axis_triviality": 7
+  },
+  "failure_label_coverage": 0.6666666666666666,
+  "top_repeated_gene_sets": [
+    {
+      "candidate_signature": "AGXT|EPAS1|PDK1|TOP2A",
+      "count": 4
+    },
+    {
+      "candidate_signature": "MKI67",
+      "count": 3
+    },
+    {
+      "candidate_signature": "SLC22A8",
+      "count": 3
+    },
+    {
+      "candidate_signature": "EPAS1|LRP2|MKI67",
+      "count": 3
+    },
+    {
+      "candidate_signature": "EPAS1|LRP2|MKI67|PTGER3",
+      "count": 2
+    },
+    {
+      "candidate_signature": "EPAS1|MKI67",
+      "count": 2
+    },
+    {
+      "candidate_signature": "ENO2|EPAS1|TOP2A",
+      "count": 1
+    },
+    {
+      "candidate_signature": "EPAS1|HK2|LRP2|MKI67",
+      "count": 1
+    },
+    {
+      "candidate_signature": "EPAS1|LRP2|MKI67|SLC22A8",
+      "count": 1
+    },
+    {
+      "candidate_signature": "AGXT|EPAS1|MKI67",
+      "count": 1
+    }
+  ]
+}

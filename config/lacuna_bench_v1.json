@@ -1,0 +1,78 @@
+{
+  "version": "lacuna-bench-v1-local-20260427",
+  "primary_scientific_goal": "Publishable falsification-first rediscovery benchmark plus failure-memory system before any new-discovery claim.",
+  "tasks": [
+    {
+      "task_id": "kirc_ccrcc_metastasis_top2a_epas1_rediscovery",
+      "disease": "ccRCC",
+      "task_type": "blind_rediscovery",
+      "dataset_card": "config/dataset_cards/kirc_metastasis_expanded.json",
+      "report_path": "results/track_a_task_landscape/metastasis_expanded/falsification_report.json",
+      "preregistration": "preregistrations/20260423T060533Z_g3_adjusted_cox_immotion150.yaml",
+      "hidden_target": "Recover compact proliferation-minus-HIF/EPAS1 ccRCC progression biology from TCGA-KIRC M0 vs M1 without exposing the target to the proposer.",
+      "target_genes": [
+        "TOP2A",
+        "EPAS1"
+      ],
+      "positive_controls": [
+        "TOP2A - EPAS1",
+        "CDK1 - EPAS1",
+        "MKI67 - EPAS1"
+      ],
+      "negative_controls": [
+        "single-gene saturation",
+        "CA9-dominated tumor-normal contrast",
+        "SLC22A8 extension on external survival replay"
+      ],
+      "external_replay": {
+        "immotion150_pfs": {
+          "path": "results/track_a_task_landscape/external_replay/immotion150_pfs/verdict.json",
+          "endpoint": "survival",
+          "expected_endpoint": "metastasis_m_stage",
+          "endpoint_relation": "same_biology_survival_proxy",
+          "replay_role": "independent_prognostic_replay",
+          "interpretation": "Independent metastatic ccRCC survival replay; supportive but not exact same-endpoint metastasis replay."
+        },
+        "gse53757_tumor_normal": {
+          "path": "results/track_a_task_landscape/external_replay/gse53757/verdict.json",
+          "endpoint": "tumor_normal",
+          "expected_endpoint": "metastasis_m_stage",
+          "endpoint_relation": "endpoint_mismatch",
+          "replay_role": "tumor_normal_specificity_probe",
+          "interpretation": "Public ccRCC tumor-vs-normal sanity cohort; failure should be read as endpoint/context mismatch, not as same-endpoint biological disproof."
+        },
+        "cptac3_m_stage": {
+          "path": "results/track_a_task_landscape/external_replay/cptac3_gate_result.json",
+          "endpoint": "metastasis_m_stage",
+          "expected_endpoint": "metastasis_m_stage",
+          "endpoint_relation": "same_endpoint_underpowered",
+          "replay_role": "same_endpoint_external_replay",
+          "interpretation": "Closest same-endpoint ccRCC replay lane; current failure is direction-preserved but underpowered and single-gene saturated."
+        }
+      },
+      "notes": "Flagship local v1 task: a rediscovery benchmark, not a new biomarker claim."
+    }
+  ],
+  "expansion_candidates": [
+    {
+      "disease": "LUAD",
+      "task_type": "tumor_normal_or_stage_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    },
+    {
+      "disease": "IPF",
+      "task_type": "fibrosis_rescue_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    },
+    {
+      "disease": "UC",
+      "task_type": "inflammation_remission_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    },
+    {
+      "disease": "MASH",
+      "task_type": "fibrosis_metabolic_axis_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    }
+  ]
+}

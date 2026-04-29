@@ -1,4 +1,4 @@
-.PHONY: help install test smoke demo demo-kirc demo-templates clean status audit paper skeptic-review prereg prereg-validate prereg-audit rejection-log h1 h2 venv all
+.PHONY: help install test smoke demo demo-kirc demo-templates clean status audit paper paper-fmai skeptic-review prereg prereg-validate prereg-audit rejection-log h1 h2 venv all
 
 # ============================================================
 # Lacuna Falsification — Developer Commands
@@ -11,6 +11,9 @@ VENV_PYTHON ?= python3
 PYTHONPATH_SRC := PYTHONPATH=src
 DEMO_OUT := artifacts/flagship_run
 TRANSFER_OUT := artifacts/transfer_run
+VERSION ?=
+PAPER_FMAI_VERSION ?= $(VERSION)
+PAPER_FMAI_STEM := $(if $(PAPER_FMAI_VERSION),paper_fmai_$(PAPER_FMAI_VERSION),paper_fmai)
 
 # Note: PYTHON defaults to the project-local virtualenv to guarantee
 # Python 3.10-3.13 (pyproject.toml excludes 3.14 because scientific
@@ -30,6 +33,7 @@ help:
 	@echo "  make demo          Guided proposer handoff on synthetic data (requires API key)"
 	@echo "  make demo-kirc     KIRC-flavoured guided handoff (requires API key)"
 	@echo "  make paper         Build docs/paper/paper.pdf via pandoc (xelatex > typst > html)"
+	@echo "  make paper-fmai    Build docs/paper/paper_fmai.pdf; set VERSION=v2 for versioned output"
 	@echo "  make rejection-log Re-render the static rejection-log HTML"
 	@echo "  make prereg-audit  Tamper-evidence chain audit on preregistrations/*.yaml"
 	@echo "  make h1            Falsification-Guided SR Loop (Opus-steered, requires API key)"
@@ -306,4 +310,40 @@ paper:
 			-s --mathjax \
 			-o docs/paper/paper.html && \
 		echo ">>> Wrote docs/paper/paper.html (install LaTeX or typst for PDF)"; \
+	fi
+
+paper-fmai:
+	@echo ">>> Building docs/paper/$(PAPER_FMAI_STEM).pdf via pandoc..."
+	@if [ ! -f docs/paper/$(PAPER_FMAI_STEM).md ]; then \
+		echo "Missing docs/paper/$(PAPER_FMAI_STEM).md"; \
+		exit 1; \
+	fi
+	@if ! command -v pandoc >/dev/null 2>&1; then \
+		echo "pandoc not installed. Install: brew install pandoc (macOS) or apt install pandoc (Linux)."; \
+		exit 1; \
+	fi
+	@if command -v xelatex >/dev/null 2>&1; then \
+		echo "  using xelatex engine..."; \
+		pandoc docs/paper/$(PAPER_FMAI_STEM).md \
+			--pdf-engine=xelatex \
+			--resource-path=.:docs/paper \
+			-V geometry:margin=1in -V fontsize=11pt -V linkcolor=blue -V urlcolor=blue \
+			-V mainfont="Times New Roman" -V monofont="Menlo" \
+			-o docs/paper/$(PAPER_FMAI_STEM).pdf && \
+		echo ">>> Wrote docs/paper/$(PAPER_FMAI_STEM).pdf (xelatex)"; \
+	elif command -v typst >/dev/null 2>&1; then \
+		echo "  xelatex not found; using typst engine..."; \
+		pandoc docs/paper/$(PAPER_FMAI_STEM).md \
+			--pdf-engine=typst \
+			--resource-path=.:docs/paper \
+			-V papersize=letter -V fontsize=11pt \
+			-o docs/paper/$(PAPER_FMAI_STEM).pdf && \
+		echo ">>> Wrote docs/paper/$(PAPER_FMAI_STEM).pdf (typst)"; \
+	else \
+		echo "  neither xelatex nor typst found; emitting HTML fallback..."; \
+		pandoc docs/paper/$(PAPER_FMAI_STEM).md \
+			--resource-path=.:docs/paper \
+			-s --mathjax \
+			-o docs/paper/$(PAPER_FMAI_STEM).html && \
+		echo ">>> Wrote docs/paper/$(PAPER_FMAI_STEM).html (install LaTeX or typst for PDF)"; \
 	fi

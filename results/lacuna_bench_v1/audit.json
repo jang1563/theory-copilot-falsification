@@ -1,0 +1,287 @@
+{
+  "manifest": "config/lacuna_bench_v1.json",
+  "manifest_version": "lacuna-bench-v1-local-20260427",
+  "primary_scientific_goal": "Publishable falsification-first rediscovery benchmark plus failure-memory system before any new-discovery claim.",
+  "task_count": 1,
+  "candidate_count": 30,
+  "survivor_count": 9,
+  "reject_count": 21,
+  "metrics": {
+    "rediscovery_f1": 1.0,
+    "false_survivor_rate": 0.6666666666666666,
+    "external_replay_rate": 0.3333333333333333,
+    "strict_external_replay_rate": 0.3333333333333333,
+    "interpretable_external_failure_rate": 1.0,
+    "direction_preserved_external_fail_rate": 0.5,
+    "underpowered_external_fail_rate": 0.5,
+    "endpoint_mismatch_rate": 0.5,
+    "single_gene_saturation_external_rate": 1.0,
+    "missing_data_external_fail_rate": 0.5,
+    "direction_reversal_external_fail_rate": 0.0,
+    "external_replay_task_coverage": 1.0,
+    "time_to_reject": null,
+    "cost_per_surviving_claim": null
+  },
+  "external_replay_profile": {
+    "known_outcomes": 3,
+    "strict_pass_count": 1,
+    "strict_fail_count": 2,
+    "failure_subtype_counts": {
+      "endpoint_mismatch": 1,
+      "underpowered_external_fail": 1,
+      "single_gene_saturation_external": 2,
+      "direction_reversal": 0,
+      "missing_data": 1,
+      "unclassified_external_fail": 0
+    },
+    "primary_failure_subtype_counts": {
+      "endpoint_mismatch": 1,
+      "underpowered_external_fail": 1,
+      "single_gene_saturation_external": 0,
+      "direction_reversal": 0,
+      "missing_data": 0,
+      "unclassified_external_fail": 0
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "kirc_ccrcc_metastasis_top2a_epas1_rediscovery",
+      "disease": "ccRCC",
+      "task_type": "blind_rediscovery",
+      "dataset_card": "config/dataset_cards/kirc_metastasis_expanded.json",
+      "report_path": "results/track_a_task_landscape/metastasis_expanded/falsification_report.json",
+      "preregistration": "preregistrations/20260423T060533Z_g3_adjusted_cox_immotion150.yaml",
+      "hidden_target": "Recover compact proliferation-minus-HIF/EPAS1 ccRCC progression biology from TCGA-KIRC M0 vs M1 without exposing the target to the proposer.",
+      "target_genes": [
+        "TOP2A",
+        "EPAS1"
+      ],
+      "candidate_count": 30,
+      "survivor_count": 9,
+      "reject_count": 21,
+      "rediscovery_hit": true,
+      "rediscovery_f1": 1.0,
+      "false_survivor_rate": 0.6666666666666666,
+      "external_replay_rate": 0.3333333333333333,
+      "strict_external_replay_rate": 0.3333333333333333,
+      "external_replay_profile": {
+        "known_outcomes": 3,
+        "strict_pass_count": 1,
+        "strict_fail_count": 2,
+        "strict_external_replay_rate": 0.3333333333333333,
+        "interpretable_external_failure_rate": 1.0,
+        "direction_preserved_external_fail_rate": 0.5,
+        "interpretable_external_failure_count": 2,
+        "direction_preserved_external_fail_count": 1,
+        "failure_subtype_counts": {
+          "endpoint_mismatch": 1,
+          "underpowered_external_fail": 1,
+          "single_gene_saturation_external": 2,
+          "direction_reversal": 0,
+          "missing_data": 1,
+          "unclassified_external_fail": 0
+        },
+        "primary_failure_subtype_counts": {
+          "endpoint_mismatch": 1,
+          "underpowered_external_fail": 1,
+          "single_gene_saturation_external": 0,
+          "direction_reversal": 0,
+          "missing_data": 0,
+          "unclassified_external_fail": 0
+        },
+        "failure_subtype_rates": {
+          "endpoint_mismatch": 0.5,
+          "underpowered_external_fail": 0.5,
+          "single_gene_saturation_external": 1.0,
+          "direction_reversal": 0.0,
+          "missing_data": 0.5,
+          "unclassified_external_fail": 0.0
+        }
+      },
+      "external_replay_known_outcomes": 3,
+      "external_replay_pass_count": 1,
+      "external_replay_fail_count": 2,
+      "external_replay": [
+        {
+          "label": "cptac3_m_stage",
+          "status": "fail",
+          "outcome_subtype": "underpowered_external_fail",
+          "primary_failure_subtype": "underpowered_external_fail",
+          "failure_subtypes": [
+            "underpowered_external_fail",
+            "single_gene_saturation_external",
+            "missing_data"
+          ],
+          "endpoint": "metastasis_m_stage",
+          "expected_endpoint": "metastasis_m_stage",
+          "endpoint_relation": "same_endpoint_underpowered",
+          "replay_role": "same_endpoint_external_replay",
+          "interpretation": "Closest same-endpoint ccRCC replay lane; current failure is direction-preserved but underpowered and single-gene saturated.",
+          "direction_preserved": true,
+          "sample_size": 155,
+          "positive_case_count": 20,
+          "power_assessment": {
+            "flag": true,
+            "basis": [
+              "positive_case_count_lt_40",
+              "explicit_underpowered_language",
+              "direction_preserved_but_ci_lower_gate_failed"
+            ],
+            "positive_case_count": 20,
+            "threshold_note": "Screening heuristic for external replay triage, not a universal sample-size rule. Interpret with endpoint, event count, CI width, and preregistered gate context."
+          },
+          "power_flag": true,
+          "single_gene_saturation_flag": true,
+          "missingness_flag": true,
+          "path": "results/track_a_task_landscape/external_replay/cptac3_gate_result.json"
+        },
+        {
+          "label": "gse53757_tumor_normal",
+          "status": "fail",
+          "outcome_subtype": "endpoint_mismatch",
+          "primary_failure_subtype": "endpoint_mismatch",
+          "failure_subtypes": [
+            "endpoint_mismatch",
+            "single_gene_saturation_external"
+          ],
+          "endpoint": "tumor_normal",
+          "expected_endpoint": "metastasis_m_stage",
+          "endpoint_relation": "endpoint_mismatch",
+          "replay_role": "tumor_normal_specificity_probe",
+          "interpretation": "Public ccRCC tumor-vs-normal sanity cohort; failure should be read as endpoint/context mismatch, not as same-endpoint biological disproof.",
+          "direction_preserved": null,
+          "sample_size": 144,
+          "positive_case_count": 72,
+          "power_assessment": {
+            "flag": false,
+            "basis": [],
+            "positive_case_count": 72,
+            "threshold_note": "Screening heuristic for external replay triage, not a universal sample-size rule. Interpret with endpoint, event count, CI width, and preregistered gate context."
+          },
+          "power_flag": false,
+          "single_gene_saturation_flag": true,
+          "missingness_flag": false,
+          "path": "results/track_a_task_landscape/external_replay/gse53757/verdict.json"
+        },
+        {
+          "label": "immotion150_pfs",
+          "status": "pass",
+          "outcome_subtype": "external_pass",
+          "primary_failure_subtype": null,
+          "failure_subtypes": [],
+          "endpoint": "survival",
+          "expected_endpoint": "metastasis_m_stage",
+          "endpoint_relation": "same_biology_survival_proxy",
+          "replay_role": "independent_prognostic_replay",
+          "interpretation": "Independent metastatic ccRCC survival replay; supportive but not exact same-endpoint metastasis replay.",
+          "direction_preserved": null,
+          "sample_size": 263,
+          "positive_case_count": 164,
+          "power_assessment": {
+            "flag": false,
+            "basis": [],
+            "positive_case_count": 164,
+            "threshold_note": "Screening heuristic for external replay triage, not a universal sample-size rule. Interpret with endpoint, event count, CI width, and preregistered gate context."
+          },
+          "power_flag": false,
+          "single_gene_saturation_flag": false,
+          "missingness_flag": false,
+          "path": "results/track_a_task_landscape/external_replay/immotion150_pfs/verdict.json"
+        }
+      ],
+      "time_to_reject_seconds": null,
+      "cost_per_surviving_claim_usd": null,
+      "top_survivors": [
+        {
+          "equation": "log1p(log1p(exp(x28 - exp(((x4 - x23) + x22) - x44)))) * 0.6274355",
+          "equation_named": "log1p(log1p(exp(MKI67 - exp(((EPAS1 - PTGER3) + LRP2) - RPL13A)))) * 0.6274355",
+          "genes_used": [
+            "EPAS1",
+            "LRP2",
+            "PTGER3",
+            "MKI67",
+            "RPL13A"
+          ],
+          "law_auc": 0.726332679622036,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": 0.06938253996553156,
+          "complexity": 15
+        },
+        {
+          "equation": "log1p(log1p(log1p(exp(x28 - exp((x4 - (x23 + x44)) + x22)))))",
+          "equation_named": "log1p(log1p(log1p(exp(MKI67 - exp((EPAS1 - (PTGER3 + RPL13A)) + LRP2)))))",
+          "genes_used": [
+            "EPAS1",
+            "LRP2",
+            "PTGER3",
+            "MKI67",
+            "RPL13A"
+          ],
+          "law_auc": 0.726332679622036,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": 0.06938253996553156,
+          "complexity": 14
+        },
+        {
+          "equation": "-0.08599428 * ((x4 + -1.5503553) - x31)",
+          "equation_named": "-0.08599428 * ((EPAS1 + -1.5503553) - TOP2A)",
+          "genes_used": [
+            "EPAS1",
+            "TOP2A"
+          ],
+          "law_auc": 0.7255601117252035,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": 0.06860997206869912,
+          "complexity": 7
+        },
+        {
+          "equation": "log1p(log1p(exp(x31 - x4)) * 0.21792223)",
+          "equation_named": "log1p(log1p(exp(TOP2A - EPAS1)) * 0.21792223)",
+          "genes_used": [
+            "EPAS1",
+            "TOP2A"
+          ],
+          "law_auc": 0.7255601117252035,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": 0.06860997206869912,
+          "complexity": 8
+        },
+        {
+          "equation": "log1p(log1p(0.24403314) * log1p(exp(x31 - x4)))",
+          "equation_named": "log1p(log1p(0.24403314) * log1p(exp(TOP2A - EPAS1)))",
+          "genes_used": [
+            "EPAS1",
+            "TOP2A"
+          ],
+          "law_auc": 0.7255601117252035,
+          "baseline_auc": 0.6569501396565044,
+          "delta_baseline": 0.06860997206869912,
+          "complexity": 9
+        }
+      ],
+      "notes": "Flagship local v1 task: a rediscovery benchmark, not a new biomarker claim."
+    }
+  ],
+  "expansion_candidates": [
+    {
+      "disease": "LUAD",
+      "task_type": "tumor_normal_or_stage_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    },
+    {
+      "disease": "IPF",
+      "task_type": "fibrosis_rescue_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    },
+    {
+      "disease": "UC",
+      "task_type": "inflammation_remission_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    },
+    {
+      "disease": "MASH",
+      "task_type": "fibrosis_metabolic_axis_rediscovery",
+      "status": "candidate_after_kirc_sanity"
+    }
+  ]
+}

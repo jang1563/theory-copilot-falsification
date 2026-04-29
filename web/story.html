@@ -650,7 +650,7 @@ body {
     <div class="beat__note">
       Built with Claude Opus 4.7 · Cerebral Valley × Anthropic · April 2026<br>
       <a href="https://github.com/jang1563/lacuna-falsification">github.com/jang1563/lacuna-falsification</a>
-      &nbsp;·&nbsp;<a href="https://youtu.be/ZfFD84JmdQg" target="_blank">▶ Demo video</a>
+      &nbsp;·&nbsp;<a href="https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV" target="_blank">▶ Demo video</a>
     </div>
   </div>
   <div class="beat__visual">
@@ -1110,7 +1110,7 @@ body {
       <span class="badge badge--pass">decoy p&lt;0.001 ✓</span>
     </div>
     <div class="gate-box">
-      <div class="gate-box__head">Task landscape · 11-gene vs 45-gene panel · same gate</div>
+      <div class="gate-box__head">Task landscape · 11-gene vs 45-gene panel · same classification gate</div>
       <table class="task-tbl">
         <thead>
           <tr><th>Task</th><th>Dominant gene</th><th>11-gene</th><th>45-gene</th><th>Best Δ</th></tr>
@@ -1341,7 +1341,7 @@ body {
                 <div class="repl-detail-inner">
                   <strong>HR 1.36</strong> (Cox per z-score) · log-rank p = 0.0003 · C-index 0.601<br>
                   Median PFS: high score 12.88 mo vs low score 5.35 mo (<strong>7.53-month gap</strong>)<br>
-                  Treatment-arm confound check: HR 1.361 (unadjusted) → <strong>1.365</strong> after controlling for immunotherapy vs VEGF-inhibitor arm — signal <em>increases</em>, confirming therapy-independence<br>
+                  Treatment-arm confound check: HR 1.361 (unadjusted) → <strong>1.365</strong> after controlling for immunotherapy vs VEGF-inhibitor arm — treatment-arm-adjusted prognostic signal persists<br>
                   Same pre-registered survival gate applied without modification · McDermott et al. 2018
                 </div>
               </div>
@@ -1431,12 +1431,12 @@ body {
   <div class="beat__text">
     <div class="eyebrow">07 · Live Oracle</div>
     <h2>The gate ran.<br>Now: new Routine, or update?</h2>
-    <p>A Claude Code Routine triggered an autonomous session yesterday. Two equations, same gate, same pre-registered thresholds. The HIF-axis compound — CA9 alone already reaches AUROC 0.965, compound adds Δ=+0.015 — refused. CDK1−EPAS1 on metastasis — Δ=+0.062 — accepted. No human decision after the API fire call.</p>
+    <p>A Claude Code Routine triggered an autonomous session yesterday. Two equations, same classification gate, same pre-registered thresholds. The HIF-axis compound — CA9 alone already reaches AUROC 0.965, compound adds Δ=+0.015 — refused. CDK1−EPAS1 on metastasis — Δ=+0.062 — accepted. No human decision after the API fire call.</p>
     <p>The gate proved it rejects AND accepts, in one session. That is not the interesting question anymore.</p>
     <p>The interesting question is: new Routine per disease, or update the existing Routine's Instructions? Answer: new Routine. The existing Routine's Instructions are the provenance record for PhL-8d — editing them retroactively breaks the audit chain. New question, new Routine. The gate and the Skills are shared.</p>
     <div style="margin-top:18px;padding:13px 18px;background:rgba(120,140,93,0.08);border-left:3px solid var(--sage);border-radius:0 6px 6px 0;">
-      <div style="font-family:var(--f-mono);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:5px;">Pattern confirmed · 4 diseases · same gate</div>
-      <div style="font-family:var(--f-body);font-size:var(--t-sm);color:rgba(255,255,255,0.52);line-height:1.65;">ccRCC Stage: 23/28 PASS · CXCR4/EPAS1 · Δ=+0.051. Colon MSI-high: 15/22 PASS · SLC2A1+Warburg · Δ=+0.100. LGG Grade II/III: 2/25 PASS · TWIST1×MKI67 interaction · <span style="color:rgba(120,140,93,0.9);font-weight:600;">AUROC 0.840</span> · Δ=+0.051. Liver HCC: 0/26 (designed negative — gate refuses). 2 live Routine sessions (ccRCC) · 2 offline gate runs (COAD, LGG) · same Skills, same pre-registered gate. DIPG is next in queue.</div>
+      <div style="font-family:var(--f-mono);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:5px;">Pattern confirmed · 4 diseases · same classification-gate family</div>
+      <div style="font-family:var(--f-body);font-size:var(--t-sm);color:rgba(255,255,255,0.52);line-height:1.65;">ccRCC Stage: 23/28 PASS · CXCR4/EPAS1 · Δ=+0.051. Colon MSI-high: 15/22 PASS · SLC2A1+Warburg · Δ=+0.100. LGG Grade II/III: 2/25 PASS · TWIST1×MKI67 interaction · <span style="color:rgba(120,140,93,0.9);font-weight:600;">AUROC 0.840</span> · Δ=+0.051. Liver HCC: 0/26 (designed negative — gate refuses). 2 live Routine sessions (ccRCC) · 2 offline gate runs (COAD, LGG) · same Skills, same classification-gate family. DIPG is next in queue.</div>
     </div>
     <div class="beat__note">
       PhL-8d · 2026-04-26 · autonomous session ~6 min ·
@@ -1527,7 +1527,7 @@ body {
 
     <!-- Multi-disease expansion -->
     <div class="mdg-wrap">
-      <div class="mdg-hd">Multi-disease expansion · same gate · new Routine per disease</div>
+      <div class="mdg-hd">Multi-disease expansion · same classification-gate family · new Routine per disease</div>
       <div class="mdg-grid">
         <div class="mdg-row mdg-row--pass">
           <div class="mdg-left">
@@ -1596,7 +1596,7 @@ body {
     <h2>DIPG. 250+ failed trials. One approval.</h2>
     <p>Pediatric brainstem glioma. H3 K27M-mutant. Median overall survival ~11 months. No disease-modifying therapy for a decade — then dordaviprone was approved in August 2025 after a 10-year graveyard of failures.</p>
     <p>The same failure-first architecture that rejected the initial kidney-cancer layer is the loop pointed at brainstem. Fifteen candidates are currently in queue.</p>
-    <p>The kidney cancer result is the proof of concept. A gate that recovered the published ccA/ccB axis from 45 genes — blind, without being told where to look — has earned the right to run on a disease where no answer has been published yet. The published law is the tip. The graveyard is the artifact.</p>
+    <p>The kidney cancer result is a positive-control case. A gate that recovered the published ccA/ccB axis from 45 genes — blind, without being told where to look — is now being tested on diseases where no answer has been published yet. The published law is the tip. The graveyard is the artifact.</p>
     <p style="font-family:var(--f-display);font-style:italic;color:var(--ink);margin-top:8px">For every scientist whose null results pushed the field forward but never made it into a paper.</p>
     <div class="traj-points">
       <div class="traj-point">

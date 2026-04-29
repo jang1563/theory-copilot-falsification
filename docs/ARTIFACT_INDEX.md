@@ -1,6 +1,6 @@
 # Artifact Index — judge navigation (60-second tour)
 
-**What this is in one sentence:** A pre-registered deterministic gate (plain Python, 5 statistical tests) was run against 203 AI-proposed cancer biology laws — it rejected 194, accepted 9, then the system's own downstream extension was also rejected by a separately pre-registered survival gate on independent clinical trial data (IMmotion150, n=263). The two live Routines sessions below are clickable proof that the falsification loop runs as code, not just as a demo.
+**What this is in one sentence:** A pre-registered deterministic gate (plain Python, 5 statistical tests) rejected 203/203 initial 11-gene TCGA-KIRC candidate evaluations; after the diagnosed panel-absence failure was repaired, the same classification gate accepted 9/30 candidates on the 45-gene metastasis panel, and the system's own downstream extension was then rejected by a separately pre-registered survival gate on independent clinical trial data (IMmotion150, n=263). The two live Routines sessions below are clickable proof that the falsification loop runs as code, not just as a demo.
 
 **For a non-biologist judge:** Skip the biology labels. The point is that Opus 4.7 cannot sweet-talk the gate — its own proposed laws fail at the same rate as everything else — and the Skeptic session (separate context window, never sees the Proposer's tokens) caught two fabricated claims in the IPF (lung fibrosis) run. That is context isolation working at runtime, not by construction.
 
@@ -45,7 +45,7 @@ the submission.
 | **PhL-9v2** | Path A sequential 3-session chain on **real TCGA-KIRC** (via `files.upload()` + `resources=[{"type":"file",...}]` mount) | `src/phl9v2_path_a_real_data.py`, `results/live_evidence/phl9v2_path_a_real_data/SUMMARY.md` | OK — Proposer emits ccRCC proliferation-vs-HIF family, Skeptic quotes `delta_baseline=+0.0587` on LF-PROLIF-minus-HIF2A, 4 FAIL incl. negative control. 300 s wall. |
 | **PhL-11** | Adversarial self-critique 3-turn role-separated harness across Opus 4.7 + Sonnet 4.6 (6 sessions total) | `src/phl11_adversarial_critique.py`, `results/live_evidence/phl11_adversarial_critique/SUMMARY.md` | Mixed — Opus followed "one CRISPR KO per attack" literally (5 vs Sonnet's 1); both models 100% concede under pushback. Honest Petri-2.0-consistent finding. |
 | **PhL-12** | Memory chain deepened 5 → 8 lessons (template saturation + cross-cancer PRAD + pre-reg strictness edge) | `src/phl12_memory_chain_deepen.py`, `results/live_evidence/phl12_memory_chain_deepen/SUMMARY.md` | PASS — agent quoted & applied prior lessons 4 (template saturation) and 5 (cross-cancer rule incl. PRAD/KLK3), refused to invent "marginal" verdict at decoy_p=0.048 |
-| **PhL-13** | Memorization audit — 10-repeat zero-shot + literature-anchor probe on Opus 4.7 | `src/phl13_memorization_audit.py`, `results/live_evidence/phl13_memorization_audit/SUMMARY.md` | **DISCOVERY SIGNAL** — TOP2A-EPAS1 exact top pick 0/10; proliferation-HIF form anywhere 0/10; but literature probe 2/2 "structurally_equivalent_to_known". Refutes LLM-SRBench memorization concern for the flagship. |
+| **PhL-13** | Memorization audit — 10-repeat zero-shot + literature-anchor probe on Opus 4.7 | `src/phl13_memorization_audit.py`, `results/live_evidence/phl13_memorization_audit/SUMMARY.md` | **DISCOVERY SIGNAL** — TOP2A-EPAS1 exact top pick 0/10; proliferation-HIF form anywhere 0/10; but literature probe 2/2 "structurally_equivalent_to_known". Argues against simple zero-shot retrieval for the flagship. |
 | **PhL-14** | LLM-SR 10-iteration convergence — Opus 4.7 vs Sonnet 4.6 with DrSR-style outcome tracking, held-out 70/30 split, per-iter train/held-out AUROC, pathway-diversity staircase | `src/phl14_llm_sr_10iter.py`, `results/overhang/llm_sr_10iter/SUMMARY.md` + `convergence_plot.png` | **HONEST NULL** — 18 post-seed skeleton families across 2 models × 10 iter, 0 clear the gate. Gate is the binding constraint. Peak non-seed AUCs: Opus 0.608 (`TOP2A*CA9/EPAS1` novel cross), Sonnet 0.646 (`TOP2A − AGXT`). Opus 0/9 library fallbacks vs Sonnet 4/9 (structured-output reliability gap). |
 | **PhL-15** | Adaptive-thinking causal ablation on Opus 4.7 Skeptic — 120 calls × 2 thinking modes × 6 candidates × 10 repeats | `src/phl15_adaptive_thinking_ablation.py`, `results/live_evidence/phl15_adaptive_thinking/SUMMARY.md` + `mode_comparison.png` | **HONEST NULL** — adaptive ON/OFF identical verdict distribution (both 0/60 PASS, 100% dissent). why_opus_4_7.md §0 "adaptive thinking is the mechanism" causal claim honestly weakened. |
 | **PhL-16** | Cross-model Proposer quality — each of 3 models proposes 30 ccRCC metastasis laws; all pass through the same pre-registered gate | `src/phl16_proposer_quality.py`, `results/live_evidence/phl16_proposer_quality/SUMMARY.md` + `proposer_comparison.png` | **0 / 48 gated proposals PASS** (Opus 0/30, Sonnet 0/18, Haiku N/A). Combined with PhL-14 → **~66 consecutive LLM-proposed laws rejected** across 5+ model/iteration combos. Format compliance: Opus 30/30, Sonnet 18/30, Haiku 0/30. Max AUC Opus 0.615, Sonnet 0.678 (both in gate's rejection zone, single-gene ceiling 0.657). Gate is model-independent binding. |
@@ -57,7 +57,7 @@ the submission.
 
 | Phase | What | Anchor |
 |---|---|---|
-| Flagship | TCGA-KIRC metastasis_expanded survivor `TOP2A−EPAS1` AUROC 0.726 | `results/track_a_task_landscape/metastasis_expanded/falsification_report.json` (9 / 30 pass) |
+| Flagship | TCGA-KIRC metastasis_expanded survivor `TOP2A−EPAS1`: gate `law_auc=0.726`; search split `test_auroc=0.631`; 5-fold AUROC `0.722 +/- 0.078`; 9 / 30 pass | `results/track_a_task_landscape/metastasis_expanded/SUMMARY.md` + `falsification_report.json` |
 | Track-A reject | 11-gene panel: 0 / 100+ on tumor-vs-normal / stage / 5-yr survival / metastasis | `results/track_a_task_landscape/SUMMARY.md` |
 | Track-B robustness | 6-axis stress test of the metastasis reject verdict | `results/track_b_gate_robustness/SUMMARY.md` |
 | Survivor robustness | 6-axis stress test of the TOP2A−EPAS1 accept verdict | `results/track_a_task_landscape/survivor_robustness/SUMMARY.md` |
@@ -70,7 +70,7 @@ the submission.
 | H1 | Falsification-Guided SR Loop (5 iter, Opus-steered, 5 survivors at iter 1) | `src/falsification_sr_loop.py`, `results/overhang/sr_loop_run.json` |
 | H2 | Opus 4.7 adaptive-thinking synthesis over 74 rejections + 9 survivors (14k-char prompt; 1M context available but not exercised — honest scoping at `docs/headline_findings.md`) | `src/opus_1m_synthesis.py`, `results/overhang/synthesis_1m.json` |
 | I2 | Rashomon set analysis — TOP2A−EPAS1 is rank 1 / 990 pairs | `src/rashomon_analysis.py`, `results/track_a_task_landscape/rashomon_set/SUMMARY.md` |
-| I3 | Clinical utility translation (Cohen's d, NNS, OR) | `src/track_a_clinical_utility.py`, `results/track_a_task_landscape/clinical_utility/SUMMARY.md` |
+| I3 | Clinical translation / threshold profile (Cohen's d, NNS, OR) | `src/track_a_clinical_utility.py`, `results/track_a_task_landscape/clinical_utility/SUMMARY.md` |
 | I4 | Information-theoretic synergy (mutual info, MDL) | `src/i4_information_theory.py`, `results/track_a_task_landscape/information_theory/SUMMARY.md` |
 | **Platform** | KIRC Stage I-II vs III-IV (45-gene, n=512): **23 / 28 survivors**, top AUROC 0.689 | `results/track_a_task_landscape/stage_expanded/SUMMARY.md` |
 | **Platform** | TCGA-COAD Stage I-II vs III-IV (31-gene, n=484): **15 / 22 survivors**, Δ+0.107 (highest of any run) | `results/track_a_task_landscape/coad_msi/SUMMARY.md` |
@@ -108,7 +108,7 @@ the submission.
 4. `docs/why_opus_4_7.md` — orchestrator framing, Karpathy +
    Sakana citations, Michael Cohen `outcomes` parallel
 5. `docs/survivor_narrative.md` — TOP2A − EPAS1 in plain language
-6. `docs/paper/paper.pdf` — 6-page workshop-paper-form write-up
+6. `docs/paper/paper_fmai.md` — current workshop-paper source
 7. `docs/submission_description.md` + `docs/submission_form_draft.md` —
    what we submit
 8. This file — back-reference for any claim → artefact lookup

@@ -1,0 +1,32 @@
+{
+  "recommended_stage": "Phase 2: failure-memory retrieval and reranking",
+  "ready_for_contextual_bandit": false,
+  "ready_for_offline_rl": false,
+  "ready_for_rlvr": false,
+  "blockers": [
+    "Failure memory is too small for policy learning beyond retrieval.",
+    "Verifier agreement across held-out gates is not yet instrumented.",
+    "Reward variance and reward-hacking stress tests are not yet logged."
+  ],
+  "observed": {
+    "rediscovery_f1": 1.0,
+    "false_survivor_rate": 0.6666666666666666,
+    "external_replay_rate": 0.3333333333333333,
+    "strict_external_replay_rate": 0.3333333333333333,
+    "interpretable_external_failure_rate": 1.0,
+    "underpowered_external_fail_rate": 0.5,
+    "endpoint_mismatch_rate": 0.5,
+    "missing_data_external_fail_rate": 0.5,
+    "direction_reversal_external_fail_rate": 0.0,
+    "external_replay_known_outcomes": 3,
+    "external_replay_fail_count": 2,
+    "failure_records": 21,
+    "failure_label_coverage": 0.6666666666666666
+  },
+  "next_tests": [
+    "Compare no-memory proposer vs failure-memory proposer at the same candidate budget.",
+    "Run reward-hacking tests where candidates optimize internal gate pass only.",
+    "Add held-out cohort/gate agreement logs before contextual bandit training.",
+    "Require external replay plus complexity penalty before any RLVR reward is exposed."
+  ]
+}

@@ -3,7 +3,7 @@
 ## ⚡ Final submission checklist (fill at form open time)
 
 - [ ] Open the submission form: https://cerebralvalley.ai/e/built-with-4-7-hackathon/hackathon/submit
-- [x] Demo video URL: **https://youtu.be/ZfFD84JmdQg** (YouTube, ≤3 min) — paste into submission form's "Demo video" field
+- [x] Demo video URL: **https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV** (YouTube, ≤3 min) — paste into submission form's "Demo video" field
 - [ ] Select problem statement: **"Build From What You Know"**
 - [ ] Select prize category (if field exists): **"Best Use of Claude Managed Agents"**
 - [ ] Copy unified 200-word summary below into the description field
@@ -23,7 +23,7 @@ Per official rules, the actual submission requires **only three items**:
 
 | Required item | Cap |
 |---|---|
-| Demo video link (YouTube / Loom / Google Drive) | **https://youtu.be/ZfFD84JmdQg** · 3 min max |
+| Demo video link (YouTube / Loom / Google Drive) | **https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV** · 3 min max |
 | Public GitHub repository | URL; public for review, may be private after event |
 | Written description / summary | **100–200 words** |
 
@@ -65,10 +65,10 @@ Discord update; Top 6 advance to final panel review on **2026-04-28
 
 | Criterion | Weight | Our load-bearing evidence |
 |---|---|---|
-| Impact (problem-statement fit, real-world potential) | 30% | **Platform generalization (2026-04-26, same gate + thresholds):** COAD (colon) 15/22 survivors (Δ+0.107 — highest of any run); LGG (brain glioma) 2/25 survivors (**AUROC 0.840** — TWIST1×MKI67 interaction term); LIHC (liver) 0/26 (designed negative, gate refuses correctly); KIRC (kidney) Stage 23/28 survivors. 7 disease contexts total. DIPG (pediatric brain cancer) generalization (7/15 Tier-2 supported, panobinostat-CED-MTX110 lead); Tier-1 prognostic-substrate gate on PBTA v15 (pediatric brain tumor atlas, n=192, 182 events) refuses to mint substrate-PASS on 0/4 — cross-disease falsification consistent with KIRC's 194/203 reject pattern; **IPF (lung fibrosis) Run #1 (2026-04-25): same engine, 1/5 SUPPORTED + 4 INSUFFICIENT, Skeptic caught two Advocate fabrications about prior trial design (RAINIER + Raghu 2017) — runtime demonstration of dual-role context isolation; $58.28, 32 min**; DatasetCard CLI = 30-min plug-in for any disease cohort |
-| Demo (working, holds up live, cool to watch) | 25% | **[▶ YouTube demo](https://youtu.be/ZfFD84JmdQg)** (KIRC + DIPG + IPF tags), 24 reproducible plots, `make smoke` no-API health check + `make demo` guided Opus handoff, **2 Routine sessions with FAIL+PASS dual verdict** (static evidence in `results/live_evidence/`) |
-| Opus 4.7 use (creative, beyond basic, surprises) | 25% | 180-call cross-model ablation (10/60 vs 0/60 PASS gap); **Opus 4.6 vs 4.7: 53.3%→66.7% (+13.3pp)** — 4.7 PASS 10/10 clean survivors, NEEDS_MORE_TESTS 10/10 stress-test, zero over-commitment; **prospective meta-calibration (PhI-1): Opus wrote kill-tests for 4 skeletons before gate; 0/4 survived; all 4 predicted failures confirmed**; PhL-15 thinking-mode confound resolution; PhL-13 memorization audit (0/10 zero-shot retrieval); 1M-context cross-reasoning synthesis on full failure history |
-| Depth & execution (push past first idea, real craft) | 20% | Self-killed our own H1 3-gene extension (PhL-1) on a separately pre-registered survival gate; ICP causal-invariance + anchor regression + Knockoffs + Westfall-Young + AUPRC stack; 107/107 current `make test` target + audit clean on package review; **IMmotion150 treatment-arm confound control: HR 1.361 (unadjusted) → 1.365 after controlling for immunotherapy vs VEGF-inhibitor arm — signal increases, confirming therapy-independence** |
+| Impact (problem-statement fit, real-world potential) | 30% | **Platform generalization (2026-04-26, same classification-gate family + thresholds):** COAD (colon) 15/22 survivors (Δ+0.107 — highest of any run); LGG (brain glioma) 2/25 survivors (**AUROC 0.840** — TWIST1×MKI67 interaction term); LIHC (liver) 0/26 (designed negative, gate refuses correctly); KIRC (kidney) Stage 23/28 survivors. 7 disease contexts total. DIPG (pediatric brain cancer) generalization (7/15 Tier-2 supported, panobinostat-CED-MTX110 lead); Tier-1 prognostic-substrate gate on PBTA v15 (pediatric brain tumor atlas, n=192, 182 events) refuses to mint substrate-PASS on 0/4 — cross-disease falsification consistent with the original KIRC rejection layer; **IPF (lung fibrosis) Run #1 (2026-04-25): same engine, 1/5 SUPPORTED + 4 INSUFFICIENT, Skeptic caught two Advocate fabrications about prior trial design (RAINIER + Raghu 2017) — runtime demonstration of dual-role context isolation; $58.28, 32 min**; DatasetCard CLI = 30-min plug-in for any disease cohort |
+| Demo (working, holds up live, cool to watch) | 25% | **[▶ YouTube demo](https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV)** (KIRC + DIPG + IPF tags), 24 reproducible plots, `make smoke` no-API health check + `make demo` guided Opus handoff, **2 Routine sessions with FAIL+PASS dual verdict** (static evidence in `results/live_evidence/`) |
+| Opus 4.7 use (creative, beyond basic, surprises) | 25% | 180-call cross-model ablation (10/60 vs 0/60 PASS gap); **Opus 4.6 vs 4.7: 53.3%→66.7% (+13.3pp)** — 4.7 PASS 10/10 clean survivors, NEEDS_MORE_TESTS 10/10 stress-test, zero over-commitment; **prospective meta-calibration (PhI-1): Opus proposed 5 skeletons; 2 were testable on the current panel, 0/2 passed, and 2/2 failure modes were anticipated before the gate ran**; PhL-15 thinking-mode confound resolution; PhL-13 memorization audit (0/10 zero-shot retrieval); 1M-context cross-reasoning synthesis on full failure history |
+| Depth & execution (push past first idea, real craft) | 20% | Self-killed our own H1 3-gene extension (PhL-1) on a separately pre-registered survival gate; ICP causal-invariance + anchor regression + Knockoffs + Westfall-Young + AUPRC stack; 107/107 current `make test` target + audit clean on package review; **IMmotion150 treatment-arm confound control: HR 1.361 (unadjusted) → 1.365 after controlling for immunotherapy vs VEGF-inhibitor arm — treatment-arm-adjusted prognostic signal persists** |
 
 ---
 
@@ -84,116 +84,95 @@ Lacuna: Falsification-First Biological Law Discovery
 ## One-line pitch (140 char)
 
 ```
-AI for Science that says no: pre-registered gate rejects 194 of 203 cancer laws, Opus 4.7's own included. Survivor validates cross-cohort.
+AI for Science that says no: 203 initial rejects, 9/30 after panel repair, and an own-output extension killed externally.
 ```
-(139 chars.)
+(124 chars.)
 
 ---
 
-## Unified 100–200 word summary (official spec — single field)
+## Project Description (recommended final)
 
-The official rules require **one written description / summary
-(100–200 words)**. Use this version if the live form has only a
-single summary box. (Word count: ~189 space-split; cap 200. Technical
-notation like `n=505` counts as 1 word in form counters, so the
-space-split total is the authoritative count.)
-**4-beat structure (what / problem / how-built / how-Claude) — trimmed 2026-04-26 to fit 200-word cap.**
+Lacuna is an AI-for-science system built to say no.
 
-```
-Lacuna is a pre-registered falsification gate for biological law
-discovery, built with Claude Code and Opus 4.7 Managed Agents. Opus
-plays Proposer (emits law families + kill-tests before any fit),
-Skeptic (reviews gate output in an isolated session — never the
-Proposer's reasoning), and Interpreter (explains only survivors).
+Most discovery tools are optimized to generate more hypotheses.
+Lacuna focuses on the harder scientific step: rejecting weak ones
+before they become convincing stories.
 
-Existing AI-for-Science pipelines (Sakana AI Scientist, POPPER)
-optimize for hypothesis generation, not rejection. The result:
-automated confirmation bias.
+Built with Claude Code, Opus 4.7, and Claude Managed Agents, Lacuna
+proposes candidate biological laws, then sends them through a fixed
+five-test Python gate. The AI cannot change the rules after seeing the
+result. Failed candidates are saved as useful scientific evidence, not
+treated as wasted work.
 
-A deterministic 5-test Python gate rejected 194 of 203 candidates
-on TCGA kidney cancer data (n=505). The simplest survivor —
-TOP2A − EPAS1 (proliferation vs hypoxia) — maps to the known
-kidney-cancer growth-program axis. This is not a new discovery: it is
-a methodology proof. The survivor passed a separately pre-registered
-survival gate on IMmotion150 (a kidney cancer clinical trial;
-log-rank p=0.0003, HR=1.36). Our own 3-gene extension? Killed by that same gate.
+On a public kidney cancer dataset with 505 patients, Lacuna rejected
+203 of 203 initial candidate evaluations. After the loop diagnosed
+panel absence and repaired only that cause, the same five-test gate
+accepted 9 of 30 expanded-panel metastasis candidates. One simple
+survivor, TOP2A - EPAS1, matched a known kidney-cancer growth program.
+That was the point: this is not presented as a new biological discovery,
+but as positive-control evidence that the system can rediscover known
+truth under strict rules.
 
-Claude Code Managed Agents hold the Skeptic stance without collapse
-— Opus 4.7 10/60 PASS where Sonnet 4.6 = 0/60. IPF Run #1
-(lung fibrosis, $58.28, 32 min): Skeptic caught two Advocate fabrications
-about prior trial design. Same Python gate, 6 diseases: kidney (2 tasks),
-colon, brain glioma, liver (2 tasks), pancreatic, lung fibrosis;
-DIPG pediatric brain cancer: Managed Agents session, 7/15 hypotheses supported.
-```
+That survivor also passed a cross-endpoint prognostic replay in a
+kidney cancer clinical-trial dataset. A later three-gene extension
+proposed by the system failed the same external survival gate.
+
+The broader goal is a repeatable scientific discipline: propose, test,
+reject, remember, and only then interpret.
 
 ---
 
-## Project summary (150 words, ~153 counted — trim if form rejects)
+## Thoughts and feedback on building with Opus 4.7 (recommended final)
 
-Lacuna is a pre-registered falsification discipline for biological
-law discovery, built on Opus 4.7 Managed Agents. Opus plays
-Proposer (emits compact law families + kill-test per family,
-before any fit), Skeptic (reviews gate output in an isolated
-session), and Interpreter (explains only what survived).
+Opus 4.7 became most useful when I stopped using it as one general
+answer engine and instead gave it separate scientific roles.
 
-AI-for-Science tools accelerate hypothesis generation — not
-rejection. The result: automated confirmation bias.
+In each loop, Opus acts as:
+1. Proposer: suggests compact candidate laws and writes down how they
+   might fail before seeing results.
+2. Skeptic: reviews only the test output, in a separate context, and
+   decides whether the evidence is strong enough.
+3. Interpreter: explains only the candidates that survive.
 
-A deterministic 5-test Python gate rejected 194 of 203 candidates
-on kidney cancer data (TCGA-KIRC, n=505). The survivor — `TOP2A − EPAS1` — is the
-published kidney-cancer subtype axis (Brannon 2010), re-derived from
-unconstrained symbolic regression. **This is not a new discovery:
-it is a methodology proof.** A methodology that finds known truth
-under a gate it cannot rationalize past proves it can find unknown
-truth. The survivor passed a separately pre-registered survival gate
-on IMmotion150 (a kidney cancer clinical trial; log-rank p=0.0003, HR=1.36);
-our own 3-gene extension? Killed by that same survival gate. Claude Code
-Routines run this discipline on every commit — pre-registration without being asked.
+The most valuable behavior was not just creativity. It was restraint.
+Opus 4.7 could propose ideas, accept strong evidence, reject weak
+evidence, and write careful "what this does not mean" caveats.
 
----
+I also ran repeated model comparisons. In one ablation, Sonnet 4.6
+rejected every gate-passing candidate, while Opus 4.7 was better
+aligned with the evidence. I would not frame that as a universal model
+ranking, but for this workflow it mattered: the Skeptic role needs
+calibrated judgment, not permanent doubt.
 
-## Claude Opus 4.7 usage (~210 words — trim at form open if field has 150-word hard cap)
-
-Three Opus 4.7 calls per loop with extended thinking and high-effort output.
-(1) Proposer emits 3-5 compact law families and the ex-ante skeptic test for
-each, before any fit. [Gate step: plain Python, not Opus.] (2) Skeptic reviews
-the specific metric pattern (`perm_p=0.049` is weaker than `0.001`;
-`ci_lower=0.61` is marginal) and emits PASS / FAIL / NEEDS_MORE_TESTS.
-(3) Interpreter writes the mechanism hypothesis and the "what this is
-not" paragraph. **180-call cross-model ablation: Sonnet 4.6 = 0/60 PASS on
-gate-PASS candidates (full dissent collapse); Opus 4.7 = 10/60. The gap reflects
-pre-training calibration — Opus wins even without extended thinking.**
-**Memorization audit: 0/10 zero-shot retrieval of TOP2A−EPAS1 — rebuts
-memorization concern.** **IPF Run #1: Skeptic caught two Advocate
-fabrications about prior trial design — claiming clinical precedent that did
-not exist. Context isolation verified at runtime.** **Opus 4.6 vs 4.7 (60
-calls each): abstention-calibration rate 53.3%→66.7% (+13.3pp); 4.7 PASS
-10/10 on clean survivors, NEEDS_MORE_TESTS 10/10 on stress-test (zero
-over-commitment vs 4.6's 20%) — gap is in graded abstention, not binary
-correctness. Prospective experiment: Opus wrote kill-tests for 4 new
-skeletons before gate ran; 0/4 survived; all 4 predicted failures confirmed.**
+The biggest surprise was a lung fibrosis run where an isolated Skeptic
+caught two false claims made by another agent. That made the
+architecture feel real.
 
 ---
 
-## Claude Managed Agents usage (150 words, ~148 counted)
+## Claude Managed Agents usage (recommended final)
 
-**Falsification discipline, not automated discovery.** Lacuna uses
-three public-beta sessions (Proposer, Skeptic, Interpreter) with
-structured-JSON handoff. The Skeptic never sees the Proposer's
-reasoning tokens — context isolation is the load-bearing design
-choice. Path B: single-agent with full built-in toolset, end-to-end.
-Path A proves a sequential three-session chain on real kidney cancer data
-(verified live: Skeptic cited the gate's exact delta score). Path C proves
-Claude Code Routines as the **methodology persistence layer**:
-`lacuna-scientific-oracle` receives an equation via API trigger, autonomously
-runs `make venv` + `make audit` + `falsification_sweep.py`
-(1000 perm/bootstrap, n=505), emits structured PASS/FAIL verdict —
-pre-registered kill-tests firing without being asked (static evidence:
-`results/live_evidence/`). Session events persist
-server-side; sessions can be restored from the event log (brain/body
-decoupling). Memory stores accumulate rejection lessons cross-session.
-IPF Run #1 ($58.28, 32 min): Skeptic caught two fabricated trial-design
-claims — what a single-context harness cannot catch.
+Yes. Lacuna uses Claude Managed Agents to separate roles that should
+not share the same reasoning context.
+
+The Proposer suggests candidate biological laws. The Skeptic reviews
+the evidence in a separate session and never sees the Proposer's
+reasoning. The Interpreter explains only what survived. This separation
+matters because science needs adversarial review, not one continuous
+chain rationalizing its own ideas.
+
+A deterministic Python gate sits between the agents. It runs the
+actual tests and decides pass or fail. Managed Agents provide the
+structure around that gate: separate sessions, structured handoffs,
+durable event logs, and memory across runs.
+
+I also used Claude Code Routines as the persistence layer. A routine
+can receive a new equation, run the audit and falsification scripts,
+and emit a structured verdict automatically.
+
+The goal is not "AI discovers everything." The goal is a repeatable
+discipline where hypotheses are proposed, tested, rejected, remembered,
+and only then interpreted.
 
 ---
 
@@ -250,7 +229,7 @@ assets: `docs/loom_script.md` (pre-narration shot list) +
 
 ## Broader Program Context (optional, 90 words, 89 counted)
 
-Opus 4.7 proof-of-concept of a larger program (NegBioDB + failure
+Opus 4.7 prototype of a larger program (NegBioDB + failure
 network + rescue engine for prematurely-rejected clinical hypotheses).
 Same four-role engine re-run on 15 H3 K27M DMG (pediatric brainstem cancer) rescue hypotheses
 (locked-before-output git SHA 8a4ecc5): 7 supported, 7 mixed, 1

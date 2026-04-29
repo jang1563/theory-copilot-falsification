@@ -22,17 +22,14 @@ import json
 import sys
 from pathlib import Path
 
-import numpy as np
-import pandas as pd
-
-from .data_loader import DEFAULT_NON_GENE_COLUMNS, DatasetCard
-from .equations import make_equation_fn
-from .falsification import run_falsification_suite
-from .opus_client import OpusClient
-
 
 _DISEASE_TOKENS = {"disease", "tumor", "case", "cancer", "1", "true"}
 _CONTROL_TOKENS = {"control", "normal", "healthy", "0", "false"}
+
+# Test suites patch these names on lacuna.cli. Keep them as lazy placeholders
+# so lightweight commands do not pay the numpy/sklearn/Anthropic import cost.
+OpusClient = None
+run_falsification_suite = None
 
 
 def _write_json(path: Path, payload: dict | list) -> Path:
@@ -42,7 +39,7 @@ def _write_json(path: Path, payload: dict | list) -> Path:
     return path
 
 
-def _parse_labels(series: pd.Series) -> np.ndarray:
+def _parse_labels(series):
     """Parse a label column into 0/1.
 
     Disease tokens → 1, control tokens → 0. Unknown string labels print
@@ -53,6 +50,9 @@ def _parse_labels(series: pd.Series) -> np.ndarray:
     surfaces them. Custom tokens → use DatasetCard with explicit
     `disease_tokens` (see `data_loader._parse_labels`).
     """
+    import numpy as np
+    import pandas as pd
+
     if pd.api.types.is_numeric_dtype(series):
         return series.astype(int).values
     s = series.astype(str).str.strip().str.lower()
@@ -69,7 +69,9 @@ def _parse_labels(series: pd.Series) -> np.ndarray:
     return s.map(lambda v: 1 if v in _DISEASE_TOKENS else 0).values.astype(int)
 
 
-def _zscore(X: np.ndarray) -> np.ndarray:
+def _zscore(X):
+    import numpy as np
+
     mean = X.mean(axis=0, keepdims=True)
     std = X.std(axis=0, keepdims=True)
     std = np.where(std < 1e-8, 1.0, std)
@@ -77,6 +79,8 @@ def _zscore(X: np.ndarray) -> np.ndarray:
 
 
 def _equation_callable(equation_str: str, col_names: list[str]):
+    from .equations import make_equation_fn
+
     return make_equation_fn(equation_str, col_names)
 
 
@@ -91,6 +95,8 @@ def _cmd_compare(args: argparse.Namespace) -> int:
         )
         return 2
     if getattr(args, "dataset_card", None):
+        from .data_loader import DatasetCard
+
         card = DatasetCard.from_json(args.dataset_card)
         flagship_card = {
             "dataset_id": card.dataset_id,
@@ -150,7 +156,10 @@ def _cmd_compare(args: argparse.Namespace) -> int:
     proposals = json.loads(Path(args.proposals).read_text())
     features = [p.get("name", p.get("symbolic_template", "")) for p in proposals]
 
-    client = OpusClient()
+    client_cls = OpusClient
+    if client_cls is None:
+        from .opus_client import OpusClient as client_cls
+    client = client_cls()
     proposer_result = client.propose_laws(
         dataset_card=flagship_card,
         features=features,
@@ -196,6 +205,8 @@ def _cmd_compare(args: argparse.Namespace) -> int:
 
 
 def _cmd_plug_in_dataset(args: argparse.Namespace) -> int:
+    from .data_loader import DatasetCard
+
     covariates = [c.strip() for c in (args.covariate_columns or "").split(",") if c.strip()]
     exclude = [c.strip() for c in (args.exclude_columns or "").split(",") if c.strip()]
     card = DatasetCard.infer_from_csv(
@@ -221,6 +232,17 @@ def _cmd_plug_in_dataset(args: argparse.Namespace) -> int:
 
 
 def _cmd_replay(args: argparse.Namespace) -> int:
+    import numpy as np
+    import pandas as pd
+
+    from .data_loader import DEFAULT_NON_GENE_COLUMNS, DatasetCard
+    gate_fn = run_falsification_suite
+    if gate_fn is None:
+        from .falsification import run_falsification_suite as gate_fn
+    client_cls = OpusClient
+    if client_cls is None:
+        from .opus_client import OpusClient as client_cls
+
     flagship_dir = Path(args.flagship_artifacts)
     report_path = flagship_dir / "falsification_report.json"
     if not report_path.exists():
@@ -278,7 +300,7 @@ def _cmd_replay(args: argparse.Namespace) -> int:
     equation = top["equation"]
     fn = _equation_callable(equation, gene_cols)
 
-    transfer_result = run_falsification_suite(fn, X, y, X_covariates=X_cov)
+    transfer_result = gate_fn(fn, X, y, X_covariates=X_cov)
     transfer_report = {
         **top,
         **transfer_result,
@@ -289,7 +311,7 @@ def _cmd_replay(args: argparse.Namespace) -> int:
     output_dir = Path(args.output_root) / "transfer_run"
     _write_json(output_dir / "transfer_report.json", transfer_report)
 
-    client = OpusClient()
+    client = client_cls()
     dataset_context = {
         "transfer_dataset": transfer_id,
         "equation": equation,
@@ -385,6 +407,85 @@ def _cmd_replay_events(args: argparse.Namespace) -> int:
         target_session_id=args.target_session_id,
     )
     print(json.dumps(result, indent=2))
+    return 0
+
+
+def _cmd_bench_audit(args: argparse.Namespace) -> int:
+    """Audit a Lacuna-Bench manifest against existing local artifacts."""
+    from .bench import audit_manifest
+
+    audit = audit_manifest(args.manifest, root=args.repo_root)
+    if args.output:
+        _write_json(Path(args.output), audit)
+    print(
+        json.dumps(
+            {
+                "task_count": audit["task_count"],
+                "candidate_count": audit["candidate_count"],
+                "survivor_count": audit["survivor_count"],
+                "reject_count": audit["reject_count"],
+                "metrics": audit["metrics"],
+                "output": args.output,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+def _cmd_failure_atlas(args: argparse.Namespace) -> int:
+    """Build Failure Atlas v1 memory from reports or a benchmark manifest."""
+    from .failure_atlas import (
+        records_from_manifest,
+        records_from_report,
+        summarize_failure_memory,
+    )
+
+    records = []
+    if args.manifest:
+        records.extend(records_from_manifest(args.manifest, root=args.repo_root))
+    for report_path in args.report or []:
+        records.extend(records_from_report(report_path))
+
+    if not records:
+        print("failure-atlas requires --manifest and/or at least one --report.", file=sys.stderr)
+        return 2
+
+    summary = summarize_failure_memory(records)
+    if args.output:
+        _write_json(Path(args.output), records)
+    if args.summary_output:
+        _write_json(Path(args.summary_output), summary)
+    print(
+        json.dumps(
+            {
+                **summary,
+                "output": args.output,
+                "summary_output": args.summary_output,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+def _cmd_rl_readiness(args: argparse.Namespace) -> int:
+    """Assess whether current verifier artifacts justify RL/RLVR escalation."""
+    from .rl_readiness import build_rl_readiness_report, load_json
+
+    bench_audit = load_json(args.bench_audit)
+    atlas_summary = load_json(args.atlas_summary)
+    report = build_rl_readiness_report(
+        bench_audit,
+        atlas_summary,
+        min_external_outcomes=args.min_external_outcomes,
+        min_failure_records=args.min_failure_records,
+    )
+    if args.output:
+        _write_json(Path(args.output), report)
+    print(json.dumps({**report, "output": args.output}, indent=2, sort_keys=True))
     return 0
 
 
@@ -502,6 +603,54 @@ def build_parser() -> argparse.ArgumentParser:
         help="Destination Managed Agents session id.",
     )
     p_replay_ev.set_defaults(func=_cmd_replay_events)
+
+    p_bench = sub.add_parser(
+        "bench-audit",
+        help="Audit a Lacuna-Bench manifest against local falsification artifacts.",
+    )
+    p_bench.add_argument("--manifest", required=True, help="Path to Lacuna-Bench manifest JSON.")
+    p_bench.add_argument(
+        "--repo-root",
+        default=".",
+        help="Root used to resolve relative manifest paths.",
+    )
+    p_bench.add_argument("--output", required=False, help="Optional audit JSON output path.")
+    p_bench.set_defaults(func=_cmd_bench_audit)
+
+    p_atlas = sub.add_parser(
+        "failure-atlas",
+        help="Build structured Failure Atlas memory from reports or a benchmark manifest.",
+    )
+    p_atlas.add_argument("--manifest", required=False, help="Optional Lacuna-Bench manifest JSON.")
+    p_atlas.add_argument(
+        "--repo-root",
+        default=".",
+        help="Root used to resolve relative manifest paths.",
+    )
+    p_atlas.add_argument(
+        "--report",
+        action="append",
+        required=False,
+        help="Additional falsification_report.json path. May be supplied multiple times.",
+    )
+    p_atlas.add_argument("--output", required=False, help="Optional failure-memory JSON output path.")
+    p_atlas.add_argument(
+        "--summary-output",
+        required=False,
+        help="Optional summary JSON output path.",
+    )
+    p_atlas.set_defaults(func=_cmd_failure_atlas)
+
+    p_rl = sub.add_parser(
+        "rl-readiness",
+        help="Assess verifier-first readiness for reranking, contextual bandits, and RLVR.",
+    )
+    p_rl.add_argument("--bench-audit", required=True, help="Path to bench-audit JSON.")
+    p_rl.add_argument("--atlas-summary", required=True, help="Path to Failure Atlas summary JSON.")
+    p_rl.add_argument("--output", required=False, help="Optional RL readiness report JSON path.")
+    p_rl.add_argument("--min-external-outcomes", type=int, default=3)
+    p_rl.add_argument("--min-failure-records", type=int, default=50)
+    p_rl.set_defaults(func=_cmd_rl_readiness)
 
     return parser
 
