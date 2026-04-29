@@ -4,26 +4,42 @@
 
 # Lacuna
 
-> *Rejects 203 initial candidate evaluations, repairs one named failure class, then kills its own extension.*
-> *(385 total across 14 task × panel configs → [Key Numbers ↓](#key-numbers-at-a-glance))*
+> *Falsification-first rediscovery benchmark and failure-memory system for biological law discovery.*
+> *Known biology first. Failed hypotheses as data. New discovery only after external replay.*
 
 <img src="https://img.shields.io/badge/Python-3.10--3.13-1E3A8A?style=flat-square" alt="Python 3.10-3.13" />
 <img src="https://img.shields.io/badge/Built_with-Claude_Opus_4.7-1E3A8A?style=flat-square" alt="Built with Claude Opus 4.7" />
-<img src="https://img.shields.io/badge/Hackathon-Cerebral_Valley_2026-faf9f5?labelColor=141413&style=flat-square" alt="Cerebral Valley Hackathon 2026" />
+<img src="https://img.shields.io/badge/Origin-Cerebral_Valley_2026-faf9f5?labelColor=141413&style=flat-square" alt="Cerebral Valley Hackathon 2026 origin" />
 
-The original classification campaign rejected 203 of 203 initial candidate evaluations. After the loop diagnosed panel absence and repaired only that cause, the same five-test classification gate accepted 9 of 30 expanded-panel metastasis candidates, led by `TOP2A − EPAS1`. When the system's own best downstream output (a 3-gene extension) was tested on independent data, the independently pre-registered IMmotion150 survival gate also rejected it.
+Lacuna is a research prototype for asking a stricter AI-for-Science question:
+can an LLM-guided workflow rediscover known biology, kill weak hypotheses with a
+deterministic verifier, and preserve the failures as useful scientific memory?
 
-**The rejections are the product working correctly.** A gate that rejects 0% is not falsification — it is a pipeline that reports every answer it generates. The initial rejection layer shows the gate refusing to call one-gene-saturated tasks multi-gene discoveries; the repaired layer shows the same classification gate accepting a harder 45-gene task when the named failure cause is fixed. Unlike AI-for-Science systems that use an LLM-as-judge, this gate is plain Python — Opus 4.7 cannot renegotiate the threshold mid-run. In practice: on an independent IPF run the Skeptic (separate context, never sees Proposer tokens) caught 2 fabricated trial-design claims in 32 min for $58.28 — output a standard pipeline would have reported as findings.
+The current package is **not a new biomarker claim** and **not a clinical
+validation package**. Its flagship task is a positive-control rediscovery
+benchmark in ccRCC/KIRC: recover a compact proliferation-minus-HIF/EPAS1 axis,
+then account for what survives, what fails, and why. The same five-test Python
+gate rejected 203 of 203 initial candidate evaluations, accepted 9 of 30 after
+one named panel-absence failure was repaired, and later rejected the system's
+own three-gene extension on an independently pre-registered IMmotion150
+survival replay.
 
-Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 2026 · **Demo video:** [▶ YouTube](https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV) · **Demo companion:** [watch](https://jang1563.github.io/lacuna-falsification/demo.html) · **Interactive story:** [explore](https://jang1563.github.io/lacuna-falsification/story.html)
+Unlike LLM-as-judge systems, Lacuna's gate is plain Python: Opus 4.7 can
+propose, critique, and interpret, but it cannot move the threshold after seeing
+the result. The rejections are therefore part of the product, not a failed run.
 
-| **203 / 203 initial rejected** | **9 / 30 repaired-panel pass** | **HR 1.36** on IMmotion150 | **Best of 990 two-gene pairs** |
-|---|---|---|---|
-| Original 11-gene HIF-axis layer | 45-gene panel · M0/M1 · AUROC 0.726 | PFS · n=263 · p=0.0003 | Rank 1 of all C(45,2) combinations |
+Built by a bioinformatics postdoc · *Built with Claude Opus 4.7* · April 2026 · **3-minute overview:** [YouTube](https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV) · **Demo companion:** [watch](https://jang1563.github.io/lacuna-falsification/demo.html) · **Interactive story:** [explore](https://jang1563.github.io/lacuna-falsification/story.html)
 
-> **Judge path:** [1. ▶ Watch demo (YouTube)](https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV) · [2. Read discovery story](https://jang1563.github.io/lacuna-falsification/story.html) · [3. Verify evidence](docs/ARTIFACT_INDEX.md) · [4. Run smoke](#quick-start)
+| **What this is** | **What this is not** |
+|---|---|
+| Falsification-first rediscovery benchmark | A new clinical biomarker claim |
+| Deterministic verifier around LLM proposal/critique | LLM-as-judge validation |
+| Failure-memory substrate for future reranking/RL | RLVR-ready reward system |
+| Positive-control ccRCC/KIRC package | Prospective clinical evidence |
+
+> **Start here:** [3-minute overview](https://youtu.be/eB-gREA4zGI?si=8hjo-BhMtKqtN_lV) · [Dashboard](https://jang1563.github.io/lacuna-falsification/) · [Interactive story](https://jang1563.github.io/lacuna-falsification/story.html) · [Artifact index](docs/ARTIFACT_INDEX.md) · [Quick start](#quick-start)
 >
-> **Evidence surfaces:** [Dashboard](https://jang1563.github.io/lacuna-falsification/) · [Full rejection log](https://jang1563.github.io/lacuna-falsification/rejection-log.html) · [FMAI paper](docs/paper/paper_fmai.md) · [Demo walkthrough](docs/demo_walkthrough.md)
+> **Evidence surfaces:** [Lacuna-Bench audit](results/lacuna_bench_v1/audit.json) · [Failure Atlas](results/failure_atlas_v1/SUMMARY.json) · [RL readiness](results/rl_readiness_v1/report.json) · [Full rejection log](https://jang1563.github.io/lacuna-falsification/rejection-log.html) · [FMAI paper draft](docs/paper/paper_fmai.md)
 
 ---
 
@@ -31,8 +47,14 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 
 | Metric | Value |
 |---|---|
+| Lacuna-Bench v1 flagship task | `kirc_ccrcc_metastasis_top2a_epas1_rediscovery` |
+| Rediscovery score | `rediscovery_f1 = 1.0` for the locked positive-control gene target |
+| Strict external replay | `1 / 3` machine-readable outcomes pass (`strict_external_replay_rate = 0.333`) |
+| External failure profile | endpoint mismatch `0.5`, underpowered same-endpoint fail `0.5`, missing-data subtype `0.5`, single-gene saturation subtype `1.0` |
+| Failure Atlas v1 | 21 failed records; label coverage `0.667`; dominant labels: bootstrap unstable, underpowered, single-gene saturation |
+| RL readiness | Failure-memory retrieval/reranking is justified; contextual bandit, offline RL, and RLVR are **not** yet justified |
 | Candidate evaluations (classification gate) | [**385** across 14 task × panel configs](results/track_a_task_landscape/SUMMARY.md) (KIRC original layer: 203/203 rejected; KIRC panel repair: 9/30 accepted; platform expansion: 61/101 reject; new disease tracks: 20/81 accept; **60 non-KIRC survivors total** = 40 platform + 20 new-disease) |
-| 6-verdict replication chain | **3 PASS · 2 pre-registered FAIL · 1 honest FAIL** · 5 cohorts · 3 platforms |
+| 6-verdict evidence chain | **3 PASS · 2 pre-registered FAIL · 1 honest FAIL** · 5 cohorts · 3 platforms |
 | Rashomon rank within all C(45,2) = 990 two-gene pairs | **1 / 990** |
 | Memorization check: zero-shot TOP2A−EPAS1 retrieval rate | **0 / 10** probes |
 | G + I pre-registered analysis predictions passing | **12 / 13** |
@@ -46,40 +68,43 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 
 ---
 
-## Judging criteria
+## Evidence Map
 
-| Axis | Weight | Entry point |
-|---|---|---|
-| **Opus 4.7 use** | 25% | [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A/B/C · [PhL-8 Routines live](results/live_evidence/phl8_routine_fire/) · [180-call Skeptic ablation](results/ablation/SUMMARY.md): Opus 10/60 PASS · Haiku 14/60 (over-accepts) · Sonnet 0/60 (permanent dissent even with extended thinking) · [PhL-15](results/live_evidence/phl15_adaptive_thinking/SUMMARY.md): model identity changes gate-alignment behavior under available inference modes |
-| **Impact** | 30% | [IPF Run #1](results/external_validation_ipf/) — Skeptic caught 2 fabricated trial-design claims ($58.28 · 32 min) · **7 disease contexts** (ccRCC · COAD · LGG · LIHC · DIPG · IPF · PAAD) · platform generalization: [COAD 15/22](results/track_a_task_landscape/coad_msi/) · [LGG 2/25 AUROC 0.840](results/track_a_task_landscape/gbm_idh/) · [LIHC MVI 6/29 AUROC 0.702](results/track_a_task_landscape/lihc_mvi/) · [IPF CEP 6/25 AUROC 0.757](results/track_a_task_landscape/ipf_lgrc/) · [PAAD OS 8/27 AUROC 0.707](results/track_a_task_landscape/paad_survival/) · [`DatasetCard`](config/dataset_cards/) plug-in for any disease CSV |
-| **Demo** | 25% | YouTube video (≤3 min) · `make venv && make smoke` (no API key; ~1 min) · [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md) · [artefact index](docs/ARTIFACT_INDEX.md) |
-| **Depth & execution** | 20% | [12/13 G+I predictions PASS](results/track_a_task_landscape/rigor_extension/SUMMARY.md) · [own-output killed by own gate (PhL-1)](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md) · [14-question `judge_faq.md`](docs/judge_faq.md) |
+| Layer | Entry point |
+|---|---|
+| Benchmark audit | [`results/lacuna_bench_v1/audit.json`](results/lacuna_bench_v1/audit.json) · [`config/lacuna_bench_v1.json`](config/lacuna_bench_v1.json) |
+| Failure memory | [`results/failure_atlas_v1/SUMMARY.json`](results/failure_atlas_v1/SUMMARY.json) · [`src/lacuna/failure_atlas.py`](src/lacuna/failure_atlas.py) |
+| RL/RLVR readiness | [`results/rl_readiness_v1/report.json`](results/rl_readiness_v1/report.json) · [`src/lacuna/rl_readiness.py`](src/lacuna/rl_readiness.py) |
+| Deterministic gate | [`src/lacuna/falsification.py`](src/lacuna/falsification.py) · [`src/lacuna/bench.py`](src/lacuna/bench.py) |
+| Agentic workflow | [`docs/methodology.md §4`](docs/methodology.md) · [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) |
+| External replay and rejection log | [`results/track_a_task_landscape/external_replay/SUMMARY.md`](results/track_a_task_landscape/external_replay/SUMMARY.md) · [`results/rejection_log.html`](results/rejection_log.html) |
+| Reproducibility | `make venv && make smoke` · `make test` · [`docs/ARTIFACT_INDEX.md`](docs/ARTIFACT_INDEX.md) |
 
 ---
 
 ## Start here (by role)
 
-> **Navigator:** [`docs/ARTIFACT_INDEX.md`](docs/ARTIFACT_INDEX.md) is the canonical 60-second tour — every claim maps to exactly one artefact. If a claim is not in that index, it is not in the submission.
+> **Navigator:** [`docs/ARTIFACT_INDEX.md`](docs/ARTIFACT_INDEX.md) is the canonical 60-second tour — every claim maps to exactly one artifact. If a claim is not in that index, it is not part of the public evidence package.
 
-**Agentic architecture (Boris, Lydia)**
+**Agentic architecture**
 - [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions (Proposer / Skeptic / Interpreter); separate context windows by design, not convention
 - [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A (sequential 3-session chain) · Path B (single agent, `agent_toolset_20260401`) · Path C (Routines `/fire` HTTP client)
 - [`results/live_evidence/04_managed_agents_e2e.log`](results/live_evidence/04_managed_agents_e2e.log) — live agent/environment/session/stream trace
 - Two Skills: [`falsification-gate`](.claude/skills/falsification-gate/SKILL.md) (gate a candidate) + [`pre-register-claim`](.claude/skills/pre-register-claim/SKILL.md) (lock kill-tests before fit); compose in sequence
-- **Path C live runs:** PhL-8d dual-verdict oracle — FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS); static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/) · PhL-10 stage oracle — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run — local PySR stage_expanded: 0.689); static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/) · PhL-8c: single-equation PASS
+- **Path C live runs:** PhL-8d dual-verdict oracle — FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS); static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/) · PhL-10 stage oracle — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run — local PySR stage_expanded: 0.689); static evidence: [`results/live_evidence/phl10_stage_oracle/`](results/live_evidence/phl10_stage_oracle/) · PhL-8c: single-equation PASS
 - Brain/body decoupling: `lacuna persist-events` → `replay-events` — session event log survives harness crashes; re-injects client-originated events into a fresh session
-- [`docs/managed_agents_evidence_card.md`](docs/managed_agents_evidence_card.md) — Managed Agents + Routines live evidence (12 session-level artefacts from the 24-PhL ledger); per-session event counts, wall-clock times, costs; cross-reference table for all 3 paths
+- [`docs/managed_agents_evidence_card.md`](docs/managed_agents_evidence_card.md) — Managed Agents + Routines live evidence (12 session-level artifacts from the 24-PhL ledger); per-session event counts, wall-clock times, costs; cross-reference table for all 3 paths
 - **Context isolation in practice:** IPF Run #1 [`results/external_validation_ipf/`](results/external_validation_ipf/) — Skeptic (separate context, never sees Advocate tokens; "Advocate" = rescue-engine Proposer in IPF/DIPG context) caught 2 fabricated trial-design claims. $58.28 · 32 min.
 - **Memorization control** [`phl13_memorization_audit`](results/live_evidence/phl13_memorization_audit/SUMMARY.md): 0 / 10 zero-shot retrievals returned `TOP2A−EPAS1`. PySR found it; Opus did not recall it.
 
-**DX and reproducibility (Lydia, Ado)**
+**Reproducibility**
 - `make venv && make smoke` — smoke passes in ~1 min after install, no API key needed
 - [`src/README.md`](src/README.md) — map of all 60+ `src/` scripts organized by track
 - [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) — one-click dev container (VS Code Dev Containers)
-- `make test` — 107 local-runnable tests (no API key); `make audit` — compliance grep, passes on every commit
+- `make test` — local-runnable test suite (no API key); `make audit` — compliance grep, passes on every commit
 
-**Real-world impact (Ado, Jason)**
-- **7 disease contexts** under the same falsification-first discipline: ccRCC / COAD / LGG / LIHC / IPF / PAAD use the 5-test expression gate; DIPG uses the same role-separated Advocate/Skeptic review engine. Entry points (expression gate): ccRCC (flagship) · COAD ([`coad_msi/`](results/track_a_task_landscape/coad_msi/)) · LGG ([`gbm_idh/`](results/track_a_task_landscape/gbm_idh/)) · LIHC MVI ([`lihc_mvi/`](results/track_a_task_landscape/lihc_mvi/)) · IPF CEP ([`ipf_lgrc/`](results/track_a_task_landscape/ipf_lgrc/)) · PAAD ([`paad_survival/`](results/track_a_task_landscape/paad_survival/)) · DIPG (rescue engine: [`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF drug rescue ([`results/external_validation_ipf/`](results/external_validation_ipf/))
+**Supporting probes**
+- **7 disease contexts** under the same falsification-first discipline. These are supporting probes and stress tests, not equal-strength validation claims: ccRCC / COAD / LGG / LIHC / IPF / PAAD use the 5-test expression gate; DIPG uses the same role-separated Advocate/Skeptic review engine. Entry points (expression gate): ccRCC (flagship) · COAD ([`coad_msi/`](results/track_a_task_landscape/coad_msi/)) · LGG ([`gbm_idh/`](results/track_a_task_landscape/gbm_idh/)) · LIHC MVI ([`lihc_mvi/`](results/track_a_task_landscape/lihc_mvi/)) · IPF CEP ([`ipf_lgrc/`](results/track_a_task_landscape/ipf_lgrc/)) · PAAD ([`paad_survival/`](results/track_a_task_landscape/paad_survival/)) · DIPG (rescue engine: [`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF drug rescue ([`results/external_validation_ipf/`](results/external_validation_ipf/))
 - Plug-in workflow: drop any disease CSV → `lacuna plug-in-dataset` → `lacuna compare --dataset-card <card>.json`; the handoff prints exact PySR + falsification commands with the gene list pinned; see [`docs/demo_walkthrough.md`](docs/demo_walkthrough.md)
 - IPF Run #1: Skeptic caught 2 fabricated claims about prior trial design (RAINIER, Raghu 2017). $58.28 · 32 min. See [`results/external_validation_ipf/`](results/external_validation_ipf/)
 
@@ -89,7 +114,7 @@ Built by a bioinformatics postdoc · *Built with Opus 4.7* Hackathon · April 20
 - [Interpreter ablation PhL-19](results/live_evidence/phl19_interpreter_depth/SUMMARY.md): Opus 4.7 = 100% caveat rate, 100% prediction rate, avg 12 citations; Sonnet/Haiku = 0% on both (programmatic structural metrics; blind human rubric not completed)
 - Own-output falsification: H1-loop 3-gene extension (`TOP2A − (EPAS1 + SLC22A8)`) failed IMmotion150 survival replay ([PhL-1](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md))
 
-**5-minute challenge check → [`docs/judge_faq.md`](docs/judge_faq.md)** — 14 reviewer challenges (rediscovery vs discovery, AUROC ceiling, cohort independence, Sonnet drop-in, memorisation audit, `delta_confound` null) with direct evidence links
+**Reviewer challenge check → [`docs/judge_faq.md`](docs/judge_faq.md)** — 14 claim-boundary challenges (rediscovery vs discovery, AUROC ceiling, cohort independence, Sonnet drop-in, memorisation audit, `delta_confound` null) with direct evidence links
 
 ---
 
@@ -157,9 +182,9 @@ flowchart TB
 make venv && make smoke
 ```
 
-This creates `.venv/`, installs the package, runs critical module imports, fires a deterministic gate sanity check, runs the compliance audit, and verifies all judge-facing artefact indices are present. Expected output: `SMOKE OK`.
+This creates `.venv/`, installs the package, runs critical module imports, fires a deterministic gate sanity check, runs the compliance audit, and verifies all public artifact indices are present. Expected output: `SMOKE OK`.
 
-Use Python **3.10-3.13**. Lacuna intentionally excludes Python 3.14 for the submission package because scientific dependency wheels can lag new CPython releases. If your system `python3` is too new, run `make venv VENV_PYTHON=python3.12` (or 3.10/3.11/3.13).
+Use Python **3.10-3.13**. Lacuna intentionally excludes Python 3.14 for the public package because scientific dependency wheels can lag new CPython releases. If your system `python3` is too new, run `make venv VENV_PYTHON=python3.12` (or 3.10/3.11/3.13).
 
 > **Python 3.10-3.13 required.** `pyproject.toml` enforces this range so unsupported 3.14 environments fail fast instead of hanging during dependency installs. `make venv` creates the project-local virtualenv with `VENV_PYTHON` (default `python3`).
 
@@ -263,9 +288,10 @@ law earned that survival by genuinely adding 0.11 over any single gene.
 
 ## Running as a Routine (Path C)
 
-Boris Cherny in the 2026-04-21 *Built with Opus 4.7* kickoff flagged server-side
-Routines — Claude sessions that wake on a schedule and outlive the laptop — as
-the feature space "no one has cracked yet." Path C is Lacuna's answer.
+The 2026 *Built with Opus 4.7* kickoff highlighted server-side Routines —
+Claude sessions that wake on a schedule and outlive the laptop — as an
+important automation surface. Path C is Lacuna's implementation of that idea
+for falsification-first scientific review.
 
 > **Methodology framing.** Lacuna is not a biological discovery tool — it is a
 > *positive-control methodology result*. `TOP2A − EPAS1` is known biology (Brannon 2010 ccA/ccB
@@ -299,7 +325,7 @@ The Routine clones the repo, runs `make venv && make audit`, then runs
 structured verdict blocks + a dual summary — no human action after the fire call.
 
 PhL-8d static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/)
-PhL-10 static evidence: [`results/live_evidence/phl10_stage_dual_verdict/`](results/live_evidence/phl10_stage_dual_verdict/)
+PhL-10 static evidence: [`results/live_evidence/phl10_stage_oracle/`](results/live_evidence/phl10_stage_oracle/)
 Fire script: [`src/phl8d_dual_verdict_fire.py`](src/phl8d_dual_verdict_fire.py)
 
 ```bash
@@ -417,50 +443,12 @@ tool's own validation claims. See [`docs/failure_network_v3_appendix.md`](docs/f
 
 ---
 
-## Hackathon compliance notes
+## Origin and Compliance
 
-Per the *Built with Opus 4.7* rules and the 2026-04-23 / 2026-04-24
-Discord Q&A clarifications:
-
-**Code provenance.** Every commit in `git log` has a timestamp from
-2026-04-22 04:01 ET or later (the earliest commit in the repo). All
-code in the submitted tree was written during the hackathon. Pre-
-hackathon scaffold files (`src/lacuna/contracts.py`, `qc.py`,
-`reuse_inventory.py`, `reuse_plan.py`, `staging.py`, `workflow_data.py`
-plus a few config / docs / test files) are explicitly excluded via
-`.gitignore` and are not part of the submission — `git ls-files` does
-not include any of them. The hackathon-built code is the artefact; no
-pre-existing project serves as "underlying infrastructure" in the
-git-lex sense.
-
-**Managed Agents features.** Per Anthropic's 2026-04-23 response to
-our Agent Teams waitlist request, research-preview features are
-disabled for hackathon participants to keep evaluation fair. This
-submission uses public-beta features only: Path B (single agent +
-`agent_toolset_20260401`), Path A as a sequential chain of three
-Path B sessions, Path C via Claude Code Routines `/fire` HTTP client.
-The orchestrator-with-`callable_agents` code path exists in
-`_run_path_a_callable_agents` as an architectural reference, guarded
-by an env flag that is not set during the submitted run.
-
-**Data access.** Every dataset used in the pipeline is publicly
-accessible without authentication or email registration:
-
-| Dataset | Source | Access |
-|---|---|---|
-| TCGA-KIRC (STAR TPM + clinical) | GDC (gdc.cancer.gov) open-access | `data/build_tcga_kirc*.py` |
-| GSE40435, GSE53757 | NCBI GEO | `data/build_gse*.py` |
-| IMmotion150 Phase-2 (Nat Med 2018, PMID 29867230) | cBioPortal REST API (`rcc_iatlas_immotion150_2018`) | `data/build_immotion150.py` |
-| CPTAC-3 ccRCC proteogenomic (Clark Cell 2019) | PDC GraphQL + cBioPortal mirror | `data/build_cptac3_ccrcc.py` (built; not gated — proposed follow-on cohort, `docs/survivor_narrative.md §What would make this claim stronger`) |
-| TCGA-BRCA, TCGA-LUAD | GDC open-access | `data/build_tcga_brca.py`, `build_tcga_luad.py` |
-
-No dataset requires an institutional-email login, dbGaP controlled-
-access application, or any other gate that would fail the Q&A test
-*"this isn't accessible to everyone."* Published-research knowledge
-cited in the prompts is open-access per PubMed / arXiv / DOI.
-
-**Repo visibility.** Public during the judging window (`git remote -v`
-→ `github.com/jang1563/lacuna-falsification`). MIT licensed.
+Lacuna began as a *Built with Opus 4.7* Hackathon project in April 2026. The
+main package is now framed as a research artifact; the hackathon-specific
+provenance, data-access, and feature-eligibility notes are preserved in
+[`docs/hackathon_compliance.md`](docs/hackathon_compliance.md).
 
 ---
 
