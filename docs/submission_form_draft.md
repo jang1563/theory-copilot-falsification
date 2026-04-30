@@ -84,7 +84,7 @@ Lacuna: Falsification-First Biological Law Discovery
 ## One-line pitch (140 char)
 
 ```
-AI for Science that says no: 203 initial rejects, 9/30 after panel repair, and an own-output extension killed externally.
+AI for Science that says no: 194 of 203 KIRC candidates rejected, 9 survivors only after panel-absence repair, own extension killed externally.
 ```
 (124 chars.)
 
@@ -105,10 +105,11 @@ result. Failed candidates are saved as useful scientific evidence, not
 treated as wasted work.
 
 On a public kidney cancer dataset with 505 patients, Lacuna rejected
-203 of 203 initial candidate evaluations. After the loop diagnosed
-panel absence and repaired only that cause, the same five-test gate
-accepted 9 of 30 expanded-panel metastasis candidates. One simple
-survivor, TOP2A - EPAS1, matched a known kidney-cancer growth program.
+194 of 203 candidate evaluations. The 9 survivors all came from a
+single 45-gene metastasis sub-layer, after the loop diagnosed panel
+absence on the original 11-gene layer and repaired only that cause.
+One simple survivor, TOP2A - EPAS1, matched a known kidney-cancer
+growth program.
 That was the point: this is not presented as a new biological discovery,
 but as positive-control evidence that the system can rediscover known
 truth under strict rules.
