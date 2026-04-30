@@ -100,3 +100,6 @@ docs/paper/review/
 
 # Local browser test screenshots
 output/
+
+# Conference submission bundles (anonymized snapshots, never public)
+dist/

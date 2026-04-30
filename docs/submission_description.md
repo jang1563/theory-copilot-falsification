@@ -149,8 +149,9 @@ section evidences. Full artefact table at
   Δbase=+0.062) in one session. **PhL-10** (stage oracle, new
   Routine per disease) — `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS
   (AUROC 0.696, Δbase=+0.051, n=512). Same gate, same thresholds,
-  different task. Session URLs: `https://claude.ai/code/session_01CgsJYAPdvhJJwTuBt7QZLZ`
-  (PhL-8d) · `https://claude.ai/code/session_01XGse8XYFtv3C1aKLZeMH9t` (PhL-10). Local
+  different task. Session IDs (login required for live view; static
+  evidence in `results/live_evidence/`): `session_01CgsJYAPdvhJJwTuBt7QZLZ`
+  (PhL-8d) · `session_01XGse8XYFtv3C1aKLZeMH9t` (PhL-10). Local
   watch-dir / cadence loop runs when no token is configured, so the
   falsification watchdog ships regardless of whether the Routines
   research preview is available to the reviewer's account.

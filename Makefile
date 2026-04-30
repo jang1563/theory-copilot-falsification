@@ -1,4 +1,4 @@
-.PHONY: help install test smoke demo demo-kirc demo-templates clean status audit paper paper-fmai skeptic-review prereg prereg-validate prereg-audit rejection-log h1 h2 venv all
+.PHONY: help install test smoke demo demo-kirc demo-templates clean status audit skeptic-review prereg prereg-validate prereg-audit rejection-log h1 h2 venv all
 
 # ============================================================
 # Lacuna Falsification — Developer Commands
@@ -11,10 +11,6 @@ VENV_PYTHON ?= python3
 PYTHONPATH_SRC := PYTHONPATH=src
 DEMO_OUT := artifacts/flagship_run
 TRANSFER_OUT := artifacts/transfer_run
-VERSION ?=
-PAPER_FMAI_VERSION ?= $(VERSION)
-PAPER_FMAI_STEM := $(if $(PAPER_FMAI_VERSION),paper_fmai_$(PAPER_FMAI_VERSION),paper_fmai)
-
 # Note: PYTHON defaults to the project-local virtualenv to guarantee
 # Python 3.10-3.13 (pyproject.toml excludes 3.14 because scientific
 # dependency wheels can lag new CPython releases). If the venv does not
@@ -26,14 +22,12 @@ help:
 	@echo ""
 	@echo "  make venv          Create .venv and install the package (fresh-clone one-liner)"
 	@echo "  make install       Install package + dependencies into existing .venv (editable)"
-	@echo "  make all           One-command reproduction (no API key): test+audit+prereg+rejection-log+paper"
+	@echo "  make all           One-command reproduction (no API key): test+audit+prereg+rejection-log"
 	@echo "  make test          Run the local-runnable test suite (no API calls)"
 	@echo "  make smoke         Fast judge-visible smoke check (~1 min, no API key)"
 	@echo "  make audit         Run compliance grep (no sensitive strings)"
 	@echo "  make demo          Guided proposer handoff on synthetic data (requires API key)"
 	@echo "  make demo-kirc     KIRC-flavoured guided handoff (requires API key)"
-	@echo "  make paper         Build docs/paper/paper.pdf via pandoc (xelatex > typst > html)"
-	@echo "  make paper-fmai    Build docs/paper/paper_fmai.pdf; set VERSION=v2 for versioned output"
 	@echo "  make rejection-log Re-render the static rejection-log HTML"
 	@echo "  make prereg-audit  Tamper-evidence chain audit on preregistrations/*.yaml"
 	@echo "  make h1            Falsification-Guided SR Loop (Opus-steered, requires API key)"
@@ -70,17 +64,15 @@ install:
 # `make all` is the thing a judge in a clean checkout can run with
 # zero credentials.
 all: venv
-	@echo ">>> [1/5] tests"
+	@echo ">>> [1/4] tests"
 	@$(MAKE) test
-	@echo ">>> [2/5] audit"
+	@echo ">>> [2/4] audit"
 	@$(MAKE) audit
-	@echo ">>> [3/5] prereg-audit (tamper-evidence chain)"
+	@echo ">>> [3/4] prereg-audit (tamper-evidence chain)"
 	@$(MAKE) prereg-audit
-	@echo ">>> [4/5] rejection-log"
+	@echo ">>> [4/4] rejection-log"
 	@$(MAKE) rejection-log
-	@echo ">>> [5/5] paper (PDF if pandoc/xelatex/typst available, else HTML)"
-	@$(MAKE) paper
-	@echo ">>> make all complete. Reproduced: tests, audit, prereg chain, rejection log, paper."
+	@echo ">>> make all complete. Reproduced: tests, audit, prereg chain, rejection log."
 
 # Runs the local-runnable subset of the test suite: 107 tests (as of
 # 2026-04-26) across falsification gate, managed_agent_runner, routines
@@ -278,72 +270,3 @@ prereg-audit:
 rejection-log:
 	$(PYTHONPATH_SRC) $(PYTHON) src/render_rejection_log.py
 
-# --- Paper (docs/paper/paper.md → PDF via pandoc; xelatex > typst > html) ---
-# Tries pdf-engine=xelatex first (best quality). Falls back to typst if a
-# LaTeX distribution is not installed, then to HTML as last resort. All
-# three outputs land at docs/paper/paper.pdf (or .html) — Makefile prints
-# which engine ran.
-paper:
-	@echo ">>> Building docs/paper/paper.pdf via pandoc..."
-	@if ! command -v pandoc >/dev/null 2>&1; then \
-		echo "pandoc not installed. Install: brew install pandoc (macOS) or apt install pandoc (Linux)."; \
-		exit 1; \
-	fi
-	@if command -v xelatex >/dev/null 2>&1; then \
-		echo "  using xelatex engine..."; \
-		pandoc docs/paper/paper.md \
-			--pdf-engine=xelatex \
-			-V geometry:margin=1in -V fontsize=11pt -V linkcolor=blue -V urlcolor=blue \
-			-V mainfont="Times New Roman" -V monofont="Menlo" \
-			-o docs/paper/paper.pdf && \
-		echo ">>> Wrote docs/paper/paper.pdf (xelatex)"; \
-	elif command -v typst >/dev/null 2>&1; then \
-		echo "  xelatex not found; using typst engine..."; \
-		pandoc docs/paper/paper.md \
-			--pdf-engine=typst \
-			-V papersize=a4 -V fontsize=11pt \
-			-o docs/paper/paper.pdf && \
-		echo ">>> Wrote docs/paper/paper.pdf (typst)"; \
-	else \
-		echo "  neither xelatex nor typst found; emitting HTML fallback..."; \
-		pandoc docs/paper/paper.md \
-			-s --mathjax \
-			-o docs/paper/paper.html && \
-		echo ">>> Wrote docs/paper/paper.html (install LaTeX or typst for PDF)"; \
-	fi
-
-paper-fmai:
-	@echo ">>> Building docs/paper/$(PAPER_FMAI_STEM).pdf via pandoc..."
-	@if [ ! -f docs/paper/$(PAPER_FMAI_STEM).md ]; then \
-		echo "Missing docs/paper/$(PAPER_FMAI_STEM).md"; \
-		exit 1; \
-	fi
-	@if ! command -v pandoc >/dev/null 2>&1; then \
-		echo "pandoc not installed. Install: brew install pandoc (macOS) or apt install pandoc (Linux)."; \
-		exit 1; \
-	fi
-	@if command -v xelatex >/dev/null 2>&1; then \
-		echo "  using xelatex engine..."; \
-		pandoc docs/paper/$(PAPER_FMAI_STEM).md \
-			--pdf-engine=xelatex \
-			--resource-path=.:docs/paper \
-			-V geometry:margin=1in -V fontsize=11pt -V linkcolor=blue -V urlcolor=blue \
-			-V mainfont="Times New Roman" -V monofont="Menlo" \
-			-o docs/paper/$(PAPER_FMAI_STEM).pdf && \
-		echo ">>> Wrote docs/paper/$(PAPER_FMAI_STEM).pdf (xelatex)"; \
-	elif command -v typst >/dev/null 2>&1; then \
-		echo "  xelatex not found; using typst engine..."; \
-		pandoc docs/paper/$(PAPER_FMAI_STEM).md \
-			--pdf-engine=typst \
-			--resource-path=.:docs/paper \
-			-V papersize=letter -V fontsize=11pt \
-			-o docs/paper/$(PAPER_FMAI_STEM).pdf && \
-		echo ">>> Wrote docs/paper/$(PAPER_FMAI_STEM).pdf (typst)"; \
-	else \
-		echo "  neither xelatex nor typst found; emitting HTML fallback..."; \
-		pandoc docs/paper/$(PAPER_FMAI_STEM).md \
-			--resource-path=.:docs/paper \
-			-s --mathjax \
-			-o docs/paper/$(PAPER_FMAI_STEM).html && \
-		echo ">>> Wrote docs/paper/$(PAPER_FMAI_STEM).html (install LaTeX or typst for PDF)"; \
-	fi

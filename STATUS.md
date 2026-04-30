@@ -12,7 +12,7 @@
 
 - **24 PhL artefacts** (PhL-1 to PhL-19 + PhL-9v2 + PhL-8b/8c/8d + PhL-10 oracle) all live, all committed. Newest 5 (PhL-15 to PhL-19) are capability-overhang measurements — aggregated at `docs/capability_overhang_measurements.md`.
 - **QA pass complete:** 12 of 20 internal review findings resolved (all blocking + friction items); 8 deferred post-hackathon (non-blocking, rationale in commit messages).
-- **`make all`** one-command reproduction of tests + audit + prereg-audit + rejection-log + paper PDF (no API key required).
+- **`make all`** one-command reproduction of tests + audit + prereg-audit + rejection-log (no API key required).
 - **`.devcontainer/devcontainer.json`** — one-click dev container (VS Code Dev Containers or GitHub Codespaces); `make test` green in ~2 min after container start.
 - **`.claude/skills/falsification-gate/SKILL.md`** — Claude Code skill wrapping the gate as a discoverable, deterministic verification primitive.
 - GitHub repo renamed to **`jang1563/lacuna-falsification`** on 2026-04-26; old Theory Copilot URL redirects.
@@ -92,7 +92,7 @@ Results: `results/track_a_task_landscape/{stage_expanded,lihc,coad_msi,gbm_idh,l
 - 107/107 local-runnable tests pass via `make test` (review/staging suites are intentionally ignored by that target).
 - 2026-04-26 `make smoke` OK after final packaging review; the smoke target now runs critical imports, a tiny deterministic gate sanity check, compliance audit, and artefact-presence checks.
 - `make audit` OK — institutional-identifier scan + API-key-shape regex (`sk-ant-api{2}-{6}`) clean.
-- `make all` (no API key) reproduces: tests + audit + prereg-audit + rejection-log + paper PDF.
+- `make all` (no API key) reproduces: tests + audit + prereg-audit + rejection-log.
 - Falsification gate verified sign-symmetric (`fn` and `-fn` produce identical verdicts post-2026-04-23 P1 fix) and deterministic (same seed → identical perm_p / ci_lower / decoy_p).
 
 ## 📝 Submission docs (final or near-final)
@@ -103,7 +103,6 @@ Results: `results/track_a_task_landscape/{stage_expanded,lihc,coad_msi,gbm_idh,l
 - `docs/why_opus_4_7.md` — orchestrator framing + Karpathy + Sakana + Tharik + Michael Cohen `outcomes` parallel.
 - `docs/submission_description.md` — verification-first pipeline + Skeptic-as-subagent + own-output kill.
 - `docs/submission_form_draft.md` — one-line pitch (134/140 char), summary (125/150 word), MA usage (140/150 word), prize justification (under cap).
-- `docs/paper/paper_fmai.md` — FMAI framing with accounting lock, trace diagnostics, panel repair, and self-kill.
 - `docs/loom_script.md` — 90-second shot list with PhL-1 IMmotion150 beat + alternative PhL-3/PhL-4 close.
 - `docs/ARTIFACT_INDEX.md` — 1-page judge navigation.
 

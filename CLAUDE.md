@@ -36,7 +36,9 @@ string will fail the audit and block `git push`.
   `rl_readiness_v1/` (post-hackathon RL/RLVR readiness diagnostic).
 - `docs/` — judge-facing docs (all ≤ 400 lines): `methodology.md`,
   `why_opus_4_7.md`, `submission_description.md`, `survivor_narrative.md`,
-  `loom_script.md`, `submission_form_draft.md`, `paper/` (E9).
+  `loom_script.md`, `submission_form_draft.md`. (`docs/paper/` is local-only,
+  gitignored — paper drafts are excluded from the public repo for
+  conference double-blind review.)
 - `prompts/` — JSON-schema-enforced Opus 4.7 prompts.
 - `config/` — `datasets.json`, `law_proposals.json`, `dataset_cards/` (E4).
 - `.claude/agents/` — Claude Code subagents (below).
@@ -79,7 +81,6 @@ Context isolation is load-bearing: steps 4 and 5 run in separate Managed Agents 
 | `make audit` | Compliance grep. Must print `OK`. |
 | `make demo` | Guided synthetic proposer handoff; requires API key and prints PySR/gate commands. |
 | `make demo-kirc` | KIRC-flavoured guided handoff. |
-| `make paper` | Build `docs/paper/paper.pdf` via pandoc (E9). |
 | `make status` | Branch + last 5 commits + cost-ledger tail. |
 
 ## Execution flow
