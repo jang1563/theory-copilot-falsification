@@ -15,17 +15,35 @@ the submission.
 
 1. **README.md (sub-hook + opening paragraph)** — what we built, the
    one-liner, the verification framing.
-2. **`docs/headline_findings.md`** — three findings (TOP2A−EPAS1
+2. **`results/lacuna_bench_v1/audit.json`** — post-hackathon rediscovery
+   benchmark (kirc_ccrcc_metastasis_top2a_epas1; rediscovery_f1 = 1.0;
+   strict_external_replay_rate = 0.333). The benchmark layer for any
+   future falsification-first discovery claim.
+3. **`docs/headline_findings.md`** — three hackathon-era findings (TOP2A−EPAS1
    discovery + replication; rejection log as product including the
    PhL-1 own-output kill; pre-registration at LLM speed + Path C
    Routine).
-3. **`results/live_evidence/phl8_routine_fire/SUMMARY.md`** — Path C
+4. **`results/live_evidence/phl8_routine_fire/SUMMARY.md`** — Path C
    `/fire` LIVE proof (clickable `claude_code_session_url` to a
    real Claude Code cloud session).
-4. **`results/live_evidence/phl7_compound_orchestrator/SUMMARY.md`** —
+5. **`results/live_evidence/phl7_compound_orchestrator/SUMMARY.md`** —
    the flagship Best-Managed-Agents demo: MCP + Memory + 5-test gate
    composed in a single Managed Agents session with cross-substrate
    reasoning.
+
+## Post-hackathon scientific package (2026-04-27 onward)
+
+The repository's public framing was reformatted from a hackathon evaluation
+package to a falsification-first rediscovery + failure-memory scientific
+package. Three new artifacts back the `README.md` "Key Numbers" table and
+"Evidence Map":
+
+| Layer | What | Files | Verdict |
+|---|---|---|---|
+| **Lacuna-Bench v1** | Rediscovery benchmark over the flagship task. Scores `rediscovery_f1`, `strict_external_replay_rate`, `false_survivor_rate`, plus 7 interpretable failure-subtype rates. | [`config/lacuna_bench_v1.json`](../config/lacuna_bench_v1.json), [`results/lacuna_bench_v1/audit.json`](../results/lacuna_bench_v1/audit.json), [`src/lacuna/bench.py`](../src/lacuna/bench.py) | rediscovery_f1 = **1.0** on the locked positive-control gene target; strict external replay = 1/3 across the 6-verdict chain |
+| **Failure Atlas v1** | Structured memory of the 21 rejected candidates. Labels each rejection by failure mode (single-gene saturation, decoy overfit, bootstrap unstable, label shuffle fragile, underpowered, known-axis triviality). | [`results/failure_atlas_v1/SUMMARY.json`](../results/failure_atlas_v1/SUMMARY.json), [`results/failure_atlas_v1/failure_memory.json`](../results/failure_atlas_v1/failure_memory.json), [`src/lacuna/failure_atlas.py`](../src/lacuna/failure_atlas.py) | 21 records · label coverage **0.667** · top labels: bootstrap unstable (20/21), underpowered (20/21), single-gene saturation (14/21) |
+| **RL readiness v1** | Honest assessment of which RL/RLVR primitive the failure memory currently supports. Justifies retrieval/reranking; explicitly does NOT justify contextual bandit, offline RL, or RLVR yet — and lists the specific blockers. | [`results/rl_readiness_v1/report.json`](../results/rl_readiness_v1/report.json), [`src/lacuna/rl_readiness.py`](../src/lacuna/rl_readiness.py) | recommended_stage: **"Phase 2: failure-memory retrieval and reranking"** · 3 explicit blockers logged for higher-tier RL claims |
+| **Hackathon compliance** | Provenance / data-access / API spend trail kept separate from the scientific-package framing. | [`docs/hackathon_compliance.md`](hackathon_compliance.md) | n/a |
 
 ## Phase L artefacts (this hackathon's own contributions)
 

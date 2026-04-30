@@ -6,6 +6,20 @@ This document is the 5-minute version of the submission. Each finding is
 presented as *what we did* → *what we found* → *why it was not possible 6
 months ago* → *what the pattern means for other researchers / companies*.
 
+> **Post-hackathon repackaging note (2026-04-27 onward).** Since the
+> 2026-04-26 submission, the repository was reformatted from a hackathon
+> evaluation package to a falsification-first rediscovery + failure-memory
+> scientific package. Three new artifacts back that framing —
+> [Lacuna-Bench v1](../results/lacuna_bench_v1/audit.json) (rediscovery
+> benchmark, `rediscovery_f1 = 1.0`),
+> [Failure Atlas v1](../results/failure_atlas_v1/SUMMARY.json) (21 labelled
+> rejections, label coverage 0.667), and
+> [RL readiness v1](../results/rl_readiness_v1/report.json) (justifies
+> retrieval/reranking; explicitly does NOT justify contextual bandit /
+> offline RL / RLVR yet, with logged blockers). The three findings below
+> remain the scientific spine; the new layer is the benchmark + memory
+> substrate around it.
+
 ---
 
 ## Finding 1 — A two-gene law, discovered by unconstrained symbolic regression and accepted by a pre-registered deterministic gate, replicates on an independent immunotherapy trial cohort.

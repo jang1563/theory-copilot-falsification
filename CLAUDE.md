@@ -20,14 +20,20 @@ string will fail the audit and block `git push`.
 - `src/lacuna/` — library: `falsification.py` (5-test gate),
   `opus_client.py` (Opus 4.7 streaming wrapper), `cli.py` (`compare` + `replay`
   + `loop`), `managed_agent_runner.py` (Path B public beta + Path A waitlist
-  + Path C Routine driver), `data_loader.py` (DatasetCard abstraction — E4).
+  + Path C Routine driver), `data_loader.py` (DatasetCard abstraction — E4),
+  `bench.py` (Lacuna-Bench v1 rediscovery scorer — post-hackathon),
+  `failure_atlas.py` (failure-mode labeller — post-hackathon),
+  `rl_readiness.py` (RL/RLVR readiness diagnostic — post-hackathon).
 - `src/` (top-level) — runnable scripts: `pysr_sweep.py`, `falsification_sweep.py`,
   `make_plots.py`, `plot_track_a.py`, `track_a_survivor_*.py`,
   `track_a_model_ablation.py` (E2), `mcp_biology_validator.py` (E8).
 - `data/` — CSVs + build scripts (`build_tcga_kirc.py`, `build_tcga_luad.py`, etc.)
 - `results/` — committed artefacts: `flagship_run/`, `tier2_run/`,
   `track_a_task_landscape/` (4-task matrix + metastasis_expanded survivors),
-  `track_b_gate_robustness/`, `live_evidence/`, `ablation/`, `qa/`.
+  `track_b_gate_robustness/`, `live_evidence/`, `ablation/`, `qa/`,
+  `lacuna_bench_v1/` (post-hackathon rediscovery benchmark audit),
+  `failure_atlas_v1/` (post-hackathon labelled failure memory),
+  `rl_readiness_v1/` (post-hackathon RL/RLVR readiness diagnostic).
 - `docs/` — judge-facing docs (all ≤ 400 lines): `methodology.md`,
   `why_opus_4_7.md`, `submission_description.md`, `survivor_narrative.md`,
   `loom_script.md`, `submission_form_draft.md`, `paper/` (E9).
