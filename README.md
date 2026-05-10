@@ -19,7 +19,7 @@ The current package is **not a new biomarker claim** and **not a clinical
 validation package**. Its flagship task is a positive-control rediscovery
 benchmark in ccRCC/KIRC: recover a compact proliferation-minus-HIF/EPAS1 axis,
 then account for what survives, what fails, and why. The same five-test Python
-gate rejected 194 of 203 candidate evaluations on the KIRC layer — the 9
+gate rejected 194 of 203 candidate evaluations on the KIRC layer: the 9
 survivors all came from the 45-gene metastasis_expanded sub-layer, after the
 loop diagnosed panel absence on the original 11-gene layer and repaired only
 that cause. The system's own three-gene downstream extension was later
@@ -59,13 +59,13 @@ Built by a bioinformatics postdoc · *Built with Claude Opus 4.7* · April 2026 
 | Rashomon rank within all C(45,2) = 990 two-gene pairs | **1 / 990** |
 | Memorization check: zero-shot TOP2A−EPAS1 retrieval rate | **0 / 10** probes |
 | G + I pre-registered analysis predictions passing | **12 / 13** |
-| Cross-model Skeptic ablation (180 calls) | **Opus 10/60 (calibrated) · Sonnet 0/60 (permanent dissent) · Haiku 14/60 (over-accepts)** — see ablation note below |
+| Cross-model Skeptic ablation (180 calls) | **Opus 10/60 (calibrated) · Sonnet 0/60 (permanent dissent) · Haiku 14/60 (over-accepts)**: see ablation note below |
 | Interpreter ablation: Opus caveat rate / prediction rate | **100% / 100%** vs Sonnet 0% / Haiku 0% |
 | LLM-SR 10-iteration loop: post-seed proposals killed by gate | **18 / 18** |
-| Cross-model Proposer quality (PhL-16): LLM-proposed laws killed by gate | **48 / 48** (Opus 0/30, Sonnet 0/18) — gate is model-independent; Proposer's role is search navigation, not gate-passing |
+| Cross-model Proposer quality (PhL-16): LLM-proposed laws killed by gate | **48 / 48** (Opus 0/30, Sonnet 0/18): gate is model-independent; Proposer's role is search navigation, not gate-passing |
 | Total API cost (all sweeps + ablation runs) | **< $65** |
 
-> *Ablation honest null: 2/3 pre-registered citation-specificity predictions were falsified — all three models cite ≥2 metrics in 100% of critiques. The meaningful signal is verdict distribution (PASS 10 vs 14 vs 0 / 60). Full prediction verification in [`results/ablation/SUMMARY.md`](results/ablation/SUMMARY.md).*
+> *Ablation honest null: 2/3 pre-registered citation-specificity predictions were falsified: all three models cite ≥2 metrics in 100% of critiques. The meaningful signal is verdict distribution (PASS 10 vs 14 vs 0 / 60). Full prediction verification in [`results/ablation/SUMMARY.md`](results/ablation/SUMMARY.md).*
 
 ---
 
@@ -85,24 +85,24 @@ Built by a bioinformatics postdoc · *Built with Claude Opus 4.7* · April 2026 
 
 ## Start here (by role)
 
-> **Navigator:** [`docs/ARTIFACT_INDEX.md`](docs/ARTIFACT_INDEX.md) is the canonical 60-second tour — every claim maps to exactly one artifact. If a claim is not in that index, it is not part of the public evidence package.
+> **Navigator:** [`docs/ARTIFACT_INDEX.md`](docs/ARTIFACT_INDEX.md) is the canonical 60-second tour: every claim maps to exactly one artifact. If a claim is not in that index, it is not part of the public evidence package.
 
 **Agentic architecture**
-- [`docs/methodology.md §4`](docs/methodology.md) — three isolated Managed Agents sessions (Proposer / Skeptic / Interpreter); separate context windows by design, not convention
-- [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py) — Path A (sequential 3-session chain) · Path B (single agent, `agent_toolset_20260401`) · Path C (Routines `/fire` HTTP client)
-- [`results/live_evidence/04_managed_agents_e2e.log`](results/live_evidence/04_managed_agents_e2e.log) — live agent/environment/session/stream trace
+- [`docs/methodology.md §4`](docs/methodology.md): three isolated Managed Agents sessions (Proposer / Skeptic / Interpreter); separate context windows by design, not convention
+- [`src/lacuna/managed_agent_runner.py`](src/lacuna/managed_agent_runner.py): Path A (sequential 3-session chain) · Path B (single agent, `agent_toolset_20260401`) · Path C (Routines `/fire` HTTP client)
+- [`results/live_evidence/04_managed_agents_e2e.log`](results/live_evidence/04_managed_agents_e2e.log): live agent/environment/session/stream trace
 - Two Skills: [`falsification-gate`](.claude/skills/falsification-gate/SKILL.md) (gate a candidate) + [`pre-register-claim`](.claude/skills/pre-register-claim/SKILL.md) (lock kill-tests before fit); compose in sequence
-- **Path C live runs:** PhL-8d dual-verdict oracle — FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS); static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/) · PhL-10 stage oracle — **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run — local PySR stage_expanded: 0.689); static evidence: [`results/live_evidence/phl10_stage_oracle/`](results/live_evidence/phl10_stage_oracle/) · PhL-8c: single-equation PASS
-- Brain/body decoupling: `lacuna persist-events` → `replay-events` — session event log survives harness crashes; re-injects client-originated events into a fresh session
-- [`docs/managed_agents_evidence_card.md`](docs/managed_agents_evidence_card.md) — Managed Agents + Routines live evidence (12 session-level artifacts from the 24-PhL ledger); per-session event counts, wall-clock times, costs; cross-reference table for all 3 paths
-- **Context isolation in practice:** IPF Run #1 [`results/external_validation_ipf/`](results/external_validation_ipf/) — Skeptic (separate context, never sees Advocate tokens; "Advocate" = rescue-engine Proposer in IPF/DIPG context) caught 2 fabricated trial-design claims. $58.28 · 32 min.
+- **Path C live runs:** PhL-8d dual-verdict oracle: FAIL + PASS in one session (Eq1 `CA9−AGXT` FAIL, Eq2 `CDK1−EPAS1` PASS); static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/) · PhL-10 stage oracle: **new Routine per disease** (provenance principle), Stage I-II vs III-IV: `CCNB1/PGK1` FAIL + `CXCR4/EPAS1` PASS (AUROC 0.696, Δbase=+0.051; oracle run: local PySR stage_expanded: 0.689); static evidence: [`results/live_evidence/phl10_stage_oracle/`](results/live_evidence/phl10_stage_oracle/) · PhL-8c: single-equation PASS
+- Brain/body decoupling: `lacuna persist-events` → `replay-events`: session event log survives harness crashes; re-injects client-originated events into a fresh session
+- [`docs/managed_agents_evidence_card.md`](docs/managed_agents_evidence_card.md): Managed Agents + Routines live evidence (12 session-level artifacts from the 24-PhL ledger); per-session event counts, wall-clock times, costs; cross-reference table for all 3 paths
+- **Context isolation in practice:** IPF Run #1 [`results/external_validation_ipf/`](results/external_validation_ipf/): Skeptic (separate context, never sees Advocate tokens; "Advocate" = rescue-engine Proposer in IPF/DIPG context) caught 2 fabricated trial-design claims. $58.28 · 32 min.
 - **Memorization control** [`phl13_memorization_audit`](results/live_evidence/phl13_memorization_audit/SUMMARY.md): 0 / 10 zero-shot retrievals returned `TOP2A−EPAS1`. PySR found it; Opus did not recall it.
 
 **Reproducibility**
-- `make venv && make smoke` — smoke passes in ~1 min after install, no API key needed
-- [`src/README.md`](src/README.md) — map of all 60+ `src/` scripts organized by track
-- [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) — one-click dev container (VS Code Dev Containers)
-- `make test` — local-runnable test suite (no API key); `make audit` — compliance grep, passes on every commit
+- `make venv && make smoke`: smoke passes in ~1 min after install, no API key needed
+- [`src/README.md`](src/README.md): map of all 60+ `src/` scripts organized by track
+- [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json): one-click dev container (VS Code Dev Containers)
+- `make test`: local-runnable test suite (no API key); `make audit`: compliance grep, passes on every commit
 
 **Supporting probes**
 - **7 disease contexts** under the same falsification-first discipline. These are supporting probes and stress tests, not equal-strength validation claims: ccRCC / COAD / LGG / LIHC / IPF / PAAD use the 5-test expression gate; DIPG uses the same role-separated Advocate/Skeptic review engine. Entry points (expression gate): ccRCC (flagship) · COAD ([`coad_msi/`](results/track_a_task_landscape/coad_msi/)) · LGG ([`gbm_idh/`](results/track_a_task_landscape/gbm_idh/)) · LIHC MVI ([`lihc_mvi/`](results/track_a_task_landscape/lihc_mvi/)) · IPF CEP ([`ipf_lgrc/`](results/track_a_task_landscape/ipf_lgrc/)) · PAAD ([`paad_survival/`](results/track_a_task_landscape/paad_survival/)) · DIPG (rescue engine: [`results/external_validation_dipg/`](results/external_validation_dipg/)) · IPF drug rescue ([`results/external_validation_ipf/`](results/external_validation_ipf/))
@@ -110,12 +110,12 @@ Built by a bioinformatics postdoc · *Built with Claude Opus 4.7* · April 2026 
 - IPF Run #1: Skeptic caught 2 fabricated claims about prior trial design (RAINIER, Raghu 2017). $58.28 · 32 min. See [`results/external_validation_ipf/`](results/external_validation_ipf/)
 
 **Scientific depth (domain expert)**
-- 6-verdict evidence chain: TCGA-KIRC PASS (AUROC 0.726) → IMmotion150 PASS (HR 1.36; **treatment-arm adjusted: HR 1.365** — prognostic signal persists) → GSE53757 stage PASS (AUROC 0.714) → GSE53757 T-vs-N informative FAIL (platform-saturation: best single gene 0.995) → TCGA-BRCA T-vs-N pre-registered FAIL ✓ → **CPTAC-3 metastasis honest FAIL** (direction preserved p=0.006; ci_lower=0.542, Δbase=−0.007 — endpoint-matched replay fails the gate) — 3 platforms, 2 endpoint types · [full chain](results/track_a_task_landscape/external_replay/SUMMARY.md)
-- G + I rigor package (12 / 13 predictions PASS): [`rigor_extension`](results/track_a_task_landscape/rigor_extension/SUMMARY.md) (G2: AUPRC 0.321, Brier 0.122, calibration slope 0.979) · [`knockoff_v2`](results/track_a_task_landscape/knockoff_v2/SUMMARY.md) (G1: 0/45 genes selected — signal is genuinely compound) · [`rashomon_set`](results/track_a_task_landscape/rashomon_set/SUMMARY.md) (I2: rank 1/990) · [`clinical_utility`](results/track_a_task_landscape/clinical_utility/SUMMARY.md) (I3: Cohen's d 0.856, honest P3 FAIL retained) · [`information_theory`](results/track_a_task_landscape/information_theory/SUMMARY.md) (I4: 98.1% bivariate MI captured)
+- 6-verdict evidence chain: TCGA-KIRC PASS (AUROC 0.726) → IMmotion150 PASS (HR 1.36; **treatment-arm adjusted: HR 1.365**: prognostic signal persists) → GSE53757 stage PASS (AUROC 0.714) → GSE53757 T-vs-N informative FAIL (platform-saturation: best single gene 0.995) → TCGA-BRCA T-vs-N pre-registered FAIL ✓ → **CPTAC-3 metastasis honest FAIL** (direction preserved p=0.006; ci_lower=0.542, Δbase=−0.007: endpoint-matched replay fails the gate): 3 platforms, 2 endpoint types · [full chain](results/track_a_task_landscape/external_replay/SUMMARY.md)
+- G + I rigor package (12 / 13 predictions PASS): [`rigor_extension`](results/track_a_task_landscape/rigor_extension/SUMMARY.md) (G2: AUPRC 0.321, Brier 0.122, calibration slope 0.979) · [`knockoff_v2`](results/track_a_task_landscape/knockoff_v2/SUMMARY.md) (G1: 0/45 genes selected: signal is genuinely compound) · [`rashomon_set`](results/track_a_task_landscape/rashomon_set/SUMMARY.md) (I2: rank 1/990) · [`clinical_utility`](results/track_a_task_landscape/clinical_utility/SUMMARY.md) (I3: Cohen's d 0.856, honest P3 FAIL retained) · [`information_theory`](results/track_a_task_landscape/information_theory/SUMMARY.md) (I4: 98.1% bivariate MI captured)
 - [Interpreter ablation PhL-19](results/live_evidence/phl19_interpreter_depth/SUMMARY.md): Opus 4.7 = 100% caveat rate, 100% prediction rate, avg 12 citations; Sonnet/Haiku = 0% on both (programmatic structural metrics; blind human rubric not completed)
 - Own-output falsification: H1-loop 3-gene extension (`TOP2A − (EPAS1 + SLC22A8)`) failed IMmotion150 survival replay ([PhL-1](results/track_a_task_landscape/external_replay/immotion150_slc22a8/SUMMARY.md))
 
-**Reviewer challenge check → [`docs/judge_faq.md`](docs/judge_faq.md)** — 14 claim-boundary challenges (rediscovery vs discovery, AUROC ceiling, cohort independence, Sonnet drop-in, memorisation audit, `delta_confound` null) with direct evidence links
+**Reviewer challenge check → [`docs/judge_faq.md`](docs/judge_faq.md)**: 14 claim-boundary challenges (rediscovery vs discovery, AUROC ceiling, cohort independence, Sonnet drop-in, memorisation audit, `delta_confound` null) with direct evidence links
 
 ---
 
@@ -179,7 +179,7 @@ flowchart TB
 ## Quick Start
 
 ```bash
-# Fastest confidence check — no API key, ~1 minute after install
+# Fastest confidence check: no API key, ~1 minute after install
 make venv && make smoke
 ```
 
@@ -240,21 +240,21 @@ Thresholds pre-registered in [`falsification.py`](src/lacuna/falsification.py).
 Multiple candidates are tested per run → permutation p-values are adjusted with
 Benjamini-Hochberg FDR across the family, and **the gate uses the FDR-adjusted p**.
 
-> **Scoping note on the metastasis run.** The 9 survivors clear 4 active legs — `delta_confound` is null because the M0/M1 task has no non-degenerate covariates after filtering. The gate design specifies "run confound leg when covariates vary; skip otherwise." `docs/methodology.md §3` has the full specification. The framework is 5-test; the active legs for any given run depend on data availability and are logged per-candidate in the report JSON.
+> **Scoping note on the metastasis run.** The 9 survivors clear 4 active legs: `delta_confound` is null because the M0/M1 task has no non-degenerate covariates after filtering. The gate design specifies "run confound leg when covariates vary; skip otherwise." `docs/methodology.md §3` has the full specification. The framework is 5-test; the active legs for any given run depend on data availability and are logged per-candidate in the report JSON.
 
-> **On rediscovery as evaluation.** Re-deriving the published ccA/ccB axis under a pre-registered gate — without seeding the law family — is the evaluation paradigm formalised by [FIRE-Bench (arXiv 2602.02905)](https://arxiv.org/abs/2602.02905), where current SOTA agents score <50 F1 on rediscovering established findings. The contribution is the workflow, not a claim of novel biology.
+> **On rediscovery as evaluation.** Re-deriving the published ccA/ccB axis under a pre-registered gate: without seeding the law family: is the evaluation paradigm formalised by [FIRE-Bench (arXiv 2602.02905)](https://arxiv.org/abs/2602.02905), where current SOTA agents score <50 F1 on rediscovering established findings. The contribution is the workflow, not a claim of novel biology.
 
 > **Gate cannot be exploited by iteration.** In the H1 LLM-SR 10-iteration
 > loop, **18 / 18 post-seed proposals generated by Opus and Sonnet were
 > rejected** by the same gate
 > ([results/overhang/llm_sr_10iter/SUMMARY.md](results/overhang/llm_sr_10iter/SUMMARY.md)).
 > Iterative LLM creativity does not circumvent a pre-registered
-> deterministic threshold — this is the empirical answer to
+> deterministic threshold: this is the empirical answer to
 > "couldn't the model just try harder?"
 
-![Rejection landscape — KIRC layer: 194/203 rejected, 9 survivors all from the 45-gene metastasis_expanded sub-layer](docs/figures/rejection_landscape.png)
+![Rejection landscape: KIRC layer: 194/203 rejected, 9 survivors all from the 45-gene metastasis_expanded sub-layer](docs/figures/rejection_landscape.png)
 
-> **Interactive version:** [`results/rejection_log.html`](results/rejection_log.html) — filterable by cohort, task, panel, and fail reason; every candidate's full metric bundle.
+> **Interactive version:** [`results/rejection_log.html`](results/rejection_log.html): filterable by cohort, task, panel, and fail reason; every candidate's full metric bundle.
 
 ---
 
@@ -270,7 +270,7 @@ Candidates (Opus 4.7, Proposer role):
   C3  log1p(ACTB) - log1p(GAPDH)                 [Housekeeping NEGATIVE CONTROL]
   C4  log1p(MKI67) - log1p(RPL13A)               [Proliferation NEGATIVE CONTROL]
 
-Falsification gate (Python — Opus does not execute this):
+Falsification gate (Python: Opus does not execute this):
   C1  auc=0.83  ci_lo=0.79  p_fdr=0.000  Δbase=+0.11  Δconf=+0.31  decoy=0.00  PASS
   C2  auc=0.74  ci_lo=0.69  p_fdr=0.000  Δbase=+0.02  Δconf=+0.22  decoy=0.00  FAIL (delta_baseline)
   C3  auc=0.52  ci_lo=0.46  p_fdr=0.520  Δbase=-0.21  Δconf=+0.00  decoy=0.50  FAIL (all 5)
@@ -290,24 +290,24 @@ law earned that survival by genuinely adding 0.11 over any single gene.
 ## Running as a Routine (Path C)
 
 The 2026 *Built with Opus 4.7* kickoff highlighted server-side Routines —
-Claude sessions that wake on a schedule and outlive the laptop — as an
+Claude sessions that wake on a schedule and outlive the laptop: as an
 important automation surface. Path C is Lacuna's implementation of that idea
 for falsification-first scientific review.
 
-> **Methodology framing.** Lacuna is not a biological discovery tool — it is a
+> **Methodology framing.** Lacuna is not a biological discovery tool: it is a
 > *positive-control methodology result*. `TOP2A − EPAS1` is known biology (Brannon 2010 ccA/ccB
 > axis). A methodology that re-derives known truth from unconstrained search
 > under a gate it cannot rationalize past supports face validity for future
 > unknown-target searches by the same mechanism. **Routines are the persistence
 > layer for that
-> methodology**: pre-registered kill-tests fire without being asked — on every
+> methodology**: pre-registered kill-tests fire without being asked: on every
 > commit, every scheduled interval, no human needed to remember. A discovery
 > discipline that only runs when researchers remember to run it is not a
 > discipline.
 
 > **Product boundary:** Claude Code Routines (`code.claude.com`, beta header `experimental-cc-routine-2026-04-01`) and Managed Agents (`platform.claude.com`, beta header `managed-agents-2026-04-01`) are two separate Anthropic products. Path C bridges them; see [`docs/methodology.md §4`](docs/methodology.md) for the full distinction.
 
-### Gate symmetry — what the oracle actually does
+### Gate symmetry: what the oracle actually does
 
 One API fire call → one autonomous session → the full falsification story:
 
@@ -319,11 +319,11 @@ One API fire call → one autonomous session → the full falsification story:
 | PhL-10 Eq2 | `CXCR4 / EPAS1` | stage I-II vs III-IV | ✅ **PASS** | AUROC 0.696, ci_lower = 0.649, delta_baseline = +0.051 (Routine oracle run; stage_expanded local PySR: 0.689) |
 
 PhL-8d fires both equations in **one trigger text**, one session, ~6 min.
-PhL-10 is a **second Routine** (new Routine per disease/task — existing Instructions
+PhL-10 is a **second Routine** (new Routine per disease/task: existing Instructions
 are the provenance record for PhL-8d; editing them breaks the audit chain).
 The Routine clones the repo, runs `make venv && make audit`, then runs
 `falsification_sweep.py` independently on each task/dataset pair, and emits
-structured verdict blocks + a dual summary — no human action after the fire call.
+structured verdict blocks + a dual summary: no human action after the fire call.
 
 PhL-8d static evidence: [`results/live_evidence/phl8d_dual_verdict/`](results/live_evidence/phl8d_dual_verdict/)
 PhL-10 static evidence: [`results/live_evidence/phl10_stage_oracle/`](results/live_evidence/phl10_stage_oracle/)
@@ -336,7 +336,7 @@ lacuna loop --night 3 --interval-seconds 0 --max-iterations 1
 # Poll every 30 minutes, 10 times, logging to a dated JSONL
 lacuna loop --night 3 --interval-seconds 1800 --max-iterations 10
 
-# Watch an input directory — only invoke when a new cohort CSV lands
+# Watch an input directory: only invoke when a new cohort CSV lands
 lacuna loop \
     --night 3 \
     --watch-dir inputs/new_cohorts \
@@ -349,7 +349,7 @@ Each iteration appends a verdict to `results/routine/verdicts.jsonl`
 `status`, `output_chars`). The implementation in
 `src/lacuna/managed_agent_runner.py::run_path_c_routine` exposes an
 `invoke_fn` hook so a native Routines API can be swapped in once the public
-interface stabilizes — today's loop driver is intentionally local so the repo
+interface stabilizes: today's loop driver is intentionally local so the repo
 ships without a dependency on an unreleased API.
 
 For the best long-running experience, use **Claude Code's Auto permission
@@ -377,16 +377,16 @@ sample_id, label (disease/control or 0/1), age, batch_index, <gene columns...>
 ## Broader Program
 
 This artifact is the Opus 4.7-centered prototype of a larger research
-program — **NegBioDB**, a structured database of ~32.8M confirmed negative
+program: **NegBioDB**, a structured database of ~32.8M confirmed negative
 biomedical results (drug–target inactives, failed clinical trials, protein
 non-interactions, non-essential genes, benign variants) paired with benchmarks
 for publication-bias propagation into ML/LLM predictions. Lacuna
-operationalizes NegBioDB's core thesis — falsification as the expensive,
-neglected half of scientific inference — on real cancer-genomics data. The
+operationalizes NegBioDB's core thesis: falsification as the expensive,
+neglected half of scientific inference: on real cancer-genomics data. The
 public NegBioDB repository will be linked here at release.
 
 **Platform probes across diseases.** The same classification-gate family, same thresholds, same
-architecture — 14 task × panel configurations, 385 total candidate evaluations:
+architecture: 14 task × panel configurations, 385 total candidate evaluations:
 
 *Positive survivors (gate accepts when the feature landscape is distributed):*
 - **TCGA-KIRC Stage I-II vs III-IV** (45-gene, n=512): **23 / 28 survivors**.
@@ -414,29 +414,29 @@ architecture — 14 task × panel configurations, 385 total candidate evaluation
   Basal/EMT burden modulated by immune context
   ([results/track_a_task_landscape/paad_survival/SUMMARY.md](results/track_a_task_landscape/paad_survival/SUMMARY.md)).
 
-*Designed negatives (gate refuses when one gene saturates — same pattern as KIRC CA9):*
+*Designed negatives (gate refuses when one gene saturates: same pattern as KIRC CA9):*
 - **TCGA-LIHC tumor-vs-normal** (31-gene, n=424): **0 / 26**. ALB/TTR saturate
   at AUROC ~0.985. Gate correctly identifies single-gene-dominant task
   ([results/track_a_task_landscape/lihc/SUMMARY.md](results/track_a_task_landscape/lihc/SUMMARY.md)).
 - **TCGA-LUAD tumor-vs-normal** (`data/build_tcga_luad.py`): SFTPC
-  saturates at AUROC 0.998 — identical structure to CA9 in KIRC. Zero
+  saturates at AUROC 0.998: identical structure to CA9 in KIRC. Zero
   survivors from 4 candidates. Confirms the pipeline correctly identifies
   single-gene-dominant tasks and produces 0 spurious laws
   ([results/track_a_task_landscape/luad/SUMMARY.md](results/track_a_task_landscape/luad/SUMMARY.md)).
 - **TCGA-BRCA tumor-vs-normal** (1226 samples, 31-gene panel): 0 / 7
-  survivors. Cross-cancer negative control — the KIRC metastasis law is
+  survivors. Cross-cancer negative control: the KIRC metastasis law is
   disease-specific, not a pan-cancer artifact. Gate conservatism is
   consistent across tissue types
   ([results/track_a_task_landscape/brca/SUMMARY.md](results/track_a_task_landscape/brca/SUMMARY.md)).
 
 A companion analysis strand applies the same falsification posture to the
-audit framework itself — validating it against clinical trial outcomes across
+audit framework itself: validating it against clinical trial outcomes across
 ccRCC, DIPG, and IPF (104 drug-target pairs across three diseases, 9,943
 Phase 3 trials from the AACT database; `docs/failure_network_v3_appendix.md`). The
 honest result: the framework discriminates curated panels from random targets
 (16/42 null-sampling tests BY-FDR significant at q < 0.10), but it does NOT
 predict trial failure (trial-level GEE NULL after Bonferroni × 5). The initial
-4.6× enrichment claim was a Track-1 selection-bias artifact — corrected by the
+4.6× enrichment claim was a Track-1 selection-bias artifact: corrected by the
 framework itself via proper failure-mode stratification (Track 1 futility-
 terminated OR = 6.41 vs Track 2 completed-missed-primary OR = 0.13, Woolf
 homogeneity Z = 19.97, p ≪ 10⁻⁸⁷). Rejection-as-product applied to the
